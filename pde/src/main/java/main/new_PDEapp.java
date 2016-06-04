@@ -48,7 +48,8 @@ public class new_PDEapp extends Application {
         //      ----------------------------------------
         //  2.  ImageView imv = new ImageView(im);
         //  3.  stage.getIcons().add(imv);
-        stage.getIcons().add(new Image("file:resources/images/work3.png"));
+        stage.getIcons().add(new Image("file:pde\\src\\main\\resources\\images\\icons\\work3.png"));
+
         //endregion
 
         FXMLLoader loader = new FXMLLoader();
