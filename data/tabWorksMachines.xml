@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<tabWorksMachines>
+<RowWorkMachine description="   " id="15" id2="23"/>
+<RowWorkMachine description="   " id="16" id2="24"/>
+<RowWorkMachine description="   " id="16" id2="25"/>
+<RowWorkMachine description="   " id="16" id2="26"/>
+<RowWorkMachine description="   " id="16" id2="27"/>
+<RowWorkMachine description="   " id="16" id2="28"/>
+<RowWorkMachine description="   " id="16" id2="29"/>
+<RowWorkMachine description="   " id="16" id2="30"/>
+<RowWorkMachine description="   " id="16" id2="37"/>
+<RowWorkMachine description="   " id="16" id2="38"/>
+<RowWorkMachine description="   " id="16" id2="39"/>
+<RowWorkMachine description="   " id="16" id2="40"/>
+<RowWorkMachine description="   " id="16" id2="41"/>
+<RowWorkMachine description="IdWork=1IdMachine=96" id="1" id2="96"/>
+<RowWorkMachine description="IdWork=1IdMachine=97" id="1" id2="97"/>
+<RowWorkMachine description="IdWork=1IdMachine=98" id="1" id2="98"/>
+<RowWorkMachine description="IdWork=1IdMachine=99" id="1" id2="99"/>
+<RowWorkMachine description="IdWork=1IdMachine=100" id="1" id2="100"/>
+<RowWorkMachine description="" id="3" id2="101"/>
+<RowWorkMachine description="" id="3" id2="102"/>
+</tabWorksMachines>

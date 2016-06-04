@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<tabResources>
+<RowResource description="Описание строки  ресурса" id="1" name="Время"/>
+<RowResource description="Описание строки  ресурса" id="2" name="Лист 2мм"/>
+<RowResource description="Описание строки  ресурса" id="3" name="Электроэнергия"/>
+<RowResource description="Описание строки  ресурса" id="4" name="Полиэтилен"/>
+<RowResource description="Описание строки  ресурса" id="5" name="Поролон"/>
+<RowResource description="Описание строки  ресурса" id="6" name="Ткань"/>
+<RowResource description="Описание строки  ресурса" id="7" name="Лист 3мм"/>
+<RowResource description="Описание для    RowResource" id="8" name="RowResource№8"/>
+<RowResource description="Описание для    RowResource" id="9" name="RowResource№9"/>
+<RowResource description="Описание для    RowResource" id="10" name="RowResource№10"/>
+<RowResource description="Описание для    RowResource" id="11" name="RowResource№11"/>
+<RowResource description="Описание для    RowResource" id="12" name="RowResource№12"/>
+<RowResource description="Описание для    RowResource" id="13" name="RowResource№13"/>
+<RowResource description="Описание для    RowResource" id="14" name="RowResource№14"/>
+<RowResource description="Описание для    RowResource" id="15" name="RowResource№15"/>
+<RowResource description="Описание для    RowResource" id="16" name="RowResource№16"/>
+<RowResource description="Описание для    RowResource" id="17" name="RowResource№17"/>
+<RowResource description="Описание для    RowResource" id="18" name="RowResource№18"/>
+<RowResource description="Описание для    RowResource" id="19" name="RowResource№19"/>
+<RowResource description="Описание для    RowResource" id="20" name="RowResource№20"/>
+<RowResource description="Описание для    RowResource" id="21" name="RowResource№21"/>
+<RowResource description="Описание для    RowResource" id="22" name="RowResource№22"/>
+<RowResource description="Описание для    RowResource" id="23" name="RowResource№23"/>
+<RowResource description="Описание для    RowResource" id="24" name="RowResource№24"/>
+<RowResource description="Описание для    RowResource" id="25" name="RowResource№25"/>
+<RowResource description="Описание для    RowResource" id="26" name="RowResource№26"/>
+<RowResource description="Описание для    RowResource" id="27" name="RowResource№27"/>
+<RowResource description="Описание для    RowResource" id="28" name="RowResource№28"/>
+<RowResource description="Описание для    RowResource" id="29" name="RowResource№29"/>
+<RowResource description="Описание для    RowResource" id="30" name="RowResource№30"/>
+<RowResource description="Описание для    RowResource" id="31" name="RowResource№31"/>
+<RowResource description="Описание для    RowResource" id="32" name="RowResource№32"/>
+<RowResource description="Описание для    RowResource" id="33" name="RowResource№33"/>
+<RowResource description="Описание для    RowResource" id="34" name="RowResource№34"/>
+<RowResource description="Описание для    RowResource" id="35" name="RowResource№35"/>
+<RowResource description="Описание для    RowResource" id="36" name="RowResource№36"/>
+<RowResource description="Описание для    RowResource" id="37" name="RowResource№37"/>
+<RowResource description="Описание для    RowResource" id="38" name="RowResource№38"/>
+<RowResource description="Описание для    RowResource" id="39" name="RowResource№39"/>
+<RowResource description="Описание для    RowResource" id="40" name="RowResource№40"/>
+<RowResource description="Описание для    RowResource" id="41" name="RowResource№41"/>
+<RowResource description="Описание для    RowResource" id="42" name="RowResource№42"/>
+<RowResource description="Описание для    RowResource" id="43" name="RowResource№43"/>
+<RowResource description="Описание для    RowResource" id="44" name="RowResource№44"/>
+<RowResource description="Описание для    RowResource" id="45" name="RowResource№45"/>
+<RowResource description="Описание для    RowResource" id="46" name="RowResource№46"/>
+<RowResource description="Описание для    RowResource" id="47" name="RowResource№47"/>
+<RowResource description="Описание для    RowResource" id="48" name="RowResource№48"/>
+<RowResource description="Описание для    RowResource" id="49" name="RowResource№49"/>
+<RowResource description="Описание для    RowResource" id="50" name="RowResource№50"/>
+<RowResource description="Описание для    RowResource" id="51" name="RowResource№51"/>
+<RowResource description="Описание для    RowResource" id="52" name="RowResource№52"/>
+<RowResource description="Описание для    RowResource" id="53" name="RowResource№53"/>
+<RowResource description="Описание для    RowResource" id="54" name="RowResource№54"/>
+<RowResource description="Описание для    RowResource" id="55" name="RowResource№55"/>
+</tabResources>

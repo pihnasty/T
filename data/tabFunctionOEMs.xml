@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<tabFunctionOEMs>
+<RowFunctionOEM description="Описание строки  ресурса 1" id="1" name="Равномерный&#9;" pathFileFR=""/>
+<RowFunctionOEM description="Описание строки  ресурса 2" id="2" name="Показательный" pathFileFR=""/>
+<RowFunctionOEM description="Описание строки  ресурса 3" id="3" name="Нормальный&#9;" pathFileFR=""/>
+<RowFunctionOEM description="Описание строки  ресурса 4" id="4" name="Файл №1 тип P" pathFileFR=""/>
+<RowFunctionOEM description="Описание строки  ресурса 5" id="5" name="Файл №1 тип F" pathFileFR=""/>
+<RowFunctionOEM description="Описание для    RowFunctionOEM" id="6" name="RowFunctionOEM№6" pathFileFR="Path to File"/>
+<RowFunctionOEM description="Описание для    RowFunctionOEM" id="7" name="RowFunctionOEM№7" pathFileFR="Path to File"/>
+<RowFunctionOEM description="Описание для    RowFunctionOEM" id="8" name="RowFunctionOEM№8" pathFileFR="Path to File"/>
+<RowFunctionOEM description="Описание для    RowFunctionOEM" id="9" name="RowFunctionOEM№9" pathFileFR="Path to File"/>
+<RowFunctionOEM description="Описание для    RowFunctionOEM" id="10" name="RowFunctionOEM№10" pathFileFR="Path to File"/>
+<RowFunctionOEM description="Описание для    RowFunctionOEM" id="11" name="RowFunctionOEM№11" pathFileFR="Path to File"/>
+<RowFunctionOEM description="Описание для    RowFunctionOEM" id="12" name="RowFunctionOEM№12" pathFileFR="Path to File"/>
+<RowFunctionOEM description="Описание для    RowFunctionOEM" id="13" name="RowFunctionOEM№13" pathFileFR="Path to File"/>
+<RowFunctionOEM description="Описание для    RowFunctionOEM" id="14" name="RowFunctionOEM№14" pathFileFR="Path to File"/>
+<RowFunctionOEM description="Описание для    RowFunctionOEM" id="15" name="RowFunctionOEM№15" pathFileFR="Path to File"/>
+<RowFunctionOEM description="Описание для    RowFunctionOEM" id="16" name="RowFunctionOEM№16" pathFileFR="Path to File"/>
+<RowFunctionOEM description="Описание для    RowFunctionOEM" id="17" name="RowFunctionOEM№17" pathFileFR="Path to File"/>
+<RowFunctionOEM description="Описание для    RowFunctionOEM" id="18" name="RowFunctionOEM№18" pathFileFR="Path to File"/>
+<RowFunctionOEM description="Описание для    RowFunctionOEM" id="19" name="RowFunctionOEM№19" pathFileFR="Path to File"/>
+<RowFunctionOEM description="Описание для    RowFunctionOEM" id="20" name="RowFunctionOEM№20" pathFileFR="Path to File"/>
+<RowFunctionOEM description="Описание для    RowFunctionOEM" id="21" name="RowFunctionOEM№21" pathFileFR="Path to File"/>
+<RowFunctionOEM description="Описание для    RowFunctionOEM" id="22" name="RowFunctionOEM№22" pathFileFR="Path to File"/>
+<RowFunctionOEM description="Описание для    RowFunctionOEM" id="23" name="RowFunctionOEM№23" pathFileFR="Path to File"/>
+<RowFunctionOEM description="Описание для    RowFunctionOEM" id="24" name="RowFunctionOEM№24" pathFileFR="Path to File"/>
+<RowFunctionOEM description="Описание для    RowFunctionOEM" id="25" name="RowFunctionOEM№25" pathFileFR="Path to File"/>
+<RowFunctionOEM description="Описание для    RowFunctionOEM" id="26" name="RowFunctionOEM№26" pathFileFR="Path to File"/>
+<RowFunctionOEM description="Описание для    RowFunctionOEM" id="27" name="RowFunctionOEM№27" pathFileFR="Path to File"/>
+<RowFunctionOEM description="Описание для    RowFunctionOEM" id="28" name="RowFunctionOEM№28" pathFileFR="Path to File"/>
+<RowFunctionOEM description="Описание для    RowFunctionOEM" id="29" name="RowFunctionOEM№29" pathFileFR="Path to File"/>
+<RowFunctionOEM description="Описание для    RowFunctionOEM" id="30" name="RowFunctionOEM№30" pathFileFR="Path to File"/>
+<RowFunctionOEM description="Описание для    RowFunctionOEM" id="31" name="RowFunctionOEM№31" pathFileFR="Path to File"/>
+<RowFunctionOEM description="Описание для    RowFunctionOEM" id="32" name="RowFunctionOEM№32" pathFileFR="Path to File"/>
+<RowFunctionOEM description="Описание для    RowFunctionOEM" id="33" name="RowFunctionOEM№33" pathFileFR="Path to File"/>
+<RowFunctionOEM description="Описание для    RowFunctionOEM" id="34" name="RowFunctionOEM№34" pathFileFR="Path to File"/>
+<RowFunctionOEM description="Описание для    RowFunctionOEM" id="35" name="RowFunctionOEM№35" pathFileFR="Path to File"/>
+<RowFunctionOEM description="Описание для    RowFunctionOEM" id="36" name="RowFunctionOEM№36" pathFileFR="Path to File"/>
+<RowFunctionOEM description="Описание для    RowFunctionOEM" id="37" name="RowFunctionOEM№37" pathFileFR="Path to File"/>
+<RowFunctionOEM description="Описание для    RowFunctionOEM" id="38" name="RowFunctionOEM№38" pathFileFR="Path to File"/>
+<RowFunctionOEM description="Описание для    RowFunctionOEM" id="39" name="RowFunctionOEM№39" pathFileFR="Path to File"/>
+<RowFunctionOEM description="Описание для    RowFunctionOEM" id="40" name="RowFunctionOEM№40" pathFileFR="Path to File"/>
+<RowFunctionOEM description="Описание для    RowFunctionOEM" id="41" name="RowFunctionOEM№41" pathFileFR="Path to File"/>
+<RowFunctionOEM description="Описание для    RowFunctionOEM" id="42" name="RowFunctionOEM№42" pathFileFR="Path to File"/>
+<RowFunctionOEM description="Описание для    RowFunctionOEM" id="43" name="RowFunctionOEM№43" pathFileFR="Path to File"/>
+<RowFunctionOEM description="Описание для    RowFunctionOEM" id="44" name="RowFunctionOEM№44" pathFileFR="Path to File"/>
+<RowFunctionOEM description="Описание для    RowFunctionOEM" id="45" name="RowFunctionOEM№45" pathFileFR="Path to File"/>
+<RowFunctionOEM description="Описание для    RowFunctionOEM" id="46" name="RowFunctionOEM№46" pathFileFR="Path to File"/>
+<RowFunctionOEM description="Описание для    RowFunctionOEM" id="47" name="RowFunctionOEM№47" pathFileFR="Path to File"/>
+<RowFunctionOEM description="Описание для    RowFunctionOEM" id="48" name="RowFunctionOEM№48" pathFileFR="Path to File"/>
+<RowFunctionOEM description="Описание для    RowFunctionOEM" id="49" name="RowFunctionOEM№49" pathFileFR="Path to File"/>
+<RowFunctionOEM description="Описание для    RowFunctionOEM" id="50" name="RowFunctionOEM№50" pathFileFR="Path to File"/>
+<RowFunctionOEM description="Описание для    RowFunctionOEM" id="51" name="RowFunctionOEM№51" pathFileFR="Path to File"/>
+<RowFunctionOEM description="Описание для    RowFunctionOEM" id="52" name="RowFunctionOEM№52" pathFileFR="Path to File"/>
+<RowFunctionOEM description="Описание для    RowFunctionOEM" id="53" name="RowFunctionOEM№53" pathFileFR="Path to File"/>
+</tabFunctionOEMs>

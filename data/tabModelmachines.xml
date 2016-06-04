@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<tabModelmachines>
+<RowModelmachine description="Фрезерный (дерево) №1" id="1" img="Image/Machine/frezaDe_01.png" name="Фрезерный (дерево) №1" overallDimensionX="2.0" overallDimensionY="2.0" workSizeX="3.8" workSizeY="3.8"/>
+<RowModelmachine description="Фрезерный (металл) №1" id="2" img="Image/Machine/freza_03.png" name="Фрезерный (металл) №1" overallDimensionX="1.0" overallDimensionY="1.0" workSizeX="2.0" workSizeY="2.0"/>
+<RowModelmachine description="Фрезерный (металл) №2" id="3" img="Image/Machine/freza_02.png" name="Фрезерный (металл) №2" overallDimensionX="1.4" overallDimensionY="1.4" workSizeX="2.0" workSizeY="2.0"/>
+<RowModelmachine description="Пресс кривошипный К117" id="4" img="Image/Machine/press_01.png" name="Пресс кривошипный К117" overallDimensionX="1.6" overallDimensionY="1.6" workSizeX="3.8" workSizeY="3.8"/>
+<RowModelmachine description="Пресс кривошипный  №2" id="5" img="Image/Machine/press_02.png" name="Пресс кривошипный  №2" overallDimensionX="2.0" overallDimensionY="2.0" workSizeX="3.8" workSizeY="3.8"/>
+<RowModelmachine description="Пресс кривошипный  №3" id="6" img="Image/Machine/press_03.png" name="Пресс кривошипный  №3" overallDimensionX="2.0" overallDimensionY="2.0" workSizeX="3.8" workSizeY="3.8"/>
+<RowModelmachine description="Пресс кривошипный  №4" id="7" img="Image/Machine/press_04.png" name="Пресс кривошипный  №4" overallDimensionX="1.6" overallDimensionY="1.6" workSizeX="3.8" workSizeY="3.8"/>
+<RowModelmachine description="Пресс кривошипный  №5" id="8" img="Image/Machine/press_05.png" name="Пресс кривошипный  №5" overallDimensionX="2.0" overallDimensionY="2.0" workSizeX="3.8" workSizeY="3.8"/>
+<RowModelmachine description="Пресс кривошипный  №6" id="9" img="Image/Machine/press_06.png" name="Пресс кривошипный  №6" overallDimensionX="2.0" overallDimensionY="2.0" workSizeX="3.8" workSizeY="3.8"/>
+<RowModelmachine description="Пресс кривошипный  №7" id="10" img="Image/Machine/press_07.png" name="Пресс кривошипный  №7" overallDimensionX="2.0" overallDimensionY="2.0" workSizeX="3.8" workSizeY="3.8"/>
+<RowModelmachine description="Пресс кривошипный  №8" id="11" img="Image/Machine/press_08.png" name="Пресс кривошипный  №8" overallDimensionX="2.0" overallDimensionY="2.0" workSizeX="3.8" workSizeY="3.8"/>
+<RowModelmachine description="Пресс кривошипный  №9" id="12" img="Image/Machine/press_09.png" name="Пресс кривошипный  №9" overallDimensionX="2.0" overallDimensionY="2.0" workSizeX="3.8" workSizeY="3.8"/>
+<RowModelmachine description="Пресс кривошипный  №10" id="13" img="Image/Machine/press_10.png" name="Пресс кривошипный  №10" overallDimensionX="1.6" overallDimensionY="1.6" workSizeX="3.8" workSizeY="3.8"/>
+<RowModelmachine description="Пресс кривошипный  №11" id="14" img="Image/Machine/press_11.png" name="Пресс кривошипный  №11" overallDimensionX="1.6" overallDimensionY="1.6" workSizeX="3.8" workSizeY="3.8"/>
+<RowModelmachine description="Пресс кривошипный  №12" id="15" img="Image/Machine/press_12.png" name="Пресс кривошипный  №12" overallDimensionX="2.0" overallDimensionY="2.0" workSizeX="3.8" workSizeY="3.8"/>
+<RowModelmachine description="Пресс кривошипный  №13" id="16" img="Image/Machine/press_13.png" name="Пресс кривошипный  №13" overallDimensionX="2.0" overallDimensionY="2.0" workSizeX="3.8" workSizeY="3.8"/>
+<RowModelmachine description="Пресс кривошипный  №14" id="17" img="Image/Machine/press_14.png" name="Пресс кривошипный  №14" overallDimensionX="2.0" overallDimensionY="2.0" workSizeX="3.8" workSizeY="3.8"/>
+<RowModelmachine description="Пресс кривошипный  №15" id="18" img="Image/Machine/press_15.png" name="Пресс кривошипный  №15" overallDimensionX="1.0" overallDimensionY="1.0" workSizeX="1.5" workSizeY="1.5"/>
+<RowModelmachine description="Пресс кривошипный  №16" id="19" img="Image/Machine/press_16.png" name="Пресс кривошипный  №16" overallDimensionX="1.0" overallDimensionY="1.0" workSizeX="2.0" workSizeY="2.0"/>
+<RowModelmachine description="Пресс кривошипный  №17" id="20" img="Image/Machine/press_17.png" name="Пресс кривошипный  №17" overallDimensionX="2.0" overallDimensionY="2.0" workSizeX="3.8" workSizeY="3.8"/>
+<RowModelmachine description="Пресс кривошипный  №18" id="21" img="Image/Machine/press_18.png" name="Пресс кривошипный  №18" overallDimensionX="1.6" overallDimensionY="1.6" workSizeX="3.8" workSizeY="3.8"/>
+<RowModelmachine description="Пресс кривошипный  №19" id="22" img="Image/Machine/press_19.png" name="Пресс кривошипный  №19" overallDimensionX="2.0" overallDimensionY="2.0" workSizeX="3.8" workSizeY="3.8"/>
+<RowModelmachine description="Гильотина №1" id="23" img="Image/Machine/gil_01.png" name="Гильотина №1" overallDimensionX="3.78" overallDimensionY="1.6" workSizeX="5.78" workSizeY="3.6"/>
+<RowModelmachine description="Гильотина №2" id="24" img="Image/Machine/gil_02.png" name="Гильотина №2" overallDimensionX="3.78" overallDimensionY="1.6" workSizeX="5.78" workSizeY="3.6"/>
+<RowModelmachine description="Гильотина №3" id="25" img="Image/Machine/gil_03.png" name="Гильотина №3" overallDimensionX="3.78" overallDimensionY="1.6" workSizeX="5.78" workSizeY="3.6"/>
+<RowModelmachine description="Гильотина №4" id="26" img="Image/Machine/gil_04.png" name="Гильотина №4" overallDimensionX="3.78" overallDimensionY="1.6" workSizeX="5.78" workSizeY="3.6"/>
+<RowModelmachine description="Гильотина №5" id="27" img="Image/Machine/gil_05.png" name="Гильотина №5" overallDimensionX="3.4" overallDimensionY="1.39" workSizeX="5.4" workSizeY="3.39"/>
+<RowModelmachine description="Гильотина №6" id="28" img="Image/Machine/gil_06.png" name="Гильотина №6" overallDimensionX="3.78" overallDimensionY="1.6" workSizeX="5.78" workSizeY="3.6"/>
+<RowModelmachine description="Сверлильный мет. №1" id="29" img="Image/Machine/sverlo_01.png" name="Сверлильный мет. №1" overallDimensionX="1.0" overallDimensionY="1.0" workSizeX="2.0" workSizeY="2.0"/>
+<RowModelmachine description="Токарный мет. №1" id="30" img="Image/Machine/tokar_01.png" name="Токарный мет. №1" overallDimensionX="3.5" overallDimensionY="1.6" workSizeX="3.8" workSizeY="3.8"/>
+<RowModelmachine description="Вакумный №1" id="31" img="Image/Machine/vakum_01.png" name="Вакумный №1" overallDimensionX="3.0" overallDimensionY="2.0" workSizeX="5.0" workSizeY="5.0"/>
+</tabModelmachines>

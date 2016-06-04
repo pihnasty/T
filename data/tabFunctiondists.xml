@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<tabFunctiondists>
+<RowFunctiondist description="The user distribution law" id="1" name="User"/>
+<RowFunctiondist description="The normal distribution law" id="2" name="Normal"/>
+<RowFunctiondist description="The exponential distribution law" id="3" name="Exponential"/>
+<RowFunctiondist description="The uniform distribution law" id="4" name="Uniform"/>
+<RowFunctiondist description="The gamma distribution law" id="5" name="Gamma"/>
+</tabFunctiondists>

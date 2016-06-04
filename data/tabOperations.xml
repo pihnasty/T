@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<tabOperations>
+<RowOperation description="Описание операции №1" id="1" name="Технологическая операция №1"/>
+<RowOperation description="Описание операции №2" id="2" name="Технологическая операция №2"/>
+<RowOperation description="Описание операции №3" id="3" name="Технологическая операция №3"/>
+<RowOperation description="Описание операции №4" id="4" name="Технологическая операция №4"/>
+<RowOperation description="Описание операции №5" id="5" name="Технологическая операция №5"/>
+<RowOperation description="Описание операции №6" id="6" name="Технологическая операция №6"/>
+<RowOperation description="Описание операции №7" id="7" name="Технологическая операция №7"/>
+<RowOperation description="Описание операции №8" id="8" name="Технологическая операция №8"/>
+<RowOperation description="Описание операции №9" id="9" name="Технологическая операция №9"/>
+<RowOperation description="Описание операции №10" id="10" name="Технологическая операция №10"/>
+<RowOperation description="Описание операции №11" id="11" name="Технологическая операция №11"/>
+<RowOperation description="Описание операции №12" id="12" name="Технологическая операция №12"/>
+<RowOperation description="Описание операции №13" id="13" name="Технологическая операция №13"/>
+<RowOperation description="Описание операции №14" id="14" name="Технологическая операция №14"/>
+<RowOperation description="Описание операции №15" id="15" name="Технологическая операция №15"/>
+<RowOperation description="Описание операции №16" id="16" name="Технологическая операция №16"/>
+<RowOperation description="Описание операции №17" id="17" name="Технологическая операция №17"/>
+<RowOperation description="Описание операции №18" id="18" name="Технологическая операция №18"/>
+<RowOperation description="Описание операции №19" id="19" name="Технологическая операция №19"/>
+<RowOperation description="Описание для    RowOperation" id="20" name="RowOperation№20"/>
+<RowOperation description="Описание для    RowOperation" id="21" name="RowOperation№21"/>
+<RowOperation description="Описание для    RowOperation" id="22" name="RowOperation№22"/>
+<RowOperation description="Описание для    RowOperation" id="23" name="RowOperation№23"/>
+<RowOperation description="Описание для    RowOperation" id="24" name="RowOperation№24"/>
+<RowOperation description="Описание для    RowOperation" id="25" name="RowOperation№25"/>
+<RowOperation description="Описание для    RowOperation" id="26" name="RowOperation№26"/>
+<RowOperation description="Описание для    RowOperation" id="27" name="RowOperation№27"/>
+<RowOperation description="Описание для    RowOperation" id="28" name="RowOperation№28"/>
+<RowOperation description="Описание для    RowOperation" id="29" name="RowOperation№29"/>
+<RowOperation description="Описание для    RowOperation" id="30" name="RowOperation№30"/>
+<RowOperation description="Описание для    RowOperation" id="31" name="RowOperation№31"/>
+<RowOperation description="Описание для    RowOperation" id="32" name="RowOperation№32"/>
+<RowOperation description="Описание для    RowOperation" id="33" name="RowOperation№33"/>
+<RowOperation description="Описание для    RowOperation" id="34" name="RowOperation№34"/>
+<RowOperation description="Описание для    RowOperation" id="35" name="RowOperation№35"/>
+<RowOperation description="Описание для    RowOperation" id="36" name="RowOperation№36"/>
+<RowOperation description="Описание для    RowOperation" id="37" name="RowOperation№37"/>
+<RowOperation description="Описание для    RowOperation" id="38" name="RowOperation№38"/>
+<RowOperation description="Описание для    RowOperation" id="39" name="RowOperation№39"/>
+<RowOperation description="Описание для    RowOperation" id="40" name="RowOperation№40"/>
+<RowOperation description="Описание для    RowOperation" id="41" name="RowOperation№41"/>
+<RowOperation description="Описание для    RowOperation" id="42" name="RowOperation№42"/>
+<RowOperation description="Описание для    RowOperation" id="43" name="RowOperation№43"/>
+<RowOperation description="Описание для    RowOperation" id="44" name="RowOperation№44"/>
+<RowOperation description="Описание для    RowOperation" id="45" name="RowOperation№45"/>
+<RowOperation description="Описание для    RowOperation" id="46" name="RowOperation№46"/>
+<RowOperation description="Описание для    RowOperation" id="47" name="RowOperation№47"/>
+<RowOperation description="Описание для    RowOperation" id="48" name="RowOperation№48"/>
+<RowOperation description="Описание для    RowOperation" id="49" name="RowOperation№49"/>
+<RowOperation description="Описание для    RowOperation" id="50" name="RowOperation№50"/>
+<RowOperation description="Описание для    RowOperation" id="51" name="RowOperation№51"/>
+<RowOperation description="Описание для    RowOperation" id="52" name="RowOperation№52"/>
+<RowOperation description="Описание для    RowOperation" id="53" name="RowOperation№53"/>
+<RowOperation description="Описание для    RowOperation" id="54" name="RowOperation№54"/>
+<RowOperation description="Описание для    RowOperation" id="55" name="RowOperation№55"/>
+<RowOperation description="Описание для    RowOperation" id="56" name="RowOperation№56"/>
+<RowOperation description="Описание для    RowOperation" id="57" name="RowOperation№57"/>
+<RowOperation description="Описание для    RowOperation" id="58" name="RowOperation№58"/>
+<RowOperation description="Описание для    RowOperation" id="59" name="RowOperation№59"/>
+<RowOperation description="Описание для    RowOperation" id="60" name="RowOperation№60"/>
+<RowOperation description="Описание для    RowOperation" id="61" name="RowOperation№61"/>
+<RowOperation description="Описание для    RowOperation" id="62" name="RowOperation№62"/>
+<RowOperation description="Описание для    RowOperation" id="63" name="RowOperation№63"/>
+<RowOperation description="Описание для    RowOperation" id="64" name="RowOperation№64"/>
+<RowOperation description="Описание для    RowOperation" id="65" name="RowOperation№65"/>
+<RowOperation description="Описание для    RowOperation" id="66" name="RowOperation№66"/>
+<RowOperation description="Описание для    RowOperation" id="67" name="RowOperation№67"/>
+</tabOperations>

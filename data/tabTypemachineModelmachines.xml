@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<tabTypemachineModelmachines>
+<RowTypemachineModelmachine description="Тип: Фрезерные(дер.)" id="1" id2="1"/>
+<RowTypemachineModelmachine description="Тип: Фрезерные(мет.)" id="2" id2="2"/>
+<RowTypemachineModelmachine description="Тип: Фрезерные(мет.)" id="2" id2="3"/>
+<RowTypemachineModelmachine description="Тип: Пресс кривошипный" id="3" id2="4"/>
+<RowTypemachineModelmachine description="Тип: Пресс кривошипный" id="3" id2="5"/>
+<RowTypemachineModelmachine description="Тип: Пресс кривошипный" id="3" id2="6"/>
+<RowTypemachineModelmachine description="Тип: Пресс кривошипный" id="3" id2="7"/>
+<RowTypemachineModelmachine description="Тип: Пресс кривошипный" id="3" id2="8"/>
+<RowTypemachineModelmachine description="Тип: Пресс кривошипный" id="3" id2="9"/>
+<RowTypemachineModelmachine description="Тип: Пресс кривошипный" id="3" id2="10"/>
+<RowTypemachineModelmachine description="Тип: Пресс кривошипный" id="3" id2="11"/>
+<RowTypemachineModelmachine description="Тип: Пресс кривошипный" id="3" id2="12"/>
+<RowTypemachineModelmachine description="Тип: Пресс кривошипный" id="3" id2="13"/>
+<RowTypemachineModelmachine description="Тип: Пресс кривошипный" id="3" id2="14"/>
+<RowTypemachineModelmachine description="Тип: Пресс кривошипный" id="3" id2="15"/>
+<RowTypemachineModelmachine description="Тип: Пресс кривошипный" id="3" id2="16"/>
+<RowTypemachineModelmachine description="Тип: Пресс кривошипный" id="3" id2="17"/>
+<RowTypemachineModelmachine description="Тип: Пресс кривошипный" id="3" id2="18"/>
+<RowTypemachineModelmachine description="Тип: Пресс кривошипный" id="3" id2="19"/>
+<RowTypemachineModelmachine description="Тип: Пресс кривошипный" id="3" id2="20"/>
+<RowTypemachineModelmachine description="Тип: Пресс кривошипный" id="3" id2="21"/>
+<RowTypemachineModelmachine description="Тип: Пресс кривошипный" id="3" id2="22"/>
+<RowTypemachineModelmachine description="Тип: Гильотина" id="4" id2="23"/>
+<RowTypemachineModelmachine description="Тип: Гильотина" id="4" id2="24"/>
+<RowTypemachineModelmachine description="Тип: Гильотина" id="4" id2="25"/>
+<RowTypemachineModelmachine description="Тип: Гильотина" id="4" id2="26"/>
+<RowTypemachineModelmachine description="Тип: Гильотина" id="4" id2="27"/>
+<RowTypemachineModelmachine description="Тип: Гильотина" id="4" id2="28"/>
+<RowTypemachineModelmachine description="Тип: Сверлильный мет." id="5" id2="29"/>
+<RowTypemachineModelmachine description="Тип: Токарный мет." id="6" id2="30"/>
+<RowTypemachineModelmachine description="Тип: Вакумный" id="7" id2="31"/>
+</tabTypemachineModelmachines>

@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<tabSubject_laboursRoutes>
+<RowSubject_labourRoute description="Предмет труда-Технологический маршрут №1" id="4" id2="12"/>
+<RowSubject_labourRoute description="Предмет труда-Технологический маршрут №2" id="4" id2="11"/>
+<RowSubject_labourRoute description="Предмет труда-Технологический маршрут №3" id="4" id2="12"/>
+<RowSubject_labourRoute description="Предмет труда-Технологический маршрут №4" id="4" id2="3"/>
+<RowSubject_labourRoute description="Предмет труда-Технологический маршрут №5" id="8" id2="12"/>
+<RowSubject_labourRoute description="Предмет труда-Технологический маршрут №6" id="8" id2="6"/>
+<RowSubject_labourRoute description="Предмет труда-Технологический маршрут №7" id="8" id2="12"/>
+<RowSubject_labourRoute description="Предмет труда-Технологический маршрут №8" id="8" id2="14"/>
+<RowSubject_labourRoute description="Предмет труда-Технологический маршрут №9" id="8" id2="7"/>
+<RowSubject_labourRoute description="Предмет труда-Технологический маршрут №10" id="8" id2="7"/>
+<RowSubject_labourRoute description="Предмет труда-Технологический маршрут №11" id="11" id2="7"/>
+<RowSubject_labourRoute description="Предмет труда-Технологический маршрут №12" id="12" id2="12"/>
+<RowSubject_labourRoute description="Предмет труда-Технологический маршрут №13" id="13" id2="3"/>
+<RowSubject_labourRoute description="Предмет труда-Технологический маршрут №14" id="14" id2="6"/>
+<RowSubject_labourRoute description="Предмет труда-Технологический маршрут №15" id="15" id2="4"/>
+<RowSubject_labourRoute description="Предмет труда-Технологический маршрут №16" id="16" id2="5"/>
+<RowSubject_labourRoute description="Предмет труда-Технологический маршрут №17" id="17" id2="3"/>
+<RowSubject_labourRoute description="Предмет труда-Технологический маршрут №18" id="18" id2="4"/>
+<RowSubject_labourRoute description="Предмет труда-Технологический маршрут №19" id="19" id2="13"/>
+<RowSubject_labourRoute description="Предмет труда-Технологический маршрут №20" id="20" id2="17"/>
+<RowSubject_labourRoute description="Предмет труда-Технологический маршрут №21" id="21" id2="18"/>
+<RowSubject_labourRoute description="Предмет труда-Технологический маршрут №22" id="22" id2="18"/>
+<RowSubject_labourRoute description="Предмет труда-Технологический маршрут №23" id="23" id2="3"/>
+<RowSubject_labourRoute description="Предмет труда-Технологический маршрут №24" id="24" id2="2"/>
+<RowSubject_labourRoute description="Предмет труда-Технологический маршрут №25" id="25" id2="5"/>
+<RowSubject_labourRoute description="Предмет труда-Технологический маршрут №26" id="26" id2="4"/>
+<RowSubject_labourRoute description="Предмет труда-Технологический маршрут №27" id="27" id2="12"/>
+<RowSubject_labourRoute description="Предмет труда-Технологический маршрут №28" id="28" id2="11"/>
+<RowSubject_labourRoute description="Предмет труда-Технологический маршрут №29" id="29" id2="7"/>
+<RowSubject_labourRoute description="Предмет труда-Технологический маршрут №30" id="30" id2="15"/>
+<RowSubject_labourRoute description="Предмет труда-Технологический маршрут №31" id="31" id2="14"/>
+<RowSubject_labourRoute description="Предмет труда-Технологический маршрут №32" id="32" id2="4"/>
+<RowSubject_labourRoute description="Предмет труда-Технологический маршрут №33" id="33" id2="16"/>
+<RowSubject_labourRoute description="Предмет труда-Технологический маршрут №34" id="34" id2="8"/>
+<RowSubject_labourRoute description="Предмет труда-Технологический маршрут №35" id="35" id2="3"/>
+<RowSubject_labourRoute description="Предмет труда-Технологический маршрут №36" id="36" id2="7"/>
+<RowSubject_labourRoute description="Предмет труда-Технологический маршрут №37" id="37" id2="3"/>
+<RowSubject_labourRoute description="Предмет труда-Технологический маршрут №38" id="38" id2="9"/>
+<RowSubject_labourRoute description="Предмет труда-Технологический маршрут №39" id="39" id2="16"/>
+<RowSubject_labourRoute description="Предмет труда-Технологический маршрут №40" id="40" id2="2"/>
+<RowSubject_labourRoute description="Предмет труда-Технологический маршрут №41" id="41" id2="7"/>
+<RowSubject_labourRoute description="Предмет труда-Технологический маршрут №42" id="42" id2="5"/>
+<RowSubject_labourRoute description="Предмет труда-Технологический маршрут №43" id="43" id2="16"/>
+<RowSubject_labourRoute description="Предмет труда-Технологический маршрут №44" id="44" id2="15"/>
+<RowSubject_labourRoute description="Предмет труда-Технологический маршрут №45" id="45" id2="8"/>
+<RowSubject_labourRoute description="Предмет труда-Технологический маршрут №46" id="46" id2="7"/>
+<RowSubject_labourRoute description="Предмет труда-Технологический маршрут №47" id="47" id2="10"/>
+<RowSubject_labourRoute description="Предмет труда-Технологический маршрут №48" id="48" id2="15"/>
+<RowSubject_labourRoute description="Предмет труда-Технологический маршрут №49" id="49" id2="15"/>
+<RowSubject_labourRoute description="Предмет труда-Технологический маршрут №50" id="50" id2="13"/>
+<RowSubject_labourRoute description="Предмет труда-Технологический маршрут №51" id="51" id2="7"/>
+<RowSubject_labourRoute description="Предмет труда-Технологический маршрут №52" id="52" id2="14"/>
+<RowSubject_labourRoute description="Предмет труда-Технологический маршрут №53" id="53" id2="14"/>
+<RowSubject_labourRoute description="Предмет труда-Технологический маршрут №54" id="54" id2="1"/>
+<RowSubject_labourRoute description="Предмет труда-Технологический маршрут №55" id="55" id2="9"/>
+<RowSubject_labourRoute description="Предмет труда-Технологический маршрут №56" id="56" id2="14"/>
+<RowSubject_labourRoute description="Предмет труда-Технологический маршрут №57" id="57" id2="9"/>
+<RowSubject_labourRoute description="Предмет труда-Технологический маршрут №58" id="58" id2="8"/>
+<RowSubject_labourRoute description="Предмет труда-Технологический маршрут №59" id="59" id2="17"/>
+<RowSubject_labourRoute description="Предмет труда-Технологический маршрут №60" id="60" id2="2"/>
+<RowSubject_labourRoute description="Предмет труда-Технологический маршрут №61" id="61" id2="12"/>
+<RowSubject_labourRoute description="Предмет труда-Технологический маршрут №62" id="62" id2="16"/>
+<RowSubject_labourRoute description="Предмет труда-Технологический маршрут №63" id="63" id2="1"/>
+<RowSubject_labourRoute description="Предмет труда-Технологический маршрут №64" id="64" id2="16"/>
+<RowSubject_labourRoute description="Предмет труда-Технологический маршрут №65" id="65" id2="18"/>
+<RowSubject_labourRoute description="Предмет труда-Технологический маршрут №66" id="66" id2="3"/>
+<RowSubject_labourRoute description="Предмет труда-Технологический маршрут №67" id="67" id2="11"/>
+<RowSubject_labourRoute description="Предмет труда-Технологический маршрут №68" id="68" id2="16"/>
+<RowSubject_labourRoute description="Предмет труда-Технологический маршрут №69" id="69" id2="16"/>
+<RowSubject_labourRoute description="Предмет труда-Технологический маршрут №70" id="70" id2="12"/>
+<RowSubject_labourRoute description="Предмет труда-Технологический маршрут №71" id="71" id2="13"/>
+<RowSubject_labourRoute description="Предмет труда-Технологический маршрут №72" id="72" id2="12"/>
+<RowSubject_labourRoute description="Предмет труда-Технологический маршрут №73" id="73" id2="4"/>
+<RowSubject_labourRoute description="Предмет труда-Технологический маршрут №74" id="74" id2="10"/>
+<RowSubject_labourRoute description="Предмет труда-Технологический маршрут №75" id="75" id2="4"/>
+<RowSubject_labourRoute description="Предмет труда-Технологический маршрут №76" id="76" id2="11"/>
+<RowSubject_labourRoute description="Предмет труда-Технологический маршрут №77" id="77" id2="6"/>
+<RowSubject_labourRoute description="Предмет труда-Технологический маршрут №78" id="78" id2="14"/>
+<RowSubject_labourRoute description="Предмет труда-Технологический маршрут №79" id="79" id2="7"/>
+<RowSubject_labourRoute description="Предмет труда-Технологический маршрут №80" id="80" id2="2"/>
+<RowSubject_labourRoute description="Предмет труда-Технологический маршрут №81" id="81" id2="8"/>
+<RowSubject_labourRoute description="Предмет труда-Технологический маршрут №82" id="82" id2="10"/>
+<RowSubject_labourRoute description="Предмет труда-Технологический маршрут №83" id="83" id2="1"/>
+<RowSubject_labourRoute description="Предмет труда-Технологический маршрут №84" id="84" id2="9"/>
+<RowSubject_labourRoute description="Предмет труда-Технологический маршрут №85" id="85" id2="12"/>
+<RowSubject_labourRoute description="Предмет труда-Технологический маршрут №86" id="86" id2="18"/>
+<RowSubject_labourRoute description="Предмет труда-Технологический маршрут №87" id="87" id2="18"/>
+<RowSubject_labourRoute description="Предмет труда-Технологический маршрут №88" id="88" id2="12"/>
+<RowSubject_labourRoute description="Предмет труда-Технологический маршрут №89" id="89" id2="13"/>
+<RowSubject_labourRoute description="Предмет труда-Технологический маршрут №90" id="90" id2="10"/>
+<RowSubject_labourRoute description="Предмет труда-Технологический маршрут №91" id="91" id2="13"/>
+<RowSubject_labourRoute description="Предмет труда-Технологический маршрут №92" id="92" id2="15"/>
+<RowSubject_labourRoute description="Предмет труда-Технологический маршрут №93" id="93" id2="2"/>
+<RowSubject_labourRoute description="Предмет труда-Технологический маршрут №94" id="94" id2="3"/>
+<RowSubject_labourRoute description="Предмет труда-Технологический маршрут №95" id="95" id2="3"/>
+<RowSubject_labourRoute description="Предмет труда-Технологический маршрут №96" id="96" id2="15"/>
+<RowSubject_labourRoute description="Предмет труда-Технологический маршрут №97" id="97" id2="7"/>
+<RowSubject_labourRoute description="Предмет труда-Технологический маршрут №98" id="98" id2="17"/>
+<RowSubject_labourRoute description="   " id="9" id2="2"/>
+<RowSubject_labourRoute description="   " id="5" id2="2"/>
+<RowSubject_labourRoute description="   " id="1" id2="2"/>
+<RowSubject_labourRoute description="   " id="6" id2="2"/>
+<RowSubject_labourRoute description="   " id="7" id2="2"/>
+<RowSubject_labourRoute description="   " id="10" id2="2"/>
+<RowSubject_labourRoute description="   " id="2" id2="2"/>
+<RowSubject_labourRoute description="   " id="3" id2="2"/>
+<RowSubject_labourRoute description="   " id="99" id2="20"/>
+<RowSubject_labourRoute description="   " id="100" id2="21"/>
+<RowSubject_labourRoute description="   " id="101" id2="22"/>
+<RowSubject_labourRoute description="   " id="102" id2="23"/>
+<RowSubject_labourRoute description="   " id="103" id2="24"/>
+<RowSubject_labourRoute description="   " id="104" id2="25"/>
+<RowSubject_labourRoute description="   " id="105" id2="26"/>
+<RowSubject_labourRoute description="   " id="106" id2="27"/>
+<RowSubject_labourRoute description="   " id="107" id2="28"/>
+<RowSubject_labourRoute description="   " id="108" id2="29"/>
+<RowSubject_labourRoute description="   " id="109" id2="30"/>
+<RowSubject_labourRoute description="   " id="94" id2="31"/>
+<RowSubject_labourRoute description="   " id="95" id2="32"/>
+<RowSubject_labourRoute description="   " id="35" id2="33"/>
+<RowSubject_labourRoute description="   " id="37" id2="34"/>
+<RowSubject_labourRoute description="   " id="23" id2="35"/>
+<RowSubject_labourRoute description="   " id="27" id2="36"/>
+<RowSubject_labourRoute description="   " id="61" id2="37"/>
+<RowSubject_labourRoute description="   " id="66" id2="38"/>
+<RowSubject_labourRoute description="   " id="70" id2="39"/>
+<RowSubject_labourRoute description="   " id="72" id2="40"/>
+<RowSubject_labourRoute description="   " id="85" id2="41"/>
+<RowSubject_labourRoute description="   " id="88" id2="42"/>
+<RowSubject_labourRoute description="   " id="8" id2="43"/>
+<RowSubject_labourRoute description="   " id="8" id2="44"/>
+<RowSubject_labourRoute description="   " id="110" id2="45"/>
+<RowSubject_labourRoute description="   " id="4" id2="46"/>
+<RowSubject_labourRoute description="   " id="111" id2="47"/>
+</tabSubject_laboursRoutes>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<tabParametrfunctiondists>
+<RowParametrfunctiondist averageValue="1.0" description="The user distribution law" id="1" meanSquareDeviation="1.0" name="User" pathData="Image/Manufacturing/Manufacture of bearings.png"/>
+<RowParametrfunctiondist averageValue="1.0" description="The normal distribution law" id="2" meanSquareDeviation="1.0" name="Normal" pathData=""/>
+<RowParametrfunctiondist averageValue="1.0" description="The exponential distribution law" id="3" meanSquareDeviation="1.0" name="Exponential" pathData=""/>
+<RowParametrfunctiondist averageValue="1.0" description="The uniform distribution law" id="4" meanSquareDeviation="1.0" name="Uniform" pathData=""/>
+<RowParametrfunctiondist averageValue="1.0" description="The gamma distribution law" id="5" meanSquareDeviation="1.0" name="Gamma" pathData=""/>
+</tabParametrfunctiondists>

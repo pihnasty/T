@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<tabLinespecs>
+<RowLinespec description="Описание строки спецификации №1" id="1" m="1.0" name="Строка спецификации №1" sigma="1.0"/>
+<RowLinespec description="Описание строки спецификации №2" id="2" m="1.0" name="Строка спецификации №2" sigma="1.0"/>
+<RowLinespec description="Описание строки спецификации №3" id="3" m="1.0" name="Строка спецификации №3" sigma="1.0"/>
+<RowLinespec description="Описание строки спецификации №4" id="4" m="1.0" name="Строка спецификации №4" sigma="1.0"/>
+<RowLinespec description="Описание строки спецификации №5" id="5" m="1.0" name="Строка спецификации №5" sigma="1.0"/>
+<RowLinespec description="Описание строки спецификации №6" id="6" m="1.0" name="Строка спецификации №6" sigma="1.0"/>
+<RowLinespec description="Описание строки спецификации №7" id="7" m="1.0" name="Строка спецификации №7" sigma="1.0"/>
+<RowLinespec description="Описание строки спецификации №8" id="8" m="1.0" name="Строка спецификации №8" sigma="1.0"/>
+<RowLinespec description="Описание строки спецификации №9" id="9" m="1.0" name="Строка спецификации №9" sigma="1.0"/>
+<RowLinespec description="Описание строки спецификации №10" id="10" m="1.0" name="Строка спецификации №10" sigma="1.0"/>
+<RowLinespec description="Описание строки спецификации №11" id="11" m="1.0" name="Строка спецификации №11" sigma="1.0"/>
+<RowLinespec description="Описание строки спецификации №12" id="12" m="1.0" name="Строка спецификации №12" sigma="1.0"/>
+<RowLinespec description="Описание строки спецификации №13" id="13" m="1.0" name="Строка спецификации №13" sigma="1.0"/>
+<RowLinespec description="Описание строки спецификации №14" id="14" m="1.0" name="Строка спецификации №14" sigma="1.0"/>
+<RowLinespec description="Описание строки спецификации №15" id="15" m="1.0" name="Строка спецификации №15" sigma="1.0"/>
+<RowLinespec description="Описание строки спецификации №16" id="16" m="1.0" name="Строка спецификации №16" sigma="1.0"/>
+<RowLinespec description="Описание строки спецификации №17" id="17" m="1.0" name="Строка спецификации №17" sigma="1.0"/>
+<RowLinespec description="Описание строки спецификации №18" id="18" m="1.0" name="Строка спецификации №18" sigma="1.0"/>
+<RowLinespec description="Описание строки спецификации №19" id="19" m="1.0" name="Строка спецификации №19" sigma="1.0"/>
+<RowLinespec description="Описание для    RowLinespec" id="20" m="1.0" name="RowLinespec№20" sigma="1.0"/>
+<RowLinespec description="Описание для    RowLinespec" id="21" m="1.0" name="RowLinespec№21" sigma="1.0"/>
+<RowLinespec description="Описание для    RowLinespec" id="22" m="1.0" name="RowLinespec№22" sigma="1.0"/>
+<RowLinespec description="Описание для    RowLinespec" id="23" m="1.0" name="RowLinespec№23" sigma="1.0"/>
+<RowLinespec description="Описание для    RowLinespec" id="24" m="1.0" name="RowLinespec№24" sigma="1.0"/>
+<RowLinespec description="Описание для    RowLinespec" id="25" m="1.0" name="RowLinespec№25" sigma="1.0"/>
+<RowLinespec description="Описание для    RowLinespec" id="26" m="1.0" name="RowLinespec№26" sigma="1.0"/>
+<RowLinespec description="Описание для    RowLinespec" id="27" m="1.0" name="RowLinespec№27" sigma="1.0"/>
+<RowLinespec description="Описание для    RowLinespec" id="28" m="1.0" name="RowLinespec№28" sigma="1.0"/>
+<RowLinespec description="Описание для    RowLinespec" id="29" m="1.0" name="RowLinespec№29" sigma="1.0"/>
+<RowLinespec description="Описание для    RowLinespec" id="30" m="1.0" name="RowLinespec№30" sigma="1.0"/>
+<RowLinespec description="Описание для    RowLinespec" id="31" m="1.0" name="RowLinespec№31" sigma="1.0"/>
+<RowLinespec description="Описание для    RowLinespec" id="32" m="1.0" name="RowLinespec№32" sigma="1.0"/>
+<RowLinespec description="Описание для    RowLinespec" id="33" m="1.0" name="RowLinespec№33" sigma="1.0"/>
+<RowLinespec description="Описание для    RowLinespec" id="34" m="1.0" name="RowLinespec№34" sigma="1.0"/>
+<RowLinespec description="Описание для    RowLinespec" id="35" m="1.0" name="RowLinespec№35" sigma="1.0"/>
+<RowLinespec description="Описание для    RowLinespec" id="36" m="1.0" name="RowLinespec№36" sigma="1.0"/>
+<RowLinespec description="Описание для    RowLinespec" id="37" m="1.0" name="RowLinespec№37" sigma="1.0"/>
+<RowLinespec description="Описание для    RowLinespec" id="38" m="1.0" name="RowLinespec№38" sigma="1.0"/>
+<RowLinespec description="Описание для    RowLinespec" id="39" m="1.0" name="RowLinespec№39" sigma="1.0"/>
+<RowLinespec description="Описание для    RowLinespec" id="40" m="1.0" name="RowLinespec№40" sigma="1.0"/>
+<RowLinespec description="Описание для    RowLinespec" id="41" m="1.0" name="RowLinespec№41" sigma="1.0"/>
+<RowLinespec description="Описание для    RowLinespec" id="42" m="1.0" name="RowLinespec№42" sigma="1.0"/>
+<RowLinespec description="Описание для    RowLinespec" id="43" m="1.0" name="RowLinespec№43" sigma="1.0"/>
+<RowLinespec description="Описание для    RowLinespec" id="44" m="1.0" name="RowLinespec№44" sigma="1.0"/>
+<RowLinespec description="Описание для    RowLinespec" id="45" m="1.0" name="RowLinespec№45" sigma="1.0"/>
+<RowLinespec description="Описание для    RowLinespec" id="46" m="1.0" name="RowLinespec№46" sigma="1.0"/>
+<RowLinespec description="Описание для    RowLinespec" id="47" m="1.0" name="RowLinespec№47" sigma="1.0"/>
+<RowLinespec description="Описание для    RowLinespec" id="48" m="1.0" name="RowLinespec№48" sigma="1.0"/>
+<RowLinespec description="Описание для    RowLinespec" id="49" m="1.0" name="RowLinespec№49" sigma="1.0"/>
+<RowLinespec description="Описание для    RowLinespec" id="50" m="1.0" name="RowLinespec№50" sigma="1.0"/>
+<RowLinespec description="Описание для    RowLinespec" id="51" m="1.0" name="RowLinespec№51" sigma="1.0"/>
+<RowLinespec description="Описание для    RowLinespec" id="52" m="1.0" name="RowLinespec№52" sigma="1.0"/>
+<RowLinespec description="Описание для    RowLinespec" id="53" m="1.0" name="RowLinespec№53" sigma="1.0"/>
+<RowLinespec description="Описание для    RowLinespec" id="54" m="1.0" name="RowLinespec№54" sigma="1.0"/>
+<RowLinespec description="Описание для    RowLinespec" id="55" m="1.0" name="RowLinespec№55" sigma="1.0"/>
+<RowLinespec description="Описание для    RowLinespec" id="56" m="1.0" name="RowLinespec№56" sigma="1.0"/>
+<RowLinespec description="Описание для    RowLinespec" id="57" m="1.0" name="RowLinespec№57" sigma="1.0"/>
+<RowLinespec description="Описание для    RowLinespec" id="58" m="1.0" name="RowLinespec№58" sigma="1.0"/>
+<RowLinespec description="Описание для    RowLinespec" id="59" m="1.0" name="RowLinespec№59" sigma="1.0"/>
+<RowLinespec description="Описание для    RowLinespec" id="60" m="1.0" name="RowLinespec№60" sigma="1.0"/>
+<RowLinespec description="Описание для    RowLinespec" id="61" m="1.0" name="RowLinespec№61" sigma="1.0"/>
+<RowLinespec description="Описание для    RowLinespec" id="62" m="1.0" name="RowLinespec№62" sigma="1.0"/>
+<RowLinespec description="Описание для    RowLinespec" id="63" m="1.0" name="RowLinespec№63" sigma="1.0"/>
+<RowLinespec description="Описание для    RowLinespec" id="64" m="1.0" name="RowLinespec№64" sigma="1.0"/>
+<RowLinespec description="Описание для    RowLinespec" id="65" m="1.0" name="RowLinespec№65" sigma="1.0"/>
+<RowLinespec description="Описание для    RowLinespec" id="66" m="1.0" name="RowLinespec№66" sigma="1.0"/>
+<RowLinespec description="Описание для    RowLinespec" id="67" m="1.0" name="RowLinespec№67" sigma="1.0"/>
+</tabLinespecs>

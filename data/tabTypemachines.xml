@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<tabTypemachines>
+<RowTypemachine description="Тип машины:Фрезерные (дерево)" id="1" name="Фрезерные (дерево)"/>
+<RowTypemachine description="Тип машины:Фрезерные (металл)" id="2" name="Фрезерные (металл)"/>
+<RowTypemachine description="Тип машины:Гильотины" id="4" name="Гильотины"/>
+<RowTypemachine description="Тип машины:Пресса кривошипные" id="3" name="Пресса кривошипные"/>
+<RowTypemachine description="Тип машины:Сверлильные" id="5" name="Сверлильные"/>
+<RowTypemachine description="Тип машины:Токарные" id="6" name="Токарные"/>
+<RowTypemachine description="Тип машины:Вакумные пресса" id="7" name="Вакумные пресса"/>
+<RowTypemachine description="Описание для    RowTypemachine" id="8" name="Пресса кривошипные"/>
+<RowTypemachine description="Описание для    RowTypemachine" id="9" name="Пресса кривошипные"/>
+</tabTypemachines>
