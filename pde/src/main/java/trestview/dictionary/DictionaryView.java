@@ -15,8 +15,6 @@ import javafx.scene.layout.VBox;
 import javafx.util.Pair;
 import persistence.loader.DataSet;
 import persistence.loader.XmlRW;
-import persistence.loader.tabDataSet.RowWork;
-import resources.images.icons.IconT;
 import trestview.hboxpane.HboxpaneController;
 import trestview.hboxpane.HboxpaneModel;
 import trestview.hboxpane.HboxpaneView;
