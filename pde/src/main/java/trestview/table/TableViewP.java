@@ -96,7 +96,7 @@ public class TableViewP<cL> extends TableView<cL> implements Observer {
                               new FileChooser.ExtensionFilter("JPG", "*.jpg"), new FileChooser.ExtensionFilter("PNG", "*.png"),
                               new FileChooser.ExtensionFilter("BMP", "*.bmp"), new FileChooser.ExtensionFilter("GIF", "*.gif")
                       );
-                      chooser.setTitle( ResourceBundle.getBundle("resources.ui").getString("nameFileScheme"));
+                      chooser.setTitle( ResourceBundle.getBundle("ui").getString("nameFileScheme"));
                       Stage st = new Stage();
                       st.setMaxWidth(400);
                       st.setMaxHeight(400);

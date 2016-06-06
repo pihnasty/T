@@ -15,8 +15,6 @@ import javafx.scene.layout.VBox;
 import javafx.util.Pair;
 import persistence.loader.DataSet;
 import persistence.loader.XmlRW;
-import persistence.loader.tabDataSet.RowWork;
-import resources.images.icons.IconT;
 import trestview.hboxpane.HboxpaneController;
 import trestview.hboxpane.HboxpaneModel;
 import trestview.hboxpane.HboxpaneView;
@@ -45,11 +43,11 @@ public class  DictionaryView extends Dialog implements Observer {
     public DictionaryView (DictionaryModel dictionaryModel, DictionaryController dictionaryController ) {
         this.dictionaryModel =dictionaryModel;
         this.dataSet =dictionaryModel.getTMenuModel().getTrestModel().getDataSet();
-        FXMLLoader fxmlLoader = XmlRW.fxmlLoad(this,dictionaryController, "dictionaryView.fxml","resources.ui", "");
+        FXMLLoader fxmlLoader = XmlRW.fxmlLoad(this,dictionaryController, "trestview\\dictionary\\dictionaryView.fxml","ui", "");
 
        //  setTitle("%Open");
         setTitle(fxmlLoader.getResources().getString("Dictionary")+":  "+fxmlLoader.getResources().getString(dictionaryModel.gettClass().getSimpleName()));
-        setGraphic( new ImageView(new Image(IconT.class.getResource(dictionaryModel.gettClass().getSimpleName()+".png").toString())));
+        setGraphic( new ImageView(new Image(dictionaryModel.gettClass().getSimpleName()+".png")));
 
         setHeaderText(fxmlLoader.getResources().getString("HeaderText"));
         setResizable(true);             //  Defines whether the Stage is resizable or not by the user.

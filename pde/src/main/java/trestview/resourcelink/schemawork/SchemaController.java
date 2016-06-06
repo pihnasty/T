@@ -27,14 +27,15 @@ public class SchemaController implements Initializable, EventHandler<MouseEvent>
 
     @Override
     public void handle(MouseEvent event) {
+        System.out.println(event.getEventType());
         if ( event.getEventType() == MouseEvent.MOUSE_MOVED) {
-     //       observableModel.changeCursor(new Point((int) event.getX(), (int) event.getY()));
             observableModel.changeCursor(event);
         }
-        if ( event.getEventType() == MouseEvent.MOUSE_PRESSED) {
+//        if ( event.getEventType() == MouseEvent.MOUSE_PRESSED) {            observableModel.changeLocation(event);    }
+        if ( event.getEventType() == MouseEvent.MOUSE_DRAGGED) {
             observableModel.changeLocation(event);
+
         }
-        System.out.println(event.getEventType());
     }
 
     /**

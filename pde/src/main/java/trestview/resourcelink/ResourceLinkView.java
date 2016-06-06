@@ -13,7 +13,6 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import persistence.loader.DataSet;
 import persistence.loader.XmlRW;
-import resources.images.icons.IconT;
 import trestview.hboxpane.HboxpaneController;
 import trestview.hboxpane.HboxpaneModel;
 import trestview.hboxpane.HboxpaneView;
@@ -54,8 +53,9 @@ public class  ResourceLinkView extends BorderPane implements Observer {
         MVC schemaWorkMVC  = new MVC (SchemaModel.class, SchemaController.class, SchemaView.class, this.resourceLinkModel, Rule.Work );
         SchemaView view = (SchemaView) schemaWorkMVC.getView();
         view.addEventHandler(MouseEvent.MOUSE_MOVED, (SchemaController)schemaWorkMVC.getController());
-        view.addEventHandler(MouseEvent.MOUSE_PRESSED, (SchemaController)schemaWorkMVC.getController());
 
+        view.addEventHandler(MouseEvent.MOUSE_DRAGGED, (SchemaController)schemaWorkMVC.getController());
+     // view.addEventHandler(MouseEvent.MOUSE_PRESSED, (SchemaController)schemaWorkMVC.getController());
 
 
 //        pschemeView.addMouseMotionListener(pschemeController);                          //  Here we add an observer (MouseMotionListener: mouseDragged, mouseMoved) for the view.

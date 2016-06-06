@@ -98,13 +98,12 @@ public class SchemaModel extends Observable  implements Observer{
         this.mouseEvent =  event;
         Point p = new Point((int) mouseEvent.getX(), (int) mouseEvent.getY());
 
-            Q q = find(this);
+         Q q = find(this);
 
         double x = (p.getX() / kScale );
         double y = (p.getY() / kScale );
         ImageView imvWork = new ImageView();
         imvWork.setImage(new javafx.scene.image.Image("file:"+work.getScheme() ));
-
 
             if (q == null) {
                 setCursor(Cursor.DEFAULT);
@@ -133,7 +132,6 @@ public class SchemaModel extends Observable  implements Observer{
 
     public void setkScale(Double kScale) {
         this.kScale = kScale;
-        System.out.println("kScale="+kScale);
     }
 
     public Q find(Observable o) {

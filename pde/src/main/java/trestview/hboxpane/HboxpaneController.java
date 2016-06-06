@@ -41,10 +41,10 @@ public class HboxpaneController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        addButton. setGraphic(new ImageView(new Image(IconT.class.getResource("add.png").toString())));
-        editButton.setGraphic(new ImageView(new Image(IconT.class.getResource("edit.png").toString())));
-        saveButton.setGraphic(new ImageView(new Image(IconT.class.getResource("save.png").toString())));
-        delButton. setGraphic(new ImageView(new Image(IconT.class.getResource("del.png").toString())));
+        addButton. setGraphic(new ImageView(new Image("file:pde\\src\\main\\resources\\images\\icons\\add.png" )));
+        editButton. setGraphic(new ImageView(new Image("file:pde\\src\\main\\resources\\images\\icons\\edit.png" )));
+        saveButton. setGraphic(new ImageView(new Image("file:pde\\src\\main\\resources\\images\\icons\\save.png" )));
+        delButton. setGraphic(new ImageView(new Image("file:pde\\src\\main\\resources\\images\\icons\\del.png" )));
     }
 
 

@@ -16,7 +16,7 @@ public class HboxpaneView extends HBox implements Observer {
 
     public HboxpaneView(HboxpaneModel hboxpaneModel, HboxpaneController hboxpaneController ) {
         this.hboxpaneModel =hboxpaneModel;
-//        FXMLLoader fxmlLoader =   XmlRW.fxmlLoad(this,hboxpaneController, "trestview\\hboxpane\\hboxpaneView.fxml","ui", "");
+        FXMLLoader fxmlLoader =   XmlRW.fxmlLoad(this,hboxpaneController, "trestview\\hboxpane\\hboxpaneView.fxml","ui", "");
     }
 
     @Override
