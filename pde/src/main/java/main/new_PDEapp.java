@@ -6,7 +6,7 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import resources.images.icons.IconT;
+//import resources.images.icons.IconT;
 import trestcontroller.TrestController;
 import trestmodel.TrestModel;
 import trestview.TrestView;

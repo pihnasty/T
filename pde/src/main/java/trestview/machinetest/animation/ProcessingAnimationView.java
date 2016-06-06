@@ -188,7 +188,7 @@ public class ProcessingAnimationView extends Pane implements Observer {
     @Override
     public void update(Observable o, Object arg) {
         if(o.getClass() == ProcessingAnimationModel.class) {
-            circleStack.pop();
+//            circleStack.pop();
             removeItemFromStorage();
             toggleHide(rectangle);
             runProcessingAnimation(((ProcessingAnimationModel)o).getDuration());

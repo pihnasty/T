@@ -8,7 +8,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import persistence.loader.XmlRW;
-import resources.images.icons.IconT;
+//import resources.images.icons.IconT;
 
 import java.net.URL;
 import java.util.ArrayList;
