@@ -37,6 +37,7 @@ public class ProcessingAnimationView extends Pane implements Observer {
     TranslateTransition transitionRect;
 
     private Stack<Rectangle> products;
+    private Stack<Circle> circleStack;
 
     public ProcessingAnimationView(ProcessingAnimationModel animationModel) {//ProcessingAnimationModel animationModel, MachineTestController testController) {
         this.processingAnimationModel = animationModel;
@@ -61,14 +62,14 @@ public class ProcessingAnimationView extends Pane implements Observer {
         Image imgStorage = new Image("file:Image\\animation\\storage.png");
         imageViewLeftStorage = new ImageView();
         imageViewLeftStorage.setFitWidth(200);
-        imageViewLeftStorage.setFitHeight(80);
-        imageViewLeftStorage.setY(185);
+        imageViewLeftStorage.setFitHeight(130);
+        imageViewLeftStorage.setY(150);
         imageViewLeftStorage.setImage(imgStorage);
 
         imageViewRightStorage = new ImageView();
         imageViewRightStorage.setFitWidth(200);
-        imageViewRightStorage.setFitHeight(80);
-        imageViewRightStorage.setY(185);
+        imageViewRightStorage.setFitHeight(130);
+        imageViewRightStorage.setY(150);
         imageViewRightStorage.setX(500);
         imageViewRightStorage.setImage(imgStorage);
 
@@ -87,6 +88,8 @@ public class ProcessingAnimationView extends Pane implements Observer {
         transitionCircle = new TranslateTransition();
         transitionRect = new TranslateTransition();
         products = new Stack<>();
+        circleStack = new Stack<>();
+        fillLeftStorage(this, imageViewLeftStorage);
     }
 
     private void runProcessingAnimation(double duration) {
@@ -134,7 +137,7 @@ public class ProcessingAnimationView extends Pane implements Observer {
     private void stackProducts(Rectangle rectangle, ImageView box, Pane layout) {
 
         Rectangle rect = null;
-        //if(rectangle.getClass() == Rectangle.class) {
+
         rect = new Rectangle();
         rect.setWidth(rectangle.getWidth());
         rect.setHeight(rectangle.getHeight());
@@ -142,7 +145,7 @@ public class ProcessingAnimationView extends Pane implements Observer {
         //}
         if(products.isEmpty()) {
             rect.setX(box.getX()+box.getFitWidth()-20);
-            rect.setY(box.getY()-rect.getHeight());
+            rect.setY(box.getY()-rect.getHeight()+box.getFitHeight()-30);
 
         } else if(products.peek().getX() < box.getX()+20){
             rect.setY(products.peek().getY() - rect.getHeight() -2);
@@ -157,9 +160,36 @@ public class ProcessingAnimationView extends Pane implements Observer {
 
     }
 
+    private void fillLeftStorage(Pane layout, ImageView box) {
+        Circle circle;
+        for(int i = 0; i < 25; i++) {
+            circle = new Circle(10, Color.CORAL);
+            if(circleStack.isEmpty()) {
+                circle.setCenterX(box.getX()+box.getFitWidth()-20);
+                circle.setCenterY(box.getY()-circle.getRadius()+box.getFitHeight()-30);
+
+            } else if(circleStack.peek().getCenterX() < box.getX()+30){
+                circle.setCenterY(circleStack.peek().getCenterY() - 2*circle.getRadius() -2);
+                circle.setCenterX(box.getX()+box.getFitWidth()-20);
+
+            } else {
+                circle.setCenterX(circleStack.peek().getCenterX()-2*circle.getRadius() - 2);
+                circle.setCenterY(circleStack.peek().getCenterY());
+            }
+            circleStack.add(circle);
+            layout.getChildren().add(circle);
+        }
+    }
+
+    private void removeItemFromStorage() {
+        this.getChildren().remove(circleStack.pop());
+    }
+
     @Override
     public void update(Observable o, Object arg) {
         if(o.getClass() == ProcessingAnimationModel.class) {
+            circleStack.pop();
+            removeItemFromStorage();
             toggleHide(rectangle);
             runProcessingAnimation(((ProcessingAnimationModel)o).getDuration());
 
