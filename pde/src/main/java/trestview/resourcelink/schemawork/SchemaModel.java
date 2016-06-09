@@ -96,23 +96,30 @@ public class SchemaModel extends Observable  implements Observer{
 
     public void changeLocation(MouseEvent event) {
         this.mouseEvent =  event;
+        double eps = 0.01;   //   Error move
         Point p = new Point((int) mouseEvent.getX(), (int) mouseEvent.getY());
 
-         Q q = find(this);
+        Q q = find(this);
 
         double x = (p.getX() / kScale );
         double y = (p.getY() / kScale );
+
         ImageView imvWork = new ImageView();
         imvWork.setImage(new javafx.scene.image.Image("file:"+work.getScheme() ));
 
             if (q == null) {
                 setCursor(Cursor.DEFAULT);
             } else {
-                for (Machine m:  work.getMachines()) {
-                    if (m.getId()==q.getIdQ()) {
-                        m.setLocationX(x/imvWork.getImage().getWidth()); m.setLocationY(y/imvWork.getImage().getHeight());
+                for (Machine m:  work.getMachines())
+                    if (m.getId() == q.getIdQ()) {
+                        double dxLocationX = x / imvWork.getImage().getWidth() - m.getLocationX();
+                        double dyLocationY = y / imvWork.getImage().getHeight() - m.getLocationY();
+
+                        if (Math.abs(dxLocationX) > eps) { dxLocationX = eps * Math.signum(dxLocationX);  m.setLocationX(m.getLocationX()+dxLocationX); }
+                            else m.setLocationX(x / imvWork.getImage().getWidth());
+                        if (Math.abs(dyLocationY) > eps) { dyLocationY = eps * Math.signum(dyLocationY);  m.setLocationY(m.getLocationY()+dyLocationY);}
+                            else m.setLocationY(y / imvWork.getImage().getHeight());
                     }
-                }
             }
         createDataSchemaModel (work);
         changed();
