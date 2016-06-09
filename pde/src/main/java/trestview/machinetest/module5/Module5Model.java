@@ -55,9 +55,10 @@ public class Module5Model extends Observable implements Observer{
 
     private void runSigma(int amount) {
 
-        if(amount>randomValuesList.size()) amount = randomValuesList.size();
+        if(amount>randomValuesList.size())
+            amount = randomValuesList.size();
         for(int i = randomValuesList.size()-amount; i < randomValuesList.size(); i++) {
-            double sigma = Math.abs(findAverage() - randomValuesList.get(i));
+            double sigma = Math.abs(randomValuesList.get(i) - findAverage());
             listSigma.add(sigma);
         }
         System.out.println("sigmaaa"+listSigma);

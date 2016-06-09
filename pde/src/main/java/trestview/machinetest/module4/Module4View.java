@@ -75,7 +75,7 @@ public class Module4View extends HBox implements Observer {
         if(o.getClass() == Module4Model.class) {
             Module4Model m4 = (Module4Model) o;
             redrawChart(lineChart, m4.getExpectedValues(), null, m4.getConstantVal(), series, series2);
-            redrawChart(lineChart2, m4.getTemps(), null, m4.getConstantVal()/10, series3, series4);
+            redrawChart(lineChart2, m4.getTemps(), null, m4.getConstantVal(), series3, series4);
         }
     }
 

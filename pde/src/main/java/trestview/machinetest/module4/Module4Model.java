@@ -43,7 +43,7 @@ public class Module4Model extends Observable implements Observer{
     }
 
     public double getConstantVal() {
-        constantVal = 5;
+        constantVal = 0.05;
         return constantVal;
     }
 

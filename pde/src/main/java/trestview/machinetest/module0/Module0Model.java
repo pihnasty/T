@@ -1,8 +1,12 @@
 package trestview.machinetest.module0;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.application.Platform;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.util.Duration;
 
-import java.time.Duration;
 import java.util.*;
 
 /**
@@ -36,29 +40,39 @@ public class Module0Model extends Observable {
     //populate the List with a test data
     private void populateList(int limit) {
 
-        timer = new Timer();
-        timer.schedule(new TimerTask() {
+//        timer = new Timer();
+//        timer.schedule(new TimerTask() {
+//            @Override
+//            public void run() {
+//                Platform.runLater(new Runnable() {
+//                    @Override
+//                    public void run() {
+//
+//                        System.out.println("Timer is working");
+//                        double value = Math.random() * 100;
+////                        System.sout.println(value+"\\(^-^)/");
+//                        randomVariable = value;
+//
+//                        changed();
+//                    }
+//                });
+//            }
+//        }, 3000, 3000);//3000000, 300000000);
+
+
+
+        Timeline timeline = new Timeline(new KeyFrame(Duration.millis(3000), new EventHandler<ActionEvent>() {
             @Override
-            public void run() {
-                Platform.runLater(new Runnable() {
-                    @Override
-                    public void run() {
-
-                        System.out.println("Timer is working");
-                        double value = Math.random()*100;
-//                        System.out.println(value+"\\(^-^)/");
-                        randomVariable = value;
-
-                        changed();
-                    }
-                });
-
+            public void handle(ActionEvent event) {
+                System.out.println("this is called every 3 seconds on UI thread");
+                double value = Math.random() * 100;
+                randomVariable = value;
+                changed();
             }
-        },3000, 3000);//3000000, 300000000);
+        }));
+        timeline.setCycleCount(Timeline.INDEFINITE);
+        timeline.play();
 
-//        for (double i = 0; i < limit; i++) {
-//            randomValuesList.add(Math.atan(i));
-//        }
     }
 
     public void changed() {
