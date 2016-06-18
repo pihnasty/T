@@ -55,6 +55,7 @@ public class  ResourceLinkView extends BorderPane implements Observer {
         view.addEventHandler(MouseEvent.MOUSE_MOVED, (SchemaController)schemaWorkMVC.getController());
 
         view.addEventHandler(MouseEvent.MOUSE_DRAGGED, (SchemaController)schemaWorkMVC.getController());
+        view.addEventHandler(MouseEvent.MOUSE_RELEASED, (SchemaController)schemaWorkMVC.getController());
      // view.addEventHandler(MouseEvent.MOUSE_PRESSED, (SchemaController)schemaWorkMVC.getController());
 
 

@@ -59,8 +59,9 @@ public class Q extends BorderPane{
 
         idMacine.setY(fontSize-oY);    idMacine.setX(-oX);
 
-        Rectangle rInner = new Rectangle(-modelmachine.getOverallDimensionX()*scale/2.0,-modelmachine.getOverallDimensionY()*scale/2.0,modelmachine.getOverallDimensionX()*scale,modelmachine.getOverallDimensionY()*scale);
+        rInner = new Rectangle(-modelmachine.getOverallDimensionX()*scale/2.0,-modelmachine.getOverallDimensionY()*scale/2.0,modelmachine.getOverallDimensionX()*scale,modelmachine.getOverallDimensionY()*scale);
         rOuter = new Rectangle(-oX,-oY,2*oX,2*oY);
+
 
         //region: Affine coordinate transformation
         this.imvQ.setImage(new javafx.scene.image.Image("file:"+machine.getModelmachine().getImg() ));
@@ -154,4 +155,7 @@ public class Q extends BorderPane{
 
     public ImageView getImvQ()   { return imvQ;  }
 
+    public Rectangle getrInner() {
+        return rInner;
+    }
 }

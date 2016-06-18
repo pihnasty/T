@@ -55,6 +55,7 @@ public class SchemaView extends BorderPane implements Observer {
           //  q.setRotate(q.getAngle());
             q.setLayoutX(q.getX());
             q.setLayoutY(q.getY());
+
         }
         if (imageview != null)           bp.getChildren().addAll(imageview);
         if (schemaModel.getQs() != null) bp.getChildren().addAll(schemaModel.getQs());
