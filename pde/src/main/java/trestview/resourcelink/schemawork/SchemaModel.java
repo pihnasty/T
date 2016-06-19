@@ -57,7 +57,7 @@ public class SchemaModel extends Observable implements Observer {
             changed();
         }
 
-        if (this.rule == Rule.Work) {
+        if ((this.rule == Rule.Work)&&  ((TableModel) o).getRule()==Rule.Work   ) {
             createDataSchemaModel((Work) ((TableModel<Work>) o).getSelectRow());
         }
 
