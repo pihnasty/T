@@ -18,9 +18,6 @@ import java.lang.reflect.Field;
 import java.util.*;
 import java.util.stream.Stream;
 
-/**
- * Created by pom on 05.03.2016.
- */
 public abstract class AbstractTableModel<cL> extends Observable {
 
     protected ArrayList<cL> tab;

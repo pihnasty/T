@@ -752,7 +752,7 @@ public class DataSet {
 
 
         if (row.getClass() == RowEmployee.class) {
-            m = new Employee(((RowEmployee) row).getId(), ((RowEmployee) row).getName(), ((RowEmployee) row).getDescription());
+            m = new Employee(row.getId(), row.getName(), row.getDescription());
         }
         if (row.getClass() == RowOperation.class) {
             m = new Operation(((RowOperation) row).getId(), ((RowOperation) row).getName(), ((RowOperation) row).getDescription());
@@ -1145,14 +1145,6 @@ public class DataSet {
 
 
         return null;
-    }
-
-    public static void main2(String[] args) {
-        int b = 20;                        // Количество предметов труда в таблице
-        for (int i = 1; i < 20; i++) {
-            int a = ((int) (Math.random() * b));            // генерирование номера предмета труда в таблице
-            System.out.println(a);
-        }
     }
 
     public ArrayList<RowLinespec> getTabLinespecs() {

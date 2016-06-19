@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <tabMachines>
-<RowMachine angle="90.0" description="Machine96" id="96" locationX="0.0" locationY="0.0" name="Machine96" state="1.0"/>
-<RowMachine angle="0.0" description="Machine97" id="97" locationX="0.1" locationY="0.9" name="Machine97" state="1.0"/>
-<RowMachine angle="135.0" description="Machine98" id="98" locationX="0.9" locationY="0.1" name="Machine98" state="1.0"/>
-<RowMachine angle="115.0" description="Machine99" id="99" locationX="1.0" locationY="1.0" name="Machine99" state="1.0"/>
-<RowMachine angle="0.0" description="Machine100" id="100" locationX="0.5" locationY="0.5" name="Machine100" state="1.0"/>
+<RowMachine angle="90.0" description="Machine96" id="96" locationX="0.2246123739645437" locationY="0.315077755240027" name="Machine96" state="1.0"/>
+<RowMachine angle="0.0" description="Machine97" id="97" locationX="0.13981894764861155" locationY="0.6977687626774848" name="Machine97" state="1.0"/>
+<RowMachine angle="135.0" description="Machine98" id="98" locationX="0.8055375500013555" locationY="0.29479377958079783" name="Machine98" state="1.0"/>
+<RowMachine angle="115.0" description="Machine99" id="99" locationX="0.9597894212782108" locationY="0.9574036511156186" name="Machine99" state="1.0"/>
+<RowMachine angle="0.0" description="Machine100" id="100" locationX="0.4293794779402522" locationY="0.5368492224475997" name="Machine100" state="1.0"/>
 <RowMachine angle="0.0" description="Описание для    RowMachine" id="101" locationX="0.3" locationY="0.3" name="RowMachine№101" state="1.0"/>
 <RowMachine angle="0.0" description="Описание для    RowMachine" id="102" locationX="0.5" locationY="0.5" name="RowMachine№101" state="1.0"/>
 </tabMachines>

@@ -36,9 +36,9 @@ public class SchemaController implements Initializable, EventHandler<MouseEvent>
             observableModel.changeLocation(event);
         }
 
-//        if ( event.getEventType() == MouseEvent.MOUSE_RELEASED) {
-//            observableModel.changeLocation(event);
-//        }
+        if ( event.getEventType() == MouseEvent.MOUSE_RELEASED) {
+            observableModel.qCurrentIsNull();
+        }
 
 
     }

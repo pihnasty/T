@@ -56,13 +56,6 @@ public class  ResourceLinkView extends BorderPane implements Observer {
 
         view.addEventHandler(MouseEvent.MOUSE_DRAGGED, (SchemaController)schemaWorkMVC.getController());
         view.addEventHandler(MouseEvent.MOUSE_RELEASED, (SchemaController)schemaWorkMVC.getController());
-     // view.addEventHandler(MouseEvent.MOUSE_PRESSED, (SchemaController)schemaWorkMVC.getController());
-
-
-//        pschemeView.addMouseMotionListener(pschemeController);                          //  Here we add an observer (MouseMotionListener: mouseDragged, mouseMoved) for the view.
-//        pschemeView.addMouseListener(pschemeController);                                //  Here we add an observer (MouseListener:  mousePressed) for the view.
-
-
 //----------------------------------------------------------------------------------------------------------------------
         MVC tableWorkMVC  = new MVC (TableModel.class, TableController.class, TableViewP.class, this.resourceLinkModel, Rule.Work );
         MVC hboxpaneWorkMVC = new MVC (HboxpaneModel.class,HboxpaneController.class,HboxpaneView.class,dataSet, Rule.Work);
@@ -84,6 +77,7 @@ public class  ResourceLinkView extends BorderPane implements Observer {
         tableWorkMVC.addObserverP((TableModel)tableMacineMVC .getModel());
         tableWorkMVC.addObserverP((SchemaModel)schemaWorkMVC .getModel());
 
+        tableMacineMVC.addObserverP((SchemaModel)schemaWorkMVC .getModel());
 
         VBox vboxMacine = new VBox();
         Label labelMacine = new Label(fxmlLoader.getResources().getString("ListEquipment"));
