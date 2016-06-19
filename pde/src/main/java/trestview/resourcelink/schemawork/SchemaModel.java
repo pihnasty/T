@@ -117,9 +117,9 @@ public class SchemaModel extends Observable  implements Observer{
                 setCursor(Cursor.DEFAULT);
             } else {
 
+                isEmptyPoint(q);
 
-
-                if(!isEmptyPoint(q))
+            //    if(!isEmptyPoint(q))
                 for (Machine m:  work.getMachines())
                     if (m.getId() == q.getIdQ()) {
                         double dxLocationX = x / imvWork.getImage().getWidth() - m.getLocationX();

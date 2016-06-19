@@ -23,7 +23,7 @@ public class Module0Model extends Observable {
     public Module0Model() {
 //        this.randomVariablesList = new ArrayDeque<>();
 //        this.groupedStatisticalSeries = new Hashtable<>();
-        populateList(100);
+   //     populateList(100);
     }
 
     public double getRandomVariable() {
