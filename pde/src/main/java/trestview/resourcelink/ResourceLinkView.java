@@ -1,6 +1,7 @@
 package trestview.resourcelink;
 
 import designpatterns.MVC;
+import designpatterns.ObservableDS;
 import entityProduction.Trest;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
@@ -53,7 +54,6 @@ public class  ResourceLinkView extends BorderPane implements Observer {
         MVC schemaWorkMVC  = new MVC (SchemaModel.class, SchemaController.class, SchemaView.class, this.resourceLinkModel, Rule.Work );
         SchemaView view = (SchemaView) schemaWorkMVC.getView();
         view.addEventHandler(MouseEvent.MOUSE_MOVED, (SchemaController)schemaWorkMVC.getController());
-
         view.addEventHandler(MouseEvent.MOUSE_DRAGGED, (SchemaController)schemaWorkMVC.getController());
         view.addEventHandler(MouseEvent.MOUSE_RELEASED, (SchemaController)schemaWorkMVC.getController());
 //----------------------------------------------------------------------------------------------------------------------

@@ -1,5 +1,6 @@
 package trestview.resourcelink.schemawork;
 
+import designpatterns.ObservableDS;
 import entityProduction.Machine;
 import entityProduction.Work;
 import javafx.scene.Cursor;

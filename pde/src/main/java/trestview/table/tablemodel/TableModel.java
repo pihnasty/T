@@ -18,9 +18,6 @@ import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
-/**
- * Created by pom on 07.02.2016.
- */
 public class TableModel <cL> extends AbstractTableModel implements Observer {
 
     private MethodCall methodCall;

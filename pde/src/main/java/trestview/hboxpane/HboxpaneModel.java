@@ -1,5 +1,6 @@
 package trestview.hboxpane;
 
+import designpatterns.ObservableDS;
 import persistence.loader.DataSet;
 import persistence.loader.tabDataSet.RowFunctiondist;
 import trestview.table.tablemodel.abstracttablemodel.Rule;

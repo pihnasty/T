@@ -1,5 +1,6 @@
 package trestview.resourcelink;
 
+import designpatterns.ObservableDS;
 import entityProduction.Trest;
 import persistence.loader.DataSet;
 import trestmodel.TrestModel;
