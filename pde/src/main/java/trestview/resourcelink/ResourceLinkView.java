@@ -64,26 +64,27 @@ public class  ResourceLinkView extends BorderPane implements Observer {
         VBox vboxWork = new VBox();
 
         Label labelWork = new Label(fxmlLoader.getResources().getString("ListManufacturing"));
-        labelWork.setGraphic(new ImageView(new Image("file:images\\icons\\RowWork.png")));
+        labelWork.setGraphic(new ImageView(new Image("file:pde\\src\\main\\resources\\images\\icons\\RowWork.png")));
 
         vboxWork.getChildren().addAll(labelWork,(HboxpaneView)hboxpaneWorkMVC.getView(),(TableViewP)tableWorkMVC.getView());
         vboxWork.setSpacing(5);   // The amount of vertical space between each child in the vbox.
         vboxWork.setPadding(new Insets(10, 0, 0, 10));   // The top,right,bottom,left padding around the region's content. This space will be included in the calculation of the region's minimum and preferred sizes. By default padding is Insets.EMPTY and cannot be set to null.
 //----------------------------------------------------------------------------------------------------------------------
-         MVC tableMacineMVC  = new MVC (TableModel.class, TableController.class, TableViewP.class, this.resourceLinkModel, Rule.Machine );
+         MVC tableMachineMVC  = new MVC (TableModel.class, TableController.class, TableViewP.class, this.resourceLinkModel, Rule.Machine );
          MVC hboxpaneMVCmacine = new MVC (HboxpaneModel.class,HboxpaneController.class,HboxpaneView.class,dataSet, Rule.RowMachine);
-         hboxpaneMVCmacine.addObserverP( (TableModel)tableMacineMVC .getModel());
+         hboxpaneMVCmacine.addObserverP( (TableModel)tableMachineMVC .getModel());
 
-        tableWorkMVC.addObserverP((TableModel)tableMacineMVC .getModel());
+        tableWorkMVC.addObserverP((TableModel)tableMachineMVC .getModel());
         tableWorkMVC.addObserverP((SchemaModel)schemaWorkMVC .getModel());
 
-        tableMacineMVC.addObserverP((SchemaModel)schemaWorkMVC .getModel());
+        tableMachineMVC.addObserverP((SchemaModel)schemaWorkMVC .getModel());
 
         VBox vboxMacine = new VBox();
         Label labelMacine = new Label(fxmlLoader.getResources().getString("ListEquipment"));
-        labelMacine.setGraphic(new ImageView(new  Image("file:images\\icons\\RowWork.png\\RowMachine.png")));
+        labelMacine.setGraphic(new ImageView(new  Image("file:pde\\src\\main\\resources\\images\\icons\\RowMachine.png")));
 
-        vboxMacine.getChildren().addAll(labelMacine,(HboxpaneView)hboxpaneMVCmacine.getView(),(TableViewP)tableMacineMVC.getView());
+
+        vboxMacine.getChildren().addAll(labelMacine,(HboxpaneView)hboxpaneMVCmacine.getView(),(TableViewP)tableMachineMVC.getView());
         vboxMacine.setSpacing(5);   // The amount of vertical space between each child in the vbox.
         vboxMacine.setPadding(new Insets(30, 0, 0, 10));   // The top,right,bottom,left padding around the region's content. This space will be included in the calculation of the region's minimum and preferred sizes. By default padding is Insets.EMPTY and cannot be set to null.
 //----------------------------------------------------------------------------------------------------------------------

@@ -47,7 +47,7 @@ public class  DictionaryView extends Dialog implements Observer {
 
        //  setTitle("%Open");
         setTitle(fxmlLoader.getResources().getString("Dictionary")+":  "+fxmlLoader.getResources().getString(dictionaryModel.gettClass().getSimpleName()));
-        setGraphic( new ImageView(new Image(dictionaryModel.gettClass().getSimpleName()+".png")));
+        setGraphic( new ImageView(new Image("file:pde\\src\\main\\resources\\images\\icons\\"+dictionaryModel.gettClass().getSimpleName()+".png")));
 
         setHeaderText(fxmlLoader.getResources().getString("HeaderText"));
         setResizable(true);             //  Defines whether the Stage is resizable or not by the user.

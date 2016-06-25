@@ -18,6 +18,8 @@ import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
+import static persistence.loader.XmlRW.FieldToField_ifClass;
+
 public class TableModel <cL> extends AbstractTableModel implements Observer {
 
     private MethodCall methodCall;
@@ -106,6 +108,7 @@ public class TableModel <cL> extends AbstractTableModel implements Observer {
                 break;
             case saveRowTable:
                 methodCall = MethodCall.saveRowTable;
+                for(Object r: tab) FieldToField_ifClass(dataset, r);
                 this.dataset.saveDataset();
                 break;
             case editRowTable:
