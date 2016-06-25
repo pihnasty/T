@@ -50,9 +50,9 @@ public class SchemaModel extends Observable implements Observer {
 
         if ( (o.getClass()==TableModel.class) && ((TableModel) o).getRule()==Rule.Machine   )   {
             this.dataSet = ((TableModel) o).getDataset();
-            if (this.rule == Rule.Work) {
+            if (rule == Rule.Work) {
                 if (!((ResourceLinkModel) observableModel).getTrest().getWorks().isEmpty()) {
-                    createDataSchemaModel(((ResourceLinkModel) observableModel).getTrest().getWorks().get(0));
+     //              createDataSchemaModel(((ResourceLinkModel) observableModel).getTrest().getWorks().get(0));
                 }
             }
             changed();
@@ -90,7 +90,6 @@ public class SchemaModel extends Observable implements Observer {
         qs.clear();
         this.work = work;
         qs.addAll(work.getMachines().stream().map(Q::new).collect(Collectors.toList())); //for (Machine machine : work.getMachines()) {  qs.add(new Q(machine)); }
-
     }
 
     public Cursor getCursor() {
