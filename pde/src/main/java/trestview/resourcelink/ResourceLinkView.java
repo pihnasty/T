@@ -71,8 +71,8 @@ public class  ResourceLinkView extends BorderPane implements Observer {
         vboxWork.setPadding(new Insets(10, 0, 0, 10));   // The top,right,bottom,left padding around the region's content. This space will be included in the calculation of the region's minimum and preferred sizes. By default padding is Insets.EMPTY and cannot be set to null.
 //----------------------------------------------------------------------------------------------------------------------
          MVC tableMachineMVC  = new MVC (TableModel.class, TableController.class, TableViewP.class, this.resourceLinkModel, Rule.Machine );
-         MVC hboxpaneMVCmachine = new MVC (HboxpaneModel.class,HboxpaneController.class,HboxpaneView.class,dataSet, Rule.RowMachine);
-         hboxpaneMVCmachine.addObserverP( (TableModel)tableMachineMVC .getModel());
+         MVC hboxpaneMachineMVC = new MVC (HboxpaneModel.class,HboxpaneController.class,HboxpaneView.class,dataSet, Rule.RowMachine);
+        hboxpaneMachineMVC.addObserverP( (TableModel)tableMachineMVC .getModel());
 
         tableWorkMVC.addObserverP((TableModel)tableMachineMVC .getModel());
         tableWorkMVC.addObserverP((SchemaModel)schemaWorkMVC .getModel());
@@ -84,7 +84,7 @@ public class  ResourceLinkView extends BorderPane implements Observer {
         labelMachine.setGraphic(new ImageView(new  Image("file:pde\\src\\main\\resources\\images\\icons\\RowMachine.png")));
 
 
-        vboxMachine.getChildren().addAll(labelMachine,(HboxpaneView)hboxpaneMVCmachine.getView(),(TableViewP)tableMachineMVC.getView());
+        vboxMachine.getChildren().addAll(labelMachine,(HboxpaneView)hboxpaneMachineMVC.getView(),(TableViewP)tableMachineMVC.getView());
         vboxMachine.setSpacing(5);   // The amount of vertical space between each child in the vbox.
         vboxMachine.setPadding(new Insets(30, 0, 0, 10));   // The top,right,bottom,left padding around the region's content. This space will be included in the calculation of the region's minimum and preferred sizes. By default padding is Insets.EMPTY and cannot be set to null.
 //----------------------------------------------------------------------------------------------------------------------
