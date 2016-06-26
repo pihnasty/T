@@ -37,9 +37,9 @@ public class TrestModel extends Observable {
 
         intersectionMachine();  // The intersection of the collection from the collection on line
 
-        DataSet.showTab(trests);
-
-        DataSet.showTab(trest.getWorks());
+//        DataSet.showTab(trests);
+//
+//        DataSet.showTab(trest.getWorks());
 
 
     }

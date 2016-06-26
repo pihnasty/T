@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <tabWorks>
-<RowWork description="description №01" id="1" name="Производс №1" overallSize="23.0" scaleEquipment="3.0" scheme="Image/Manufacturing/Производство двигателей.png"/>
+<RowWork description="description №01" id="1" name="Производс №1" overallSize="40.0" scaleEquipment="3.0" scheme="Image/Manufacturing/Производство двигателей.png"/>
 <RowWork description="description №3a" id="3" name="Производст №3" overallSize="100.0" scaleEquipment="5.0" scheme="Image/Manufacturing/Производство мебели.png"/>
 <RowWork description="description №4" id="4" name="Производс №4" overallSize="36.14" scaleEquipment="1.0" scheme="Image/Manufacturing/Manufacture of bearings.png"/>
 <RowWork description="description №5" id="5" name="Производ №5" overallSize="100.0" scaleEquipment="1.0" scheme="Image/Manufacturing/Производство полимеров.png"/>

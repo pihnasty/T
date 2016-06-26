@@ -634,17 +634,7 @@ public class DataSet {
                 rmtTab.add(rIdId);
                 // теперь у нас есть все необходиое для создание отсутствующего предмета труда
                 typemachines.add((T) createObject(rSL));
-            } catch (NoSuchMethodException ex) {
-                Logger.getLogger(DataSet.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (SecurityException ex) {
-                Logger.getLogger(DataSet.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (InstantiationException ex) {
-                Logger.getLogger(DataSet.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (IllegalAccessException ex) {
-                Logger.getLogger(DataSet.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (IllegalArgumentException ex) {
-                Logger.getLogger(DataSet.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (InvocationTargetException ex) {
+            } catch (NoSuchMethodException | SecurityException | InstantiationException | IllegalArgumentException | IllegalAccessException | InvocationTargetException ex) {
                 Logger.getLogger(DataSet.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
@@ -676,18 +666,6 @@ public class DataSet {
         return typemachines;
     }
 
-//    public <T, RT extends RowIdNameDescription, RMT extends RowIdId2>  T selectBack(int id, ArrayList<RT> rtTab, ArrayList<RMT> rmtTab) {
-//        T modelmachine = null;
-//        for (RMT wr : rmtTab) {  // Выбираем из rtTab все элементы RT, для которых row.Id==RMT.Id && RMT.Id2 == RT.Id
-//            if ( id == wr.getId2()) {
-//                 for (RT w : rtTab) if (wr.getId() == w.getId()) { modelmachine = createObject(w); }
-//             }
-//        }
-//        return modelmachine;
-//    }
-
-
-
     //-------------------------------------------------------------------------------
     public <cL> cL createObject( RowIdNameDescription row) {
         Object m = null;
@@ -716,7 +694,7 @@ public class DataSet {
                     row.getDescription());
         }
 //----------------------------------------------------------------------------------------------------------------------
-        if (row.getClass() == RowModelmachine.class) {
+        if (row.getClass() == RowModelmachine.class) { //noinspection ConstantConditions
              m = new Modelmachine(row.getId(),row.getName(),
                     ((RowModelmachine) row).getImg(),
                     select(row, tabMachines, tabModelmachineMachines ),   //  ArrayList<Machine> machines
@@ -725,7 +703,7 @@ public class DataSet {
             );
         }
 //----------------------------------------------------------------------------------------------------------------------
-        if (row.getClass() == RowMachine.class) {
+        if (row.getClass() == RowMachine.class) {    //noinspection ConstantConditions
             m =  new Machine(row.getId(), row.getName(),((RowMachine) row).getLocationX(), ((RowMachine) row).getLocationY(), ((RowMachine) row).getAngle(),  ((RowMachine) row).getState(),row.getDescription());
         }
 //=====================================================================================================================/
@@ -735,14 +713,15 @@ public class DataSet {
         }
 
 
-        if (row.getClass() == RowParametrfunctiondist.class) {
-             m =   new Parametrfunctiondist(           row.getId(),
-                                                        row.getName(),
-                                                           ((RowParametrfunctiondist) row).getAverageValue(),
-                                                           ((RowParametrfunctiondist) row).getMeanSquareDeviation(),
-                                                           ((RowParametrfunctiondist) row).getPathData(),
-                                                        row.getDescription());
-        }
+    if (row.getClass() == RowParametrfunctiondist.class) { //noinspection ConstantConditions
+        m = new Parametrfunctiondist(row.getId(),
+                row.getName(),
+                ((RowParametrfunctiondist) row).getAverageValue(),
+                ((RowParametrfunctiondist) row).getMeanSquareDeviation(),
+                ((RowParametrfunctiondist) row).getPathData(),
+                row.getDescription());
+    }
+
 
 
 

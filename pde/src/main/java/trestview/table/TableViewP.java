@@ -150,6 +150,7 @@ public class TableViewP<cL> extends TableView<cL> implements Observer {
             if(fielgName=="scaleEquipment")   ((RowWork) t.getTableView().getItems().get( t.getTablePosition().getRow()) ).setScaleEquipment(t.getNewValue());
             if(fielgName=="locationX")      ((RowMachine) t.getTableView().getItems().get( t.getTablePosition().getRow()) ).setLocationX (t.getNewValue());
             if(fielgName=="locationY")      ((RowMachine) t.getTableView().getItems().get( t.getTablePosition().getRow()) ).setLocationY (t.getNewValue());
+            if(fielgName=="angle")      ((RowMachine) t.getTableView().getItems().get( t.getTablePosition().getRow()) ).setAngle (t.getNewValue());
             if(fielgName=="state")      ((RowMachine) t.getTableView().getItems().get( t.getTablePosition().getRow()) ).setState (t.getNewValue());
             if(fielgName=="averageValue")      ((Functiondist) t.getTableView().getItems().get( t.getTablePosition().getRow()) ).setAverageValue (t.getNewValue());
             if(fielgName=="meanSquareDeviation")      ((Functiondist) t.getTableView().getItems().get( t.getTablePosition().getRow()) ).setMeanSquareDeviation(t.getNewValue());
@@ -160,8 +161,7 @@ public class TableViewP<cL> extends TableView<cL> implements Observer {
         if(parametersColumn.getFielgName().equals(fielgName)) {
             tableColumn.setCellValueFactory(new PropertyValueFactory("scheme"));
 
-            tableColumn.setCellFactory(
-              new Callback<TableColumn<cL, String>,TableCell<cL, String>>(){
+            tableColumn.setCellFactory( new Callback<TableColumn<cL, String>,TableCell<cL, String>>(){
                 @Override
                 public TableCell<cL, String> call(TableColumn<cL, String> param) {
                     TableCell<cL, String> cell = new TableCell<cL, String>(){
@@ -185,14 +185,7 @@ public class TableViewP<cL> extends TableView<cL> implements Observer {
                     };
                     return cell;
                 }
-
             });
-
-
-            //   tableColumn.setCellFactory(TextFieldTableCell.<cL, Integer>forTableColumn(new IntegerStringConverter()));
-       //     tableColumn.setOnEditCommit(  (TableColumn.CellEditEvent<cL, Image> t) -> {
-         //       if(fielgName=="image")   ((RowIdNameDescription) t.getTableView().getItems().get( t.getTablePosition().getRow()) ).setId(t.getNewValue());
-           // });
         }
     }
 
@@ -223,6 +216,7 @@ public class TableViewP<cL> extends TableView<cL> implements Observer {
             setDoubleColumn(parametersColumn, tableColumn,"scaleEquipment",tClass);
             setDoubleColumn(parametersColumn, tableColumn,"locationX",tClass);
             setDoubleColumn(parametersColumn, tableColumn,"locationY",tClass);
+            setDoubleColumn(parametersColumn, tableColumn,"angle",tClass);
             setDoubleColumn(parametersColumn, tableColumn,"state",tClass);
             setDoubleColumn(parametersColumn, tableColumn,"averageValue",tClass);
             setDoubleColumn(parametersColumn, tableColumn,"meanSquareDeviation",tClass);
@@ -234,7 +228,6 @@ public class TableViewP<cL> extends TableView<cL> implements Observer {
             setImageColumn(parametersColumn, tableColumn,"image",tClass);
             tableCol=tableColumn;
         }
-
 
         getColumns().addAll(tableCol);
         tableCol.setMinWidth(parametersColumn.getWidth());
@@ -297,7 +290,6 @@ public class TableViewP<cL> extends TableView<cL> implements Observer {
                 //if (getItems().size() == 0) {   return;   }
                 break;
             default:
-                break;
         }
     }
 
@@ -312,7 +304,6 @@ public class TableViewP<cL> extends TableView<cL> implements Observer {
             tableModel.selectRowForTwoTableModel();
         }
     }
-
     private class CellEditEvent<T, T1> {
     }
 }

@@ -144,12 +144,11 @@ public class TableModel <cL> extends AbstractTableModel implements Observer {
                 case Machine:
                     createEntityRowentity();
                     dataset.getTabWorksMachines().add(new RowWorkMachine(parentselectRow.getId(),r.getId(),""));
+        // робывал добавить оборудование            dataset.getTabModelmachineMachines().add( new RowModelmachineMachine(15,r.getId(),"")  );
                     break;
                 default:
                     createRowentity();
-                    break;
             }
-
     }
 
     private void createRowentity()  {
