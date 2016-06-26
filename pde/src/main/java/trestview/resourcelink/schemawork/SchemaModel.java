@@ -35,8 +35,9 @@ public class SchemaModel extends Observable implements Observer {
     public SchemaModel(Observable observableModel, Rule rule) {
         this.rule = rule;
         this.qs = new ArrayList();
-        this.dataSet = ((ResourceLinkModel) observableModel).getDataSet();
         this.observableModel = observableModel;
+        this.dataSet = ((ResourceLinkModel) observableModel).getDataSet();
+
 
         if (this.rule == Rule.Work) {
             if (!((ResourceLinkModel) observableModel).getTrest().getWorks().isEmpty()) {
@@ -48,21 +49,27 @@ public class SchemaModel extends Observable implements Observer {
     @Override
     public void update(Observable o, Object arg) {
 
-        if ( (o.getClass()==TableModel.class) && ((TableModel) o).getRule()==Rule.Machine   )   {
-            this.dataSet = ((TableModel) o).getDataset();
-            if (rule == Rule.Work) {
-                if (!((ResourceLinkModel) observableModel).getTrest().getWorks().isEmpty()) {
-     //              createDataSchemaModel(((ResourceLinkModel) observableModel).getTrest().getWorks().get(0));
-                }
+        if ((this.rule == Rule.Work))  {   //
+            if ((o.getClass()==TableModel.class)) {
+                updateForTableWorkMVC   ((TableModel) o);
+                updateForTableMachineMVC((TableModel) o);
             }
-            changed();
         }
-
-        if ((this.rule == Rule.Work)&&  ((TableModel) o).getRule()==Rule.Work   ) {
-            createDataSchemaModel((Work) ((TableModel<Work>) o).getSelectRow());
-        }
-
         changed();
+    }
+
+    private void updateForTableMachineMVC(TableModel o) {
+        if (o.getRule()== Rule.Machine   )   {
+            this.dataSet = o.getDataset();
+
+            if (!((ResourceLinkModel) observableModel).getTrest().getWorks().isEmpty()) {
+                //              createDataSchemaModel(((ResourceLinkModel) observableModel).getTrest().getWorks().get(0));
+            }
+        }
+    }
+
+    private void updateForTableWorkMVC(TableModel o) {
+        if (o.getRule()==Rule.Work   ) createDataSchemaModel((Work) ((TableModel<Work>) o).getSelectRow());
     }
 
     private void changed() {

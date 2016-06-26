@@ -158,10 +158,7 @@ public class TableModel <cL> extends AbstractTableModel implements Observer {
         constructor = tClass.getConstructor(DataSet.class, Class.class);
         selectRow = constructor.newInstance(this.dataset,tClass);
         tab.add(selectRow);
-        }   catch (NoSuchMethodException e)     { e.printStackTrace(); }
-        catch (InstantiationException e)    { e.printStackTrace(); }
-        catch (IllegalAccessException e)    { e.printStackTrace(); }
-        catch (InvocationTargetException e) { e.printStackTrace(); }
+        }   catch (NoSuchMethodException | InstantiationException | IllegalAccessException | InvocationTargetException e)     { e.printStackTrace(); }
     }
 
     private void createEntityRowentity()  {
@@ -172,10 +169,7 @@ public class TableModel <cL> extends AbstractTableModel implements Observer {
             tab.add(selectRow);
             List<RowIdNameDescription> tabRow = dataset.getTabIND(tClass.getSuperclass());
             tabRow.add(r);
-        } catch (NoSuchMethodException e)   { e.printStackTrace();  }
-        catch (InstantiationException e)    { e.printStackTrace();  }
-        catch (IllegalAccessException e)    { e.printStackTrace();  }
-        catch (InvocationTargetException e) { e.printStackTrace();  }
+        }   catch (NoSuchMethodException | InstantiationException | IllegalAccessException | InvocationTargetException e)     { e.printStackTrace(); }
     }
 
     public MethodCall getMethodCall() { return methodCall;  }
