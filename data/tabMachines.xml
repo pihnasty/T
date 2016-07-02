@@ -1,10 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <tabMachines>
-<RowMachine angle="91.0" description="Machine96" id="96" locationX="0.05863375223974032" locationY="0.12440838404327248" name="Machine96" state="0.91"/>
+<RowMachine angle="135.0" description="Machine96" id="96" locationX="0.17590125671922097" locationY="0.46247464503042596" name="Machine96" state="0.91"/>
 <RowMachine angle="0.0" description="Machine97" id="97" locationX="0.3840197762601081" locationY="0.6463826910074374" name="Machine97" state="0.8"/>
 <RowMachine angle="135.0" description="Machine98" id="98" locationX="0.8055375500013555" locationY="0.29479377958079783" name="Machine98" state="1.0"/>
 <RowMachine angle="115.0" description="Machine99" id="99" locationX="0.7992231459139989" locationY="0.7478025693035835" name="Machine99" state="1.0"/>
 <RowMachine angle="0.0" description="Machine100" id="100" locationX="0.5141729042561843" locationY="0.20554428668018931" name="Machine100" state="1.0"/>
 <RowMachine angle="0.0" description="Описание для    RowMachine" id="101" locationX="0.3" locationY="0.3" name="RowMachine№101" state="1.0"/>
 <RowMachine angle="0.0" description="Описание для    RowMachine" id="102" locationX="0.5" locationY="0.5" name="RowMachine№101" state="1.0"/>
+<RowMachine angle="0.0" description="Описание для    RowMachine" id="103" locationX="0.33736958981019816" locationY="0.11088573360378633" name="RowMachine№103" state="0.0"/>
+<RowMachine angle="60.0" description="Описание для    RowMachine" id="104" locationX="0.15786010218391625" locationY="0.1839080459770115" name="RowMachine№104" state="0.0"/>
+<RowMachine angle="0.0" description="Описание для    RowMachine" id="105" locationX="-0.49999999999999994" locationY="-0.49999999999999994" name="RowMachine№105" state="0.0"/>
+<RowMachine angle="0.0" description="Описание для    RowMachine" id="106" locationX="0.3617251484328595" locationY="0.3935091277890466" name="RowMachine№106" state="0.0"/>
+<RowMachine angle="0.0" description="Описание для    RowMachine" id="107" locationX="0.0" locationY="0.0" name="RowMachine№107" state="0.0"/>
 </tabMachines>

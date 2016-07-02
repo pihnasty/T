@@ -780,7 +780,7 @@ public class DataSet {
                 if (((RowRoute) row).getId() == wr.getId()) {
                     for (RowLineroute w : tabLineroutes) {
                         if (wr.getId2() == w.getId()) {
-                            lineroutes.add((Lineroute) createObject(w));
+                            lineroutes.add( createObject(w));
                         }
                     }
                 }
@@ -1016,7 +1016,7 @@ public class DataSet {
                 // если для строки заказа по IdId не находится предмет труда, то
                 RowSubject_labour rSL = new RowSubject_labour(this, RowSubject_labour.class);    // а)создаем отсутствующий RowSubject_labour
                 tabSubject_labours.add(rSL);                                                        // б)помещаем его в таблицу для RowSubject_labour
-                RowLineSubject_labour rIdId = new RowLineSubject_labour(((RowLine) row).getId(), rSL.getId(), "   ");    //	в)для связи по id строки RowLine и RowSubject_labour  создаем строку реестра    и
+                RowLineSubject_labour rIdId = new RowLineSubject_labour(row.getId(), rSL.getId(), "   ");    //	в)для связи по id строки RowLine и RowSubject_labour  создаем строку реестра    и
 
                 tabLinesSubject_labours.add(rIdId);                                                                //	г) помещаем ее в таблицу DataSet.tabLinesSubject_labours
                 // теперь у нас есть все необходиое для создание отсутствующего предмета труда

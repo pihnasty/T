@@ -1,6 +1,7 @@
 package trestview.table.tablemodel;
 
 import entityProduction.Machine;
+import entityProduction.Modelmachine;
 import entityProduction.Work;
 import persistence.loader.DataSet;
 import persistence.loader.XmlRW;
@@ -143,8 +144,10 @@ public class TableModel <cL> extends AbstractTableModel implements Observer {
                     break;
                 case Machine:
                     createEntityRowentity();
+                    int idModelMachine = dataset.IdMax(Modelmachine.class);
+                    ((Machine) r).setModelmachine();
                     dataset.getTabWorksMachines().add(new RowWorkMachine(parentselectRow.getId(),r.getId(),""));
-        // робывал добавить оборудование            dataset.getTabModelmachineMachines().add( new RowModelmachineMachine(15,r.getId(),"")  );
+                    dataset.getTabModelmachineMachines().add( new RowModelmachineMachine(idModelMachine ,r.getId(),"")  );       // пробывал добавить оборудование
                     break;
                 default:
                     createRowentity();
