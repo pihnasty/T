@@ -145,7 +145,7 @@ public class TableModel <cL> extends AbstractTableModel implements Observer {
                 case Machine:
                     createEntityRowentity();
                     int idModelMachine = dataset.IdMax(Modelmachine.class);
-                    ((Machine) r).setModelmachine();
+                 //   ((Machine) r).setModelmachine();
                     dataset.getTabWorksMachines().add(new RowWorkMachine(parentselectRow.getId(),r.getId(),""));
                     dataset.getTabModelmachineMachines().add( new RowModelmachineMachine(idModelMachine ,r.getId(),"")  );       // пробывал добавить оборудование
                     break;

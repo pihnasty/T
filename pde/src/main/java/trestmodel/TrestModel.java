@@ -1,6 +1,8 @@
 package trestmodel;
 
 import entityProduction.*;
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import persistence.loader.DataSet;
 import persistence.loader.SectionDataSet;
 import persistence.loader.tabDataSet.RowTrest;
@@ -21,6 +23,9 @@ public class TrestModel extends Observable {
     private Trest trest;
     private List<Trest> trests = new ArrayList();
 
+    private ObjectProperty<Trest>  trestObjectProperty  = new SimpleObjectProperty<>();
+    private ObjectProperty<DataSet> dataObjectProperty  = new SimpleObjectProperty<>();
+
     public Locale locale;
 
     public TrestModel() {
@@ -36,6 +41,9 @@ public class TrestModel extends Observable {
         for (Trest t: trests)  if (t.getId()==1)    this.trest= t;
 
         intersectionMachine();  // The intersection of the collection from the collection on line
+
+
+   //     trestObjectProperty.bind(dataObjectProperty);
 
 //        DataSet.showTab(trests);
 //
