@@ -30,6 +30,17 @@
         <MenuItem text="%ResourcesLinksPerspective"     fx:id="resourcesLinksPerspectiveItem" onAction="#handleResourcesLinksPerspectiveAction"/>
     </Menu>
 </Menu>
+
+<Menu text="%Tasks">
+    <Menu  text="%conveyorPDE"       fx:id="conveyorPDEItem"  >
+        <MenuItem text="%conveyorSpeedConstant"       fx:id="conveyorSpeedConstantItem"   onAction="#conveyorSpeedConstant"  />
+        <MenuItem text="%Copy"      fx:id="copyItem2"    />
+        <MenuItem text="%Paste"     fx:id="pasteItem2"   />
+    </Menu>
+
+</Menu>
+
+
 <Menu text="%Dictionary"  >
     <MenuItem text="%RowWork"           fx:id="rowWorkItem"             onAction="#handleRowWorkAction" />
     <MenuItem text="%RowTypemachine"    fx:id="rowTypemachineItem"      onAction="#handleRowTypemachineAction" />

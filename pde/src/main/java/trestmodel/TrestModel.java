@@ -29,7 +29,7 @@ public class TrestModel extends Observable {
     public Locale locale;
 
     public TrestModel() {
-        setLocale("ru"); //en
+        setLocale("ru"); //   ru en
         this.dataSet = new DataSet();
 
         this.sectionDataSet = new SectionDataSet(dataSet);

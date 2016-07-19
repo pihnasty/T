@@ -138,6 +138,17 @@ public class TMenuController implements Initializable {
         System.exit(0);
         Platform.exit();
     }
+
+
+
+//------------------- menu Tasks ------------------------------------
+    @FXML
+    private void conveyorSpeedConstant (ActionEvent event) {
+
+    }
+
+
+
 //------------------- menu Dictionary ------------------------------------
     @FXML
     private void handleRowWorkAction (ActionEvent event) {
