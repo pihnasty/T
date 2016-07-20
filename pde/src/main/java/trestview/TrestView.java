@@ -44,6 +44,30 @@ public class TrestView extends BorderPane implements Observer {
         MachineTestController machineTestController = new MachineTestController(machineTestModel);
         machineTestView = new MachineTestView(machineTestModel, machineTestController);
         machineTestModel.addObserver(machineTestView);
+
+
+
+
+        /*
+
+
+        ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+
+
+
+         */
+
+
+
+
+
+
+
+
+
+
     }
 
     @Override
@@ -55,6 +79,11 @@ public class TrestView extends BorderPane implements Observer {
         switch (o.getMenuItemCall()) {
             case testOfMachineItem:             this.setCenter(machineTestView);                        break;
             case resourcesLinksPerspectiveItem: this.setCenter((BorderPane)resourceLink.getView());     break;
+            case conveyorSpeedConstantItem:
+                                                this.setCenter(null);
+                                                    System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+                                                    break;
+
             default:                                                                                    break;
         }
     }

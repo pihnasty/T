@@ -43,4 +43,9 @@ public class TMenuModel extends Observable {
         changed();
     }
 
+
+    public void clickConveyorSpeedConstantItem()  {
+        this.menuItemCall = MenuItemCall.conveyorSpeedConstantItem;
+        changed();
+    }
 }

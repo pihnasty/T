@@ -33,7 +33,7 @@
 
 <Menu text="%Tasks">
     <Menu  text="%conveyorPDE"       fx:id="conveyorPDEItem"  >
-        <MenuItem text="%conveyorSpeedConstant"       fx:id="conveyorSpeedConstantItem"   onAction="#conveyorSpeedConstant"  />
+        <MenuItem text="%conveyorSpeedConstant"       fx:id="conveyorSpeedConstantItem"   onAction="#handleConveyorSpeedConstantAction"  />
         <MenuItem text="%Copy"      fx:id="copyItem2"    />
         <MenuItem text="%Paste"     fx:id="pasteItem2"   />
     </Menu>

@@ -143,8 +143,8 @@ public class TMenuController implements Initializable {
 
 //------------------- menu Tasks ------------------------------------
     @FXML
-    private void conveyorSpeedConstant (ActionEvent event) {
-
+    private void handleConveyorSpeedConstantAction (ActionEvent event) {
+        menuModel.clickConveyorSpeedConstantItem();
     }
 
 
