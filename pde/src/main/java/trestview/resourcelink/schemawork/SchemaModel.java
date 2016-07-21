@@ -48,8 +48,7 @@ public class SchemaModel extends Observable implements Observer {
 
     @Override
     public void update(Observable o, Object arg) {
-
-        if ((this.rule == Rule.Work))  {   //
+       if ((this.rule == Rule.Work))  {   //
             if ((o.getClass()==TableModel.class)) {
                 updateForTableWorkMVC   ((TableModel) o);
                 updateForTableMachineMVC((TableModel) o);
@@ -59,9 +58,11 @@ public class SchemaModel extends Observable implements Observer {
     }
 
     private void updateForTableMachineMVC(TableModel o) {
+
+
         if (o.getRule()== Rule.Machine   )   {
             this.dataSet = o.getDataset();
-
+            createDataSchemaModel(work);
             if (!((ResourceLinkModel) observableModel).getTrest().getWorks().isEmpty()) {
                 //              createDataSchemaModel(((ResourceLinkModel) observableModel).getTrest().getWorks().get(0));
             }

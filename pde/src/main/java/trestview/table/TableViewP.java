@@ -78,14 +78,19 @@ public class TableViewP<cL> extends TableView<cL> implements Observer {
     }
 
     private void setStringColumn(ParametersColumn parametersColumn, TableColumn<cL, String> tableColumn,String fielgName, Class tclass ) {
+
         if(parametersColumn.getFielgName().equals(fielgName)) {
             tableColumn.setCellValueFactory(new PropertyValueFactory(fielgName));
             tableColumn.setCellFactory(TextFieldTableCell.<cL>forTableColumn());
 
             tableColumn.setOnEditCommit(  (TableColumn.CellEditEvent<cL, String> t) -> {
+
               //if(tclass==RowWork.class)
               if(fielgName=="name") ((RowIdNameDescription) t.getTableView().getItems().get( t.getTablePosition().getRow()) ).setName(t.getNewValue());
-              if(fielgName=="scheme" || fielgName=="pathData") {
+                System.out.println("fielgName="+fielgName);
+              if(fielgName=="modelmachine") ((RowIdNameDescription) t.getTableView().getItems().get( t.getTablePosition().getRow()) ).setName(t.getNewValue());
+
+              if(fielgName=="scheme" || fielgName=="pathData" ) {
                   File f = new File(t.getNewValue());
                   String schemePath = "Image\\Manufacturing";
                   if (!f.exists()) {
@@ -200,6 +205,7 @@ public class TableViewP<cL> extends TableView<cL> implements Observer {
             setStringColumn(parametersColumn, tableColumn,"scheme",tClass);
             setStringColumn(parametersColumn, tableColumn,"description",tClass);
             setStringColumn(parametersColumn, tableColumn,"pathData",tClass);
+      //      setStringColumn(parametersColumn, tableColumn,"modelmachine",tClass);
 
 
             tableCol=tableColumn;
