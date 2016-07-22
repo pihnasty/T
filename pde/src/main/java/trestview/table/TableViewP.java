@@ -226,8 +226,7 @@ public class TableViewP<cL> extends TableView<cL> implements Observer {
             setDoubleColumn(parametersColumn, tableColumn,"state",tClass);
             setDoubleColumn(parametersColumn, tableColumn,"averageValue",tClass);
             setDoubleColumn(parametersColumn, tableColumn,"meanSquareDeviation",tClass);
-
-                tableCol=tableColumn;
+            tableCol=tableColumn;
         }
         if (parametersColumn.getcLs()==Image.class) {
             TableColumn<cL,String> tableColumn = new TableColumn  (parametersColumn.getName());
