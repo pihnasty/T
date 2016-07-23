@@ -3,9 +3,11 @@ package trestview.table;
 import designpatterns.MVC;
 import entityProduction.Functiondist;
 import entityProduction.Machine;
+import entityProduction.Modelmachine;
 import entityProduction.Work;
 import javafx.beans.property.Property;
 import javafx.beans.property.SimpleListProperty;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -77,17 +79,77 @@ public class TableViewP<cL> extends TableView<cL> implements Observer {
 
     }
 
+
+    private TableColumn<cL, ?> getTableColumnP(ParametersColumn parametersColumn) {
+
+        TableColumn<cL,?> tableCol = new TableColumn<>();
+
+        if (parametersColumn.getcLs()==String.class) {
+            TableColumn<cL,String> tableColumn = new TableColumn  (parametersColumn.getName());
+            setStringColumn(parametersColumn, tableColumn,"name",tClass);
+            setStringColumn(parametersColumn, tableColumn,"scheme",tClass);
+            setStringColumn(parametersColumn, tableColumn,"description",tClass);
+            setStringColumn(parametersColumn, tableColumn,"pathData",tClass);
+            setStringColumn(parametersColumn, tableColumn,"modelmachine",tClass);
+
+
+            tableCol=tableColumn;
+        }
+
+        if (parametersColumn.getcLs()==int.class) {
+            TableColumn<cL,Integer> tableColumn = new TableColumn  (parametersColumn.getName());
+            setIntegerColumn(parametersColumn, tableColumn,"id",tClass);
+            tableCol=tableColumn;
+        }
+        if (parametersColumn.getcLs()==double.class) {
+            TableColumn<cL,Double> tableColumn = new TableColumn  (parametersColumn.getName());
+            setDoubleColumn(parametersColumn, tableColumn,"overallSize",tClass);
+            setDoubleColumn(parametersColumn, tableColumn,"scaleEquipment",tClass);
+            setDoubleColumn(parametersColumn, tableColumn,"locationX",tClass);
+            setDoubleColumn(parametersColumn, tableColumn,"locationY",tClass);
+            setDoubleColumn(parametersColumn, tableColumn,"angle",tClass);
+            setDoubleColumn(parametersColumn, tableColumn,"state",tClass);
+            setDoubleColumn(parametersColumn, tableColumn,"averageValue",tClass);
+            setDoubleColumn(parametersColumn, tableColumn,"meanSquareDeviation",tClass);
+            tableCol=tableColumn;
+        }
+        if (parametersColumn.getcLs()==Image.class) {
+            TableColumn<cL,String> tableColumn = new TableColumn  (parametersColumn.getName());
+            setImageColumn(parametersColumn, tableColumn,"image",tClass);
+            tableCol=tableColumn;
+        }
+
+        getColumns().addAll(tableCol);
+        tableCol.setMinWidth(parametersColumn.getWidth());
+        tableCol.setPrefWidth(parametersColumn.getWidth());
+        tableCol.setEditable(parametersColumn.isEditable());
+
+        return tableCol;
+    }
+
     private void setStringColumn(ParametersColumn parametersColumn, TableColumn<cL, String> tableColumn,String fielgName, Class tclass ) {
 
         if(parametersColumn.getFielgName().equals(fielgName)) {
-            tableColumn.setCellValueFactory(new PropertyValueFactory(fielgName));
+
+            if(fielgName=="modelmachine") // tableColumn.setCellValueFactory(new PropertyValueFactory(fielgName));
+
+            tableColumn.setCellValueFactory(p -> new SimpleStringProperty(((Machine) p.getValue()).getModelmachine().getName()) );
+//            tableColumn.setCellValueFactory(  new Callback<TableColumn.CellDataFeatures<cL, String>, ObservableValue<String>>() {
+//                                                  public ObservableValue<String> call(TableColumn.CellDataFeatures<cL, String> p) {
+//                                                      return new SimpleStringProperty(((Machine) p.getValue()).getModelmachine().getName());
+//                                                  }
+//                                              });
+//                                            }
+
+            else  tableColumn.setCellValueFactory(new PropertyValueFactory(fielgName));
+
             tableColumn.setCellFactory(TextFieldTableCell.<cL>forTableColumn());
 
             tableColumn.setOnEditCommit(  (TableColumn.CellEditEvent<cL, String> t) -> {
 
               //if(tclass==RowWork.class)
               if(fielgName=="name") ((RowIdNameDescription) t.getTableView().getItems().get( t.getTablePosition().getRow()) ).setName(t.getNewValue());
-                System.out.println("fielgName="+fielgName);
+
               if(fielgName=="modelmachine") ((RowIdNameDescription) t.getTableView().getItems().get( t.getTablePosition().getRow()) ).setName(t.getNewValue());
 
               if(fielgName=="scheme" || fielgName=="pathData" ) {
@@ -135,7 +197,6 @@ public class TableViewP<cL> extends TableView<cL> implements Observer {
             });
         }
     }
-
     private void setIntegerColumn(ParametersColumn parametersColumn, TableColumn<cL, Integer> tableColumn,String fielgName, Class tclass ) {
         if(parametersColumn.getFielgName().equals(fielgName)) {
             tableColumn.setCellValueFactory(new PropertyValueFactory(fielgName));
@@ -145,7 +206,6 @@ public class TableViewP<cL> extends TableView<cL> implements Observer {
             });
         }
     }
-
     private void setDoubleColumn(ParametersColumn parametersColumn, TableColumn<cL, Double> tableColumn,String fielgName, Class tclass ) {
         if(parametersColumn.getFielgName().equals(fielgName)) {
             tableColumn.setCellValueFactory(new PropertyValueFactory(fielgName));
@@ -192,54 +252,6 @@ public class TableViewP<cL> extends TableView<cL> implements Observer {
                 }
             });
         }
-    }
-
-
-    private TableColumn<cL, ?> getTableColumnP(ParametersColumn parametersColumn) {
-
-        TableColumn<cL,?> tableCol = new TableColumn<>();
-
-        if (parametersColumn.getcLs()==String.class) {
-            TableColumn<cL,String> tableColumn = new TableColumn  (parametersColumn.getName());
-            setStringColumn(parametersColumn, tableColumn,"name",tClass);
-            setStringColumn(parametersColumn, tableColumn,"scheme",tClass);
-            setStringColumn(parametersColumn, tableColumn,"description",tClass);
-            setStringColumn(parametersColumn, tableColumn,"pathData",tClass);
-      //      setStringColumn(parametersColumn, tableColumn,"modelmachine",tClass);
-
-
-            tableCol=tableColumn;
-        }
-
-        if (parametersColumn.getcLs()==int.class) {
-            TableColumn<cL,Integer> tableColumn = new TableColumn  (parametersColumn.getName());
-            setIntegerColumn(parametersColumn, tableColumn,"id",tClass);
-            tableCol=tableColumn;
-        }
-        if (parametersColumn.getcLs()==double.class) {
-            TableColumn<cL,Double> tableColumn = new TableColumn  (parametersColumn.getName());
-            setDoubleColumn(parametersColumn, tableColumn,"overallSize",tClass);
-            setDoubleColumn(parametersColumn, tableColumn,"scaleEquipment",tClass);
-            setDoubleColumn(parametersColumn, tableColumn,"locationX",tClass);
-            setDoubleColumn(parametersColumn, tableColumn,"locationY",tClass);
-            setDoubleColumn(parametersColumn, tableColumn,"angle",tClass);
-            setDoubleColumn(parametersColumn, tableColumn,"state",tClass);
-            setDoubleColumn(parametersColumn, tableColumn,"averageValue",tClass);
-            setDoubleColumn(parametersColumn, tableColumn,"meanSquareDeviation",tClass);
-            tableCol=tableColumn;
-        }
-        if (parametersColumn.getcLs()==Image.class) {
-            TableColumn<cL,String> tableColumn = new TableColumn  (parametersColumn.getName());
-            setImageColumn(parametersColumn, tableColumn,"image",tClass);
-            tableCol=tableColumn;
-        }
-
-        getColumns().addAll(tableCol);
-        tableCol.setMinWidth(parametersColumn.getWidth());
-        tableCol.setPrefWidth(parametersColumn.getWidth());
-        tableCol.setEditable(parametersColumn.isEditable());
-
-        return tableCol;
     }
 
 
