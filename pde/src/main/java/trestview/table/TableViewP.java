@@ -133,13 +133,14 @@ public class TableViewP<cL> extends TableView<cL> implements Observer {
 
             if(fielgName=="modelmachine") // tableColumn.setCellValueFactory(new PropertyValueFactory(fielgName));
 
+            //---------------------------  It's (Lambda Exspression)
             tableColumn.setCellValueFactory(p -> new SimpleStringProperty(((Machine) p.getValue()).getModelmachine().getName()) );
-//            tableColumn.setCellValueFactory(  new Callback<TableColumn.CellDataFeatures<cL, String>, ObservableValue<String>>() {
-//                                                  public ObservableValue<String> call(TableColumn.CellDataFeatures<cL, String> p) {
-//                                                      return new SimpleStringProperty(((Machine) p.getValue()).getModelmachine().getName());
-//                                                  }
-//                                              });
-//                                            }
+            //            tableColumn.setCellValueFactory(  new Callback<TableColumn.CellDataFeatures<cL, String>, ObservableValue<String>>() {
+            //                                                  public ObservableValue<String> call(TableColumn.CellDataFeatures<cL, String> p) {
+            //                                                      return new SimpleStringProperty(((Machine) p.getValue()).getModelmachine().getName());
+            //                                                  }
+            //                                              });
+            //                                            }
 
             else  tableColumn.setCellValueFactory(new PropertyValueFactory(fielgName));
 
