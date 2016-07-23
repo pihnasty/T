@@ -1,25 +1,19 @@
 package trestview.table;
 
-import designpatterns.MVC;
 import entityProduction.Functiondist;
 import entityProduction.Machine;
 import entityProduction.Modelmachine;
-import entityProduction.Work;
 import javafx.beans.property.Property;
-import javafx.beans.property.SimpleListProperty;
-import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.Callback;
@@ -30,10 +24,10 @@ import persistence.loader.XmlRW;
 import persistence.loader.tabDataSet.*;
 //import resources.images.icons.IconT;
 //import resources.images.works.WorkT;
-import trestview.hboxpane.HboxpaneModel;
 import trestview.hboxpane.MethodCall;
 import trestview.table.tablemodel.TableModel;
 import trestview.table.tablemodel.abstracttablemodel.ParametersColumn;
+import trestview.table.tablemodel.abstracttablemodel.Rule;
 
 import java.io.File;
 import java.io.IOException;
@@ -48,6 +42,7 @@ public class TableViewP<cL> extends TableView<cL> implements Observer {
     private TableModel tableModel;
     private Property<TableModel> tableModelProperty;
     private ObservableList data;
+    private ObservableList dataComboboxModelMachne;
     private int selectIndex = -1;
     private MethodCall methodCall;
     private ArrayList<cL> tab;
@@ -69,7 +64,7 @@ public class TableViewP<cL> extends TableView<cL> implements Observer {
         if (tClass == RowFunctiondist.class) this.setEditable(false);
         XmlRW.fxmlLoad(this,tableController, "trestview\\table\\TableView.fxml","ui", "");
 
-        this.tableModel.getParametersOfColumns().stream().map(p-> getTableColumnP((ParametersColumn)p)).count();
+        this.tableModel.getParametersOfColumns().stream().map(p-> getTableColumnP((ParametersColumn)p)).count();  // for ( ParametersColumn p: (ArrayList<ParametersColumn>) this.tableModel.getParametersOfColumns() )  getTableColumnP(p);
 
         isEditable();
 
@@ -119,6 +114,13 @@ public class TableViewP<cL> extends TableView<cL> implements Observer {
             tableCol=tableColumn;
         }
 
+        if (parametersColumn.getcLs()==Modelmachine.class) {
+            TableColumn<cL,RowModelmachine> tableColumn = new TableColumn  (parametersColumn.getName());
+            setComboBoxColumn(parametersColumn, tableColumn,"modelmachine",tClass);
+            tableCol=tableColumn;
+        }
+
+
         getColumns().addAll(tableCol);
         tableCol.setMinWidth(parametersColumn.getWidth());
         tableCol.setPrefWidth(parametersColumn.getWidth());
@@ -127,14 +129,18 @@ public class TableViewP<cL> extends TableView<cL> implements Observer {
         return tableCol;
     }
 
-    private void setStringColumn(ParametersColumn parametersColumn, TableColumn<cL, String> tableColumn,String fielgName, Class tclass ) {
+    private void setComboBoxColumn(ParametersColumn parametersColumn, TableColumn<cL, RowModelmachine> tableColumn, String fielgName, Class tclass ) {
 
         if(parametersColumn.getFielgName().equals(fielgName)) {
 
-            if(fielgName=="modelmachine") // tableColumn.setCellValueFactory(new PropertyValueFactory(fielgName));
 
+            Callback<TableColumn<cL, RowModelmachine>, TableCell<cL, RowModelmachine>> comboBoxCellFactory = (TableColumn<cL, RowModelmachine> param) -> new ComboBoxEditingCell();
+
+
+            if(fielgName=="modelmachine") // tableColumn.setCellValueFactory(new PropertyValueFactory(fielgName));
+                tableColumn.setCellFactory(comboBoxCellFactory);
             //---------------------------  It's (Lambda Exspression)
-            tableColumn.setCellValueFactory(p -> new SimpleStringProperty(((Machine) p.getValue()).getModelmachine().getName()) );
+            // tableColumn.setCellValueFactory(p -> new SimpleStringProperty(((Machine) p.getValue()).getModelmachine().getName()) );
             //            tableColumn.setCellValueFactory(  new Callback<TableColumn.CellDataFeatures<cL, String>, ObservableValue<String>>() {
             //                                                  public ObservableValue<String> call(TableColumn.CellDataFeatures<cL, String> p) {
             //                                                      return new SimpleStringProperty(((Machine) p.getValue()).getModelmachine().getName());
@@ -142,62 +148,71 @@ public class TableViewP<cL> extends TableView<cL> implements Observer {
             //                                              });
             //                                            }
 
-            else  tableColumn.setCellValueFactory(new PropertyValueFactory(fielgName));
+        }
+    }
+
+    private void setStringColumn(ParametersColumn parametersColumn, TableColumn<cL, String> tableColumn,String fielgName, Class tclass ) {
+
+        if(parametersColumn.getFielgName().equals(fielgName)) {
+
+            tableColumn.setCellValueFactory(new PropertyValueFactory(fielgName));
 
             tableColumn.setCellFactory(TextFieldTableCell.<cL>forTableColumn());
 
             tableColumn.setOnEditCommit(  (TableColumn.CellEditEvent<cL, String> t) -> {
 
-              //if(tclass==RowWork.class)
-              if(fielgName=="name") ((RowIdNameDescription) t.getTableView().getItems().get( t.getTablePosition().getRow()) ).setName(t.getNewValue());
+                //if(tclass==RowWork.class)
+                if(fielgName=="name") ((RowIdNameDescription) t.getTableView().getItems().get( t.getTablePosition().getRow()) ).setName(t.getNewValue());
 
-              if(fielgName=="modelmachine") ((RowIdNameDescription) t.getTableView().getItems().get( t.getTablePosition().getRow()) ).setName(t.getNewValue());
+                if(fielgName=="modelmachine") ((RowIdNameDescription) t.getTableView().getItems().get( t.getTablePosition().getRow()) ).setName(t.getNewValue());
 
-              if(fielgName=="scheme" || fielgName=="pathData" ) {
-                  File f = new File(t.getNewValue());
-                  String schemePath = "Image\\Manufacturing";
-                  if (!f.exists()) {
-                      FileChooser chooser = new FileChooser();
-                      chooser.setInitialDirectory(new File (schemePath));
-                      chooser.getExtensionFilters().addAll(
-                              new FileChooser.ExtensionFilter("All Images", "*.*"),
-                              new FileChooser.ExtensionFilter("JPG", "*.jpg"), new FileChooser.ExtensionFilter("PNG", "*.png"),
-                              new FileChooser.ExtensionFilter("BMP", "*.bmp"), new FileChooser.ExtensionFilter("GIF", "*.gif")
-                      );
-                      chooser.setTitle( ResourceBundle.getBundle("ui").getString("nameFileScheme"));
-                      Stage st = new Stage();
-                      st.setMaxWidth(400);
-                      st.setMaxHeight(400);
-                      f = chooser.showOpenDialog(st);
-                      if (f!=null) {
-                          try {
-                              Files.copy(f.toPath(), new File(schemePath+"\\m"+f.getName()).toPath());
+                if(fielgName=="scheme" || fielgName=="pathData" ) {
+                    File f = new File(t.getNewValue());
+                    String schemePath = "Image\\Manufacturing";
+                    if (!f.exists()) {
+                        FileChooser chooser = new FileChooser();
+                        chooser.setInitialDirectory(new File (schemePath));
+                        chooser.getExtensionFilters().addAll(
+                                new FileChooser.ExtensionFilter("All Images", "*.*"),
+                                new FileChooser.ExtensionFilter("JPG", "*.jpg"), new FileChooser.ExtensionFilter("PNG", "*.png"),
+                                new FileChooser.ExtensionFilter("BMP", "*.bmp"), new FileChooser.ExtensionFilter("GIF", "*.gif")
+                        );
+                        chooser.setTitle( ResourceBundle.getBundle("ui").getString("nameFileScheme"));
+                        Stage st = new Stage();
+                        st.setMaxWidth(400);
+                        st.setMaxHeight(400);
+                        f = chooser.showOpenDialog(st);
+                        if (f!=null) {
+                            try {
+                                Files.copy(f.toPath(), new File(schemePath+"\\m"+f.getName()).toPath());
 
-                               if(new File(schemePath+"\\"+f.getName()).delete()){
-                              }else System.out.println("Файл file.txt не был найден в корневой папке проекта");
-                              Files.copy(new File(schemePath+"\\m"+f.getName()).toPath(), new File(schemePath+"\\"+f.getName()).toPath());
-                              if(new File(schemePath+"\\m"+f.getName()).delete()){
-                              }else System.out.println("Файл file.txt не был найден в корневой папке проекта");
+                                if(new File(schemePath+"\\"+f.getName()).delete()){
+                                }else System.out.println("Файл file.txt не был найден в корневой папке проекта");
+                                Files.copy(new File(schemePath+"\\m"+f.getName()).toPath(), new File(schemePath+"\\"+f.getName()).toPath());
+                                if(new File(schemePath+"\\m"+f.getName()).delete()){
+                                }else System.out.println("Файл file.txt не был найден в корневой папке проекта");
 
-                          } catch (IOException e) {
-                              e.printStackTrace();
-                          }
-                          if (fielgName== "scheme")        ((RowWork) t.getTableView().getItems().get(t.getTablePosition().getRow())).setScheme(schemePath+"\\"+f.getName());
-                          if (fielgName== "pathData") ((Functiondist) t.getTableView().getItems().get(t.getTablePosition().getRow())).setPathData (schemePath+"\\"+f.getName());
-                          repaintTable();
-                      }
-                      else {
-                          if (fielgName== "scheme") ((RowWork) t.getTableView().getItems().get(t.getTablePosition().getRow())).setScheme(t.getOldValue());
-                          if (fielgName== "pathData") ((Functiondist) t.getTableView().getItems().get(t.getTablePosition().getRow())).setPathData (t.getOldValue());
-                      }
-                  }
-              }
-              if(fielgName=="description") { ((RowIdNameDescription) t.getTableView().getItems().get( t.getTablePosition().getRow()) ).setDescription(t.getNewValue());
-                  ((TableCell)t.getTableView().getItems().get( t.getTablePosition().getRow())).setTooltip(new Tooltip(t.getNewValue()));}
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                            if (fielgName== "scheme")        ((RowWork) t.getTableView().getItems().get(t.getTablePosition().getRow())).setScheme(schemePath+"\\"+f.getName());
+                            if (fielgName== "pathData") ((Functiondist) t.getTableView().getItems().get(t.getTablePosition().getRow())).setPathData (schemePath+"\\"+f.getName());
+                            repaintTable();
+                        }
+                        else {
+                            if (fielgName== "scheme") ((RowWork) t.getTableView().getItems().get(t.getTablePosition().getRow())).setScheme(t.getOldValue());
+                            if (fielgName== "pathData") ((Functiondist) t.getTableView().getItems().get(t.getTablePosition().getRow())).setPathData (t.getOldValue());
+                        }
+                    }
+                }
+                if(fielgName=="description") { ((RowIdNameDescription) t.getTableView().getItems().get( t.getTablePosition().getRow()) ).setDescription(t.getNewValue());
+                    ((TableCell)t.getTableView().getItems().get( t.getTablePosition().getRow())).setTooltip(new Tooltip(t.getNewValue()));}
 
             });
         }
     }
+
+
     private void setIntegerColumn(ParametersColumn parametersColumn, TableColumn<cL, Integer> tableColumn,String fielgName, Class tclass ) {
         if(parametersColumn.getFielgName().equals(fielgName)) {
             tableColumn.setCellValueFactory(new PropertyValueFactory(fielgName));
@@ -282,6 +297,12 @@ public class TableViewP<cL> extends TableView<cL> implements Observer {
         for (Object row : this.tab) data.add(row);
         setEditable(true);
         setItems(data);
+
+        if (tableModel.getRule()== Rule.Machine) {
+            dataComboboxModelMachne = FXCollections.observableArrayList();
+            for (Object row : dataSet.getTabModelmachines()) dataComboboxModelMachne.add((RowModelmachine) row);
+        }
+
     }
 
     private void updateTableModel(TableModel o) {
@@ -322,8 +343,101 @@ public class TableViewP<cL> extends TableView<cL> implements Observer {
             tableModel.selectRowForTwoTableModel();
         }
     }
-    private class CellEditEvent<T, T1> {
+
+
+    class ComboBoxEditingCell extends TableCell<cL, RowModelmachine> {
+
+        private ComboBox<RowModelmachine> comboBox;
+
+        private ComboBoxEditingCell() {
+        }
+
+        @Override
+        public void startEdit() {
+            if (!isEmpty()) {
+                super.startEdit();
+                createComboBox();
+                setText(null);
+                setGraphic(comboBox);
+            }
+        }
+
+        @Override
+        public void cancelEdit() {
+            super.cancelEdit();
+
+    //        setText(getTyp().getTyp());
+            setGraphic(null);
+        }
+
+        @Override
+        public void updateItem(RowModelmachine item, boolean empty) {
+            super.updateItem(item, empty);
+
+            if (empty) {
+                setText(null);
+                setGraphic(null);
+            } else {
+                if (isEditing()) {
+                    if (comboBox != null) {
+       //                 comboBox.setValue(getTyp());
+                    }
+//                    setText(getTyp().getTyp());
+                    setGraphic(comboBox);
+                } else {
+//                    setText(getTyp().getTyp());
+                    setGraphic(null);
+                }
+            }
+        }
+
+        private void createComboBox() {
+            comboBox = new ComboBox<RowModelmachine>(dataComboboxModelMachne);
+            comboBoxConverter(comboBox);
+
+
+            RowModelmachine r = null;
+            for ( RowModelmachine rmm :  dataSet.getTabModelmachines())
+                if (  rmm.getId() ==  ((Machine) data.get(selectIndex)).getModelmachine().getId()) {
+                      r = rmm;
+                }
+
+
+           comboBox.valueProperty().set( r );
+            comboBox.setMinWidth(this.getWidth() - this.getGraphicTextGap() * 2);
+            comboBox.setOnAction((e) -> {
+                System.out.println("Committed: " + comboBox.getSelectionModel().getSelectedItem());
+                commitEdit(comboBox.getSelectionModel().getSelectedItem());
+            });
+//            comboBox.focusedProperty().addListener((ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) -> {
+//                if (!newValue) {
+//                    commitEdit(comboBox.getSelectionModel().getSelectedItem());
+//                }
+//            });
+        }
+
+        private void comboBoxConverter(ComboBox<RowModelmachine> comboBox) {
+            // Define rendering of the list of values in ComboBox drop down.
+            comboBox.setCellFactory((c) -> {
+                return new ListCell<RowModelmachine>() {
+                    @Override
+                    protected void updateItem(RowModelmachine item, boolean empty) {
+                        super.updateItem(item, empty);
+
+                        if (item == null || empty) {
+                            setText(null);
+                        } else {
+                            setText(item.getName());
+                        }
+                    }
+                };
+            });
+        }
+
+
     }
+
+
 }
 
 
