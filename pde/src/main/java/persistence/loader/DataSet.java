@@ -641,7 +641,7 @@ public class DataSet {
         return typemachines;
     }
 
-    public <T, RT extends RowIdNameDescription, RMT extends RowIdId2> ArrayList<T> select(RowIdNameDescription row, ArrayList<RT> rtTab, ArrayList<RMT> rmtTab) {
+   public <T, RT extends RowIdNameDescription, RMT extends RowIdId2> ArrayList<T> select(RowIdNameDescription row, ArrayList<RT> rtTab, ArrayList<RMT> rmtTab) {
         ArrayList<T> typemachines = new ArrayList<>();
         ArrayList<RMT> deleteFrom_rmtTab = new ArrayList<>();
         ArrayList<RT> deleteFrom_rtTab = new ArrayList<>();
@@ -1426,5 +1426,16 @@ public class DataSet {
         DTS dts = new DTS();
         return dts;
     }
+
+//----------------------------------------------------------------------------------------------------------------------
+
+    /** The method returns the table element with the specified identifier. */
+    public static <T> T getById(int id, ArrayList<T> tab) {
+        if (tab!=null)
+            if (!tab.isEmpty() )
+                for ( T r : tab)
+                    if ( ((RowIdNameDescription) r).getId() ==  id) return r;
+    return null;
+}
 
 }
