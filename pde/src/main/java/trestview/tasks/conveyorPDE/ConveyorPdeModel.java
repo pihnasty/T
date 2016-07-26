@@ -98,7 +98,7 @@ public class ConveyorPdeModel implements IConveyorPdeModel {
 
         IConveyorPdeModel conveyorPdeModel = new ConveyorPdeModel();
 
-        for (Point2D.Double p : conveyorPdeModel.xi0ForConstT(0)) {
+        for (Point2D.Double p : conveyorPdeModel.xi0ForConstT(-0.000000002)) {
             System.out.printf("p.s= %5.2f              p.hi0=  %5.2f  %n", p.getX(),p.getY());
 
         }
