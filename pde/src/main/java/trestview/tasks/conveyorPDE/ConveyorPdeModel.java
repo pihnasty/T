@@ -84,13 +84,8 @@ public class ConveyorPdeModel implements IConveyorPdeModel {
         double tD = 10.0;
         double dT =0.1;
 
-        for (double t=t0; t<=tD; t+=dT) {
-            Point2D.Double p1 = new Point2D.Double(t,
-                    decision(r(s,t))
-                );
-            doubleList.add(p1);
-        }
-        return doubleList;
+
+        return null;
     }
 
 
