@@ -25,16 +25,16 @@ interface IConveyorPdeModel {
 }
 
 public class ConveyorPdeModel implements IConveyorPdeModel {
-    double g = 9.8;
+
 
     public double initialCondition(double r) {
-        //double sD = 1;
-        return 1+Math.sin(2*Math.PI*r);//2 + Math.sin((2 * Math.PI) / (sD) * r);
+
+        return 1+Math.sin(2*Math.PI*r);
     }
 
     public double boundaryCondition(double r) {
 
-        return 1-Math.pow(r, 2);//2 * g - g * Math.pow(r, 2);
+        return 1-Math.pow(r, 2);
 
 
     }
@@ -58,19 +58,18 @@ public class ConveyorPdeModel implements IConveyorPdeModel {
         else return 1.0;
     }
 
-    public double r(double _s, double _t) { return _s-_t;//s - g * t;
-    }
+    public double r(double _s, double _t) { return _s-_t;   }
 
     @Override
-    public List<Point2D.Double> xi0ForConstT(double t) {
+    public List<Point2D.Double> xi0ForConstT(double _t) {
         List<Point2D.Double> doubleList = new ArrayList<>();
         double s0 = 0.0;
         double sD = 10.0;
         double dS =0.1;
 
-        for (double s=s0; s<=sD; s+=dS) {
-            Point2D.Double p = new Point2D.Double(s,
-                                                  decision(r(s,t))
+        for (double _s=s0; _s<=sD; _s+=dS) {
+            Point2D.Double p = new Point2D.Double(_s,
+                                                  decision(r(_s,_t))
                                                   );
             doubleList.add(p);
         }
@@ -78,14 +77,20 @@ public class ConveyorPdeModel implements IConveyorPdeModel {
     }
 
     @Override
-    public List<Point2D.Double> xi0ForConstS(double s) {
+    public List<Point2D.Double> xi0ForConstS(double _s) {
         List<Point2D.Double> doubleList = new ArrayList<>();
         double t0 = 0.0;
         double tD = 10.0;
         double dT =0.1;
 
+        for (double _t=t0; _t<=tD; _t+=dT) {
+            Point2D.Double p1 = new Point2D.Double(_t,
+                    decision(r(_s,_t))
+            );
+            doubleList.add(p1);
+        }
+        return doubleList;
 
-        return null;
     }
 
 
