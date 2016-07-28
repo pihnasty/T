@@ -28,13 +28,13 @@ public class ConveyorPdeModel implements IConveyorPdeModel {
     double g = 9.8;
 
     public double initialCondition(double r) {
-        double sD = 1;
-        return 2 + Math.sin((2 * Math.PI) / (sD) * r);
+        //double sD = 1;
+        return 1+Math.sin(2*Math.PI*r);//2 + Math.sin((2 * Math.PI) / (sD) * r);
     }
 
     public double boundaryCondition(double r) {
 
-        return 2 * g - g * Math.pow(r, 2);
+        return 1-Math.pow(r, 2);//2 * g - g * Math.pow(r, 2);
 
 
     }
@@ -58,8 +58,7 @@ public class ConveyorPdeModel implements IConveyorPdeModel {
         else return 1.0;
     }
 
-    public double r(double s, double t) {
-        return s - g * t;
+    public double r(double _s, double _t) { return _s-_t;//s - g * t;
     }
 
     @Override
@@ -80,9 +79,18 @@ public class ConveyorPdeModel implements IConveyorPdeModel {
 
     @Override
     public List<Point2D.Double> xi0ForConstS(double s) {
+        List<Point2D.Double> doubleList = new ArrayList<>();
+        double t0 = 0.0;
+        double tD = 10.0;
+        double dT =0.1;
 
-
-        return null;
+        for (double t=t0; t<=tD; t+=dT) {
+            Point2D.Double p1 = new Point2D.Double(t,
+                    decision(r(s,t))
+                );
+            doubleList.add(p1);
+        }
+        return doubleList;
     }
 
 
@@ -98,8 +106,13 @@ public class ConveyorPdeModel implements IConveyorPdeModel {
 
         IConveyorPdeModel conveyorPdeModel = new ConveyorPdeModel();
 
-        for (Point2D.Double p : conveyorPdeModel.xi0ForConstT(0)) {
+        /*for (Point2D.Double p : conveyorPdeModel.xi0ForConstT(0)) {
             System.out.printf("p.s= %5.2f              p.hi0=  %5.2f  %n", p.getX(),p.getY());
+
+        }*/
+
+        for (Point2D.Double p1 : conveyorPdeModel.xi0ForConstS(0.0)) {
+            System.out.printf("p.s= %5.2f              p.hi0=  %5.2f  %n", p1.getX(),p1.getY());
 
         }
 
