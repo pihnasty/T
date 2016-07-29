@@ -10,21 +10,21 @@ interface IConveyorPdeModel {
 
     public double boundaryCondition(double r);
 
-    public boolean comparisonBoundaryCondition(double r);
+    public boolean comparisonBoundaryCondition();
 
     public double decision(double r);
 
     public double h(double r);
 
-    public double r(double s, double t);
+    public double r(double _s, double _t);
 
-    public List<Point2D.Double> xi0ForConstT(double t);
+    public List<Point2D.Double> xi0ForConstT(double _t);
 
-    public List<Point2D.Double> xi0ForConstS(double s);
+    public List<Point2D.Double> xi0ForConstS(double _s);
 
 }
 
-public class ConveyorPdeModel implements IConveyorPdeModel {
+public  class ConveyorPdeModel implements IConveyorPdeModel {
 
 
     public double initialCondition(double r) {
@@ -40,8 +40,13 @@ public class ConveyorPdeModel implements IConveyorPdeModel {
     }
 
     @Override
-    public boolean comparisonBoundaryCondition(double r) {
-        return false;
+    public boolean comparisonBoundaryCondition() {
+
+        if(boundaryCondition(0)==initialCondition(0))return true;
+        else return false;
+
+
+
     }
 
 
@@ -66,12 +71,13 @@ public class ConveyorPdeModel implements IConveyorPdeModel {
         double s0 = 0.0;
         double sD = 10.0;
         double dS =0.1;
-
+        if (comparisonBoundaryCondition()==true) {
         for (double _s=s0; _s<=sD; _s+=dS) {
             Point2D.Double p = new Point2D.Double(_s,
                                                   decision(r(_s,_t))
                                                   );
             doubleList.add(p);
+        }
         }
         return doubleList;
     }
@@ -82,13 +88,14 @@ public class ConveyorPdeModel implements IConveyorPdeModel {
         double t0 = 0.0;
         double tD = 10.0;
         double dT =0.1;
-
-        for (double _t=t0; _t<=tD; _t+=dT) {
-            Point2D.Double p1 = new Point2D.Double(_t,
-                    decision(r(_s,_t))
-            );
-            doubleList.add(p1);
-        }
+if (comparisonBoundaryCondition()==true) {
+    for (double _t = t0; _t <= tD; _t += dT) {
+        Point2D.Double p1 = new Point2D.Double(_t,
+                decision(r(_s, _t))
+        );
+        doubleList.add(p1);
+    }
+}
         return doubleList;
 
     }
