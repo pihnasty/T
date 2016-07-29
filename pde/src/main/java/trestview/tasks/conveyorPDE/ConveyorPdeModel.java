@@ -24,27 +24,54 @@ interface IConveyorPdeModel {
 
 }
 
-public  class ConveyorPdeModel implements IConveyorPdeModel {
 
-
+class Condition1 extends ConveyorPdeModel {
+    @Override
     public double initialCondition(double r) {
 
-        return 1+Math.sin(2*Math.PI*r);
+        return 1 + Math.sin(2 * Math.PI * r);
     }
 
+    @Override
     public double boundaryCondition(double r) {
 
-        return 1-Math.pow(r, 2);
-
-
+        return 1 - Math.pow(r, 2);
     }
+
+
+}
+
+
+
+
+class Condition2 extends ConveyorPdeModel {
+    @Override
+    public double initialCondition(double r) {
+
+        return r;
+    }
+
+    @Override
+    public double boundaryCondition(double r) {
+
+        return r*2;
+    }
+
+
+}
+
+public abstract class ConveyorPdeModel implements IConveyorPdeModel {
+
+
+    public abstract double initialCondition(double r);
+
+    public abstract double boundaryCondition(double r);
 
     @Override
     public boolean comparisonBoundaryCondition() {
 
-        if(boundaryCondition(0)==initialCondition(0))return true;
+        if (boundaryCondition(0) == initialCondition(0)) return true;
         else return false;
-
 
 
     }
@@ -63,21 +90,23 @@ public  class ConveyorPdeModel implements IConveyorPdeModel {
         else return 1.0;
     }
 
-    public double r(double _s, double _t) { return _s-_t;   }
+    public double r(double _s, double _t) {
+        return _s - _t;
+    }
 
     @Override
     public List<Point2D.Double> xi0ForConstT(double _t) {
         List<Point2D.Double> doubleList = new ArrayList<>();
         double s0 = 0.0;
         double sD = 10.0;
-        double dS =0.1;
-        if (comparisonBoundaryCondition()==true) {
-        for (double _s=s0; _s<=sD; _s+=dS) {
-            Point2D.Double p = new Point2D.Double(_s,
-                                                  decision(r(_s,_t))
-                                                  );
-            doubleList.add(p);
-        }
+        double dS = 0.1;
+        if (comparisonBoundaryCondition() == true) {
+            for (double _s = s0; _s <= sD; _s += dS) {
+                Point2D.Double p = new Point2D.Double(_s,
+                        decision(r(_s, _t))
+                );
+                doubleList.add(p);
+            }
         }
         return doubleList;
     }
@@ -87,15 +116,15 @@ public  class ConveyorPdeModel implements IConveyorPdeModel {
         List<Point2D.Double> doubleList = new ArrayList<>();
         double t0 = 0.0;
         double tD = 10.0;
-        double dT =0.1;
-if (comparisonBoundaryCondition()==true) {
-    for (double _t = t0; _t <= tD; _t += dT) {
-        Point2D.Double p1 = new Point2D.Double(_t,
-                decision(r(_s, _t))
-        );
-        doubleList.add(p1);
-    }
-}
+        double dT = 0.1;
+        if (comparisonBoundaryCondition() == true) {
+            for (double _t = t0; _t <= tD; _t += dT) {
+                Point2D.Double p1 = new Point2D.Double(_t,
+                        decision(r(_s, _t))
+                );
+                doubleList.add(p1);
+            }
+        }
         return doubleList;
 
     }
@@ -111,15 +140,17 @@ if (comparisonBoundaryCondition()==true) {
 
     static public void main(String[] args) {
 
-        IConveyorPdeModel conveyorPdeModel = new ConveyorPdeModel();
 
-        /*for (Point2D.Double p : conveyorPdeModel.xi0ForConstT(0)) {
-            System.out.printf("p.s= %5.2f              p.hi0=  %5.2f  %n", p.getX(),p.getY());
+        IConveyorPdeModel conveyorPdeMode = new Condition2();
+        //IConveyorPdeModel conveyorPdeModel = new ConveyorPdeModel();
 
-        }*/
+        for (Point2D.Double p : conveyorPdeMode.xi0ForConstT(0)) {
+            System.out.printf("p.s= %5.2f              p.hi0=  %5.2f  %n", p.getX(), p.getY());
 
-        for (Point2D.Double p1 : conveyorPdeModel.xi0ForConstS(0.0)) {
-            System.out.printf("p.s= %5.2f              p.hi0=  %5.2f  %n", p1.getX(),p1.getY());
+        }
+
+        for (Point2D.Double p1 : conveyorPdeMode.xi0ForConstS(0.0)) {
+            System.out.printf("p.s= %5.2f              p.hi0=  %5.2f  %n", p1.getX(), p1.getY());
 
         }
 
