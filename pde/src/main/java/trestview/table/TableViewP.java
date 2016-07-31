@@ -142,6 +142,15 @@ public class TableViewP<cL> extends TableView<cL> implements Observer {
                                                                                                                 ((Machine) p.getValue()).getModelmachine().getId(),
                                                                                                                 dataSet.getTabModelmachines())));
               tableColumn.setCellFactory(comboBoxCellFactory);
+                tableColumn.setOnEditCommit(  (TableColumn.CellEditEvent<cL, RowModelmachine> t) -> {
+//                            if (fielgName == "modelmachine")
+//
+//                                ((RowIdNameDescription) t.getTableView().getItems().get(t.getTablePosition().getRow())).getId());
+//
+//
+//                                ((RowIdNameDescription) t.getTableView().getItems().get(t.getTablePosition().getRow())).set(t.getNewValue());
+                        });
+
 //                tableColumn.setOnEditCommit(
 //                        (TableColumn.CellEditEvent<cL, RowModelmachine> t) -> {
 //                            RowModelmachine row = t.getNewValue();
@@ -413,6 +422,7 @@ public class TableViewP<cL> extends TableView<cL> implements Observer {
                         System.out.println("isEditing:comboBox.getSelectionModel().getSelectedItem()= " + comboBox.getSelectionModel().getSelectedItem());
                       System.out.println("selectIndex="+selectIndex);
 
+                      if (selectIndex<0) selectIndex =1;
                       r  = DataSet.getById(((Machine) data.get(selectIndex)).getModelmachine().getId(), dataSet.getTabModelmachines());
 
 

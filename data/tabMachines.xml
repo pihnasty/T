@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <tabMachines>
 <RowMachine angle="0.0" description="Machine96" id="96" locationX="0.0983242922174107" locationY="0.16091954022988506" name="Machine96" state="0.91"/>
-<RowMachine angle="45.0" description="Machine97" id="97" locationX="0.0" locationY="0.37322515212981744" name="Machine97" state="0.8"/>
+<RowMachine angle="45.0" description="Machine97" id="97" locationX="0.5" locationY="0.37322515212981744" name="Machine971" state="0.8"/>
 <RowMachine angle="135.0" description="Machine98" id="98" locationX="0.8055375500013555" locationY="0.29479377958079783" name="Machine98" state="1.0"/>
 <RowMachine angle="90.0" description="Machine99" id="99" locationX="0.1443292362824377" locationY="0.5449628127112914" name="Machine99" state="1.0"/>
 <RowMachine angle="0.0" description="Machine100" id="100" locationX="0.5141729042561843" locationY="0.20554428668018931" name="Machine100" state="1.0"/>
