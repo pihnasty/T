@@ -147,16 +147,39 @@ public class VconstConveyorPdeModel implements ConveyorPdeModel {
         ConveyorPdeModel vconstConveyorPdeModel = new VconstConveyorPdeModel();
 
         InitialCondition sinConveyorPdeModel = new SinInitialCondition();
+
+        InitialCondition sinLConveyorPdeModel= _r ->  1 + Math.sin(2 * Math.PI * _r);
+
+
+        double z=5;
+
         BoundaryCondition pow2BoundaryCondition = new Pow2BoundaryCondition();
 
         InitialCondition rConveyorPdeModel = new RInitialCondition();
         BoundaryCondition rpow2BoundaryCondition = new RPow2BoundaryCondition();
 
-
-        for (Point2D.Double p : vconstConveyorPdeModel.xi0ForConstS(0.5,sinConveyorPdeModel,pow2BoundaryCondition)) {
+// 1 ------------------------------------------------------------------
+        for (Point2D.Double p : vconstConveyorPdeModel.xi0ForConstS(0.5,sinConveyorPdeModel, pow2BoundaryCondition)) {
             System.out.printf("p.s= %5.2f              p.hi0=  %5.2f  %n", p.getX(), p.getY());
-
         }
+// 2 ------------------------------------------------------------------
+        for (Point2D.Double p : vconstConveyorPdeModel.xi0ForConstS(0.5,sinConveyorPdeModel::initialCondition, pow2BoundaryCondition::boundaryCondition)) {
+            System.out.printf("p.s= %5.2f              p.hi0=  %5.2f  %n", p.getX(), p.getY());
+        }
+// 3 ------------------------------------------------------------------
+        for (Point2D.Double p : vconstConveyorPdeModel.xi0ForConstS(0.5,sinLConveyorPdeModel, pow2BoundaryCondition::boundaryCondition)) {
+            System.out.printf("p.s= %5.2f              p.hi0=  %5.2f  %n", p.getX(), p.getY());
+        }
+
+// 3 ------------------------------------------------------------------
+        for (Point2D.Double p : vconstConveyorPdeModel.xi0ForConstS(0.5,
+                                                                    _r ->  1 + Math.sin(2 * Math.PI * _r),
+                                                                    pow2BoundaryCondition::boundaryCondition)) {
+            System.out.printf("p.s= %5.2f              p.hi0=  %5.2f  %n", p.getX(), p.getY());
+        }
+
+
+
 
         for (Point2D.Double p1 : vconstConveyorPdeModel.xi0ForConstT(0,sinConveyorPdeModel,pow2BoundaryCondition)) {
             System.out.printf("p.s= %5.2f              p.hi0=  %5.2f  %n", p1.getX(), p1.getY());
