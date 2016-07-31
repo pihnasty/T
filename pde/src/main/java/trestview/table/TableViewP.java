@@ -132,48 +132,7 @@ public class TableViewP<cL> extends TableView<cL> implements Observer {
         return tableCol;
     }
 
-    private void setComboBoxColumn(ParametersColumn parametersColumn, TableColumn<cL, RowModelmachine> tableColumn, String fielgName, Class tclass ) {
 
-        if(parametersColumn.getFielgName().equals(fielgName)) {
-            Callback<TableColumn<cL, RowModelmachine>, TableCell<cL, RowModelmachine>> comboBoxCellFactory = param -> new ComboBoxEditingCell();
-
-            if(fielgName=="modelmachine") {
-                tableColumn.setCellValueFactory(p -> new SimpleObjectProperty<RowModelmachine>(  DataSet.getById(
-                                                                                                                ((Machine) p.getValue()).getModelmachine().getId(),
-                                                                                                                dataSet.getTabModelmachines())));
-              tableColumn.setCellFactory(comboBoxCellFactory);
-                tableColumn.setOnEditCommit(  (TableColumn.CellEditEvent<cL, RowModelmachine> t) -> {
-//                            if (fielgName == "modelmachine")
-//
-//                                ((RowIdNameDescription) t.getTableView().getItems().get(t.getTablePosition().getRow())).getId());
-//
-//
-//                                ((RowIdNameDescription) t.getTableView().getItems().get(t.getTablePosition().getRow())).set(t.getNewValue());
-                        });
-
-//                tableColumn.setOnEditCommit(
-//                        (TableColumn.CellEditEvent<cL, RowModelmachine> t) -> {
-//                            RowModelmachine row = t.getNewValue();
-//                            Modelmachine m = new Modelmachine(row.getId(),row.getName(),
-//                                    row.getImg(),
-//                                    dataSet.select(row, dataSet.getTabMachines(), dataSet.getTabModelmachineMachines() ),   //  ArrayList<Machine> machines
-//                                    row.getOverallDimensionX(), row.getOverallDimensionY(),
-//                                    row.getWorkSizeX(),  row.getWorkSizeY(),  row.getDescription());
-//                            ((Machine) t.getTableView().getItems()
-//                                    .get(t.getTablePosition().getRow()))
-//                                    .setModelmachine(m);
-//                        });
-                //---------------------------  It's (Lambda Exspression)
-                // tableColumn.setCellValueFactory(p -> new SimpleStringProperty(((Machine) p.getValue()).getModelmachine().getName()) );
-                //            tableColumn.setCellValueFactory(  new Callback<TableColumn.CellDataFeatures<cL, String>, ObservableValue<String>>() {
-                //                                                  public ObservableValue<String> call(TableColumn.CellDataFeatures<cL, String> p) {
-                //                                                      return new SimpleStringProperty(((Machine) p.getValue()).getModelmachine().getName());
-                //                                                  }
-                //                                              });
-                //                                            }
-            }
-        }
-    }
 
     private void setStringColumn(ParametersColumn parametersColumn, TableColumn<cL, String> tableColumn,String fielgName, Class tclass ) {
 
@@ -235,8 +194,6 @@ public class TableViewP<cL> extends TableView<cL> implements Observer {
             });
         }
     }
-
-
     private void setIntegerColumn(ParametersColumn parametersColumn, TableColumn<cL, Integer> tableColumn,String fielgName, Class tclass ) {
         if(parametersColumn.getFielgName().equals(fielgName)) {
             tableColumn.setCellValueFactory(new PropertyValueFactory(fielgName));
@@ -262,11 +219,51 @@ public class TableViewP<cL> extends TableView<cL> implements Observer {
             });
         }
     }
-    private void setImageColumn(ParametersColumn parametersColumn, TableColumn<cL, String> tableColumn, String fielgName, Class tclass ) {
-        if(parametersColumn.getFielgName().equals(fielgName)) {
-            tableColumn.setCellValueFactory(new PropertyValueFactory("scheme"));
 
-            tableColumn.setCellFactory( new Callback<TableColumn<cL, String>,TableCell<cL, String>>(){
+    private void setComboBoxColumn(ParametersColumn parametersColumn, TableColumn<cL, RowModelmachine> tableColumn, String fielgName, Class tclass ) {
+        if(parametersColumn.getFielgName().equals(fielgName)) {
+            Callback<TableColumn<cL, RowModelmachine>, TableCell<cL, RowModelmachine>> comboBoxCellFactory = param -> new ComboBoxEditingCell();
+
+
+
+            if(fielgName=="modelmachine") {
+                tableColumn.setCellValueFactory(p -> new SimpleObjectProperty<RowModelmachine>(  DataSet.getById(
+                        ((Machine) p.getValue()).getModelmachine().getId(),
+                        dataSet.getTabModelmachines())));
+                tableColumn.setCellFactory(comboBoxCellFactory);
+                tableColumn.setOnEditCommit((TableColumn.CellEditEvent<cL, RowModelmachine> t) -> {
+                    if (fielgName == "modelmachine") {
+                        RowModelmachine rowModelmachine = t.getNewValue();
+                        Modelmachine modelmachine = new Modelmachine(rowModelmachine.getId(), rowModelmachine.getName(),
+                                rowModelmachine.getImg(),
+                                dataSet.select(rowModelmachine, dataSet.getTabMachines(), dataSet.getTabModelmachineMachines()),   //  ArrayList<Machine> machines
+                                rowModelmachine.getOverallDimensionX(), rowModelmachine.getOverallDimensionY(),
+                                rowModelmachine.getWorkSizeX(), rowModelmachine.getWorkSizeY(), rowModelmachine.getDescription());
+//                                for(cL machine :   tab)
+//                                    if   ( ((Machine)machine).getModelmachine().getId()==t.getOldValue().getId())
+//                                    ((Machine)machine).setModelmachine(modelmachine);
+                        for (int i = 0; i < tab.size(); i++)
+                            if (((Machine) tab.get(i)).getModelmachine().getId() == t.getOldValue().getId())
+                                if (((Machine) selectRow).getId() ==  ((Machine) tab.get(i)).getId())
+                                    ((Machine) tab.get(i)).setModelmachine(modelmachine);
+                    }
+                });
+            }
+        }
+    }
+    private void setImageColumn(ParametersColumn parametersColumn, TableColumn<cL, String> tableColumn, String fielgName, Class tclass ) {
+
+//        if (tableModel.getRule() == Rule.Machine) {
+//            System.out.println("if (tableModel.getRule() == Rule.Machine)");
+//            Callback<TableColumn<cL, RowModelmachine>, TableCell<cL, RowModelmachine>> imageMachineCellFactory = param -> new ImageMachineEditingCell();
+//            tableColumn.setCellFactory(imageMachineCellFactory);
+//        }
+
+        if(parametersColumn.getFielgName().equals(fielgName)) {
+           // if (tableModel.getRule() == Rule.Work)
+               tableColumn.setCellValueFactory(new PropertyValueFactory("scheme"));
+
+        tableColumn.setCellFactory( new Callback<TableColumn<cL, String>,TableCell<cL, String>>(){
                 @Override
                 public TableCell<cL, String> call(TableColumn<cL, String> param) {
                     TableCell<cL, String> cell = new TableCell<cL, String>(){
@@ -278,7 +275,7 @@ public class TableViewP<cL> extends TableView<cL> implements Observer {
                                 ScrollPane sp = new ScrollPane();
                                 sp.setPrefSize(50,50);
                                 ImageView imageview = new ImageView();
-                                imageview.setFitHeight(100);    imageview.setFitWidth(100);    //    imageview.setScaleX(0.5);
+                                imageview.setFitHeight(100);    imageview.setFitWidth(100);
                                 sp.setPannable(false);
                                 imageview.setImage(new Image("file:"+item ));
                                 setTooltip(new Tooltip(item));
@@ -324,7 +321,7 @@ public class TableViewP<cL> extends TableView<cL> implements Observer {
 
         if (tableModel.getRule()== Rule.Machine) {
             dataComboboxModelMachne = FXCollections.observableArrayList();
-            for (Object row : dataSet.getTabModelmachines()) dataComboboxModelMachne.add((RowModelmachine) row);
+            for (Object row : dataSet.getTabModelmachines()) dataComboboxModelMachne.add(row);
         }
 
     }
@@ -422,7 +419,7 @@ public class TableViewP<cL> extends TableView<cL> implements Observer {
                         System.out.println("isEditing:comboBox.getSelectionModel().getSelectedItem()= " + comboBox.getSelectionModel().getSelectedItem());
                       System.out.println("selectIndex="+selectIndex);
 
-                      if (selectIndex<0) selectIndex =1;
+                      if (selectIndex<0) selectIndex =0;
                       r  = DataSet.getById(((Machine) data.get(selectIndex)).getModelmachine().getId(), dataSet.getTabModelmachines());
 
 
@@ -431,26 +428,11 @@ public class TableViewP<cL> extends TableView<cL> implements Observer {
 
                       for ( int i=0; i< dataSet.getTabModelmachineMachines().size(); i++ ) {
                           RowIdId2 row = dataSet.getTabModelmachineMachines().get(i);
-                          System.out.println("1dataSet.getTabModelmachineMachines().get(i)="+dataSet.getTabModelmachineMachines().get(i).getId());
-
-                          System.out.println("row.getId2() ="+row.getId2()+
-                                  "               ((Machine) data.get(selectIndex)).getModelmachine().getId()= "+((Machine) data.get(selectIndex)).getId());
-                          if ( row.getId2() == ((Machine) data.get(selectIndex)).getId()) {
-                              dataSet.getTabModelmachineMachines().get(i).setId(item.getId());
-                              System.out.println("true");
-                          }
-
-
-
+                          if ( row.getId2() == ((Machine) data.get(selectIndex)).getId()) dataSet.getTabModelmachineMachines().get(i).setId(item.getId());
                       }
-
-
-
-
                       setText(item.getName());
                   }
                     setGraphic(null);
-
                 }
 
             }
@@ -490,6 +472,111 @@ public class TableViewP<cL> extends TableView<cL> implements Observer {
 
 }
 
+    class ImageMachineEditingCell extends TableCell<cL, RowModelmachine> {
+
+        private ComboBox<RowModelmachine> comboBox;
+
+        private RowModelmachine r;
+
+        private ImageMachineEditingCell() {
+            if( selectIndex>=0 )
+                r  = DataSet.getById(((Machine) data.get(selectIndex)).getModelmachine().getId(), dataSet.getTabModelmachines());
+        }
+
+        @Override
+        public void startEdit() {
+            if (!isEmpty()) {
+                super.startEdit();
+                createComboBox();
+                setText(null);
+                setGraphic(comboBox);
+            }
+        }
+
+        @Override
+        public void cancelEdit() {
+            super.cancelEdit();
+
+            setText(r.getName());
+            setGraphic(null);
+        }
+
+        @Override
+        public void updateItem(RowModelmachine item, boolean empty) {
+            super.updateItem(item, empty);
+
+            if (item == null || empty) {
+                setText(null);
+                setGraphic(null);
+            } else {
+                setText(item.getName());             //-----------------------------------------------------------------
+                setTextFill(Color.CHOCOLATE);
+                setStyle("-fx-background-color: yellow");
+                if (isEditing()) {
+                    if (comboBox != null) {
+                        comboBox.setValue(r);
+                    }
+                    setText(r.getName());
+                    setGraphic(comboBox);
+
+                } else {
+                    if (r!=null)   {
+                        System.out.println("isEditing: r.getName()= " + r.getName());
+                        System.out.println("isEditing:comboBox.getSelectionModel().getSelectedItem()= " + comboBox.getSelectionModel().getSelectedItem());
+                        System.out.println("selectIndex="+selectIndex);
+
+                        if (selectIndex<0) selectIndex =0;
+                        r  = DataSet.getById(((Machine) data.get(selectIndex)).getModelmachine().getId(), dataSet.getTabModelmachines());
+
+
+
+                        //         for ( RowIdId2 row: dataSet.getTabModelmachineMachines() ) if ( row.getId2() == ((Machine) data.get(selectIndex)).getModelmachine().getId()) row.setId(r.getId());
+
+                        for ( int i=0; i< dataSet.getTabModelmachineMachines().size(); i++ ) {
+                            RowIdId2 row = dataSet.getTabModelmachineMachines().get(i);
+                            if ( row.getId2() == ((Machine) data.get(selectIndex)).getId()) dataSet.getTabModelmachineMachines().get(i).setId(item.getId());
+                        }
+                        setText(item.getName());
+                    }
+                    setGraphic(null);
+                }
+
+            }
+        }
+
+        private void createComboBox() {
+            comboBox = new ComboBox(dataComboboxModelMachne);
+            comboBoxConverter(comboBox);
+            r  = DataSet.getById(((Machine) data.get(selectIndex)).getModelmachine().getId(), dataSet.getTabModelmachines());
+
+            comboBox.valueProperty().set( r ); // comboBox.valueProperty().set(getTyp());
+            comboBox.setMinWidth(this.getWidth() - this.getGraphicTextGap() * 2);
+            comboBox.setOnAction((e) -> {
+                System.out.println("Committed: " + comboBox.getSelectionModel().getSelectedItem());
+                r  = DataSet.getById((comboBox.getSelectionModel().getSelectedItem()).getId(), dataSet.getTabModelmachines());
+                commitEdit(comboBox.getSelectionModel().getSelectedItem());
+            });
+
+        }
+
+        private void comboBoxConverter(ComboBox<RowModelmachine> comboBox) {
+            // Define rendering of the list of values in ComboBox drop down.
+            comboBox.setCellFactory((c) -> {
+                return new ListCell<RowModelmachine>() {
+                    @Override
+                    protected void updateItem(RowModelmachine item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (item == null || empty) {
+                            setText(null);
+                        } else {
+                            setText(item.getName());
+                        }
+                    }
+                };
+            });
+        }
+
+    }
 
 }
 
