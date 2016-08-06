@@ -114,12 +114,6 @@ public class TableModel <cL> extends AbstractTableModel implements Observer {
                 methodCall = MethodCall.saveRowTable;
                 for(Object r: tab) FieldToField_ifClass(dataset, r);
                 this.dataset.saveDataset();
-                if (  rule == Rule.Machine)  {
-
-                     for(Work w: trest.getWorks())
-                         if ( w == parentselectRow  )  this.tab = w.getMachines();
-                    changed();
-                }
                 break;
             case editRowTable:
                 methodCall = MethodCall.editRowTable;
