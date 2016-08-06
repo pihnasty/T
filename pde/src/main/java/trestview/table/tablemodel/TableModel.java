@@ -29,7 +29,7 @@ public class TableModel <cL> extends AbstractTableModel implements Observer {
     private RowIdNameDescription parentselectRow;
     private SectionDataSet sectionDataSet;
 
-    public TableModel(DataSet dataSet ) {
+    public TableModel(DataSet dataSet ) {  //--------
         this.parametersOfColumns = buildParametersColumn() ;
         this.dataset = dataSet;
     }
