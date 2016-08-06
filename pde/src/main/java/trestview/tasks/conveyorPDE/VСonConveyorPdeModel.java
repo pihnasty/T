@@ -22,7 +22,7 @@ interface BoundaryCondition {
     double boundaryCondition(double _r);
 
 }
-/**это сделано мной*/
+/**это сделанлоывиплоывиплоывиплоо мной*/
 
 
 
