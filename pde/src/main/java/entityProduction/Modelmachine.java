@@ -3,8 +3,10 @@
  */
 package entityProduction;
 
-import old.database.DataSet;
-import old.database.tabDataSet.RowModelmachine;
+
+
+import persistence.loader.DataSet;
+import persistence.loader.tabDataSet.RowModelmachine;
 
 import java.util.ArrayList;
 

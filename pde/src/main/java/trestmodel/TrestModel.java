@@ -18,6 +18,9 @@ import java.util.Observable;
 public class TrestModel extends Observable {
 
     private DataSet dataSet;
+
+
+
     private SectionDataSet sectionDataSet;
 
     private Trest trest;
@@ -99,6 +102,14 @@ public class TrestModel extends Observable {
 
     public void setTrest(Trest trest) {
         this.trest = trest;
+    }
+
+    public SectionDataSet getSectionDataSet() {
+        return sectionDataSet;
+    }
+
+    public void setSectionDataSet(SectionDataSet sectionDataSet) {
+        this.sectionDataSet = sectionDataSet;
     }
 
 
