@@ -1438,4 +1438,11 @@ public class DataSet {
     return null;
 }
 
+    public void addRowToDataSet (RowIdNameDescription r, RowIdNameDescription bindingRow1,  RowIdNameDescription bindingRow2) {
+           if (r instanceof RowMachine) {
+            //   tabMachines.add((RowMachine) r);
+               tabWorksMachines.add(new RowWorkMachine(bindingRow1.getId(),r.getId(),  String.format("  %s   %s ",bindingRow1.getDescription(),r.getDescription())));
+               tabModelmachineMachines.add(new RowModelmachineMachine(bindingRow2.getId(), r.getId(),  String.format("  %s   %s ",bindingRow2.getDescription(),r.getDescription())));
+           }
+    }
 }

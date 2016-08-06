@@ -2,8 +2,10 @@ package trestview.table.tablemodel;
 
 import entityProduction.Machine;
 import entityProduction.Modelmachine;
+import entityProduction.Typemachine;
 import entityProduction.Work;
 import persistence.loader.DataSet;
+import persistence.loader.SectionDataSet;
 import persistence.loader.XmlRW;
 import persistence.loader.tabDataSet.*;
 import trestview.hboxpane.HboxpaneModel;
@@ -13,7 +15,6 @@ import trestview.table.tablemodel.abstracttablemodel.Rule;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.ParameterizedType;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
@@ -26,6 +27,7 @@ public class TableModel <cL> extends AbstractTableModel implements Observer {
     private MethodCall methodCall;
     private Observable observableModel;
     private RowIdNameDescription parentselectRow;
+    private SectionDataSet sectionDataSet;
 
     public TableModel(DataSet dataSet ) {
         this.parametersOfColumns = buildParametersColumn() ;
@@ -38,6 +40,7 @@ public class TableModel <cL> extends AbstractTableModel implements Observer {
      */
     public TableModel(Observable observableModel, Rule rule) {
         this.observableModel = observableModel;
+        this.sectionDataSet = ((ResourceLinkModel)observableModel).getSectionDataSet();
         this.rule = rule;
         this.tClass =  rule.getClassTab();
         if(rule.getClassTab()== Work.class)  {
@@ -150,10 +153,9 @@ public class TableModel <cL> extends AbstractTableModel implements Observer {
                     break;
                 case Machine:
                     createEntityRowentity();
-                    int idModelMachine = dataset.IdMax(Modelmachine.class);
-  //                  ((Machine) r).setModelmachine(dataset.getTabModelmachines().get(idModelMachine));
-                    dataset.getTabWorksMachines().add(new RowWorkMachine(parentselectRow.getId(),r.getId(),""));
-                    dataset.getTabModelmachineMachines().add( new RowModelmachineMachine(idModelMachine ,r.getId(),"")  );       // пробывал добавить оборудование
+//                    dataset.getTabWorksMachines().add(new RowWorkMachine(parentselectRow.getId(),r.getId(),""));
+//                    dataset.getTabModelmachineMachines().add( new RowModelmachineMachine(idModelMachine ,r.getId(),"")  );       // пробывал добавить оборудование
+           //update(observableModel,null);
                     break;
                 default:
                     createRowentity();
@@ -173,14 +175,36 @@ public class TableModel <cL> extends AbstractTableModel implements Observer {
         try {
             Constructor constructor = tClass.getSuperclass().getConstructor(DataSet.class, Class.class);
             r = (RowIdNameDescription) constructor.newInstance(this.dataset, tClass.getSuperclass());
+
             selectRow = dataset.createObject(r);
+
+
+            if (tClass ==   Machine.class) {
+
+                dataset.addRowToDataSet(r, parentselectRow, dataset.getTabModelmachines().get(0));
+                for (Typemachine typemachine : sectionDataSet.getTypemachines())
+                    for (Modelmachine modelmachine : typemachine.getModelmachines())
+                        if (dataset.getTabModelmachines().get(0).getId() == modelmachine.getId()) {
+                            System.out.println("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&");
+                            ((Machine) selectRow).setModelmachine(modelmachine);
+                        }
+
+                ((Machine) selectRow).setWork((Work) parentselectRow);
+            }
+
+
             tab.add(selectRow);
             List<RowIdNameDescription> tabRow = dataset.getTabIND(tClass.getSuperclass());
             tabRow.add(r);
+
+//changed();
+
         }   catch (NoSuchMethodException | InstantiationException | IllegalAccessException | InvocationTargetException e)     { e.printStackTrace(); }
     }
 
     public MethodCall getMethodCall() { return methodCall;  }
+
+
 }
 
 

@@ -41,13 +41,13 @@ public class RowModelmachine extends RowIdNameDescription {
     }
 
     /* Габаритный X-размер машины  в метрах																*/
-    private double overallDimensionX = 0;
+    private double overallDimensionX = 1;
     /* Габаритный Y-размер машины  в метрах																*/
-    private double overallDimensionY = 0;
+    private double overallDimensionY = 1;
     /* Габаритный X-размер производственной площади для машины, необходимый для работы  в метрах		*/
-    private double workSizeX = 0;
+    private double workSizeX = 3;
     /* Габаритный Y-размер производственной площади для машины, необходимый для работы  в метрах		*/
-    private double workSizeY = 0;
+    private double workSizeY = 3;
     /* Фото машины																						*/
     private String img = "Image/Machine/press_16.png";
 

@@ -439,13 +439,15 @@ public class TableViewP<cL> extends TableView<cL> implements Observer {
                     setText(r.getName());
 
 
-                    ImageView imageview = new ImageView();
-                    imageview.setFitHeight(100);    imageview.setFitWidth(100);
 
-                    imageview.setImage(new Image("file:"+item ));
-                    comboBox.setItems((ObservableList<RowModelmachine>) imageview);
-
-                    setGraphic(comboBox);
+//                    updateTableModel(tableModel);
+//                    ImageView imageview = new ImageView();
+//                    imageview.setFitHeight(100);    imageview.setFitWidth(100);
+//
+//                    imageview.setImage(new Image("file:"+item ));
+//                    comboBox.setItems((ObservableList<RowModelmachine>) imageview);
+//
+//                    setGraphic(comboBox);
 
                 } else {
                   if (r!=null)   {
@@ -456,15 +458,12 @@ public class TableViewP<cL> extends TableView<cL> implements Observer {
                       if (selectIndex<0) selectIndex =0;
                       r  = DataSet.getById(((Machine) data.get(selectIndex)).getModelmachine().getId(), dataSet.getTabModelmachines());
 
-
-
-             //         for ( RowIdId2 row: dataSet.getTabModelmachineMachines() ) if ( row.getId2() == ((Machine) data.get(selectIndex)).getModelmachine().getId()) row.setId(r.getId());
-
                       for ( int i=0; i< dataSet.getTabModelmachineMachines().size(); i++ ) {
                           RowIdId2 row = dataSet.getTabModelmachineMachines().get(i);
                           if ( row.getId2() == ((Machine) data.get(selectIndex)).getId()) dataSet.getTabModelmachineMachines().get(i).setId(item.getId());
                       }
                       setText(item.getName());
+                      updateTableModel(tableModel);
                   }
                     setGraphic(null);
                 }
