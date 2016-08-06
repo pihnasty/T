@@ -1,17 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <tabWorksMachines>
-<RowWorkMachine description="   " id="16" id2="24"/>
-<RowWorkMachine description="   " id="16" id2="25"/>
-<RowWorkMachine description="   " id="16" id2="26"/>
-<RowWorkMachine description="   " id="16" id2="27"/>
-<RowWorkMachine description="   " id="16" id2="28"/>
-<RowWorkMachine description="   " id="16" id2="29"/>
-<RowWorkMachine description="   " id="16" id2="30"/>
-<RowWorkMachine description="   " id="16" id2="37"/>
-<RowWorkMachine description="   " id="16" id2="38"/>
-<RowWorkMachine description="   " id="16" id2="39"/>
-<RowWorkMachine description="   " id="16" id2="40"/>
-<RowWorkMachine description="   " id="16" id2="41"/>
 <RowWorkMachine description="IdWork=1IdMachine=96" id="1" id2="96"/>
 <RowWorkMachine description="IdWork=1IdMachine=97" id="1" id2="97"/>
 <RowWorkMachine description="IdWork=1IdMachine=98" id="1" id2="98"/>
@@ -35,8 +23,9 @@
 <RowWorkMachine description="  Описание для    RowWork   Описание для    RowMachine " id="8" id2="116"/>
 <RowWorkMachine description="  Описание для    RowWork   Описание для    RowMachine " id="8" id2="117"/>
 <RowWorkMachine description="  Описание для    RowWork   Описание для    RowMachine " id="8" id2="118"/>
-<RowWorkMachine description="  description №3a   Описание для    RowMachine " id="3" id2="119"/>
-<RowWorkMachine description="  description №3a   Описание для    RowMachine " id="3" id2="120"/>
-<RowWorkMachine description="  Описание для    RowWork   Описание для    RowMachine " id="15" id2="121"/>
-<RowWorkMachine description="  Описание для    RowWork   Описание для    RowMachine " id="15" id2="122"/>
+<RowWorkMachine description="  description №01   Описание для    RowMachine " id="1" id2="119"/>
+<RowWorkMachine description="  description №01   Описание для    RowMachine " id="1" id2="120"/>
+<RowWorkMachine description="  Описание для    RowWork   Описание для    RowMachine " id="17" id2="121"/>
+<RowWorkMachine description="  Описание для    RowWork   Описание для    RowMachine " id="17" id2="122"/>
+<RowWorkMachine description="  description №01   Описание для    RowMachine " id="1" id2="123"/>
 </tabWorksMachines>

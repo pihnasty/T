@@ -23,8 +23,9 @@
 <RowMachine angle="0.0" description="Описание для    RowMachine" id="116" locationX="0.13270089213195496" locationY="0.2823529411764706" name="RowMachine№116" state="0.0"/>
 <RowMachine angle="0.0" description="Описание для    RowMachine" id="117" locationX="0.23543706668572656" locationY="0.28449197860962566" name="RowMachine№117" state="0.0"/>
 <RowMachine angle="0.0" description="Описание для    RowMachine" id="118" locationX="0.3424539151792386" locationY="0.41069518716577535" name="RowMachine№118" state="0.0"/>
-<RowMachine angle="0.0" description="Описание для    RowMachine" id="119" locationX="0.17895717755213386" locationY="0.30993042378241614" name="RowMachine№119" state="0.0"/>
-<RowMachine angle="0.0" description="Описание для    RowMachine" id="120" locationX="0.18768679596931112" locationY="0.43643263757115747" name="RowMachine№120" state="0.0"/>
-<RowMachine angle="0.0" description="Описание для    RowMachine" id="121" locationX="0.3951241986240932" locationY="0.16866961838498842" name="RowMachine№121" state="0.0"/>
-<RowMachine angle="0.0" description="Описание для    RowMachine" id="122" locationX="0.0" locationY="0.0" name="RowMachine№122" state="0.0"/>
+<RowMachine angle="0.0" description="Описание для    RowMachine" id="119" locationX="-0.39999999999999997" locationY="-0.39999999999999997" name="RowMachine№119" state="0.0"/>
+<RowMachine angle="0.0" description="Описание для    RowMachine" id="120" locationX="0.0881902186161821" locationY="0.16768086544962812" name="RowMachine№120" state="0.0"/>
+<RowMachine angle="0.0" description="Описание для    RowMachine" id="121" locationX="-0.35" locationY="-0.35" name="RowMachine№121" state="0.0"/>
+<RowMachine angle="0.0" description="Описание для    RowMachine" id="122" locationX="0.3660575909092174" locationY="0.21365787694388103" name="RowMachine№122" state="0.0"/>
+<RowMachine angle="0.0" description="Описание для    RowMachine" id="123" locationX="0.20406806400721209" locationY="0.14063556457065585" name="RowMachine№123" state="0.0"/>
 </tabMachines>
