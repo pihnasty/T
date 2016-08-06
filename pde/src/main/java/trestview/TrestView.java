@@ -15,6 +15,8 @@ import trestview.menu.TMenuView;
 import trestview.resourcelink.ResourceLinkController;
 import trestview.resourcelink.ResourceLinkModel;
 import trestview.resourcelink.ResourceLinkView;
+import trestview.tasks.conveyorPDE.VConConveyorPdeView;
+import trestview.tasks.conveyorPDE.VСonConveyorPdeModel;
 
 
 import java.util.List;
@@ -26,6 +28,7 @@ public class TrestView extends BorderPane implements Observer {
     private DataSet dataSet;
     private List<Node> nodes;
     private MachineTestView machineTestView;
+    private VConConveyorPdeView vConConveyorPdeView;
     private MVC resourceLink;
 
     public TrestView(TrestModel trestModel) {
@@ -53,15 +56,12 @@ public class TrestView extends BorderPane implements Observer {
 
         ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-
-
-
-
          */
 
 
-
-
+        VСonConveyorPdeModel vСonConveyorPdeModel = new VСonConveyorPdeModel(dataSet);
+        vConConveyorPdeView =new VConConveyorPdeView(vСonConveyorPdeModel);
+        vСonConveyorPdeModel.addObserver(vConConveyorPdeView);
 
 
 
@@ -80,7 +80,7 @@ public class TrestView extends BorderPane implements Observer {
             case testOfMachineItem:             this.setCenter(machineTestView);                        break;
             case resourcesLinksPerspectiveItem: this.setCenter((BorderPane)resourceLink.getView());     break;
             case conveyorSpeedConstantItem:
-                                                this.setCenter(null);
+                                                this.setCenter(vConConveyorPdeView);
                                                     System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
                                                     break;
 

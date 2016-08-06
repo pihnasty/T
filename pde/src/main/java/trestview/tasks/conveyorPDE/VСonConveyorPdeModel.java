@@ -1,12 +1,14 @@
     package trestview.tasks.conveyorPDE;
 
-import old.database.DataSet;
+
+
+import persistence.loader.DataSet;
 
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
-import java.util.Observer;
+
 
 
 interface InitialCondition {
@@ -22,14 +24,7 @@ interface BoundaryCondition {
 }
 
 
-interface ConveyorPdeModel {
 
-
-    List<Point2D.Double> xi0ForConstT(double _t, InitialCondition a, BoundaryCondition b);
-
-    List<Point2D.Double> xi0ForConstS(double _s, InitialCondition a, BoundaryCondition b);
-
-}
 
 class SinInitialCondition  implements InitialCondition {
 
@@ -63,21 +58,42 @@ class RPow2BoundaryCondition implements BoundaryCondition {
 
 }
 
-class VСonConveyorPdeModel extends Observable implements ConveyorPdeModel {
+public class VСonConveyorPdeModel extends Observable     {
 
-VСonConveyorPdeModel(DataSet dataset){
+    private    List<Point2D.Double> listConT;
+    private    List<Point2D.Double> listConS;
+
+    public List<Point2D.Double> getListConT(){return listConT;}
+    public void setListConT(List<Point2D.Double> listConT){this.listConT=listConT;}
+
+    public List<Point2D.Double> getListConS(){return listConS;}
+    public void setListConS(List<Point2D.Double> listConS){this.listConS=listConS;}
+
+
+public VСonConveyorPdeModel(DataSet dataset){
 
 
 
 
 }
+    private void change(){
 
-    private void changeInitialboundaryCondition(){
-        if (  true  ) {
-            setChanged();
-            notifyObservers();
-        }
+        setChanged();
+        notifyObservers();
+
     }
+
+
+    private void changeInitialboundaryCondition(double _s1,double _t1, InitialCondition a1, BoundaryCondition b1){
+
+
+        listConT=xi0ForConstT(_t1, a1,  b1);
+        listConS=xi0ForConstS(_s1, a1,  b1);
+
+        change();
+
+    }
+
 
 
 
@@ -100,8 +116,8 @@ VСonConveyorPdeModel(DataSet dataset){
         return _s - _t;
     }
 
-    @Override
-    public List<Point2D.Double> xi0ForConstT(double _t, InitialCondition a, BoundaryCondition b) {
+
+    private      List<Point2D.Double> xi0ForConstT(double _t, InitialCondition a, BoundaryCondition b) {
         List<Point2D.Double> doubleList = new ArrayList<>();
         double s0 = 0.0;
         double sD = 10.0;
@@ -117,18 +133,18 @@ VСonConveyorPdeModel(DataSet dataset){
         return doubleList;
     }
 
-    @Override
-    public List<Point2D.Double> xi0ForConstS(double _s, InitialCondition a, BoundaryCondition b) {
+
+        private List<Point2D.Double> xi0ForConstS(double _s, InitialCondition a, BoundaryCondition b) {
         List<Point2D.Double> doubleList = new ArrayList<>();
         double t0 = 0.0;
         double tD = 10.0;
         double dT = 0.1;
         if (_s >= 0 && _s <= 1) {
             for (double _t = t0; _t <= tD; _t += dT) {
-                Point2D.Double p1 = new Point2D.Double(_t,
+                Point2D.Double p = new Point2D.Double(_t,
                         decision(r(_s, _t), a, b)
                 );
-                doubleList.add(p1);
+                doubleList.add(p);
             }
         }
         return doubleList;
@@ -136,11 +152,12 @@ VСonConveyorPdeModel(DataSet dataset){
     }
 
 
+
     static public void main(String[] args) {
 
         double s = 0;
         double t = 0;
-        ConveyorPdeModel vСonConveyorPdeModel = new VСonConveyorPdeModel(null);
+        VСonConveyorPdeModel vСonConveyorPdeModel = new VСonConveyorPdeModel(null);
 
         InitialCondition sinConveyorPdeModel = new SinInitialCondition();
         BoundaryCondition pow2BoundaryCondition = new Pow2BoundaryCondition();
