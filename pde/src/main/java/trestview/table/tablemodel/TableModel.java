@@ -107,7 +107,7 @@ public class TableModel <cL> extends AbstractTableModel implements Observer {
         switch (o.getMethodCall()) {
             case addRowTable:
                 methodCall = MethodCall.addRowTable;
-                addEntity();
+                addEntity();   // dddd
 
                 break;
             case saveRowTable:
