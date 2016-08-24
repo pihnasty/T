@@ -1,5 +1,6 @@
 package trestview.table.tablemodel;
 
+import designpatterns.ObservableDS;
 import entityProduction.Machine;
 import entityProduction.Modelmachine;
 import entityProduction.Typemachine;
@@ -29,7 +30,7 @@ public class TableModel <cL> extends AbstractTableModel implements Observer {
     private RowIdNameDescription parentselectRow;
     private SectionDataSet sectionDataSet;
 
-    public TableModel(DataSet dataSet ) {  //--------
+    public TableModel(DataSet dataSet ) {  /* -------- */
         this.parametersOfColumns = buildParametersColumn() ;
         this.dataset = dataSet;
     }
