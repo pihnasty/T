@@ -2,6 +2,7 @@
 
 
 
+import designpatterns.ObservableDS;
 import persistence.loader.DataSet;
 
 import java.awt.geom.Point2D;
@@ -70,7 +71,7 @@ public class VСonConveyorPdeModel extends Observable     {
     public void setListConS(List<Point2D.Double> listConS){this.listConS=listConS;}
 
 
-public VСonConveyorPdeModel(DataSet dataset){
+public VСonConveyorPdeModel(ObservableDS observable){
 
 
 
@@ -80,7 +81,6 @@ public VСonConveyorPdeModel(DataSet dataset){
 
         setChanged();
         notifyObservers();
-
     }
 
 

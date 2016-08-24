@@ -1,5 +1,6 @@
 package trestmodel;
 
+import designpatterns.ObservableDS;
 import entityProduction.*;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -15,11 +16,9 @@ import java.util.Observable;
 /**
  * Created by Max on 19.02.2016.
  */
-public class TrestModel extends Observable {
+public class TrestModel extends ObservableDS {
 
     private DataSet dataSet;
-
-
 
     private SectionDataSet sectionDataSet;
 
@@ -44,14 +43,6 @@ public class TrestModel extends Observable {
         for (Trest t: trests)  if (t.getId()==1)    this.trest= t;
 
         intersectionMachine();  // The intersection of the collection from the collection on line
-
-
-   //     trestObjectProperty.bind(dataObjectProperty);
-
-//        DataSet.showTab(trests);
-//
-//        DataSet.showTab(trest.getWorks());
-
 
     }
 

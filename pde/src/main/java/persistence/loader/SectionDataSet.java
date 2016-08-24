@@ -21,7 +21,8 @@ public class SectionDataSet {
     }
 
     public <cL> List<cL> getTab (List tab){
-        return (List<cL>) tab.stream().map(row->(cL)dataSet.createObject((RowIdNameDescription) row)).collect(Collectors.toList());      //   for (RowTypemachine row : dataSet.getTabTypemachines()) sectionTypemachines.add(dataSet.createObject(row));
+        return (List<cL>) tab.stream().map(row->(cL)dataSet.createObject((RowIdNameDescription) row)).collect(Collectors.toList());
+        //   for (RowTypemachine row : dataSet.getTabTypemachines()) sectionTypemachines.add(dataSet.createObject(row));
     }
 
     public List<Typemachine> getTypemachines() {

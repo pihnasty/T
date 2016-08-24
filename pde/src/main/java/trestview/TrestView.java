@@ -28,8 +28,9 @@ public class TrestView extends BorderPane implements Observer {
     private DataSet dataSet;
     private List<Node> nodes;
     private MachineTestView machineTestView;
-    private VConConveyorPdeView vConConveyorPdeView;
+//    private VConConveyorPdeView vConConveyorPdeView;
     private MVC resourceLink;
+    private MVC conConveyorPdeModel;
 
     public TrestView(TrestModel trestModel) {
         this.trestModel =  trestModel;
@@ -59,9 +60,11 @@ public class TrestView extends BorderPane implements Observer {
          */
 
 
-        VСonConveyorPdeModel vСonConveyorPdeModel = new VСonConveyorPdeModel(dataSet);
-        vConConveyorPdeView =new VConConveyorPdeView(vСonConveyorPdeModel);
-        vСonConveyorPdeModel.addObserver(vConConveyorPdeView);
+
+         MVC conConveyorPdeModel = new MVC (TMenuModel.class, TMenuController.class, TMenuView.class, this.trestModel);
+//        VСonConveyorPdeModel vСonConveyorPdeModel = new VСonConveyorPdeModel(trestModel);
+//        vConConveyorPdeView =new VConConveyorPdeView(vСonConveyorPdeModel);
+//        vСonConveyorPdeModel.addObserver(vConConveyorPdeView);
 
 
 
@@ -80,9 +83,7 @@ public class TrestView extends BorderPane implements Observer {
             case testOfMachineItem:             this.setCenter(machineTestView);                        break;
             case resourcesLinksPerspectiveItem: this.setCenter((BorderPane)resourceLink.getView());     break;
             case conveyorSpeedConstantItem:
-                                                this.setCenter(vConConveyorPdeView);
-                                                    System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
-                                                    break;
+                                                this.setCenter((BorderPane)conConveyorPdeModel.getView());                    break;
 
             default:                                                                                    break;
         }
