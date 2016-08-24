@@ -1,6 +1,7 @@
 package trestview;
 
 import designpatterns.MVC;
+import designpatterns.ObservableDS;
 import javafx.scene.Node;
 import javafx.scene.layout.BorderPane;
 import persistence.loader.DataSet;
@@ -15,6 +16,7 @@ import trestview.menu.TMenuView;
 import trestview.resourcelink.ResourceLinkController;
 import trestview.resourcelink.ResourceLinkModel;
 import trestview.resourcelink.ResourceLinkView;
+import trestview.tasks.conveyorPDE.VConConveyorPdeController;
 import trestview.tasks.conveyorPDE.VConConveyorPdeView;
 import trestview.tasks.conveyorPDE.VСonConveyorPdeModel;
 
@@ -61,7 +63,7 @@ public class TrestView extends BorderPane implements Observer {
 
 
 
-         MVC conConveyorPdeModel = new MVC (TMenuModel.class, TMenuController.class, TMenuView.class, this.trestModel);
+        conConveyorPdeModel = new MVC (VСonConveyorPdeModel.class, VConConveyorPdeController.class, VConConveyorPdeView.class,this.trestModel, null);    //     88888
 //        VСonConveyorPdeModel vСonConveyorPdeModel = new VСonConveyorPdeModel(trestModel);
 //        vConConveyorPdeView =new VConConveyorPdeView(vСonConveyorPdeModel);
 //        vСonConveyorPdeModel.addObserver(vConConveyorPdeView);

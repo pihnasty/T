@@ -2,7 +2,10 @@
 
 
 
+import designpatterns.ObservableDS;
 import persistence.loader.DataSet;
+import trestview.linechart.LineChartInterface;
+import trestview.table.tablemodel.abstracttablemodel.Rule;
 
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
@@ -86,7 +89,7 @@ public class VСonConveyorPdeModel extends ObservableDS implements LineChartInte
     }
 
 
-    public VСonConveyorPdeModel(ObservableDS o) {
+    public VСonConveyorPdeModel(ObservableDS o, Rule rule) {
         this.o=o;
         double s = 0;
         double t = 0.7;
