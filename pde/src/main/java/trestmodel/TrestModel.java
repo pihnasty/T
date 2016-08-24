@@ -1,6 +1,5 @@
 package trestmodel;
 
-import designpatterns.ObservableDS;
 import entityProduction.*;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
