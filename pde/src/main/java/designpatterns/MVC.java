@@ -72,7 +72,7 @@ public class MVC {
 
         } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException | InstantiationException e)  {      e.printStackTrace();        }
     }
-
+// Main Constructor
     public   MVC (Class mClass, Class cClass, Class vClass, ObservableDS o, Rule rule )   {
         try {
             Constructor mConstructor = mClass.getConstructor(ObservableDS.class, Rule.class);

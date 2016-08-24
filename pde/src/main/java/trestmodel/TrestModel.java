@@ -1,5 +1,6 @@
 package trestmodel;
 
+import designpatterns.ObservableDS;
 import entityProduction.*;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -15,7 +16,8 @@ import java.util.Observable;
 /**
  * Created by Max on 19.02.2016.
  */
-public class TrestModel extends Observable {
+public class TrestModel extends ObservableDS {
+
 
     private DataSet dataSet;
 

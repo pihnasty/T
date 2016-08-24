@@ -15,6 +15,7 @@ import trestview.menu.TMenuView;
 import trestview.resourcelink.ResourceLinkController;
 import trestview.resourcelink.ResourceLinkModel;
 import trestview.resourcelink.ResourceLinkView;
+import trestview.tasks.conveyorPDE.VConConveyorPdeController;
 import trestview.tasks.conveyorPDE.VConConveyorPdeView;
 import trestview.tasks.conveyorPDE.VСonConveyorPdeModel;
 
@@ -59,8 +60,9 @@ public class TrestView extends BorderPane implements Observer {
          */
 
 
-        VСonConveyorPdeModel vСonConveyorPdeModel = new VСonConveyorPdeModel(dataSet);
-        vConConveyorPdeView =new VConConveyorPdeView(vСonConveyorPdeModel);
+        VСonConveyorPdeModel vСonConveyorPdeModel = new VСonConveyorPdeModel(trestModel);
+        VConConveyorPdeController vConConveyorPdeController=new VConConveyorPdeController();
+        vConConveyorPdeView =new VConConveyorPdeView(vСonConveyorPdeModel,vConConveyorPdeController);
         vСonConveyorPdeModel.addObserver(vConConveyorPdeView);
 
 
