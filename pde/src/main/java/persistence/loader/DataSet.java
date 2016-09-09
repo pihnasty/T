@@ -634,24 +634,14 @@ public class DataSet {
                 rmtTab.add(rIdId);
                 // теперь у нас есть все необходиое для создание отсутствующего предмета труда
                 typemachines.add((T) createObject(rSL));
-            } catch (NoSuchMethodException ex) {
-                Logger.getLogger(DataSet.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (SecurityException ex) {
-                Logger.getLogger(DataSet.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (InstantiationException ex) {
-                Logger.getLogger(DataSet.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (IllegalAccessException ex) {
-                Logger.getLogger(DataSet.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (IllegalArgumentException ex) {
-                Logger.getLogger(DataSet.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (InvocationTargetException ex) {
+            } catch (NoSuchMethodException | SecurityException | InstantiationException | IllegalArgumentException | IllegalAccessException | InvocationTargetException ex) {
                 Logger.getLogger(DataSet.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
         return typemachines;
     }
 
-    public <T, RT extends RowIdNameDescription, RMT extends RowIdId2> ArrayList<T> select(RowIdNameDescription row, ArrayList<RT> rtTab, ArrayList<RMT> rmtTab) {
+   public <T, RT extends RowIdNameDescription, RMT extends RowIdId2> ArrayList<T> select(RowIdNameDescription row, ArrayList<RT> rtTab, ArrayList<RMT> rmtTab) {
         ArrayList<T> typemachines = new ArrayList<>();
         ArrayList<RMT> deleteFrom_rmtTab = new ArrayList<>();
         ArrayList<RT> deleteFrom_rtTab = new ArrayList<>();
@@ -675,18 +665,6 @@ public class DataSet {
         rtTab.trimToSize();
         return typemachines;
     }
-
-//    public <T, RT extends RowIdNameDescription, RMT extends RowIdId2>  T selectBack(int id, ArrayList<RT> rtTab, ArrayList<RMT> rmtTab) {
-//        T modelmachine = null;
-//        for (RMT wr : rmtTab) {  // Выбираем из rtTab все элементы RT, для которых row.Id==RMT.Id && RMT.Id2 == RT.Id
-//            if ( id == wr.getId2()) {
-//                 for (RT w : rtTab) if (wr.getId() == w.getId()) { modelmachine = createObject(w); }
-//             }
-//        }
-//        return modelmachine;
-//    }
-
-
 
     //-------------------------------------------------------------------------------
     public <cL> cL createObject( RowIdNameDescription row) {
@@ -716,7 +694,7 @@ public class DataSet {
                     row.getDescription());
         }
 //----------------------------------------------------------------------------------------------------------------------
-        if (row.getClass() == RowModelmachine.class) {
+        if (row.getClass() == RowModelmachine.class) { //noinspection ConstantConditions
              m = new Modelmachine(row.getId(),row.getName(),
                     ((RowModelmachine) row).getImg(),
                     select(row, tabMachines, tabModelmachineMachines ),   //  ArrayList<Machine> machines
@@ -725,7 +703,7 @@ public class DataSet {
             );
         }
 //----------------------------------------------------------------------------------------------------------------------
-        if (row.getClass() == RowMachine.class) {
+        if (row.getClass() == RowMachine.class) {    //noinspection ConstantConditions
             m =  new Machine(row.getId(), row.getName(),((RowMachine) row).getLocationX(), ((RowMachine) row).getLocationY(), ((RowMachine) row).getAngle(),  ((RowMachine) row).getState(),row.getDescription());
         }
 //=====================================================================================================================/
@@ -735,14 +713,15 @@ public class DataSet {
         }
 
 
-        if (row.getClass() == RowParametrfunctiondist.class) {
-             m =   new Parametrfunctiondist(           row.getId(),
-                                                        row.getName(),
-                                                           ((RowParametrfunctiondist) row).getAverageValue(),
-                                                           ((RowParametrfunctiondist) row).getMeanSquareDeviation(),
-                                                           ((RowParametrfunctiondist) row).getPathData(),
-                                                        row.getDescription());
-        }
+    if (row.getClass() == RowParametrfunctiondist.class) { //noinspection ConstantConditions
+        m = new Parametrfunctiondist(row.getId(),
+                row.getName(),
+                ((RowParametrfunctiondist) row).getAverageValue(),
+                ((RowParametrfunctiondist) row).getMeanSquareDeviation(),
+                ((RowParametrfunctiondist) row).getPathData(),
+                row.getDescription());
+    }
+
 
 
 
@@ -752,7 +731,7 @@ public class DataSet {
 
 
         if (row.getClass() == RowEmployee.class) {
-            m = new Employee(((RowEmployee) row).getId(), ((RowEmployee) row).getName(), ((RowEmployee) row).getDescription());
+            m = new Employee(row.getId(), row.getName(), row.getDescription());
         }
         if (row.getClass() == RowOperation.class) {
             m = new Operation(((RowOperation) row).getId(), ((RowOperation) row).getName(), ((RowOperation) row).getDescription());
@@ -801,7 +780,7 @@ public class DataSet {
                 if (((RowRoute) row).getId() == wr.getId()) {
                     for (RowLineroute w : tabLineroutes) {
                         if (wr.getId2() == w.getId()) {
-                            lineroutes.add((Lineroute) createObject(w));
+                            lineroutes.add( createObject(w));
                         }
                     }
                 }
@@ -1037,7 +1016,7 @@ public class DataSet {
                 // если для строки заказа по IdId не находится предмет труда, то
                 RowSubject_labour rSL = new RowSubject_labour(this, RowSubject_labour.class);    // а)создаем отсутствующий RowSubject_labour
                 tabSubject_labours.add(rSL);                                                        // б)помещаем его в таблицу для RowSubject_labour
-                RowLineSubject_labour rIdId = new RowLineSubject_labour(((RowLine) row).getId(), rSL.getId(), "   ");    //	в)для связи по id строки RowLine и RowSubject_labour  создаем строку реестра    и
+                RowLineSubject_labour rIdId = new RowLineSubject_labour(row.getId(), rSL.getId(), "   ");    //	в)для связи по id строки RowLine и RowSubject_labour  создаем строку реестра    и
 
                 tabLinesSubject_labours.add(rIdId);                                                                //	г) помещаем ее в таблицу DataSet.tabLinesSubject_labours
                 // теперь у нас есть все необходиое для создание отсутствующего предмета труда
@@ -1145,14 +1124,6 @@ public class DataSet {
 
 
         return null;
-    }
-
-    public static void main2(String[] args) {
-        int b = 20;                        // Количество предметов труда в таблице
-        for (int i = 1; i < 20; i++) {
-            int a = ((int) (Math.random() * b));            // генерирование номера предмета труда в таблице
-            System.out.println(a);
-        }
     }
 
     public ArrayList<RowLinespec> getTabLinespecs() {
@@ -1456,4 +1427,22 @@ public class DataSet {
         return dts;
     }
 
+//----------------------------------------------------------------------------------------------------------------------
+
+    /** The method returns the table element with the specified identifier. */
+    public static <T> T getById(int id, ArrayList<T> tab) {
+        if (tab!=null)
+            if (!tab.isEmpty() )
+                for ( T r : tab)
+                    if ( ((RowIdNameDescription) r).getId() ==  id) return r;
+    return null;
+}
+
+    public void addRowToDataSet (RowIdNameDescription r, RowIdNameDescription bindingRow1,  RowIdNameDescription bindingRow2) {
+           if (r instanceof RowMachine) {
+            //   tabMachines.add((RowMachine) r);
+               tabWorksMachines.add(new RowWorkMachine(bindingRow1.getId(),r.getId(),  String.format("  %s   %s ",bindingRow1.getDescription(),r.getDescription())));
+               tabModelmachineMachines.add(new RowModelmachineMachine(bindingRow2.getId(), r.getId(),  String.format("  %s   %s ",bindingRow2.getDescription(),r.getDescription())));
+           }
+    }
 }

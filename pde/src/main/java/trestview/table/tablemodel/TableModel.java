@@ -1,8 +1,12 @@
 package trestview.table.tablemodel;
 
+import designpatterns.ObservableDS;
 import entityProduction.Machine;
+import entityProduction.Modelmachine;
+import entityProduction.Typemachine;
 import entityProduction.Work;
 import persistence.loader.DataSet;
+import persistence.loader.SectionDataSet;
 import persistence.loader.XmlRW;
 import persistence.loader.tabDataSet.*;
 import trestview.hboxpane.HboxpaneModel;
@@ -12,22 +16,21 @@ import trestview.table.tablemodel.abstracttablemodel.Rule;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.ParameterizedType;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
-/**
- * Created by pom on 07.02.2016.
- */
+import static persistence.loader.XmlRW.FieldToField_ifClass;
+
 public class TableModel <cL> extends AbstractTableModel implements Observer {
 
     private MethodCall methodCall;
     private Observable observableModel;
     private RowIdNameDescription parentselectRow;
+    private SectionDataSet sectionDataSet;
 
-    public TableModel(DataSet dataSet ) {
+    public TableModel(DataSet dataSet ) {  /* -------- */
         this.parametersOfColumns = buildParametersColumn() ;
         this.dataset = dataSet;
     }
@@ -38,6 +41,7 @@ public class TableModel <cL> extends AbstractTableModel implements Observer {
      */
     public TableModel(Observable observableModel, Rule rule) {
         this.observableModel = observableModel;
+        this.sectionDataSet = ((ResourceLinkModel)observableModel).getSectionDataSet();
         this.rule = rule;
         this.tClass =  rule.getClassTab();
         if(rule.getClassTab()== Work.class)  {
@@ -109,7 +113,14 @@ public class TableModel <cL> extends AbstractTableModel implements Observer {
                 break;
             case saveRowTable:
                 methodCall = MethodCall.saveRowTable;
+                for(Object r: tab) FieldToField_ifClass(dataset, r);
                 this.dataset.saveDataset();
+                if (  rule == Rule.Machine)  {
+
+                    for(Work w: trest.getWorks())
+                        if ( w == parentselectRow  )  this.tab = w.getMachines();
+                    changed();
+                }
                 break;
             case editRowTable:
                 methodCall = MethodCall.editRowTable;
@@ -143,13 +154,13 @@ public class TableModel <cL> extends AbstractTableModel implements Observer {
                     break;
                 case Machine:
                     createEntityRowentity();
-                    dataset.getTabWorksMachines().add(new RowWorkMachine(parentselectRow.getId(),r.getId(),""));
+//                    dataset.getTabWorksMachines().add(new RowWorkMachine(parentselectRow.getId(),r.getId(),""));
+//                    dataset.getTabModelmachineMachines().add( new RowModelmachineMachine(idModelMachine ,r.getId(),"")  );       // пробывал добавить оборудование
+           //update(observableModel,null);
                     break;
                 default:
                     createRowentity();
-                    break;
             }
-
     }
 
     private void createRowentity()  {
@@ -158,27 +169,43 @@ public class TableModel <cL> extends AbstractTableModel implements Observer {
         constructor = tClass.getConstructor(DataSet.class, Class.class);
         selectRow = constructor.newInstance(this.dataset,tClass);
         tab.add(selectRow);
-        }   catch (NoSuchMethodException e)     { e.printStackTrace(); }
-        catch (InstantiationException e)    { e.printStackTrace(); }
-        catch (IllegalAccessException e)    { e.printStackTrace(); }
-        catch (InvocationTargetException e) { e.printStackTrace(); }
+        }   catch (NoSuchMethodException | InstantiationException | IllegalAccessException | InvocationTargetException e)     { e.printStackTrace(); }
     }
 
     private void createEntityRowentity()  {
         try {
             Constructor constructor = tClass.getSuperclass().getConstructor(DataSet.class, Class.class);
             r = (RowIdNameDescription) constructor.newInstance(this.dataset, tClass.getSuperclass());
+
             selectRow = dataset.createObject(r);
+
+
+            if (tClass ==   Machine.class) {
+
+                dataset.addRowToDataSet(r, parentselectRow, dataset.getTabModelmachines().get(0));
+                for (Typemachine typemachine : sectionDataSet.getTypemachines())
+                    for (Modelmachine modelmachine : typemachine.getModelmachines())
+                        if (dataset.getTabModelmachines().get(0).getId() == modelmachine.getId()) {
+                            System.out.println("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&");
+                            ((Machine) selectRow).setModelmachine(modelmachine);
+                        }
+
+                ((Machine) selectRow).setWork((Work) parentselectRow);
+            }
+
+
             tab.add(selectRow);
             List<RowIdNameDescription> tabRow = dataset.getTabIND(tClass.getSuperclass());
             tabRow.add(r);
-        } catch (NoSuchMethodException e)   { e.printStackTrace();  }
-        catch (InstantiationException e)    { e.printStackTrace();  }
-        catch (IllegalAccessException e)    { e.printStackTrace();  }
-        catch (InvocationTargetException e) { e.printStackTrace();  }
+
+//changed();
+
+        }   catch (NoSuchMethodException | InstantiationException | IllegalAccessException | InvocationTargetException e)     { e.printStackTrace(); }
     }
 
     public MethodCall getMethodCall() { return methodCall;  }
+
+
 }
 
 

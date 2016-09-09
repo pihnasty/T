@@ -1,5 +1,6 @@
 package trestview.table.tablemodel.abstracttablemodel;
 
+import entityProduction.Modelmachine;
 import javafx.scene.image.Image;
 
 import java.util.HashMap;
@@ -24,7 +25,10 @@ public class ParametersColumnMap  {
         // Parameters  of column  for RowMachine
         map.put("locationX", new ParametersColumn ("locationX",double.class, true, 100) );
         map.put("locationY", new ParametersColumn ("locationY",double.class, true, 100) );
+        map.put("angle", new ParametersColumn ("angle",double.class, true, 100) );
         map.put("state", new ParametersColumn ("state",double.class, true, 100) );
+        // Parameters  of column  for Machine
+        map.put("modelmachine", new ParametersColumn ("modelmachine", Modelmachine.class, true, 100) );
         // Parameters  of column  for Functiondist
         map.put("averageValue", new ParametersColumn ("averageValue",double.class, true, 100) );
         map.put("meanSquareDeviation", new ParametersColumn ("meanSquareDeviation",double.class, true, 100) );

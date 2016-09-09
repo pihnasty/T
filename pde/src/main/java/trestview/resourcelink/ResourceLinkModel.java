@@ -1,7 +1,9 @@
 package trestview.resourcelink;
 
+import designpatterns.ObservableDS;
 import entityProduction.Trest;
 import persistence.loader.DataSet;
+import persistence.loader.SectionDataSet;
 import trestmodel.TrestModel;
 import trestview.menu.TMenuModel;
 import trestview.resourcelink.schemawork.Q;
@@ -15,8 +17,13 @@ import java.util.Observable;
  */
 public class ResourceLinkModel extends Observable  {
 
+
     private Observable trestModel;
     private DataSet dataSet;
+
+
+
+    private SectionDataSet sectionDataSet;
 
     private Trest trest;
 
@@ -24,6 +31,7 @@ public class ResourceLinkModel extends Observable  {
         this.trestModel = trestModel;
         this.trest =  ((TrestModel)trestModel).getTrest();
         this.dataSet = ((TrestModel)trestModel).getDataSet();
+        this.sectionDataSet = ((TrestModel)trestModel).getSectionDataSet();
 
     }
 
@@ -37,4 +45,6 @@ public class ResourceLinkModel extends Observable  {
     public DataSet getDataSet()                      { return dataSet;                  }
     public Trest getTrest()                          { return trest;                    }
     public void setTrest(Trest trest)                { this.trest = trest;              }
+    public SectionDataSet getSectionDataSet()        { return sectionDataSet;           }
+    public void setSectionDataSet(SectionDataSet sectionDataSet) { this.sectionDataSet = sectionDataSet; }
 }

@@ -1,6 +1,7 @@
 package trestview;
 
 import designpatterns.MVC;
+import designpatterns.ObservableDS;
 import javafx.scene.Node;
 import javafx.scene.layout.BorderPane;
 import persistence.loader.DataSet;
@@ -15,6 +16,9 @@ import trestview.menu.TMenuView;
 import trestview.resourcelink.ResourceLinkController;
 import trestview.resourcelink.ResourceLinkModel;
 import trestview.resourcelink.ResourceLinkView;
+import trestview.tasks.conveyorPDE.VConConveyorPdeController;
+import trestview.tasks.conveyorPDE.VConConveyorPdeView;
+import trestview.tasks.conveyorPDE.VСonConveyorPdeModel;
 
 
 import java.util.List;
@@ -26,7 +30,9 @@ public class TrestView extends BorderPane implements Observer {
     private DataSet dataSet;
     private List<Node> nodes;
     private MachineTestView machineTestView;
+//    private VConConveyorPdeView vConConveyorPdeView;
     private MVC resourceLink;
+    private MVC conConveyorPdeModel;
 
     public TrestView(TrestModel trestModel) {
         this.trestModel =  trestModel;
@@ -44,6 +50,29 @@ public class TrestView extends BorderPane implements Observer {
         MachineTestController machineTestController = new MachineTestController(machineTestModel);
         machineTestView = new MachineTestView(machineTestModel, machineTestController);
         machineTestModel.addObserver(machineTestView);
+
+
+
+
+        /*
+
+
+        ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+
+
+        */
+        conConveyorPdeModel = new MVC (VСonConveyorPdeModel.class, VConConveyorPdeController.class, VConConveyorPdeView.class,this.trestModel, null);    //     88888
+//        VСonConveyorPdeModel vСonConveyorPdeModel = new VСonConveyorPdeModel(trestModel);
+//        vConConveyorPdeView =new VConConveyorPdeView(vСonConveyorPdeModel);
+//        vСonConveyorPdeModel.addObserver(vConConveyorPdeView);
+
+
+
+
+
+
     }
 
     @Override
@@ -53,9 +82,10 @@ public class TrestView extends BorderPane implements Observer {
 
     private void updateCenter (TMenuModel o) {
         switch (o.getMenuItemCall()) {
-            case testOfMachineItem:             this.setCenter(machineTestView);                        break;
-            case resourcesLinksPerspectiveItem: this.setCenter((BorderPane)resourceLink.getView());     break;
-            default:                                                                                    break;
+            case testOfMachineItem:             this.setCenter(machineTestView);                            break;
+            case resourcesLinksPerspectiveItem: this.setCenter((BorderPane)resourceLink.getView());         break;
+            case conveyorSpeedConstantItem:     this.setCenter((BorderPane)conConveyorPdeModel.getView());  break;
+            default:                                                                                        break;
         }
     }
 }

@@ -1,10 +1,31 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <tabMachines>
-<RowMachine angle="90.0" description="Machine96" id="96" locationX="0.0" locationY="0.0" name="Machine96" state="1.0"/>
-<RowMachine angle="0.0" description="Machine97" id="97" locationX="0.1" locationY="0.9" name="Machine97" state="1.0"/>
-<RowMachine angle="135.0" description="Machine98" id="98" locationX="0.9" locationY="0.1" name="Machine98" state="1.0"/>
-<RowMachine angle="115.0" description="Machine99" id="99" locationX="1.0" locationY="1.0" name="Machine99" state="1.0"/>
-<RowMachine angle="0.0" description="Machine100" id="100" locationX="0.5" locationY="0.5" name="Machine100" state="1.0"/>
-<RowMachine angle="0.0" description="Описание для    RowMachine" id="101" locationX="0.3" locationY="0.3" name="RowMachine№101" state="1.0"/>
-<RowMachine angle="0.0" description="Описание для    RowMachine" id="102" locationX="0.5" locationY="0.5" name="RowMachine№101" state="1.0"/>
+<RowMachine angle="0.0" description="Machine96" id="96" locationX="0.08203741266621592" locationY="0.5179175118323192" name="Machine96" state="0.91"/>
+<RowMachine angle="45.0" description="Machine97" id="97" locationX="0.3868830290736985" locationY="0.2610209601081812" name="Machine971" state="0.8"/>
+<RowMachine angle="135.0" description="Machine98" id="98" locationX="0.488088798737886" locationY="0.4367816091954023" name="Machine98" state="1.0"/>
+<RowMachine angle="90.0" description="Machine99" id="99" locationX="0.27277439711516793" locationY="0.8316430020283976" name="Machine99" state="1.0"/>
+<RowMachine angle="0.0" description="Machine100" id="100" locationX="0.19278791976560739" locationY="0.6842461122379987" name="Machine100" state="1.0"/>
+<RowMachine angle="0.0" description="Описание для    RowMachine" id="101" locationX="0.6784117595445653" locationY="0.6842461122379986" name="RowMachine№101" state="1.0"/>
+<RowMachine angle="90.0" description="Описание для    RowMachine" id="102" locationX="0.3900634325854585" locationY="0.6017579445571332" name="RowMachine№101" state="1.0"/>
+<RowMachine angle="0.0" description="Описание для    RowMachine" id="103" locationX="0.4604349785891368" locationY="0.32319134550371875" name="RowMachine№103" state="0.0"/>
+<RowMachine angle="45.0" description="Описание для    RowMachine" id="104" locationX="1.0" locationY="0.1839080459770115" name="RowMachine№104" state="0.0"/>
+<RowMachine angle="0.0" description="Описание для    RowMachine" id="105" locationX="1.0" locationY="1.0" name="RowMachine№105" state="0.0"/>
+<RowMachine angle="90.0" description="Описание для    RowMachine" id="106" locationX="0.9480626708302627" locationY="0.8897903989181879" name="RowMachine№106" state="0.0"/>
+<RowMachine angle="0.0" description="Описание для    RowMachine" id="107" locationX="1.0" locationY="0.34192021636240705" name="RowMachine№107" state="0.0"/>
+<RowMachine angle="0.0" description="Описание для    RowMachine" id="108" locationX="0.22955886223928895" locationY="0.27856659905341447" name="RowMachine№108" state="0.0"/>
+<RowMachine angle="0.0" description="Описание для    RowMachine" id="109" locationX="0.4516523956252677" locationY="0.3191345503718728" name="RowMachine№109" state="0.0"/>
+<RowMachine angle="0.0" description="Описание для    RowMachine" id="110" locationX="0.328507510032466" locationY="0.21622718052738338" name="RowMachine№110" state="0.0"/>
+<RowMachine angle="0.0" description="Описание для    RowMachine" id="111" locationX="0.5557503197246488" locationY="0.36375929682217717" name="RowMachine№111" state="0.0"/>
+<RowMachine angle="0.0" description="Описание для    RowMachine" id="112" locationX="0.6696731076074673" locationY="0.3094658553076403" name="RowMachine№112" state="0.0"/>
+<RowMachine angle="0.0" description="Описание для    RowMachine" id="113" locationX="1.0" locationY="0.0" name="RowMachine№113" state="0.0"/>
+<RowMachine angle="0.0" description="Описание для    RowMachine" id="114" locationX="1.0" locationY="0.0" name="RowMachine№114" state="0.0"/>
+<RowMachine angle="0.0" description="Описание для    RowMachine" id="115" locationX="0.2626082236870902" locationY="0.3110209601081812" name="RowMachine№115" state="0.0"/>
+<RowMachine angle="0.0" description="Описание для    RowMachine" id="116" locationX="0.13270089213195496" locationY="0.2823529411764706" name="RowMachine№116" state="0.0"/>
+<RowMachine angle="0.0" description="Описание для    RowMachine" id="117" locationX="0.23543706668572656" locationY="0.28449197860962566" name="RowMachine№117" state="0.0"/>
+<RowMachine angle="0.0" description="Описание для    RowMachine" id="118" locationX="0.3424539151792386" locationY="0.41069518716577535" name="RowMachine№118" state="0.0"/>
+<RowMachine angle="0.0" description="Описание для    RowMachine" id="119" locationX="-0.39999999999999997" locationY="-0.39999999999999997" name="RowMachine№119" state="0.0"/>
+<RowMachine angle="0.0" description="Описание для    RowMachine" id="120" locationX="0.0881902186161821" locationY="0.16768086544962812" name="RowMachine№120" state="0.0"/>
+<RowMachine angle="0.0" description="Описание для    RowMachine" id="121" locationX="-0.35" locationY="-0.35" name="RowMachine№121" state="0.0"/>
+<RowMachine angle="0.0" description="Описание для    RowMachine" id="122" locationX="0.3660575909092174" locationY="0.21365787694388103" name="RowMachine№122" state="0.0"/>
+<RowMachine angle="0.0" description="Описание для    RowMachine" id="123" locationX="0.20406806400721209" locationY="0.14063556457065585" name="RowMachine№123" state="0.0"/>
 </tabMachines>

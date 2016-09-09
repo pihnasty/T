@@ -1,0 +1,5 @@
+<root>
+  <item name='java.lang.Class java.lang.reflect.Constructor&lt;T&gt; getConstructor(java.lang.Class&lt;?&gt;...)'>
+    <annotation name='org.jetbrains.annotations.NotNull'/>
+  </item>
+</root>

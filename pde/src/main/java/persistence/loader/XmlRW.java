@@ -276,8 +276,8 @@ public class XmlRW
         {	fd.setAccessible(true);
             fd.set(ro, fd.get(o));
 			fd.setAccessible(false);
-        } catch (IllegalArgumentException exp)   {  exp.printStackTrace(); } catch (IllegalAccessException exp)  {  exp.printStackTrace();  }
-    }
+        } catch (IllegalArgumentException | IllegalAccessException exp)   {  exp.printStackTrace(); }
+	}
 
     /**
      * Делаем изменения в DataSet ds в соответствие с данными объекта Object o. При изменение Object o, которым является  o.getClass()==Trest.class или o.getClass()==Work.class или o.getClass()==Machine.class ...

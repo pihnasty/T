@@ -222,7 +222,7 @@ public class PschemeModel extends AbstractPtmModel implements Observer {
         int i = 1;
 
         double powerSpeed = 4.0;    //  This is the scaling factor for the speed.
-        System.out.println("PschemeView 209  Вход");
+
 
         if (current != null) {
             while (intersectionExist) {
@@ -282,7 +282,7 @@ public class PschemeModel extends AbstractPtmModel implements Observer {
 
             }
         }
-        System.out.println("Выход PschemeView 233");
+
 
     }
 

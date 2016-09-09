@@ -11,6 +11,8 @@
 
     <artifactId>pde</artifactId>
     <build>
+        <finalName>${project.groupId}-${project.artifactId}</finalName>
+
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

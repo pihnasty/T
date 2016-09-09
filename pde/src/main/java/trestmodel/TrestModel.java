@@ -1,6 +1,9 @@
 package trestmodel;
 
+import designpatterns.ObservableDS;
 import entityProduction.*;
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import persistence.loader.DataSet;
 import persistence.loader.SectionDataSet;
 import persistence.loader.tabDataSet.RowTrest;
@@ -13,18 +16,22 @@ import java.util.Observable;
 /**
  * Created by Max on 19.02.2016.
  */
-public class TrestModel extends Observable {
+public class TrestModel extends ObservableDS {
 
     private DataSet dataSet;
+
     private SectionDataSet sectionDataSet;
 
     private Trest trest;
     private List<Trest> trests = new ArrayList();
 
+    private ObjectProperty<Trest>  trestObjectProperty  = new SimpleObjectProperty<>();
+    private ObjectProperty<DataSet> dataObjectProperty  = new SimpleObjectProperty<>();
+
     public Locale locale;
 
     public TrestModel() {
-        setLocale("ru"); //en
+        setLocale("en"); //   ru en
         this.dataSet = new DataSet();
 
         this.sectionDataSet = new SectionDataSet(dataSet);
@@ -36,11 +43,6 @@ public class TrestModel extends Observable {
         for (Trest t: trests)  if (t.getId()==1)    this.trest= t;
 
         intersectionMachine();  // The intersection of the collection from the collection on line
-
-        DataSet.showTab(trests);
-
-        DataSet.showTab(trest.getWorks());
-
 
     }
 
@@ -91,6 +93,14 @@ public class TrestModel extends Observable {
 
     public void setTrest(Trest trest) {
         this.trest = trest;
+    }
+
+    public SectionDataSet getSectionDataSet() {
+        return sectionDataSet;
+    }
+
+    public void setSectionDataSet(SectionDataSet sectionDataSet) {
+        this.sectionDataSet = sectionDataSet;
     }
 
 

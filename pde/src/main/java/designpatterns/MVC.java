@@ -34,12 +34,10 @@ public class MVC {
             methodAddObserver = Observable.class.getDeclaredMethod("addObserver",Observer.class );
             methodAddObserver.invoke(model, view);
 
-        } catch (NoSuchMethodException e)  {      e.printStackTrace();        }
-        catch (IllegalAccessException e) {      e.printStackTrace();        }
-        catch (InstantiationException e) {      e.printStackTrace();        }
-        catch (InvocationTargetException e) {    e.printStackTrace();       }
+        } catch (NoSuchMethodException | IllegalAccessException | InstantiationException | InvocationTargetException e)  {      e.printStackTrace();        }
     }
 
+    @Deprecated
     public   MVC (Class mClass, Class cClass, Class vClass, DataSet dataSet, Rule rule )   {
         try {
             Constructor mConstructor = mClass.getConstructor(DataSet.class, Rule.class);
@@ -54,12 +52,10 @@ public class MVC {
             methodAddObserver = Observable.class.getDeclaredMethod("addObserver",Observer.class );
             methodAddObserver.invoke(model, view);
 
-        } catch (NoSuchMethodException e)  {      e.printStackTrace();        }
-        catch (IllegalAccessException e) {      e.printStackTrace();        }
-        catch (InstantiationException e) {      e.printStackTrace();        }
-        catch (InvocationTargetException e) {    e.printStackTrace();       }
+        } catch (NoSuchMethodException | InstantiationException | InvocationTargetException | IllegalAccessException e)  {      e.printStackTrace();        }
     }
 
+    @Deprecated
     public   MVC (Class mClass, Class cClass, Class vClass, Observable o, Rule rule )   {
         try {
             Constructor mConstructor = mClass.getConstructor(Observable.class, Rule.class);
@@ -74,11 +70,26 @@ public class MVC {
             methodAddObserver = Observable.class.getDeclaredMethod("addObserver",Observer.class );
             methodAddObserver.invoke(model, view);
 
-        } catch (NoSuchMethodException e)  {      e.printStackTrace();        }
-          catch (IllegalAccessException e) {      e.printStackTrace();        }
-          catch (InstantiationException e) {      e.printStackTrace();        }
-          catch (InvocationTargetException e) {    e.printStackTrace();       }
+        } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException | InstantiationException e)  {      e.printStackTrace();        }
     }
+// Main Constructor
+    public   MVC (Class mClass, Class cClass, Class vClass, ObservableDS o, Rule rule )   {
+        try {
+            Constructor mConstructor = mClass.getConstructor(ObservableDS.class, Rule.class);
+            model = mConstructor.newInstance(o,rule);
+
+            Constructor cConstructor = cClass.getConstructor( ObservableDS.class);
+            controller = cConstructor.newInstance(model);
+
+            Constructor vConstructor = vClass.getConstructor( ObservableDS.class, cClass);
+            view = vConstructor.newInstance(model,controller);
+
+            methodAddObserver = Observable.class.getDeclaredMethod("addObserver",Observer.class );
+            methodAddObserver.invoke(model, view);
+
+        } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException | InstantiationException e)  {      e.printStackTrace();        }
+    }
+
 
     public   MVC (Class mClass, Class cClass, Class vClass, Observable o )   {
         try {
@@ -94,15 +105,7 @@ public class MVC {
             methodAddObserver = Observable.class.getDeclaredMethod("addObserver",Observer.class );
             methodAddObserver.invoke(model, view);
 
-        } catch (NoSuchMethodException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        } catch (InstantiationException e) {
-            e.printStackTrace();
-        } catch (InvocationTargetException e) {
-            e.printStackTrace();
-        }
+        } catch (NoSuchMethodException | IllegalAccessException | InstantiationException | InvocationTargetException e) {      e.printStackTrace();    }
     }
 
 
@@ -139,8 +142,7 @@ public class MVC {
 
     public MVC addObserverP (Observer observer) {
         try   {   methodAddObserver.invoke(model, observer); }
-        catch (IllegalAccessException e)    { e.printStackTrace();    }
-        catch (InvocationTargetException e) { e.printStackTrace();    }
+        catch (IllegalAccessException | InvocationTargetException e)    { e.printStackTrace();    }
         return this;
     }
 }

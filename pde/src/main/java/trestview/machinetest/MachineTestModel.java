@@ -21,7 +21,7 @@ public class MachineTestModel extends Observable {
     private TMenuModel menuModel;
     private ArrayList<Double> randomValuesList;
     private DataSet dataSet;
-    private TableViewP tableView;
+
 //    private Class tClass;
 
 
@@ -36,14 +36,6 @@ public class MachineTestModel extends Observable {
 //        this.tClass = tClass;
         this.dataSet =  menuModel.getTrestModel().getDataSet();
 
-//-----------------------------------------------------------------------------------------------
-        ArrayList<Functiondist> functiondists = new ArrayList<>();
-     //   for (RowFunctiondist rowFun: dataSet.getTabFunctiondists()) functiondists.add(dataSet.createObject( rowFun));   // Это эквивалентно  dataSet.getTabFunctiondists().stream().filter(w->{functiondists.add(dataSet.createObject(w)); return true;}).count();
-        dataSet.getTabFunctiondists().stream().filter(w->{functiondists.add(dataSet.createObject(w)); return true;}).count();
-        DataSet.showTab(functiondists);
-        MVC tableMVC = new MVC(TableModel.class, TableController.class, TableViewP.class, functiondists, Rule.Functiondist);
-        tableView = (TableViewP) tableMVC.getView();
-//--------------------------------------------------------------------------------------------------
 
 
     }
@@ -88,12 +80,9 @@ public class MachineTestModel extends Observable {
         notifyObservers();
     }
 
-    public TableViewP getTableView() {
-        return tableView;
-    }
 
-    public void setTableView(TableViewP tableView) {
-        this.tableView = tableView;
-    }
 
+    public DataSet getDataSet() {
+        return dataSet;
+    }
 }

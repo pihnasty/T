@@ -1,23 +1,22 @@
 package trestview.table;
 
-import designpatterns.MVC;
+import com.sun.org.apache.xpath.internal.SourceTree;
 import entityProduction.Functiondist;
 import entityProduction.Machine;
-import entityProduction.Work;
+import entityProduction.Modelmachine;
 import javafx.beans.property.Property;
-import javafx.beans.property.SimpleListProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.Callback;
@@ -28,10 +27,10 @@ import persistence.loader.XmlRW;
 import persistence.loader.tabDataSet.*;
 //import resources.images.icons.IconT;
 //import resources.images.works.WorkT;
-import trestview.hboxpane.HboxpaneModel;
 import trestview.hboxpane.MethodCall;
 import trestview.table.tablemodel.TableModel;
 import trestview.table.tablemodel.abstracttablemodel.ParametersColumn;
+import trestview.table.tablemodel.abstracttablemodel.Rule;
 
 import java.io.File;
 import java.io.IOException;
@@ -46,6 +45,7 @@ public class TableViewP<cL> extends TableView<cL> implements Observer {
     private TableModel tableModel;
     private Property<TableModel> tableModelProperty;
     private ObservableList data;
+    private ObservableList dataComboboxModelMachne;
     private int selectIndex = -1;
     private MethodCall methodCall;
     private ArrayList<cL> tab;
@@ -67,7 +67,7 @@ public class TableViewP<cL> extends TableView<cL> implements Observer {
         if (tClass == RowFunctiondist.class) this.setEditable(false);
         XmlRW.fxmlLoad(this,tableController, "trestview\\table\\TableView.fxml","ui", "");
 
-        this.tableModel.getParametersOfColumns().stream().map(p-> getTableColumnP((ParametersColumn)p)).count();
+        this.tableModel.getParametersOfColumns().stream().map(p-> getTableColumnP((ParametersColumn)p)).count();  // for ( ParametersColumn p: (ArrayList<ParametersColumn>) this.tableModel.getParametersOfColumns() )  getTableColumnP(p);
 
         isEditable();
 
@@ -75,125 +75,6 @@ public class TableViewP<cL> extends TableView<cL> implements Observer {
         repaintTable();
         getSelectionModel().selectedIndexProperty().addListener(new RowSelectChangeListener());
 
-    }
-
-    private void setStringColumn(ParametersColumn parametersColumn, TableColumn<cL, String> tableColumn,String fielgName, Class tclass ) {
-        if(parametersColumn.getFielgName().equals(fielgName)) {
-            tableColumn.setCellValueFactory(new PropertyValueFactory(fielgName));
-            tableColumn.setCellFactory(TextFieldTableCell.<cL>forTableColumn());
-
-            tableColumn.setOnEditCommit(  (TableColumn.CellEditEvent<cL, String> t) -> {
-              //if(tclass==RowWork.class)
-              if(fielgName=="name") ((RowIdNameDescription) t.getTableView().getItems().get( t.getTablePosition().getRow()) ).setName(t.getNewValue());
-              if(fielgName=="scheme" || fielgName=="pathData") {
-                  File f = new File(t.getNewValue());
-                  String schemePath = "Image\\Manufacturing";
-                  if (!f.exists()) {
-                      FileChooser chooser = new FileChooser();
-                      chooser.setInitialDirectory(new File (schemePath));
-                      chooser.getExtensionFilters().addAll(
-                              new FileChooser.ExtensionFilter("All Images", "*.*"),
-                              new FileChooser.ExtensionFilter("JPG", "*.jpg"), new FileChooser.ExtensionFilter("PNG", "*.png"),
-                              new FileChooser.ExtensionFilter("BMP", "*.bmp"), new FileChooser.ExtensionFilter("GIF", "*.gif")
-                      );
-                      chooser.setTitle( ResourceBundle.getBundle("ui").getString("nameFileScheme"));
-                      Stage st = new Stage();
-                      st.setMaxWidth(400);
-                      st.setMaxHeight(400);
-                      f = chooser.showOpenDialog(st);
-                      if (f!=null) {
-                          try {
-                              Files.copy(f.toPath(), new File(schemePath+"\\m"+f.getName()).toPath());
-
-                               if(new File(schemePath+"\\"+f.getName()).delete()){
-                              }else System.out.println("Файл file.txt не был найден в корневой папке проекта");
-                              Files.copy(new File(schemePath+"\\m"+f.getName()).toPath(), new File(schemePath+"\\"+f.getName()).toPath());
-                              if(new File(schemePath+"\\m"+f.getName()).delete()){
-                              }else System.out.println("Файл file.txt не был найден в корневой папке проекта");
-
-                          } catch (IOException e) {
-                              e.printStackTrace();
-                          }
-                          if (fielgName== "scheme")        ((RowWork) t.getTableView().getItems().get(t.getTablePosition().getRow())).setScheme(schemePath+"\\"+f.getName());
-                          if (fielgName== "pathData") ((Functiondist) t.getTableView().getItems().get(t.getTablePosition().getRow())).setPathData (schemePath+"\\"+f.getName());
-                          repaintTable();
-                      }
-                      else {
-                          if (fielgName== "scheme") ((RowWork) t.getTableView().getItems().get(t.getTablePosition().getRow())).setScheme(t.getOldValue());
-                          if (fielgName== "pathData") ((Functiondist) t.getTableView().getItems().get(t.getTablePosition().getRow())).setPathData (t.getOldValue());
-                      }
-                  }
-              }
-              if(fielgName=="description") { ((RowIdNameDescription) t.getTableView().getItems().get( t.getTablePosition().getRow()) ).setDescription(t.getNewValue());
-                  ((TableCell)t.getTableView().getItems().get( t.getTablePosition().getRow())).setTooltip(new Tooltip(t.getNewValue()));}
-
-            });
-        }
-    }
-
-    private void setIntegerColumn(ParametersColumn parametersColumn, TableColumn<cL, Integer> tableColumn,String fielgName, Class tclass ) {
-        if(parametersColumn.getFielgName().equals(fielgName)) {
-            tableColumn.setCellValueFactory(new PropertyValueFactory(fielgName));
-            tableColumn.setCellFactory(TextFieldTableCell.<cL, Integer>forTableColumn(new IntegerStringConverter()));
-            tableColumn.setOnEditCommit(  (TableColumn.CellEditEvent<cL, Integer> t) -> {
-            if(fielgName=="id")   ((RowIdNameDescription) t.getTableView().getItems().get( t.getTablePosition().getRow()) ).setId(t.getNewValue());
-            });
-        }
-    }
-
-    private void setDoubleColumn(ParametersColumn parametersColumn, TableColumn<cL, Double> tableColumn,String fielgName, Class tclass ) {
-        if(parametersColumn.getFielgName().equals(fielgName)) {
-            tableColumn.setCellValueFactory(new PropertyValueFactory(fielgName));
-            tableColumn.setCellFactory(TextFieldTableCell.<cL, Double>forTableColumn(new DoubleStringConverter()));
-            tableColumn.setOnEditCommit(  (TableColumn.CellEditEvent<cL, Double> t) -> {
-            if(fielgName=="overallSize")   ((RowWork) t.getTableView().getItems().get( t.getTablePosition().getRow()) ).setOverallSize(t.getNewValue());
-            if(fielgName=="scaleEquipment")   ((RowWork) t.getTableView().getItems().get( t.getTablePosition().getRow()) ).setScaleEquipment(t.getNewValue());
-            if(fielgName=="locationX")      ((RowMachine) t.getTableView().getItems().get( t.getTablePosition().getRow()) ).setLocationX (t.getNewValue());
-            if(fielgName=="locationY")      ((RowMachine) t.getTableView().getItems().get( t.getTablePosition().getRow()) ).setLocationY (t.getNewValue());
-            if(fielgName=="state")      ((RowMachine) t.getTableView().getItems().get( t.getTablePosition().getRow()) ).setState (t.getNewValue());
-            if(fielgName=="averageValue")      ((Functiondist) t.getTableView().getItems().get( t.getTablePosition().getRow()) ).setAverageValue (t.getNewValue());
-            if(fielgName=="meanSquareDeviation")      ((Functiondist) t.getTableView().getItems().get( t.getTablePosition().getRow()) ).setMeanSquareDeviation(t.getNewValue());
-            });
-        }
-    }
-    private void setImageColumn(ParametersColumn parametersColumn, TableColumn<cL, String> tableColumn, String fielgName, Class tclass ) {
-        if(parametersColumn.getFielgName().equals(fielgName)) {
-            tableColumn.setCellValueFactory(new PropertyValueFactory("scheme"));
-
-            tableColumn.setCellFactory(
-              new Callback<TableColumn<cL, String>,TableCell<cL, String>>(){
-                @Override
-                public TableCell<cL, String> call(TableColumn<cL, String> param) {
-                    TableCell<cL, String> cell = new TableCell<cL, String>(){
-                        @Override
-                        public void updateItem(String item, boolean empty) {
-                            if(item!=null){
-                                HBox box= new HBox();
-                                box.setSpacing(10) ;
-                                ScrollPane sp = new ScrollPane();
-                                sp.setPrefSize(50,50);
-                                ImageView imageview = new ImageView();
-                                imageview.setFitHeight(100);    imageview.setFitWidth(100);    //    imageview.setScaleX(0.5);
-                                sp.setPannable(false);
-                                imageview.setImage(new Image("file:"+item ));
-                                setTooltip(new Tooltip(item));
-                                box.getChildren().addAll(imageview);
-                                sp.setContent(imageview);
-                                setGraphic(sp);
-                            }
-                        }
-                    };
-                    return cell;
-                }
-
-            });
-
-
-            //   tableColumn.setCellFactory(TextFieldTableCell.<cL, Integer>forTableColumn(new IntegerStringConverter()));
-       //     tableColumn.setOnEditCommit(  (TableColumn.CellEditEvent<cL, Image> t) -> {
-         //       if(fielgName=="image")   ((RowIdNameDescription) t.getTableView().getItems().get( t.getTablePosition().getRow()) ).setId(t.getNewValue());
-           // });
-        }
     }
 
 
@@ -207,6 +88,7 @@ public class TableViewP<cL> extends TableView<cL> implements Observer {
             setStringColumn(parametersColumn, tableColumn,"scheme",tClass);
             setStringColumn(parametersColumn, tableColumn,"description",tClass);
             setStringColumn(parametersColumn, tableColumn,"pathData",tClass);
+            setStringColumn(parametersColumn, tableColumn,"modelmachine",tClass);
 
 
             tableCol=tableColumn;
@@ -223,15 +105,29 @@ public class TableViewP<cL> extends TableView<cL> implements Observer {
             setDoubleColumn(parametersColumn, tableColumn,"scaleEquipment",tClass);
             setDoubleColumn(parametersColumn, tableColumn,"locationX",tClass);
             setDoubleColumn(parametersColumn, tableColumn,"locationY",tClass);
+            setDoubleColumn(parametersColumn, tableColumn,"angle",tClass);
             setDoubleColumn(parametersColumn, tableColumn,"state",tClass);
             setDoubleColumn(parametersColumn, tableColumn,"averageValue",tClass);
             setDoubleColumn(parametersColumn, tableColumn,"meanSquareDeviation",tClass);
-
-                tableCol=tableColumn;
+            tableCol=tableColumn;
         }
         if (parametersColumn.getcLs()==Image.class) {
-            TableColumn<cL,String> tableColumn = new TableColumn  (parametersColumn.getName());
-            setImageColumn(parametersColumn, tableColumn,"image",tClass);
+            if (tableModel.getRule() == Rule.Work) {
+                TableColumn<cL,String> tableColumn = new TableColumn  (parametersColumn.getName());
+                setImageColumn(parametersColumn, tableColumn,"image",tClass);
+                tableCol=tableColumn;
+            }
+            if (tableModel.getRule() == Rule.Machine) {
+                TableColumn<cL,RowModelmachine> tableColumn = new TableColumn  (parametersColumn.getName());
+                setImageColumnForMachne(parametersColumn, tableColumn,"image",tClass);
+                tableCol=tableColumn;
+            }
+
+        }
+
+        if (parametersColumn.getcLs()==Modelmachine.class) {
+            TableColumn<cL,RowModelmachine> tableColumn = new TableColumn  (parametersColumn.getName());
+            setComboBoxColumn(parametersColumn, tableColumn,"modelmachine",tClass);
             tableCol=tableColumn;
         }
 
@@ -246,8 +142,181 @@ public class TableViewP<cL> extends TableView<cL> implements Observer {
 
 
 
+    private void setStringColumn(ParametersColumn parametersColumn, TableColumn<cL, String> tableColumn,String fielgName, Class tclass ) {
+
+        if(parametersColumn.getFielgName().equals(fielgName)) {
+
+            tableColumn.setCellValueFactory(new PropertyValueFactory(fielgName));
+
+            tableColumn.setCellFactory(TextFieldTableCell.<cL>forTableColumn());
+
+            tableColumn.setOnEditCommit(  (TableColumn.CellEditEvent<cL, String> t) -> {
+
+                //if(tclass==RowWork.class)
+                if(fielgName=="name") ((RowIdNameDescription) t.getTableView().getItems().get( t.getTablePosition().getRow()) ).setName(t.getNewValue());
+
+                if(fielgName=="modelmachine") ((RowIdNameDescription) t.getTableView().getItems().get( t.getTablePosition().getRow()) ).setName(t.getNewValue());
+
+                if(fielgName=="scheme" || fielgName=="pathData" ) {
+                    File f = new File(t.getNewValue());
+                    String schemePath = "Image\\Manufacturing";
+                    if (!f.exists()) {
+                        FileChooser chooser = new FileChooser();
+                        chooser.setInitialDirectory(new File (schemePath));
+                        chooser.getExtensionFilters().addAll(
+                                new FileChooser.ExtensionFilter("All Images", "*.*"),
+                                new FileChooser.ExtensionFilter("JPG", "*.jpg"), new FileChooser.ExtensionFilter("PNG", "*.png"),
+                                new FileChooser.ExtensionFilter("BMP", "*.bmp"), new FileChooser.ExtensionFilter("GIF", "*.gif")
+                        );
+                        chooser.setTitle( ResourceBundle.getBundle("ui").getString("nameFileScheme"));
+                        Stage st = new Stage();
+                        st.setMaxWidth(400);
+                        st.setMaxHeight(400);
+                        f = chooser.showOpenDialog(st);
+                        if (f!=null) {
+                            try {
+                                Files.copy(f.toPath(), new File(schemePath+"\\m"+f.getName()).toPath());
+
+                                if(new File(schemePath+"\\"+f.getName()).delete()){
+                                }else System.out.println("Файл file.txt не был найден в корневой папке проекта");
+                                Files.copy(new File(schemePath+"\\m"+f.getName()).toPath(), new File(schemePath+"\\"+f.getName()).toPath());
+                                if(new File(schemePath+"\\m"+f.getName()).delete()){
+                                }else System.out.println("Файл file.txt не был найден в корневой папке проекта");
+
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                            if (fielgName== "scheme")        ((RowWork) t.getTableView().getItems().get(t.getTablePosition().getRow())).setScheme(schemePath+"\\"+f.getName());
+                            if (fielgName== "pathData") ((Functiondist) t.getTableView().getItems().get(t.getTablePosition().getRow())).setPathData (schemePath+"\\"+f.getName());
+                            repaintTable();
+                        }
+                        else {
+                            if (fielgName== "scheme") ((RowWork) t.getTableView().getItems().get(t.getTablePosition().getRow())).setScheme(t.getOldValue());
+                            if (fielgName== "pathData") ((Functiondist) t.getTableView().getItems().get(t.getTablePosition().getRow())).setPathData (t.getOldValue());
+                        }
+                    }
+                }
+                if(fielgName=="description") { ((RowIdNameDescription) t.getTableView().getItems().get( t.getTablePosition().getRow()) ).setDescription(t.getNewValue());
+                    ((TableCell)t.getTableView().getItems().get( t.getTablePosition().getRow())).setTooltip(new Tooltip(t.getNewValue()));}
+
+            });
+        }
+    }
+    private void setIntegerColumn(ParametersColumn parametersColumn, TableColumn<cL, Integer> tableColumn,String fielgName, Class tclass ) {
+        if(parametersColumn.getFielgName().equals(fielgName)) {
+            tableColumn.setCellValueFactory(new PropertyValueFactory(fielgName));
+            tableColumn.setCellFactory(TextFieldTableCell.<cL, Integer>forTableColumn(new IntegerStringConverter()));
+            tableColumn.setOnEditCommit(  (TableColumn.CellEditEvent<cL, Integer> t) -> {
+            if(fielgName=="id")   ((RowIdNameDescription) t.getTableView().getItems().get( t.getTablePosition().getRow()) ).setId(t.getNewValue());
+            });
+        }
+    }
+    private void setDoubleColumn(ParametersColumn parametersColumn, TableColumn<cL, Double> tableColumn,String fielgName, Class tclass ) {
+        if(parametersColumn.getFielgName().equals(fielgName)) {
+            tableColumn.setCellValueFactory(new PropertyValueFactory(fielgName));
+            tableColumn.setCellFactory(TextFieldTableCell.<cL, Double>forTableColumn(new DoubleStringConverter()));
+            tableColumn.setOnEditCommit(  (TableColumn.CellEditEvent<cL, Double> t) -> {
+            if(fielgName=="overallSize")   ((RowWork) t.getTableView().getItems().get( t.getTablePosition().getRow()) ).setOverallSize(t.getNewValue());
+            if(fielgName=="scaleEquipment")   ((RowWork) t.getTableView().getItems().get( t.getTablePosition().getRow()) ).setScaleEquipment(t.getNewValue());
+            if(fielgName=="locationX")      ((RowMachine) t.getTableView().getItems().get( t.getTablePosition().getRow()) ).setLocationX (t.getNewValue());
+            if(fielgName=="locationY")      ((RowMachine) t.getTableView().getItems().get( t.getTablePosition().getRow()) ).setLocationY (t.getNewValue());
+            if(fielgName=="angle")      ((RowMachine) t.getTableView().getItems().get( t.getTablePosition().getRow()) ).setAngle (t.getNewValue());
+            if(fielgName=="state")      ((RowMachine) t.getTableView().getItems().get( t.getTablePosition().getRow()) ).setState (t.getNewValue());
+            if(fielgName=="averageValue")      ((Functiondist) t.getTableView().getItems().get( t.getTablePosition().getRow()) ).setAverageValue (t.getNewValue());
+            if(fielgName=="meanSquareDeviation")      ((Functiondist) t.getTableView().getItems().get( t.getTablePosition().getRow()) ).setMeanSquareDeviation(t.getNewValue());
+            });
+        }
+    }
+
+    private void setComboBoxColumn(ParametersColumn parametersColumn, TableColumn<cL, RowModelmachine> tableColumn, String fielgName, Class tclass ) {
+        if(parametersColumn.getFielgName().equals(fielgName)) {
+            Callback<TableColumn<cL, RowModelmachine>, TableCell<cL, RowModelmachine>> comboBoxCellFactory = param -> new ComboBoxEditingCell();
+
+
+
+            if(fielgName=="modelmachine") {
+                tableColumn.setCellValueFactory(p -> new SimpleObjectProperty<RowModelmachine>(  DataSet.getById(
+                        ((Machine) p.getValue()).getModelmachine().getId(),
+                        dataSet.getTabModelmachines())));
+                tableColumn.setCellFactory(comboBoxCellFactory);
+                tableColumn.setOnEditCommit((TableColumn.CellEditEvent<cL, RowModelmachine> t) -> {
+                    if (fielgName == "modelmachine") {
+                        RowModelmachine rowModelmachine = t.getNewValue();
+                        Modelmachine modelmachine = new Modelmachine(rowModelmachine.getId(), rowModelmachine.getName(),
+                                rowModelmachine.getImg(),
+                                dataSet.select(rowModelmachine, dataSet.getTabMachines(), dataSet.getTabModelmachineMachines()),   //  ArrayList<Machine> machines
+                                rowModelmachine.getOverallDimensionX(), rowModelmachine.getOverallDimensionY(),
+                                rowModelmachine.getWorkSizeX(), rowModelmachine.getWorkSizeY(), rowModelmachine.getDescription());
+//                                for(cL machine :   tab)
+//                                    if   ( ((Machine)machine).getModelmachine().getId()==t.getOldValue().getId())
+//                                    ((Machine)machine).setModelmachine(modelmachine);
+                        for (int i = 0; i < tab.size(); i++)
+                            if (((Machine) tab.get(i)).getModelmachine().getId() == t.getOldValue().getId())
+                                if (((Machine) selectRow).getId() ==  ((Machine) tab.get(i)).getId())
+                                    ((Machine) tab.get(i)).setModelmachine(modelmachine);
+                    }
+                });
+            }
+        }
+    }
+
+    private void setImageColumnForMachne(ParametersColumn parametersColumn, TableColumn<cL, RowModelmachine> tableColumn, String fielgName, Class tclass ) {
+
+        if (tableModel.getRule() == Rule.Machine) {
+            System.out.println("if (tableModel.getRule() == Rule.Machine)");
+            Callback<TableColumn<cL, RowModelmachine>, TableCell<cL, RowModelmachine>> imageMachineCellFactory = param -> new ImageMachineEditingCell();
+            tableColumn.setCellFactory(imageMachineCellFactory);
+            tableColumn.setCellValueFactory(
+                    p -> new SimpleObjectProperty<RowModelmachine>(  DataSet.getById(
+                    ((Machine) p.getValue()).getModelmachine().getId(),
+                    dataSet.getTabModelmachines()))
+            );
+        }
+
+        }
+
+
+    private void setImageColumn(ParametersColumn parametersColumn, TableColumn<cL, String> tableColumn, String fielgName, Class tclass ) {
+
+        if(parametersColumn.getFielgName().equals(fielgName)) {
+            // if (tableModel.getRule() == Rule.Work)
+            tableColumn.setCellValueFactory(new PropertyValueFactory("scheme"));
+
+            tableColumn.setCellFactory( new Callback<TableColumn<cL, String>,TableCell<cL, String>>(){
+                @Override
+                public TableCell<cL, String> call(TableColumn<cL, String> param) {
+                    TableCell<cL, String> cell = new TableCell<cL, String>(){
+                        @Override
+                        public void updateItem(String item, boolean empty) {
+                            if(item!=null){
+                                HBox box= new HBox();
+                                box.setSpacing(10) ;
+                                ScrollPane sp = new ScrollPane();
+                                sp.setPrefSize(50,50);
+                                ImageView imageview = new ImageView();
+                                imageview.setFitHeight(100);    imageview.setFitWidth(100);
+                                sp.setPannable(false);
+                                imageview.setImage(new Image("file:"+item ));
+                                setTooltip(new Tooltip(item));
+                                box.getChildren().addAll(imageview);
+                                sp.setContent(imageview);
+                                setGraphic(sp);
+                            }
+                        }
+                    };
+                    return cell;
+                }
+            });
+        }
+    }
+
+
+
     @Override
     public void update(Observable o, Object arg) {
+
+
+
         if (     (!( ((TableModel)o).getMethodCall() == MethodCall.selectRowTable))    ) {
             this.getSelectionModel().getSelectedIndex();
             updateTableModel((TableModel) o);
@@ -271,6 +340,13 @@ public class TableViewP<cL> extends TableView<cL> implements Observer {
         for (Object row : this.tab) data.add(row);
         setEditable(true);
         setItems(data);
+
+
+        if (tableModel.getRule()== Rule.Machine) {
+            dataComboboxModelMachne = FXCollections.observableArrayList();
+            for (Object row : dataSet.getTabModelmachines()) dataComboboxModelMachne.add(row);
+        }
+
     }
 
     private void updateTableModel(TableModel o) {
@@ -297,7 +373,6 @@ public class TableViewP<cL> extends TableView<cL> implements Observer {
                 //if (getItems().size() == 0) {   return;   }
                 break;
             default:
-                break;
         }
     }
 
@@ -313,8 +388,162 @@ public class TableViewP<cL> extends TableView<cL> implements Observer {
         }
     }
 
-    private class CellEditEvent<T, T1> {
+
+    class ComboBoxEditingCell extends TableCell<cL, RowModelmachine> {
+//        ImageView imageview = new ImageView();
+//        imageview.setFitHeight(100);    imageview.setFitWidth(100);
+//        sp.setPannable(false);
+//        imageview.setImage(new Image("file:"+item ));
+        private ComboBox<RowModelmachine> comboBox;
+
+        private RowModelmachine r;
+
+        private ComboBoxEditingCell() {
+           if( selectIndex>=0 )
+            r  = DataSet.getById(((Machine) data.get(selectIndex)).getModelmachine().getId(), dataSet.getTabModelmachines());
+        }
+
+        @Override
+        public void startEdit() {
+            if (!isEmpty()) {
+                super.startEdit();
+                createComboBox();
+                setText(null);
+                setGraphic(comboBox);
+            }
+        }
+
+        @Override
+        public void cancelEdit() {
+            super.cancelEdit();
+
+             setText(r.getName());
+            setGraphic(null);
+        }
+
+        @Override
+        public void updateItem(RowModelmachine item, boolean empty) {
+            super.updateItem(item, empty);
+
+            if (item == null || empty) {
+                setText(null);
+                setGraphic(null);
+            } else {
+                setText(item.getName());             //-----------------------------------------------------------------
+                setTextFill(Color.CHOCOLATE);
+     //           setStyle("-fx-background-color: yellow");
+                if (isEditing()) {
+                    if (comboBox != null) {
+                       comboBox.setValue(r);
+                    }
+                    setText(r.getName());
+
+
+
+//                    updateTableModel(tableModel);
+//                    ImageView imageview = new ImageView();
+//                    imageview.setFitHeight(100);    imageview.setFitWidth(100);
+//
+//                    imageview.setImage(new Image("file:"+item ));
+//                    comboBox.setItems((ObservableList<RowModelmachine>) imageview);
+//
+//                    setGraphic(comboBox);
+
+                } else {
+                  if (r!=null)   {
+                      System.out.println("isEditing: r.getName()= " + r.getName());
+                        System.out.println("isEditing:comboBox.getSelectionModel().getSelectedItem()= " + comboBox.getSelectionModel().getSelectedItem());
+                      System.out.println("selectIndex="+selectIndex);
+
+                      if (selectIndex<0) selectIndex =0;
+                      r  = DataSet.getById(((Machine) data.get(selectIndex)).getModelmachine().getId(), dataSet.getTabModelmachines());
+
+                      for ( int i=0; i< dataSet.getTabModelmachineMachines().size(); i++ ) {
+                          RowIdId2 row = dataSet.getTabModelmachineMachines().get(i);
+                          if ( row.getId2() == ((Machine) data.get(selectIndex)).getId()) dataSet.getTabModelmachineMachines().get(i).setId(item.getId());
+                      }
+                      setText(item.getName());
+                      updateTableModel(tableModel);
+                  }
+                    setGraphic(null);
+                }
+
+            }
+        }
+
+        private void createComboBox() {
+
+            comboBox = new ComboBox(dataComboboxModelMachne);
+
+                        comboBoxConverter(comboBox);
+            r  = DataSet.getById(((Machine) data.get(selectIndex)).getModelmachine().getId(), dataSet.getTabModelmachines());
+
+            comboBox.valueProperty().set( r ); // comboBox.valueProperty().set(getTyp());
+            comboBox.setMinWidth(this.getWidth() - this.getGraphicTextGap() * 2);
+            comboBox.setOnAction((e) -> {
+                System.out.println("Committed: " + comboBox.getSelectionModel().getSelectedItem());
+                r  = DataSet.getById((comboBox.getSelectionModel().getSelectedItem()).getId(), dataSet.getTabModelmachines());
+                commitEdit(comboBox.getSelectionModel().getSelectedItem());
+            });
+
+        }
+
+        private void comboBoxConverter(ComboBox<RowModelmachine> comboBox) {
+            // Define rendering of the list of values in ComboBox drop down.
+            comboBox.setCellFactory((c) -> {
+                return new ListCell<RowModelmachine>() {
+                    @Override
+                    protected void updateItem(RowModelmachine item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (item == null || empty) {
+                            setText(null);
+                        } else {
+                            setText(item.getName());
+                        }
+                    }
+                };
+            });
+        }
+}
+
+    class ImageMachineEditingCell extends TableCell<cL, RowModelmachine> {
+
+        private ComboBox<RowModelmachine> comboBox;
+
+        private RowModelmachine r;
+
+        private ImageMachineEditingCell() {
+            if( selectIndex>=0 )
+                r  = DataSet.getById(((Machine) data.get(selectIndex)).getModelmachine().getId(), dataSet.getTabModelmachines());
+        }
+
+        @Override
+        public void updateItem(RowModelmachine item, boolean empty) {
+            super.updateItem(item, empty);
+            if(item!=null){
+                double heigth =50.0;
+                double Spacing = 10.0;
+                HBox box= new HBox();
+                box.setSpacing(Spacing) ;
+                ScrollPane sp = new ScrollPane();
+                sp.setPrefSize(heigth,heigth);
+                Image image = new Image("file:"+item.getImg() );
+                ImageView imageview = new ImageView();
+                imageview.setImage(image);
+                double k = image.getWidth()/image.getHeight();
+                imageview.setFitHeight(heigth-Spacing/2);     imageview.setFitWidth(k*(heigth-Spacing/2));
+                sp.setPannable(false);
+                box.getChildren().addAll(imageview);
+                sp.setContent(imageview);
+                setGraphic(sp);
+            }
+            else {
+        //     setStyle("-fx-background-color: yellow");
+                    setGraphic(null);
+            }
+        }
     }
+
 }
 
 
