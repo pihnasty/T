@@ -95,7 +95,9 @@ public class Module5Model extends Observable implements Observer{
         if(o.getClass() == (Module0Model.class)) {
             double tau = ((Module0Model) o).getRandomVariable();
             randomValuesList.add(tau);
-            runStandartDeviation(10);
+            if(randomValuesList.size() >= 25) {
+                runStandartDeviation(25);
+            }
             changed();
         }
 

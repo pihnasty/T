@@ -116,7 +116,7 @@ public class Module3Model extends Observable implements Observer{
     private void normalize() {
         normStatisticalSeries.clear();
         double normedVal;
-        double size = groupedStatisticalSeries.size();
+        double size = randomValuesList.size();
 //        double s = 0;
         for(double val : groupedStatisticalSeries) {
             normedVal = val/(size*step);

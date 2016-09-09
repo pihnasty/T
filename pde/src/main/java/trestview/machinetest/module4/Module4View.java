@@ -37,18 +37,21 @@ public class Module4View extends HBox implements Observer {
         yAxis = new NumberAxis();
         xAxis2 = new NumberAxis();
         yAxis2 = new NumberAxis();
+        xAxis.setLabel(ResourceBundle.getBundle("ui").getString("time"));
+        xAxis2.setLabel(ResourceBundle.getBundle("ui").getString("time"));
         this.lineChart = new LineChart<Number, Number>(xAxis , yAxis);
         this.lineChart2 = new LineChart<Number, Number>(xAxis2 , yAxis2);
         series = new XYChart.Series<>();
         series2 = new XYChart.Series<>();
         series3 = new XYChart.Series<>();
         series4 = new XYChart.Series<>();
-        lineChart.getData().addAll(series, series2);
-        lineChart2.getData().addAll(series3, series4);
+        lineChart.getData().addAll(series);//, series2);
+        lineChart2.getData().addAll(series3);//, series4);
         lineChart.setAnimated(false);
         lineChart2.setAnimated(false);
         lineChart.setCreateSymbols(false);
         lineChart2.setCreateSymbols(false);
+
 //        lineChart.setTitle();
         series3.setName(ResourceBundle.getBundle("ui").getString("temp"));
         series.setName(ResourceBundle.getBundle("ui").getString("averageValue"));
@@ -61,7 +64,7 @@ public class Module4View extends HBox implements Observer {
         series1.getData().clear();
 
         for(int i = 0; i < listData.size(); i++) {
-            series2.getData().add(new XYChart.Data(i, constant));
+//            series2.getData().add(new XYChart.Data(i, constant));
             series1.getData().add(new XYChart.Data(i, listData.get(i)));
         }
         System.out.println("In redrawChart()M4");
@@ -74,8 +77,8 @@ public class Module4View extends HBox implements Observer {
     public void update(Observable o, Object arg) {
         if(o.getClass() == Module4Model.class) {
             Module4Model m4 = (Module4Model) o;
-            redrawChart(lineChart, m4.getExpectedValues(), null, m4.getConstantVal(), series, series2);
-            redrawChart(lineChart2, m4.getTemps(), null, m4.getConstantVal(), series3, series4);
+            redrawChart(lineChart, m4.getExpectedValues(), null, m4.getConstantVal(), series, null); //series2);
+            redrawChart(lineChart2, m4.getTemps(), null, m4.getConstantVal(), series3, null); // series4);
         }
     }
 

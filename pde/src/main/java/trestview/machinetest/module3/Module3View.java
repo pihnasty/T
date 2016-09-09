@@ -60,7 +60,8 @@ public class Module3View extends HBox implements Observer {
         barChart.setBarGap(0);
         lineChart.setCreateSymbols(false);
         series.setName(ResourceBundle.getBundle("ui").getString("densityDistribution"));
-        seriesBar.setName(ResourceBundle.getBundle("ui").getString("statisticalDistribution"));
+//        seriesBar.setName(ResourceBundle.getBundle("ui").getString("statisticalDistribution"));
+        seriesBar.setName("Гистограмма");
 
     }
 

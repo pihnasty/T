@@ -51,7 +51,7 @@ public class Module4Model extends Observable implements Observer{
         double sum = 0;
 //        double k = amount;
 
-        if(amount>randomValuesList.size()) amount = randomValuesList.size();
+//        if(amount>randomValuesList.size()) //amount = randomValuesList.size();
         for(int i = randomValuesList.size()-amount; i < randomValuesList.size(); i++) {
             sum += randomValuesList.get(i);
         }
@@ -85,9 +85,12 @@ public class Module4Model extends Observable implements Observer{
         if(o.getClass() == (Module0Model.class)) {
             double tau = ((Module0Model) o).getRandomVariable();
             randomValuesList.add(tau);
-            runExpectedValue(10);
-            runTemp();
-            mesureTime();
+            if(randomValuesList.size() >= 25) {
+                runExpectedValue(25);
+                runTemp();
+            }
+                mesureTime();
+
 //            normalize();
 //            createExpectedValues();
             changed();

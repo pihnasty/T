@@ -3,6 +3,7 @@ package trestview.machinetest.module5;
 import com.sun.javafx.geom.Shape;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.geometry.Side;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
@@ -36,6 +37,7 @@ public class Module5View extends HBox implements Observer {
         ranks = FXCollections.observableArrayList();
         xAxis = new NumberAxis();
         yAxis = new NumberAxis();
+        xAxis.setLabel(ResourceBundle.getBundle("ui").getString("time"));
         this.lineChart = new LineChart<Number, Number>(xAxis , yAxis);
         series = new XYChart.Series<>();
         series.setName(ResourceBundle.getBundle("ui").getString("meanSquareDeviation"));
@@ -43,6 +45,7 @@ public class Module5View extends HBox implements Observer {
         lineChart.getData().add(series);
         lineChart.setAnimated(false);
         lineChart.setCreateSymbols(false);
+        lineChart.setLegendSide(Side.RIGHT);
         getChildren().addAll(lineChart);
     }
 
