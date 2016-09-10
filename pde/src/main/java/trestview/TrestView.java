@@ -59,10 +59,10 @@ public class TrestView extends BorderPane implements Observer {
 
         ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-         */
 
 
 
+        */
         conConveyorPdeModel = new MVC (VСonConveyorPdeModel.class, VConConveyorPdeController.class, VConConveyorPdeView.class,this.trestModel, null);    //     88888
 //        VСonConveyorPdeModel vСonConveyorPdeModel = new VСonConveyorPdeModel(trestModel);
 //        vConConveyorPdeView =new VConConveyorPdeView(vСonConveyorPdeModel);
@@ -82,12 +82,10 @@ public class TrestView extends BorderPane implements Observer {
 
     private void updateCenter (TMenuModel o) {
         switch (o.getMenuItemCall()) {
-            case testOfMachineItem:             this.setCenter(machineTestView);                        break;
-            case resourcesLinksPerspectiveItem: this.setCenter((BorderPane)resourceLink.getView());     break;
-            case conveyorSpeedConstantItem:
-                                                this.setCenter((BorderPane)conConveyorPdeModel.getView());                    break;
-
-            default:                                                                                    break;
+            case testOfMachineItem:             this.setCenter(machineTestView);                            break;
+            case resourcesLinksPerspectiveItem: this.setCenter((BorderPane)resourceLink.getView());         break;
+            case conveyorSpeedConstantItem:     this.setCenter((BorderPane)conConveyorPdeModel.getView());  break;
+            default:                                                                                        break;
         }
     }
 }
