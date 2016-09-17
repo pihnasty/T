@@ -70,7 +70,7 @@ public class VСonConveyorPdeModel extends ObservableDS implements LineChartInte
     private List<Point2D.Double> list;
     private String titleOx;
     private String titleOy="Распределение предметов труда по конвейерной линии";
-    private  ObservableDS o;
+    private  ObservableDS o;  //
 
     public List<Point2D.Double> getListConT() {
         return listConT;
