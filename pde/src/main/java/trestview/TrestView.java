@@ -1,5 +1,6 @@
 package trestview;
 
+import designpatterns.InitializableDS;
 import designpatterns.MVC;
 import designpatterns.ObservableDS;
 import javafx.scene.Node;
@@ -17,6 +18,9 @@ import trestview.menu.TMenuView;
 import trestview.resourcelink.ResourceLinkController;
 import trestview.resourcelink.ResourceLinkModel;
 import trestview.resourcelink.ResourceLinkView;
+import trestview.routeperspective.RoutePerspectiveController;
+import trestview.routeperspective.RoutePerspectiveModel;
+import trestview.routeperspective.RoutePerspectiveView;
 import trestview.tasks.conveyorPDE.VConConveyorPdeController;
 import trestview.tasks.conveyorPDE.VConConveyorPdeView;
 import trestview.tasks.conveyorPDE.VСonConveyorPdeModel;
@@ -31,11 +35,12 @@ public class TrestView extends BorderPane implements Observer {
     private DataSet dataSet;
     private List<Node> nodes;
     private MachineTestView machineTestView;
-//    private VConConveyorPdeView vConConveyorPdeView;
+
     private MVC resourceLink;
     private MVC conConveyorPdeModel;
+    private MVC routePerspective;
 
-    public TrestView(ObservableDS trestModel, TrestController trestController) {
+    public TrestView(ObservableDS trestModel, InitializableDS trestController) {
         this.trestModel = (TrestModel) trestModel;
         this.dataSet = trestModel.getDataSet();
         XmlRW.fxmlLoad(this,this, "trestview/trestview.fxml","","");
@@ -65,6 +70,9 @@ public class TrestView extends BorderPane implements Observer {
         */
         conConveyorPdeModel = new MVC (VСonConveyorPdeModel.class, VConConveyorPdeController.class, VConConveyorPdeView.class,this.trestModel, null);
 
+        routePerspective = new MVC (RoutePerspectiveModel.class, RoutePerspectiveController.class, RoutePerspectiveView.class,this.trestModel, null);
+
+
     }
 
     @Override
@@ -77,6 +85,7 @@ public class TrestView extends BorderPane implements Observer {
             case testOfMachineItem:             this.setCenter(machineTestView);                            break;
             case resourcesLinksPerspectiveItem: this.setCenter((BorderPane)resourceLink.getView());         break;
             case conveyorSpeedConstantItem:     this.setCenter((BorderPane)conConveyorPdeModel.getView());  break;
+            case routePerspectiveItem:          this.setCenter((BorderPane)routePerspective.getView());     break;
             default:                                                                                        break;
         }
     }

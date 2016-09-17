@@ -48,4 +48,9 @@ public class TMenuModel extends Observable {
         this.menuItemCall = MenuItemCall.conveyorSpeedConstantItem;
         changed();
     }
+
+    public void clickRoutePerspectiveItem()  {
+        this.menuItemCall = MenuItemCall.routePerspectiveItem;
+        changed();
+    }
 }

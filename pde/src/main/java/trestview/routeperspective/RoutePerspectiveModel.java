@@ -14,31 +14,7 @@ import java.util.Observable;
  */
 public class RoutePerspectiveModel extends ObservableDS {
 
-
-    private Observable trestModel;
-
-    private SectionDataSet sectionDataSet;
-
-    private Trest trest;
-
-    public RoutePerspectiveModel (ObservableDS o, Rule rule)  {
-        this.trestModel = trestModel;
-        this.trest =  ((TrestModel)trestModel).getTrest();
-        this.dataSet = ((TrestModel)trestModel).getDataSet();
-        this.sectionDataSet = ((TrestModel)trestModel).getSectionDataSet();
-
+    public RoutePerspectiveModel (ObservableDS observableDS, Rule rule)  {
+        super(observableDS, rule);
     }
-
-    public void changed() {
-        setChanged();
-        notifyObservers();
-    }
-
-    public Observable getTrestModel()                { changed();   return trestModel;  }
-    public void setTrestModel(Observable trestModel) { this.trestModel = trestModel;    }
-    public DataSet getDataSet()                      { return dataSet;                  }
-    public Trest getTrest()                          { return trest;                    }
-    public void setTrest(Trest trest)                { this.trest = trest;              }
-    public SectionDataSet getSectionDataSet()        { return sectionDataSet;           }
-    public void setSectionDataSet(SectionDataSet sectionDataSet) { this.sectionDataSet = sectionDataSet; }
 }

@@ -177,7 +177,8 @@ public class TMenuController implements Initializable {
     @FXML
     private void handleResourcesLinksPerspectiveAction (ActionEvent event) { menuModel.clickResourcesLinksPerspectiveItem(); }
 
-
+    @FXML
+    private void handleRoutePerspectiveAction (ActionEvent event) { menuModel.clickRoutePerspectiveItem(); }
 
 
 

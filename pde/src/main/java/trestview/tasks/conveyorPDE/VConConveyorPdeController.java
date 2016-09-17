@@ -1,5 +1,6 @@
 package trestview.tasks.conveyorPDE;
 
+import designpatterns.InitializableDS;
 import designpatterns.ObservableDS;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -9,17 +10,14 @@ import java.util.Observable;
 import java.util.ResourceBundle;
 
 
-public class VConConveyorPdeController implements Initializable
+public class VConConveyorPdeController extends InitializableDS
 {
     private Label label;
 
-    public VConConveyorPdeController(ObservableDS o) {
+    public VConConveyorPdeController(ObservableDS observableDS) {
+        super(observableDS);
     }
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-
-    }
 
     public void setLabel(Label label) {
         this.label = label;

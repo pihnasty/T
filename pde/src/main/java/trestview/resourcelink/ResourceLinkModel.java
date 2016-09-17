@@ -28,6 +28,7 @@ public class ResourceLinkModel extends ObservableDS  {
     private Trest trest;
 
     public ResourceLinkModel(Observable trestModel) {
+        super(null);
         this.trestModel = trestModel;
         this.trest =  ((TrestModel)trestModel).getTrest();
         this.dataSet = ((TrestModel)trestModel).getDataSet();

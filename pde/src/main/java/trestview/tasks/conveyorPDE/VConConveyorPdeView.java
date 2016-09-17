@@ -2,6 +2,7 @@ package trestview.tasks.conveyorPDE;
 
 
 
+        import designpatterns.InitializableDS;
         import designpatterns.ObservableDS;
         import javafx.fxml.FXML;
         import javafx.fxml.FXMLLoader;
@@ -30,7 +31,7 @@ public class VConConveyorPdeView extends BorderPane implements Observer {
     private    List<Point2D.Double> listConT =null;
     private    List<Point2D.Double> listConS=null;
 
-    public  VConConveyorPdeView(ObservableDS observebleDS, VConConveyorPdeController vConConveyorPdeController){
+    public  VConConveyorPdeView(ObservableDS observebleDS, InitializableDS vConConveyorPdeController){
 
         model = observebleDS;
         inizilize(model);

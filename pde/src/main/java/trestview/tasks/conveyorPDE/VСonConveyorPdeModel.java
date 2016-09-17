@@ -95,6 +95,7 @@ public class VСonConveyorPdeModel extends ObservableDS implements LineChartInte
 
 
     public VСonConveyorPdeModel(ObservableDS o, Rule rule) {
+        super(o,rule);
         this.o=o;
         double s = 0;
         double t = 0.7;
@@ -216,10 +217,6 @@ public class VСonConveyorPdeModel extends ObservableDS implements LineChartInte
     }
 
 
-    @Override
-    public DataSet getDataSet() {
-        return o.getDataSet();
-    }
 
     @Override
     public List<Point2D.Double> getlist() {
@@ -233,6 +230,6 @@ public class VСonConveyorPdeModel extends ObservableDS implements LineChartInte
 
     @Override
     public String getTitleY() {
-        return titleOy;
+        return "++++++++++++++++++++";
     }
 }

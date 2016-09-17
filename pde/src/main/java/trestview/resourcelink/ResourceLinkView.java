@@ -28,9 +28,6 @@ import trestview.table.tablemodel.abstracttablemodel.Rule;
 import java.util.Observable;
 import java.util.Observer;
 
-/**
- * Created by pom on 07.02.2016.
- */
 public class  ResourceLinkView extends BorderPane implements Observer {
 
     private Observable resourceLinkModel;

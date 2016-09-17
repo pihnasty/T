@@ -81,7 +81,7 @@ public class MVC {
             Constructor cConstructor = cClass.getConstructor( ObservableDS.class);
             controller = cConstructor.newInstance(model);
 
-            Constructor vConstructor = vClass.getConstructor( ObservableDS.class, cClass);
+            Constructor vConstructor = vClass.getConstructor( ObservableDS.class, InitializableDS.class);
             view = vConstructor.newInstance(model,controller);
 
             methodAddObserver = Observable.class.getDeclaredMethod("addObserver",Observer.class );
