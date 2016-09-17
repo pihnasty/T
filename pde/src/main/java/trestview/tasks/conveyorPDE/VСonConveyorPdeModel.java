@@ -11,10 +11,10 @@ import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
+import java.util.ResourceBundle;
 
 
-
-interface InitialCondition {
+    interface InitialCondition {
 
     double initialCondition(double _r);
 
@@ -69,8 +69,13 @@ public class VСonConveyorPdeModel extends ObservableDS implements LineChartInte
     private List<Point2D.Double> listConS;
     private List<Point2D.Double> list;
     private String titleOx;
-    private String titleOy="Распределение предметов труда по конвейерной линии";
-    private  ObservableDS o;  //
+    private int numberOfDivisionsOx;
+    private int numberOfDivisionsOy;
+    private int numberOfDivisionsEpisodes;
+    private int maxOx,maxOy,minOx,minOy;
+
+    // private String titleOy="Распределение предметов труда по конвейерной линии";
+    private  ObservableDS o;
 
     public List<Point2D.Double> getListConT() {
         return listConT;
@@ -124,7 +129,15 @@ public class VСonConveyorPdeModel extends ObservableDS implements LineChartInte
     public void dataBuild(String s) {
          if(s=="T") {
              list= getListConT();
-             titleOx="S";
+             titleOx= "S";
+             numberOfDivisionsOx=3;
+             numberOfDivisionsOy=3;
+             numberOfDivisionsEpisodes=1;
+             maxOx=5;
+             maxOy=5;
+             minOx=1;
+             minOy=1;
+
          }
         if (s=="S"){ list= getListConS(); titleOx="T";}//**************************************************************************************************************
     }

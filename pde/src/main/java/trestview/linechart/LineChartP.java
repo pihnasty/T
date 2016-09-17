@@ -13,6 +13,7 @@ import javafx.scene.paint.Color;
 import java.awt.geom.Point2D;
 import java.util.List;
 import java.util.Observer;
+import java.util.ResourceBundle;
 
 /**
  * Created by Maxim on 15.08.2016.
@@ -52,7 +53,7 @@ public  class LineChartP extends HBox implements Observer{
         chart.setCursor(Cursor.CROSSHAIR);
         chart.setStyle("-fx-font:bold 14 Arial; -fx-text-fill:brown;");
         chart.setPrefSize(500, 400);
-        chart.setTitle("Поточнфя линия");
+        chart.setTitle(ResourceBundle.getBundle("ui").getString("productionLine"));
         chart.setTitleSide(Side.TOP);
         chart.setLegendVisible(true);
         chart.setLegendSide(Side.BOTTOM);
