@@ -1,5 +1,7 @@
 package trestview.resourcelink.schemawork;
 
+import designpatterns.InitializableDS;
+import designpatterns.ObservableDS;
 import javafx.event.EventHandler;
 import javafx.fxml.Initializable;
 import javafx.scene.input.MouseEvent;
@@ -10,31 +12,27 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 
-public class SchemaController implements Initializable, EventHandler<MouseEvent> {
+public class SchemaController extends InitializableDS implements  EventHandler<MouseEvent> {
     private SchemaModel observableModel;
 
-    public SchemaController(SchemaModel observableModel) {
-        this.observableModel= observableModel;
+    public SchemaController(ObservableDS observableDS) {
+        super(observableDS);
     }
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-
-    }
 
     @Override
     public void handle(MouseEvent event) {
 
         if ( event.getEventType() == MouseEvent.MOUSE_MOVED) {
-            observableModel.changeCursor(event);
+            ((SchemaModel)observableDS).changeCursor(event);
         }
 
         if ( event.getEventType() == MouseEvent.MOUSE_DRAGGED) {
-            observableModel.changeLocation(event);
+            ((SchemaModel)observableDS).changeLocation(event);
         }
 
         if ( event.getEventType() == MouseEvent.MOUSE_RELEASED) {
-            observableModel.qCurrentIsNull();
+            ((SchemaModel)observableDS).qCurrentIsNull();
         }
 
 

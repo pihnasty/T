@@ -1,5 +1,8 @@
 package trestview.resourcelink.schemawork;
 
+import designpatterns.InitializableDS;
+import designpatterns.ObservableDS;
+import designpatterns.observerdsall.BorderPaneObserverDS;
 import entityProduction.Machine;
 import entityProduction.Work;
 import javafx.beans.binding.DoubleBinding;
@@ -15,10 +18,9 @@ import java.awt.*;
 import java.util.*;
 import java.util.List;
 
-public class SchemaView extends BorderPane implements Observer {
+public class SchemaView extends BorderPaneObserverDS {
 
     private ImageView imageview = new ImageView();
-    private SchemaModel schemaModel;
     private Work work;
     private Double scaleScheme;
 
@@ -29,20 +31,15 @@ public class SchemaView extends BorderPane implements Observer {
     private DoubleBinding wImv;
     private List<Q> qs;
 
-    public SchemaView(SchemaModel schemaModel, SchemaController schemaController) {
-
+    public SchemaView(ObservableDS observableDS, InitializableDS initializableDS) {
+        super(observableDS,initializableDS);
         bp = new BorderPane();
         getChildren().addAll(bp);
-        qs = schemaModel.getQs();
+        qs = ((SchemaModel)observableDS).getQs();
         setStyle("-fx-background-color: #336699;");
 
-        this.schemaModel = schemaModel;
-
-//region
-
-//endregion
         setkScaleDefault();
-        repaint(schemaModel);
+        repaint((SchemaModel) this.observableDS);
         bp.scaleXProperty().bind(kScale);
         bp.scaleYProperty().bind(kScale);
     }
@@ -73,7 +70,7 @@ public class SchemaView extends BorderPane implements Observer {
             { super.bind(heightProperty()); }
             @Override
             protected double computeValue() {
-                if(schemaModel instanceof SchemaModel) schemaModel.setkScale(  0.85*getHeight()/imageview.getImage().getHeight() );
+                if(observableDS instanceof SchemaModel)((SchemaModel) observableDS).setkScale(  0.85*getHeight()/imageview.getImage().getHeight() );
                 return 0.85*getHeight()/imageview.getImage().getHeight() ;
             }};
     }

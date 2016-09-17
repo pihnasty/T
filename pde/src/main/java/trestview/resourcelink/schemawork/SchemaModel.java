@@ -20,28 +20,29 @@ import java.util.Observable;
 import java.util.Observer;
 import java.util.stream.Collectors;
 
-public class SchemaModel extends Observable implements Observer {
-    private Rule rule;
-    private DataSet dataSet;
+public class SchemaModel extends ObservableDS implements Observer {
+
+
     private Cursor cursor;
     private MouseEvent mouseEvent;
     private Work work;
     private Double kScale;
     private List<Q> qs;
     private Q qCurrent = null;
-    private Observable observableModel;
 
 
-    public SchemaModel(Observable observableModel, Rule rule) {
-        this.rule = rule;
+
+    public SchemaModel(ObservableDS observableDS, Rule rule) {
+        super(observableDS, rule);
+
         this.qs = new ArrayList();
-        this.observableModel = observableModel;
-        this.dataSet = ((ResourceLinkModel) observableModel).getDataSet();
+
+
 
 
         if (this.rule == Rule.Work) {
-            if (!((ResourceLinkModel) observableModel).getTrest().getWorks().isEmpty()) {
-                createDataSchemaModel(((ResourceLinkModel) observableModel).getTrest().getWorks().get(0));
+            if (!((ResourceLinkModel) observableDS).getTrest().getWorks().isEmpty()) {
+                createDataSchemaModel(((ResourceLinkModel) observableDS).getTrest().getWorks().get(0));
             }
         }
     }
@@ -63,7 +64,7 @@ public class SchemaModel extends Observable implements Observer {
         if (o.getRule()== Rule.Machine   )   {
             this.dataSet = o.getDataset();
             createDataSchemaModel(work);
-            if (!((ResourceLinkModel) observableModel).getTrest().getWorks().isEmpty()) {
+            if (!((ResourceLinkModel) observableDS).getTrest().getWorks().isEmpty()) {
                 //              createDataSchemaModel(((ResourceLinkModel) observableModel).getTrest().getWorks().get(0));
             }
         }
@@ -73,10 +74,6 @@ public class SchemaModel extends Observable implements Observer {
         if (o.getRule()==Rule.Work   ) createDataSchemaModel((Work) ((TableModel<Work>) o).getSelectRow());
     }
 
-    private void changed() {
-        setChanged();
-        notifyObservers();
-    }
 
     public Work getWork() {
         return work;
