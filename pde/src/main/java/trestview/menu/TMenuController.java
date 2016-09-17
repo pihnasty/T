@@ -164,6 +164,10 @@ public class TMenuController implements Initializable {
         new MVC(DictionaryModel.class, DictionaryController.class, DictionaryView.class, this.menuModel, Rule.RowFunctiondist );
     }
 
+    @FXML
+    private void handleRowUnitAction (ActionEvent event) {
+        new MVC(DictionaryModel.class, DictionaryController.class, DictionaryView.class, this.menuModel, Rule.RowUnit );
+    }
 
     //------------------- menu MachineTest ------------------------------------
     @FXML
@@ -190,7 +194,7 @@ public class TMenuController implements Initializable {
             menuModel.getTrestModel().getDataSet().writeTab(DataSet.tSettings);                     // Write the changes to the file [tSettings]
             menuModel.getTrestModel().getDataSet().setPathDataDefault(pathData);
             if (boolOpenDataSet) {
-                TrestModel trestModel = new TrestModel();           //  We get a new model from a the changed directory.
+                TrestModel trestModel = new TrestModel(null,null);           //  We get a new model from a the changed directory.
                 menuModel.setTrestModel(trestModel);                //  We define a new model
             }
         }

@@ -6,6 +6,7 @@ import javafx.scene.Node;
 import javafx.scene.layout.BorderPane;
 import persistence.loader.DataSet;
 import persistence.loader.XmlRW;
+import trestcontroller.TrestController;
 import trestmodel.TrestModel;
 import trestview.machinetest.MachineTestController;
 import trestview.machinetest.MachineTestModel;
@@ -34,8 +35,8 @@ public class TrestView extends BorderPane implements Observer {
     private MVC resourceLink;
     private MVC conConveyorPdeModel;
 
-    public TrestView(TrestModel trestModel) {
-        this.trestModel =  trestModel;
+    public TrestView(ObservableDS trestModel, TrestController trestController) {
+        this.trestModel = (TrestModel) trestModel;
         this.dataSet = trestModel.getDataSet();
         XmlRW.fxmlLoad(this,this, "trestview/trestview.fxml","","");
 
@@ -43,15 +44,14 @@ public class TrestView extends BorderPane implements Observer {
         this.setTop((TMenuView)menu.getView());
         ((TMenuModel) menu.getModel()).addObserver(this);    // this: Depending on the keys pressed Menu is changing appearance for TrestView.
 
-        resourceLink = new MVC(ResourceLinkModel.class, ResourceLinkController.class, ResourceLinkView.class, this.trestModel );
+        resourceLink = new MVC(ResourceLinkModel.class, ResourceLinkController.class, ResourceLinkView.class, this.trestModel);
         this.setCenter((BorderPane)resourceLink.getView());
 
         MachineTestModel machineTestModel = new MachineTestModel((TMenuModel)menu.getModel());
         MachineTestController machineTestController = new MachineTestController(machineTestModel);
         machineTestView = new MachineTestView(machineTestModel, machineTestController);
         machineTestModel.addObserver(machineTestView);
-
-
+      //  machineTest = new MVC (MachineTestModel.class,  MachineTestController.class, MachineTestView.class,this.trestModel, null);
 
 
         /*
@@ -63,15 +63,7 @@ public class TrestView extends BorderPane implements Observer {
 
 
         */
-        conConveyorPdeModel = new MVC (VСonConveyorPdeModel.class, VConConveyorPdeController.class, VConConveyorPdeView.class,this.trestModel, null);    //     88888
-//        VСonConveyorPdeModel vСonConveyorPdeModel = new VСonConveyorPdeModel(trestModel);
-//        vConConveyorPdeView =new VConConveyorPdeView(vСonConveyorPdeModel);
-//        vСonConveyorPdeModel.addObserver(vConConveyorPdeView);
-
-
-
-
-
+        conConveyorPdeModel = new MVC (VСonConveyorPdeModel.class, VConConveyorPdeController.class, VConConveyorPdeView.class,this.trestModel, null);
 
     }
 

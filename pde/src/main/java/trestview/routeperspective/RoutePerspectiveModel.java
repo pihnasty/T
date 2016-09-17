@@ -1,33 +1,27 @@
-package trestview.resourcelink;
+package trestview.routeperspective;
 
 import designpatterns.ObservableDS;
 import entityProduction.Trest;
 import persistence.loader.DataSet;
 import persistence.loader.SectionDataSet;
 import trestmodel.TrestModel;
-import trestview.menu.TMenuModel;
-import trestview.resourcelink.schemawork.Q;
+import trestview.table.tablemodel.abstracttablemodel.Rule;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Observable;
 
 /**
  * Created by pom on 07.02.2016.
  */
-public class ResourceLinkModel extends ObservableDS  {
+public class RoutePerspectiveModel extends ObservableDS {
 
 
     private Observable trestModel;
-    private DataSet dataSet;
-
-
 
     private SectionDataSet sectionDataSet;
 
     private Trest trest;
 
-    public ResourceLinkModel(Observable trestModel) {
+    public RoutePerspectiveModel (ObservableDS o, Rule rule)  {
         this.trestModel = trestModel;
         this.trest =  ((TrestModel)trestModel).getTrest();
         this.dataSet = ((TrestModel)trestModel).getDataSet();

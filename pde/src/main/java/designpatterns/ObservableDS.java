@@ -7,6 +7,8 @@ import java.util.Observable;
 /**
  * Created by Max on 20.06.2016.
  */
-public abstract class ObservableDS extends Observable {
-    abstract public DataSet getDataSet();
+public class ObservableDS extends Observable {
+    protected DataSet dataSet;
+    private ObservableDS observableDS;
+    public DataSet getDataSet() {return dataSet;}
 }
