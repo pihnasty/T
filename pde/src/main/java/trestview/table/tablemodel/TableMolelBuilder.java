@@ -9,7 +9,7 @@ import trestview.dictionary.DictionaryModel;
  */
 public class  TableMolelBuilder <cL> {
 
-    public static <cL> AbstractTableModel build (DictionaryModel dictionaryModel, Class tClass) {
+    public static <cL> TableBaseModel build (DictionaryModel dictionaryModel, Class tClass) {
 
         DataSet dataSet = dictionaryModel.getTMenuModel().getTrestModel().getDataSet();
         AbstractFactoryTableModel factoryTableModel = new FactoryTableModel(dataSet,tClass);

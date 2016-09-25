@@ -36,12 +36,10 @@ public class SchemaRouteModel extends SchemaBaseModel {
     @Override
     public void update(Observable o, Object arg) {
 
-       if ((this.rule == Rule.Work))  {   //
             if ((o.getClass()==TableModel.class)) {
                 updateForTableWorkMVC   ((TableModel) o);
                 updateForTableMachineMVC((TableModel) o);
             }
-        }
         changed();
     }
 
@@ -51,8 +49,8 @@ public class SchemaRouteModel extends SchemaBaseModel {
         if (o.getRule()== Rule.Machine   )   {
             this.dataSet = o.getDataset();
             createDataSchemaModel(work);
-            if (!((ResourceLinkModel) observableDS).getTrest().getWorks().isEmpty()) {
-                //              createDataSchemaModel(((ResourceLinkModel) observableModel).getTrest().getWorks().get(0));
+            if (!observableDS.getTrest().getWorks().isEmpty()) {
+                             createDataSchemaModel(observableDS.getTrest().getWorks().get(0));
             }
         }
     }

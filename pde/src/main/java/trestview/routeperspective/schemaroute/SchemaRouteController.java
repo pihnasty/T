@@ -8,12 +8,10 @@ import trestview.resourcelink.schemawork.SchemaModel;
 
 
 public class SchemaRouteController extends InitializableDS implements  EventHandler<MouseEvent> {
-    private SchemaModel observableModel;
 
     public SchemaRouteController(ObservableDS observableDS) {
         super(observableDS);
     }
-
 
     @Override
     public void handle(MouseEvent event) {

@@ -3,6 +3,7 @@ package trestview;
 import designpatterns.InitializableDS;
 import designpatterns.MVC;
 import designpatterns.ObservableDS;
+import designpatterns.observerdsall.BorderPaneObserverDS;
 import javafx.scene.Node;
 import javafx.scene.layout.BorderPane;
 import persistence.loader.DataSet;
@@ -26,11 +27,12 @@ import trestview.tasks.conveyorPDE.VConConveyorPdeView;
 import trestview.tasks.conveyorPDE.VСonConveyorPdeModel;
 
 
+import java.lang.reflect.Constructor;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
-public class TrestView extends BorderPane implements Observer {
+public class TrestView extends BorderPaneObserverDS {
     private TrestModel trestModel;
     private DataSet dataSet;
     private List<Node> nodes;
@@ -41,6 +43,7 @@ public class TrestView extends BorderPane implements Observer {
     private MVC routePerspective;
 
     public TrestView(ObservableDS trestModel, InitializableDS trestController) {
+        super(trestModel,trestController);
         this.trestModel = (TrestModel) trestModel;
         this.dataSet = trestModel.getDataSet();
         XmlRW.fxmlLoad(this,this, "trestview/trestview.fxml","","");
@@ -49,7 +52,13 @@ public class TrestView extends BorderPane implements Observer {
         this.setTop((TMenuView)menu.getView());
         ((TMenuModel) menu.getModel()).addObserver(this);    // this: Depending on the keys pressed Menu is changing appearance for TrestView.
 
-        resourceLink = new MVC(ResourceLinkModel.class, ResourceLinkController.class, ResourceLinkView.class, this.trestModel);
+        resourceLink = new MVC(ResourceLinkModel.class, ResourceLinkController.class, ResourceLinkView.class, this.trestModel, null);
+
+        // MVC (Class mClass, Class cClass, Class vClass, ObservableDS o, Rule rule )
+//        Constructor vConstructor = vClass.getConstructor( ObservableDS.class, InitializableDS.class);
+//        view = vConstructor.newInstance(model,controller);
+
+
         this.setCenter((BorderPane)resourceLink.getView());
 
         MachineTestModel machineTestModel = new MachineTestModel((TMenuModel)menu.getModel());

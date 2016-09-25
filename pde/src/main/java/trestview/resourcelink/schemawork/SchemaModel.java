@@ -41,10 +41,13 @@ public class SchemaModel extends ObservableDS implements Observer {
 
 
         if (this.rule == Rule.Work) {
-            if (!((ResourceLinkModel) observableDS).getTrest().getWorks().isEmpty()) {
-                createDataSchemaModel(((ResourceLinkModel) observableDS).getTrest().getWorks().get(0));
+            if (!( observableDS).getTrest().getWorks().isEmpty()) {
+                createDataSchemaModel((observableDS).getTrest().getWorks().get(0));
             }
         }
+
+
+
     }
 
     @Override

@@ -1,5 +1,7 @@
 package trestview.resourcelink;
 
+import designpatterns.InitializableDS;
+import designpatterns.ObservableDS;
 import javafx.fxml.Initializable;
 import trestview.dictionary.DictionaryModel;
 
@@ -10,11 +12,11 @@ import java.util.ResourceBundle;
 /**
  * Created by pom on 28.02.2016.
  */
-public class ResourceLinkController implements Initializable {
+public class ResourceLinkController extends InitializableDS {
 
-    private ResourceLinkModel resourceLinkModel;
-    public ResourceLinkController (ResourceLinkModel resourceLinkModel) {
-        this.resourceLinkModel = resourceLinkModel;
+
+    public ResourceLinkController (ObservableDS resourceLinkModel) {
+        super(resourceLinkModel);
      }
 
     @Override

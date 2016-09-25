@@ -54,8 +54,13 @@ public class SchemaRouteView extends BorderPaneObserverDS {
     }
     @Override
     public void update(Observable o, Object arg) {
-        if(  ((SchemaRouteModel) o).getMouseEvent().getEventType() ==   MouseEvent.MOUSE_MOVED)  setCursor(((SchemaRouteModel) o).getCursor());
-        if(  ((SchemaRouteModel) o).getMouseEvent().getEventType() ==   MouseEvent.MOUSE_PRESSED) { qs = ((SchemaRouteModel) o).getQs();      }
+        if(( (SchemaRouteModel) o).getMouseEvent() != null) {
+            if (((SchemaRouteModel) o).getMouseEvent().getEventType() == MouseEvent.MOUSE_MOVED)
+                setCursor(((SchemaRouteModel) o).getCursor());
+            if (((SchemaRouteModel) o).getMouseEvent().getEventType() == MouseEvent.MOUSE_PRESSED) {
+                qs = ((SchemaRouteModel) o).getQs();
+            }
+        }
         repaint((SchemaRouteModel) o);
         setHeight(getHeight()+1);        setHeight(getHeight()-1);
     }

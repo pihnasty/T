@@ -78,8 +78,8 @@ public class MachineTestView extends BorderPane implements Observer {
         //   for (RowFunctiondist rowFun: dataSet.getTabFunctiondists()) functiondists.add(dataSet.createObject( rowFun));   // Это эквивалентно  dataSet.getTabFunctiondists().stream().filter(w->{functiondists.add(dataSet.createObject(w)); return true;}).count();
         machineTestModel.getDataSet().getTabFunctiondists().stream().filter(w->{functiondists.add(machineTestModel.getDataSet().createObject(w)); return true;}).count();
         DataSet.showTab(functiondists);
-        MVC tableMVC = new MVC(TableModel.class, TableController.class, TableViewP.class, functiondists, Rule.Functiondist);
-        tableView = (TableViewP) tableMVC.getView();
+//        MVC tableMVC = new MVC(TableModel.class, TableController.class, TableViewP.class, functiondists, Rule.Functiondist);
+//        tableView = (TableViewP) tableMVC.getView();
 //--------------------------------------------------------------------------------------------------
 
 
@@ -150,7 +150,7 @@ public class MachineTestView extends BorderPane implements Observer {
 //        chartView1.setMaxSize(600, 400);
 //        chartView2.setMaxSize(600, 400);
 
-        vBox.getChildren().addAll(animationView, tableView);
+//        vBox.getChildren().addAll(animationView, tableView);
         vBox1.getChildren().addAll(module3View, module4View, module5View); //, chartView1, chartView2);
         splitPane.getItems().addAll(vBox, vBox1);
 
