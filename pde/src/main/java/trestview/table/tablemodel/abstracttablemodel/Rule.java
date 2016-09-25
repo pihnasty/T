@@ -11,6 +11,7 @@ public enum Rule {  RowWork (RowWork.class),
                     Work (Work.class),
                     Machine(Machine.class),
                     Functiondist(Functiondist.class),
+                    RoutePerspective(Route.class),
                     Functiondist2(Functiondist.class);
     Rule(Class clazz) {  this.clazz = clazz;  }
     private Class clazz;

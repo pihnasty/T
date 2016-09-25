@@ -6,31 +6,23 @@ import designpatterns.ObservableDS;
 import designpatterns.observerdsall.BorderPaneObserverDS;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.SplitPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import persistence.loader.XmlRW;
-import trestview.hboxpane.HboxpaneController;
-import trestview.hboxpane.HboxpaneModel;
-import trestview.hboxpane.HboxpaneView;
-import trestview.resourcelink.ResourceLinkController;
-import trestview.resourcelink.ResourceLinkModel;
-import trestview.resourcelink.schemawork.SchemaController;
-import trestview.resourcelink.schemawork.SchemaModel;
-import trestview.resourcelink.schemawork.SchemaView;
+import trestview.routeperspective.schemaroute.SchemaRouteController;
+import trestview.routeperspective.schemaroute.SchemaRouteModel;
+import trestview.routeperspective.schemaroute.SchemaRouteView;
 import trestview.table.TableController;
 import trestview.table.TableViewP;
 import trestview.table.tablemodel.TableModel;
 import trestview.table.tablemodel.abstracttablemodel.Rule;
 
 import java.util.Observable;
-import java.util.Observer;
 
 public class RoutePerspectiveView extends BorderPaneObserverDS {
     public RoutePerspectiveView (ObservableDS observableDS, InitializableDS initializableDS ) {
@@ -44,13 +36,13 @@ public class RoutePerspectiveView extends BorderPaneObserverDS {
 
 //----------------------------------------------------------------------------------------------------------------------
 
-  //        MVC schemaWorkMVC  = new MVC (SchemaModel.class, SchemaController.class, SchemaView.class, this.observableDS, Rule.Work );
-//        SchemaView view = (SchemaView) schemaWorkMVC.getView();
-//        view.addEventHandler(MouseEvent.MOUSE_MOVED, (SchemaController)schemaWorkMVC.getController());
-//        view.addEventHandler(MouseEvent.MOUSE_DRAGGED, (SchemaController)schemaWorkMVC.getController());
-//        view.addEventHandler(MouseEvent.MOUSE_RELEASED, (SchemaController)schemaWorkMVC.getController());
+        MVC schemaRouteMVC  = new MVC (SchemaRouteModel.class, SchemaRouteController.class, SchemaRouteView.class, this.observableDS, Rule.RoutePerspective );
+         SchemaRouteView view = (SchemaRouteView) schemaRouteMVC.getView();
+        view.addEventHandler(MouseEvent.MOUSE_MOVED, (SchemaRouteController)schemaRouteMVC.getController());
+         view.addEventHandler(MouseEvent.MOUSE_DRAGGED, (SchemaRouteController)schemaRouteMVC.getController());
+         view.addEventHandler(MouseEvent.MOUSE_RELEASED, (SchemaRouteController)schemaRouteMVC.getController());
 //----------------------------------------------------------------------------------------------------------------------
-//        MVC tableWorkMVC  = new MVC (TableModel.class, TableController.class, TableViewP.class, this.observableDS, Rule.Work );
+//          MVC tableWorkMVC  = new MVC (TableModel.class, TableController.class, TableViewP.class,(Observable) this.observableDS, Rule.Work );
 //        MVC hboxpaneWorkMVC = new MVC (HboxpaneModel.class,HboxpaneController.class,HboxpaneView.class,this.observableDS.getDataSet(), Rule.Work);
 //        hboxpaneWorkMVC.addObserverP( (TableModel)tableWorkMVC.getModel());
 
@@ -87,23 +79,20 @@ public class RoutePerspectiveView extends BorderPaneObserverDS {
         vboxSplitPaneLeft.setPadding(new Insets(10, 0, 0, 10));   // The top,right,bottom,left padding around the region's content. This space will be included in the calculation of the region's minimum and preferred sizes. By default padding is Insets.EMPTY and cannot be set to null.
 //----------------------------------------------------------------------------------------------------------------------
 
-
+/*
         final StackPane sp3 = new StackPane();
         sp3.setMinHeight(120);
         sp3.getChildren().add(new Button("Button Tree"));
-
-        splitPane.getItems().addAll(vboxSplitPaneLeft, borderPane);
-
- //       borderPane.setCenter((BorderPane)schemaWorkMVC.getView());
         borderPane.setBottom(sp3);
-
-/*
         splitPaneInner.getItems().addAll((BorderPane)schemaWorkMVC.getView(), sp3);
         splitPaneInner.setDividerPositions(0.5f, 0.1f);
         splitPaneInner.setOrientation(Orientation.VERTICAL);
-
 */
 
+
+
+       borderPane.setCenter((BorderPane)schemaRouteMVC.getView());
+        splitPane.getItems().addAll(vboxSplitPaneLeft, borderPane);
         splitPane.setDividerPositions(0.2f, 0.6f);
 
         setCenter(splitPane);

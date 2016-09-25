@@ -41,7 +41,7 @@ public class TableModel <cL> extends AbstractTableModel implements Observer {
      */
     public TableModel(Observable observableModel, Rule rule) {
         this.observableModel = observableModel;
-        this.sectionDataSet = ((ResourceLinkModel)observableModel).getSectionDataSet();
+        this.sectionDataSet = ((ObservableDS)observableModel).getSectionDataSet();
         this.rule = rule;
         this.tClass =  rule.getClassTab();
         if(rule.getClassTab()== Work.class)  {

@@ -1,6 +1,8 @@
 package designpatterns;
 
+import entityProduction.Trest;
 import persistence.loader.DataSet;
+import persistence.loader.SectionDataSet;
 import trestmodel.TrestModel;
 import trestview.table.tablemodel.abstracttablemodel.Rule;
 
@@ -13,6 +15,9 @@ public class ObservableDS extends Observable {
     protected DataSet dataSet;
     protected ObservableDS observableDS;
     protected Rule rule;
+    protected Trest trest;
+
+    protected SectionDataSet sectionDataSet;
 
     public ObservableDS ()  {}
 
@@ -24,6 +29,8 @@ public class ObservableDS extends Observable {
         this.observableDS = observableDS;
         this.dataSet = observableDS.getDataSet();
         this.rule=rule;
+        this.trest=observableDS.getTrest();
+        this.sectionDataSet = observableDS.getSectionDataSet();
     }
 
     public void changed() {
@@ -32,4 +39,16 @@ public class ObservableDS extends Observable {
     }
 
     public DataSet getDataSet() {return dataSet;}
+
+    public Trest getTrest() {
+        return trest;
+    }
+
+    public SectionDataSet getSectionDataSet() {
+        return sectionDataSet;
+    }
+
+    public void setSectionDataSet(SectionDataSet sectionDataSet) {
+        this.sectionDataSet = sectionDataSet;
+    }
 }
