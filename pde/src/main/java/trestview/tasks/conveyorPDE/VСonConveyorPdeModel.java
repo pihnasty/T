@@ -130,7 +130,7 @@ public class VСonConveyorPdeModel extends ObservableDS implements LineChartInte
     public void dataBuild(String s) {
          if(s=="T") {
              list= getListConT();
-             titleOx= "S";
+             titleOx= "Позиция предмета труда в технологическом процессе";
              numberOfDivisionsOx=3;
              numberOfDivisionsOy=3;
              numberOfDivisionsEpisodes=1;
