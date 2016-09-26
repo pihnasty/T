@@ -7,6 +7,7 @@ import persistence.loader.SectionDataSet;
 import trestmodel.TrestModel;
 import trestview.menu.TMenuModel;
 import trestview.resourcelink.schemawork.Q;
+import trestview.table.tablemodel.abstracttablemodel.Rule;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,6 +30,15 @@ public class ResourceLinkModel extends ObservableDS  {
 
     public ResourceLinkModel(Observable trestModel) {
         super(null);
+        this.trestModel = trestModel;
+        this.trest =  ((TrestModel)trestModel).getTrest();
+        this.dataSet = ((TrestModel)trestModel).getDataSet();
+        this.sectionDataSet = ((TrestModel)trestModel).getSectionDataSet();
+
+    }
+
+    public ResourceLinkModel(ObservableDS trestModel, Rule rule) {
+        super(trestModel, rule);
         this.trestModel = trestModel;
         this.trest =  ((TrestModel)trestModel).getTrest();
         this.dataSet = ((TrestModel)trestModel).getDataSet();

@@ -36,8 +36,4 @@ public class LineChartModel extends ObservableDS implements LineChartInterface {
         return titleY;
     }
 
-    @Override
-    public DataSet getDataSet() {
-        return o.getDataSet();
-    }
 }

@@ -1,5 +1,6 @@
 package trestview.table.tablemodel;
 
+import designpatterns.ObservableDS;
 import entityProduction.Trest;
 import entityProduction.Work;
 import persistence.loader.DataSet;
@@ -14,7 +15,7 @@ import java.lang.reflect.Field;
 import java.util.*;
 import java.util.stream.Stream;
 
-public abstract class AbstractTableModel<cL> extends Observable {
+public class TableBaseModel<cL> extends ObservableDS {
 
     protected ArrayList<cL> tab;
     protected cL selectRow;
@@ -25,14 +26,18 @@ public abstract class AbstractTableModel<cL> extends Observable {
     protected Rule rule;
     protected RowIdNameDescription r;
 
+    public TableBaseModel() {
+    }
+    public TableBaseModel (ObservableDS observableDS, Rule rule)  {
+       super( observableDS,rule);
+    }
+
+
+
     public ArrayList<ParametersColumn> getParametersOfColumns() {
         return parametersOfColumns;
     }
 
-    public void changed() {
-        setChanged();
-        notifyObservers();
-    }
 
     public ArrayList<ParametersColumn> buildParametersColumn() {
         parametersOfColumns = new ArrayList<>();

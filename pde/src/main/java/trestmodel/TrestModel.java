@@ -32,7 +32,7 @@ public class TrestModel extends ObservableDS {
     public Locale locale;
 
     public TrestModel(ObservableDS observableDS, Rule rule) {
-        setLocale("en"); //   ru en
+        setLocale("ru"); //   ru en
         this.dataSet = new DataSet();
 
         this.sectionDataSet = new SectionDataSet(dataSet);
