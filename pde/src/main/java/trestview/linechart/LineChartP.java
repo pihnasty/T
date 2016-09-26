@@ -1,5 +1,6 @@
 package trestview.linechart;
 
+import designpatterns.InitializableDS;
 import designpatterns.ObservableDS;
 import javafx.beans.Observable;
 import javafx.geometry.Side;
@@ -24,7 +25,7 @@ public  class LineChartP extends HBox implements Observer{
 
     private LineChartInterface o;
 
-     public LineChartP(ObservableDS o, LineChartController lineChartController){
+     public LineChartP(ObservableDS o, InitializableDS initializableDS){
         this.o =(LineChartInterface)o;
 
         viewgrafic();

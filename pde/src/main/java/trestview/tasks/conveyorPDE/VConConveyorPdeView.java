@@ -1,17 +1,12 @@
 package trestview.tasks.conveyorPDE;
-
-
-
         import designpatterns.InitializableDS;
+        import designpatterns.MVC;
         import designpatterns.ObservableDS;
+        import designpatterns.observerdsall.BorderPaneObserverDS;
         import javafx.fxml.FXML;
         import javafx.fxml.FXMLLoader;
         import javafx.scene.control.Label;
-        import javafx.scene.layout.BorderPane;
-        import javafx.scene.layout.HBox;
         import javafx.scene.layout.VBox;
-        import javafx.scene.paint.Color;
-        import javafx.scene.text.Text;
         import persistence.loader.XmlRW;
         import trestview.linechart.LineChartController;
         import trestview.linechart.LineChartModel;
@@ -20,55 +15,39 @@ package trestview.tasks.conveyorPDE;
         import java.awt.geom.Point2D;
         import java.util.List;
         import java.util.Observable;
-        import java.util.Observer;
 
-
-public class VConConveyorPdeView extends BorderPane implements Observer {
-   private ObservableDS model;
+public class VConConveyorPdeView extends BorderPaneObserverDS {
 
     @FXML
     private Label label = new Label();
     private    List<Point2D.Double> listConT =null;
     private    List<Point2D.Double> listConS=null;
 
-    public  VConConveyorPdeView(ObservableDS observebleDS, InitializableDS vConConveyorPdeController){
-
-        model = observebleDS;
-        inizilize(model);
-        FXMLLoader fxmlLoader = XmlRW.fxmlLoad(this,vConConveyorPdeController, "trestview/menu/tasks/conveyorPDE/vConConveyorPdeView.fxml","ui", "trestview/menu/tasks/conveyorPDE/vConConveyorPdeStyle.css");
-
-
-        ((VСonConveyorPdeModel)model).dataBuild("T");
-        ObservableDS m1 = model;
+    public  VConConveyorPdeView(ObservableDS observebleDS, InitializableDS initializableDS){
+        super(observebleDS,initializableDS);
+        inizilize(observableDS);
+        FXMLLoader fxmlLoader = XmlRW.fxmlLoad(this,initializableDS, "trestview/menu/tasks/conveyorPDE/vConConveyorPdeView.fxml","ui", "trestview/menu/tasks/conveyorPDE/vConConveyorPdeStyle.css");
 
 
-        LineChartModel lineChartModel = new LineChartModel(m1, null);
-        LineChartController lineChartController = new LineChartController(lineChartModel);
-        LineChartP lineChartP = new LineChartP(lineChartModel,lineChartController);
-        lineChartModel.addObserver(lineChartP);
+        ((VСonConveyorPdeModel)observableDS).dataBuild("T");
+        ObservableDS m1 = observableDS;
 
+        MVC LineChart1MVC  = new MVC (LineChartModel.class, LineChartController.class, LineChartP.class,  m1, null );
 
-        ((VСonConveyorPdeModel)model).dataBuild("S");
-        ObservableDS m2 = model;
+        ((VСonConveyorPdeModel)observableDS).dataBuild("S");
+        ObservableDS m2 = observableDS;
 
+        MVC LineChart2MVC  = new MVC (LineChartModel.class, LineChartController.class, LineChartP.class,  m2, null );
 
-        LineChartModel lineChartModel2 = new LineChartModel(m2, null);
-        LineChartController lineChartController2 = new LineChartController(lineChartModel);
-        LineChartP lineChartP2 = new LineChartP(lineChartModel,lineChartController);
-        lineChartModel.addObserver(lineChartP2);
+        ((VСonConveyorPdeModel)observableDS).dataBuild("S");
+        ObservableDS m3 = observableDS;
 
-
-        ((VСonConveyorPdeModel)model).dataBuild("S");
-        ObservableDS m3 = model;
-        LineChartModel lineChartModel3 = new LineChartModel(m3, null);
-        LineChartController lineChartController3 = new LineChartController(lineChartModel);
-        LineChartP lineChartP3 = new LineChartP(lineChartModel,lineChartController);
-        lineChartModel.addObserver(lineChartP2);
+        MVC LineChart3MVC  = new MVC (LineChartModel.class, LineChartController.class, LineChartP.class,  m3, null );
 
         VBox vBox = new VBox();
         VBox vBox1 = new VBox();
-        vBox.getChildren().addAll(lineChartP,lineChartP2);
-        vBox1.getChildren().addAll(lineChartP3);
+        vBox.getChildren().addAll((LineChartP)LineChart1MVC.getView(),(LineChartP)LineChart2MVC.getView());
+        vBox1.getChildren().addAll((LineChartP)LineChart3MVC.getView());
         setLeft(vBox);
         setRight(vBox1);
 
