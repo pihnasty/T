@@ -38,7 +38,7 @@ public class RoutePerspectiveView extends BorderPaneObserverDS {
 
 
 //----------------------------------------------------------------------------------------------------------------------
-        MVC schemaRouteMVC  = new MVC (SchemaRouteModel.class, SchemaRouteController.class, SchemaRouteView.class, this.observableDS, Rule.RoutePerspective );
+        MVC schemaRouteMVC = new MVC(SchemaRouteModel.class, SchemaRouteController.class, SchemaRouteView.class, this.observableDS, Rule.RoutePerspective);
         SchemaRouteView view = (SchemaRouteView) schemaRouteMVC.getView();
         view.addEventHandler(MouseEvent.MOUSE_MOVED, (SchemaRouteController)schemaRouteMVC.getController());
         view.addEventHandler(MouseEvent.MOUSE_DRAGGED, (SchemaRouteController)schemaRouteMVC.getController());

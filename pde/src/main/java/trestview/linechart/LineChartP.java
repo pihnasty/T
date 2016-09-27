@@ -80,7 +80,6 @@ public  class LineChartP extends HBox implements Observer{
 
         for (Point2D.Double p : o.getlist()) {
             seriesWaterTem.getData().add(new XYChart.Data(p.getX(), p.getY()));
-            System.out.println(String.format("   px=%5.2f   py=%5.2f   ", p.getX(), p.getY()));
         }
 
         chart.getData().addAll(seriesWaterTem);

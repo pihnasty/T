@@ -9,16 +9,16 @@ import java.util.List;
 
 public class LineChartModel extends ObservableDS implements LineChartInterface {
 
-    private ObservableDS o;
+
     private List<Point2D.Double> list;
     private String titleX;
     private String titleY;
 
     public LineChartModel(ObservableDS o, Rule rule){
-        this.o=o;
-        list =( (LineChartInterface) o).getlist();
-        titleX=( (LineChartInterface) o).getTitleX();
-        titleY=( (LineChartInterface) o).getTitleY();
+       super(o,rule);
+        list =( (LineChartInterface) observableDS).getlist();
+        titleX=( (LineChartInterface) observableDS).getTitleX();
+        titleY=( (LineChartInterface) observableDS).getTitleY();
     }
 
     @Override

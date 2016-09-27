@@ -29,20 +29,15 @@ public class VConConveyorPdeView extends BorderPaneObserverDS {
         FXMLLoader fxmlLoader = XmlRW.fxmlLoad(this,initializableDS, "trestview/menu/tasks/conveyorPDE/vConConveyorPdeView.fxml","ui", "trestview/menu/tasks/conveyorPDE/vConConveyorPdeStyle.css");
 
 
-        ((VСonConveyorPdeModel)observableDS).dataBuild("T");
-        ObservableDS m1 = observableDS;
 
-        MVC LineChart1MVC  = new MVC (LineChartModel.class, LineChartController.class, LineChartP.class,  m1, null );
+        MVC LineChart1MVC  = new MVC (LineChartModel.class, LineChartController.class, LineChartP.class,
+                ((VСonConveyorPdeModel) observableDS).dataBuildVСonConveyorPdeModel("T"), null );
 
-        ((VСonConveyorPdeModel)observableDS).dataBuild("S");
-        ObservableDS m2 = observableDS;
+        MVC LineChart2MVC  = new MVC (LineChartModel.class, LineChartController.class, LineChartP.class,
+                ((VСonConveyorPdeModel) observableDS).dataBuildVСonConveyorPdeModel("S"), null );
 
-        MVC LineChart2MVC  = new MVC (LineChartModel.class, LineChartController.class, LineChartP.class,  m2, null );
-
-        ((VСonConveyorPdeModel)observableDS).dataBuild("S");
-        ObservableDS m3 = observableDS;
-
-        MVC LineChart3MVC  = new MVC (LineChartModel.class, LineChartController.class, LineChartP.class,  m3, null );
+        MVC LineChart3MVC  = new MVC (LineChartModel.class, LineChartController.class, LineChartP.class,
+                ((VСonConveyorPdeModel) observableDS).dataBuildVСonConveyorPdeModel("S"), null );
 
         VBox vBox = new VBox();
         VBox vBox1 = new VBox();
