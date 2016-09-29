@@ -37,7 +37,7 @@ public class VConConveyorPdeView extends BorderPaneObserverDS {
                 ((VСonConveyorPdeModel) observableDS).dataBuildVСonConveyorPdeModel("S"), null );
 
         MVC LineChart3MVC  = new MVC (LineChartModel.class, LineChartController.class, LineChartP.class,
-                ((VСonConveyorPdeModel) observableDS).dataBuildVСonConveyorPdeModel("S"), null );
+                ((VСonConveyorPdeModel) observableDS).dataBuildVСonConveyorPdeModel("T"), null );
 
         VBox vBox = new VBox();
         VBox vBox1 = new VBox();

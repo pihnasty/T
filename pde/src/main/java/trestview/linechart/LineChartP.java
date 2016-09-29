@@ -35,9 +35,6 @@ public  class LineChartP extends HBox implements Observer{
 
 
     public void viewgrafic(){
-
-
-
         NumberAxis xAxis = new NumberAxis(o.getTitleX(), 0,1, 10);
         xAxis.setTickLabelFill(Color.BROWN);
 
@@ -75,16 +72,16 @@ public  class LineChartP extends HBox implements Observer{
 */
         //seriesAirTem.getData().addAll(data1, new XYChart.Data(category.get(1),0), new XYChart.Data(category.get(2),24), new XYChart.Data(category.get(3),27), new XYChart.Data(category.get(4),30), new XYChart.Data(category.get(5),32), data7, new XYChart.Data(category.get(7),33), new XYChart.Data(category.get(8),31), new XYChart.Data(category.get(9),29), new XYChart.Data(category.get(10),26),data12);
 
-        XYChart.Series seriesWaterTem= new XYChart.Series();
+
         //seriesWaterTem.setName("Температура воды");
 
-        for (Point2D.Double p : o.getlist()) {
-            seriesWaterTem.getData().add(new XYChart.Data(p.getX(), p.getY()));
+        for (List<Point2D.Double> list : o.getPullList())  {
+            XYChart.Series seriesWaterTem= new XYChart.Series();
+            for (Point2D.Double p : list) {
+                seriesWaterTem.getData().add(new XYChart.Data(p.getX(), p.getY()));
+            }
+            chart.getData().addAll(seriesWaterTem);
         }
-
-        chart.getData().addAll(seriesWaterTem);
-
-        //this.getChildren().addAll(chart);
 
         this.getChildren().add(chart);
      }

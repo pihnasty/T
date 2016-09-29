@@ -7,7 +7,10 @@ import java.util.List;
 import java.util.Observable;
 
  public interface LineChartInterface {
-    public List<Point2D.Double> getlist();
-    public String getTitleX();
-    public String getTitleY();
+    List<Point2D.Double> getList();
+    String getTitleX();
+    String getTitleY();
+
+    List<List<Point2D.Double>> getPullList();
+
 }
