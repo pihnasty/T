@@ -35,23 +35,23 @@ public  class LineChartP extends HBox implements Observer{
 
 
     public void viewgrafic(){
-        NumberAxis xAxis = new NumberAxis(o.getTitleX(), 0,1, 10);
+        NumberAxis xAxis = new NumberAxis(o.getTitleX(), o.getxMin(),o.getxMax(), o.getxTickUnit());
         xAxis.setTickLabelFill(Color.BROWN);
 
-        NumberAxis yAxis = new NumberAxis(o.getTitleY(), 0,3, 10);
+        NumberAxis yAxis = new NumberAxis(o.getTitleY(),  o.getyMin(),o.getyMax(),o.getyTickUnit() );
         yAxis.setTickLabelFill(Color.BROWN);
         // yAxis.setTickLabelGap(1);
         yAxis.setSide(Side.LEFT);
         //yAxis.setAutoRanging(false);
  //       yAxis.setMinorTickCount(10);
 
-        LineChart<Number,Number> chart = new LineChart<Number,Number>(xAxis,yAxis);
+        LineChart<Number,Number> chart = new LineChart<>(xAxis,yAxis);
         chart.setLayoutX(50);
         chart.setLayoutY(10);
         chart.setCursor(Cursor.CROSSHAIR);
-        chart.setStyle("-fx-font:bold 14 Arial; -fx-text-fill:brown;");
+        chart.setStyle("-fx-font:bold 12 Arial; -fx-text-fill:brown;");
         chart.setPrefSize(500, 400);
-        chart.setTitle(ResourceBundle.getBundle("ui").getString("productionLine"));
+        chart.setTitle(o.getTitleGraph());
         chart.setTitleSide(Side.TOP);
         chart.setLegendVisible(true);
         chart.setLegendSide(Side.BOTTOM);
@@ -74,13 +74,15 @@ public  class LineChartP extends HBox implements Observer{
 
 
         //seriesWaterTem.setName("Температура воды");
-
+        int i = 0;
         for (List<Point2D.Double> list : o.getPullList())  {
-            XYChart.Series seriesWaterTem= new XYChart.Series();
+            XYChart.Series line= new XYChart.Series();
+
             for (Point2D.Double p : list) {
-                seriesWaterTem.getData().add(new XYChart.Data(p.getX(), p.getY()));
+                line.getData().add(new XYChart.Data(p.getX(), p.getY()));
             }
-            chart.getData().addAll(seriesWaterTem);
+            line.setName(o.getListLegend().get(i)); i++;
+            chart.getData().addAll(line);
         }
 
         this.getChildren().add(chart);
