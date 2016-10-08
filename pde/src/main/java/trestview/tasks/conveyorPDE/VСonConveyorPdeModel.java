@@ -41,9 +41,6 @@ public class VСonConveyorPdeModel extends ObservableDS implements LineChartInte
     private List<String> listLegend;
 
 
-
-
-
     public List<Point2D.Double> getListConT() {
         return listConT;
     }
@@ -64,11 +61,13 @@ public class VСonConveyorPdeModel extends ObservableDS implements LineChartInte
     public VСonConveyorPdeModel(ObservableDS o, Rule rule) {
         super(o,rule);
 
-        double _s = 0.0;
-        double _t = 0.0;
+        double _s0 = 0.0;
+        double _t0 = 0.0;
 
         DoubleFunction<Double> sinConveyorPdeModel    = _r -> (2 + Math.sin(2 * Math.PI * _r))/3.0;
-        DoubleFunction<Double> pow2BoundaryCondition  = _r -> { double ftMax = 1.0/3.0;   return  (_r*_r)*ftMax;};  // (10*Math.pow(_r, 2)/100)*ftMax;}
+        DoubleFunction<Double> pow2BoundaryCondition  = _r -> { double ftMax = 1.0/3.0;   return  _r*0.5+0.25;
+                //  (_r*_r)*ftMax;// 0.3;
+        };  //    2) (_r*_r)*ftMax;        1)    (10*Math.pow(_r, 2)/100)*ftMax;}
 
         pullListConS = new ArrayList<>();
         pullListConT = new ArrayList<>();
@@ -77,13 +76,13 @@ public class VСonConveyorPdeModel extends ObservableDS implements LineChartInte
         listConTLegend = new ArrayList<>();
 
 
-        for (_s=0; _s<1.0;  _s+=0.1)   {
-            pullListConS.add(xi0ForConstS(_s, sinConveyorPdeModel, pow2BoundaryCondition));
+        for (double _s=0; _s<1.0;  _s+=0.1)   {
+            pullListConS.add(xi0ForConstS(_s, _s0, _t0, sinConveyorPdeModel, pow2BoundaryCondition));
             listConSLegend.add("S/Sd="+ String.format("%3.1f",_s));
 
         }
-        for (_t=0; _t<1.0; _t+=0.1)   {
-            pullListConT.add(xi0ForConstT(_t, sinConveyorPdeModel, pow2BoundaryCondition));
+        for ( double _t=0; _t<1.0; _t+=0.1)   {
+            pullListConT.add(xi0ForConstT(_t, _s0, _t0,  sinConveyorPdeModel, pow2BoundaryCondition));
             listConTLegend.add("t/Td="+ String.format("%3.1f",_t));
         }
 
@@ -152,8 +151,16 @@ public class VСonConveyorPdeModel extends ObservableDS implements LineChartInte
 
     }
 
-    private double decision(double r, DoubleFunction<Double> a, DoubleFunction<Double> b) {
-        return a.apply(r) * h(r) + b.apply(r) * h(-r);
+    private double decision(double _s, double  _t, double  _s0,double  _t0, DoubleFunction<Double> a, DoubleFunction<Double> b) {
+        double _r = r(_s,_t,_s0,_t0);
+
+   //     System.out.println("->"+(b.apply(_t0 )-a.apply(_s0) ) * ( h(_s-_s0)*h(_s0-_s) + h(_t-_t0)*h(_t0-_t) )+"          "+_s+"             "+_t);
+
+        return a.apply(  _r +_s0) * (h(_r) + h(_s0-_s))
+             + b.apply(_t0 - _r ) * (h(-_r)- h(_s0-_s))
+             +(b.apply(_t0 )-a.apply(_s0) ) * ( h(_s-_s0)*h(_s0-_s) * h(_t-_t0)*h(_t0-_t) )
+                ;
+
     }
 
     private double h(double r) {
@@ -162,17 +169,17 @@ public class VСonConveyorPdeModel extends ObservableDS implements LineChartInte
         else return 1.0;
     }
 
-    private double r(double _s, double _t) {
-        return _s - _t;
+    private double r(double _s, double _t, double _s0, double _t0) {
+        return _s - _t - _s0 + _t0 ;
     }
 
-    private List<Point2D.Double> xi0ForConstT(double _t, DoubleFunction<Double> a, DoubleFunction<Double> b) {
+    private List<Point2D.Double> xi0ForConstT(double _t, double _s0, double _t0, DoubleFunction<Double> a, DoubleFunction<Double> b) {
         List<Point2D.Double> doubleList = new ArrayList<>();
         double dS = 0.001;
         if (_t >= 0) {
             for (double _s = 0.0; _s <= 1.0; _s += dS) {
                 Point2D.Double p = new Point2D.Double(_s,
-                        decision(r(_s, _t), a, b)
+                        decision(_s, _t, _s0, _t0, a, b)
                 );
                 doubleList.add(p);
             }
@@ -181,7 +188,7 @@ public class VСonConveyorPdeModel extends ObservableDS implements LineChartInte
     }
 
 
-    private List<Point2D.Double> xi0ForConstS(double _s, DoubleFunction<Double> a,DoubleFunction<Double> b) {
+    private List<Point2D.Double> xi0ForConstS(double _s, double _s0, double _t0, DoubleFunction<Double> a,DoubleFunction<Double> b) {
         List<Point2D.Double> doubleList = new ArrayList<>();
         double t0 = 0.0;
         double tD = 10.0;
@@ -189,7 +196,7 @@ public class VСonConveyorPdeModel extends ObservableDS implements LineChartInte
         if (_s >= 0 && _s <= 1) {
             for (double _t = t0; _t <= tD; _t += dT) {
                 Point2D.Double p = new Point2D.Double(_t,
-                                                       decision(r(_s, _t), a, b)
+                                                       decision(_s, _t, _s0, _t0 , a, b)
                                                      );
                 doubleList.add(p);
             }
