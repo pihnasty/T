@@ -1,15 +1,16 @@
-package trestview.resourcelink.schemawork;
+package trestview.routeperspective.schemaroute;
 
 import designpatterns.ObservableDS;
 import entityProduction.Machine;
 import entityProduction.Work;
 import javafx.scene.Cursor;
-import javafx.scene.image.*;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import persistence.loader.DataSet;
 import persistence.loader.XmlRW;
 import persistence.loader.tabDataSet.RowMachine;
 import trestview.resourcelink.ResourceLinkModel;
+import trestview.resourcelink.schemawork.Q;
+import trestview.routeperspective.schemabase.SchemaBaseModel;
 import trestview.table.tablemodel.TableModel;
 import trestview.table.tablemodel.abstracttablemodel.Rule;
 
@@ -20,44 +21,25 @@ import java.util.Observable;
 import java.util.Observer;
 import java.util.stream.Collectors;
 
-public class SchemaModel extends ObservableDS implements Observer {
-
-
+public class SchemaRouteModel extends SchemaBaseModel {
     private Cursor cursor;
     private MouseEvent mouseEvent;
-    private Work work;
+
     private Double kScale;
-    private List<Q> qs;
+
     private Q qCurrent = null;
 
-
-
-    public SchemaModel(ObservableDS observableDS, Rule rule) {
+    public SchemaRouteModel(ObservableDS observableDS, Rule rule) {
         super(observableDS, rule);
-
-        this.qs = new ArrayList();
-
-
-
-
-        if (this.rule == Rule.Work) {
-            if (!( observableDS).getTrest().getWorks().isEmpty()) {
-                createDataSchemaModel((observableDS).getTrest().getWorks().get(0));
-            }
         }
-
-
-
-    }
 
     @Override
     public void update(Observable o, Object arg) {
-       if ((this.rule == Rule.Work))  {   //
+
             if ((o.getClass()==TableModel.class)) {
                 updateForTableWorkMVC   ((TableModel) o);
                 updateForTableMachineMVC((TableModel) o);
             }
-        }
         changed();
     }
 
@@ -67,8 +49,8 @@ public class SchemaModel extends ObservableDS implements Observer {
         if (o.getRule()== Rule.Machine   )   {
             this.dataSet = o.getDataset();
             createDataSchemaModel(work);
-            if (!((ResourceLinkModel) observableDS).getTrest().getWorks().isEmpty()) {
-                //              createDataSchemaModel(((ResourceLinkModel) observableModel).getTrest().getWorks().get(0));
+            if (!observableDS.getTrest().getWorks().isEmpty()) {
+                             createDataSchemaModel(observableDS.getTrest().getWorks().get(0));
             }
         }
     }
@@ -92,12 +74,6 @@ public class SchemaModel extends ObservableDS implements Observer {
 
     public void setQs(List<Q> qs) {
         this.qs = qs;
-    }
-
-    private void createDataSchemaModel(Work work) {
-        qs.clear();
-        this.work = work;
-        qs.addAll(work.getMachines().stream().map(Q::new).collect(Collectors.toList())); //for (Machine machine : work.getMachines()) {  qs.add(new Q(machine)); }
     }
 
     public Cursor getCursor() {

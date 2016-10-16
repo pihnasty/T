@@ -1,58 +1,53 @@
-package trestview.resourcelink.schemawork;
+package trestview.routeperspective.schemabase;
 
 import designpatterns.InitializableDS;
 import designpatterns.ObservableDS;
 import designpatterns.observerdsall.BorderPaneObserverDS;
-import entityProduction.Machine;
 import entityProduction.Work;
 import javafx.beans.binding.DoubleBinding;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-import javafx.scene.Cursor;
-import javafx.scene.image.*;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
+import trestview.resourcelink.schemawork.Q;
+import trestview.resourcelink.schemawork.SchemaModel;
 
-import java.awt.*;
-import java.util.*;
 import java.util.List;
+import java.util.Observable;
 
-public class SchemaView extends BorderPaneObserverDS {
+public class SchemaBaseView extends BorderPaneObserverDS {
 
     private ImageView imageview = new ImageView();
     private Work work;
-    private Double scaleScheme;
+    protected Double scaleScheme;
 
-    private BorderPane bp;
+    protected BorderPane bp;
 
     private DoubleBinding kScale;
     private DoubleBinding hImv;
     private DoubleBinding wImv;
-    private List<Q> qs;
+    protected List<Q> qs;
 
-    public SchemaView(ObservableDS observableDS, InitializableDS initializableDS) {
+    public SchemaBaseView(ObservableDS observableDS, InitializableDS initializableDS) {
         super(observableDS,initializableDS);
         bp = new BorderPane();
         getChildren().addAll(bp);
-        qs = ((SchemaModel)observableDS).getQs();
+        qs = ((SchemaBaseModel)observableDS).getQs();
         setStyle("-fx-background-color: #336699;");
 
         setkScaleDefault();
-        repaint((SchemaModel) this.observableDS);
-        bp.scaleXProperty().bind(kScale);
-        bp.scaleYProperty().bind(kScale);
+        repaint((SchemaBaseModel) this.observableDS);
+//        bp.scaleXProperty().bind(kScale);
+ //       bp.scaleYProperty().bind(kScale);
     }
 
-    private void repaint(SchemaModel schemaModel) {
+    protected void repaint(SchemaBaseModel schemaModel) {
         this.bp.getChildren().clear();
         this.work = schemaModel.getWork();
         this.imageview.setImage(new Image("file:"+work.getScheme() ));
         for(Q q: schemaModel.getQs()) {
-          //  q.setRotate(q.getAngle());
             q.setLayoutX(q.getX());
             q.setLayoutY(q.getY());
-
         }
         if (imageview != null)           bp.getChildren().addAll(imageview);
         if (schemaModel.getQs() != null) bp.getChildren().addAll(schemaModel.getQs());
@@ -61,7 +56,7 @@ public class SchemaView extends BorderPaneObserverDS {
     public void update(Observable o, Object arg) {
         if(  ((SchemaModel) o).getMouseEvent().getEventType() ==   MouseEvent.MOUSE_MOVED)  setCursor(((SchemaModel) o).getCursor());
         if(  ((SchemaModel) o).getMouseEvent().getEventType() ==   MouseEvent.MOUSE_PRESSED) { qs = ((SchemaModel) o).getQs();      }
-        repaint((SchemaModel) o);
+        repaint((SchemaBaseModel) o);
         setHeight(getHeight()+1);        setHeight(getHeight()-1);
     }
 

@@ -26,8 +26,8 @@
     <Menu  fx:id="OpenPerspective"  text="%OpenPerspective">
         <MenuItem text="%DefaultPerspective"            fx:id="defaultPerspectiveItem"  />
         <MenuItem text="%OrdersPerspective"             fx:id="ordersPerspectiveItem"/>
-        <MenuItem text="%RoutesPerspective"             fx:id="routesPerspectiveItem"/>
-        <MenuItem text="%ResourcesLinksPerspective"     fx:id="resourcesLinksPerspectiveItem" onAction="#handleResourcesLinksPerspectiveAction"/>
+        <MenuItem text="%RoutesPerspective"             fx:id="routesPerspectiveItem"           onAction="#handleRoutePerspectiveAction"/>
+        <MenuItem text="%ResourcesLinksPerspective"     fx:id="resourcesLinksPerspectiveItem"   onAction="#handleResourcesLinksPerspectiveAction"/>
     </Menu>
 </Menu>
 
@@ -45,6 +45,7 @@
     <MenuItem text="%RowWork"           fx:id="rowWorkItem"             onAction="#handleRowWorkAction" />
     <MenuItem text="%RowTypemachine"    fx:id="rowTypemachineItem"      onAction="#handleRowTypemachineAction" />
     <MenuItem text="%RowFunctiondist"   fx:id="rowFunctiondistItem"     onAction="#handleRowFunctiondistAction" />
+    <MenuItem text="%RowUnit"           fx:id="rowUnitItem"             onAction="#handleRowUnitAction" />
 </Menu>
 <Menu text="%Test">
     <MenuItem text="%TestOfMachine" fx:id="testOfMachineItem" onAction="#handleMachineTestAction"></MenuItem>

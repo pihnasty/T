@@ -7,6 +7,7 @@ import javafx.beans.property.SimpleObjectProperty;
 import persistence.loader.DataSet;
 import persistence.loader.SectionDataSet;
 import persistence.loader.tabDataSet.RowTrest;
+import trestview.table.tablemodel.abstracttablemodel.Rule;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,8 +31,8 @@ public class TrestModel extends ObservableDS {
 
     public Locale locale;
 
-    public TrestModel() {
-        setLocale("en"); //   ru en
+    public TrestModel(ObservableDS observableDS, Rule rule) {
+        setLocale("ru"); //   ru en
         this.dataSet = new DataSet();
 
         this.sectionDataSet = new SectionDataSet(dataSet);

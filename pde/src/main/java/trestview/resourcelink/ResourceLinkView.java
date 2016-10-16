@@ -1,7 +1,9 @@
 package trestview.resourcelink;
 
+import designpatterns.InitializableDS;
 import designpatterns.MVC;
 import designpatterns.ObservableDS;
+import designpatterns.observerdsall.BorderPaneObserverDS;
 import entityProduction.Trest;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
@@ -28,21 +30,17 @@ import trestview.table.tablemodel.abstracttablemodel.Rule;
 import java.util.Observable;
 import java.util.Observer;
 
-/**
- * Created by pom on 07.02.2016.
- */
-public class  ResourceLinkView extends BorderPane implements Observer {
+public class  ResourceLinkView extends BorderPaneObserverDS {
 
-    private Observable resourceLinkModel;
+
     private DataSet dataSet;
     private Trest trest;
 
-    public ResourceLinkView (ResourceLinkModel resourceLinkModel, ResourceLinkController resourceLinkController ) {
-        this.resourceLinkModel = resourceLinkModel;
+    public ResourceLinkView (ObservableDS resourceLinkModel, InitializableDS resourceLinkController ) {
+        super(resourceLinkModel,resourceLinkController);
+
         this.dataSet = resourceLinkModel.getDataSet();
         this.trest = resourceLinkModel.getTrest();
-        //this.dictionaryModel =dictionaryModel;
-        //this.dataSet =dictionaryModel.getTMenuModel().getTrestModel().getDataSet();
         FXMLLoader fxmlLoader = XmlRW.fxmlLoad(this,resourceLinkController, "trestview/resourcelink/resourceLinkView.fxml","ui", "trestview/resourcelink/resourceLinkStyle.css");
 
         SplitPane  splitPane = new SplitPane();
@@ -51,13 +49,13 @@ public class  ResourceLinkView extends BorderPane implements Observer {
 
 //----------------------------------------------------------------------------------------------------------------------
 
-        MVC schemaWorkMVC  = new MVC (SchemaModel.class, SchemaController.class, SchemaView.class, this.resourceLinkModel, Rule.Work );
+        MVC schemaWorkMVC  = new MVC (SchemaModel.class, SchemaController.class, SchemaView.class, this.observableDS, Rule.Work );
         SchemaView view = (SchemaView) schemaWorkMVC.getView();
         view.addEventHandler(MouseEvent.MOUSE_MOVED, (SchemaController)schemaWorkMVC.getController());
         view.addEventHandler(MouseEvent.MOUSE_DRAGGED, (SchemaController)schemaWorkMVC.getController());
         view.addEventHandler(MouseEvent.MOUSE_RELEASED, (SchemaController)schemaWorkMVC.getController());
 //----------------------------------------------------------------------------------------------------------------------
-        MVC tableWorkMVC  = new MVC (TableModel.class, TableController.class, TableViewP.class, this.resourceLinkModel, Rule.Work );
+        MVC tableWorkMVC  = new MVC (TableModel.class, TableController.class, TableViewP.class, this.observableDS, Rule.Work );
         MVC hboxpaneWorkMVC = new MVC (HboxpaneModel.class,HboxpaneController.class,HboxpaneView.class,dataSet, Rule.Work);
         hboxpaneWorkMVC.addObserverP( (TableModel)tableWorkMVC.getModel());
 
@@ -70,7 +68,7 @@ public class  ResourceLinkView extends BorderPane implements Observer {
         vboxWork.setSpacing(5);   // The amount of vertical space between each child in the vbox.
         vboxWork.setPadding(new Insets(10, 0, 0, 10));   // The top,right,bottom,left padding around the region's content. This space will be included in the calculation of the region's minimum and preferred sizes. By default padding is Insets.EMPTY and cannot be set to null.
 //----------------------------------------------------------------------------------------------------------------------
-        MVC tableMachineMVC  = new MVC (TableModel.class, TableController.class, TableViewP.class, this.resourceLinkModel, Rule.Machine );
+        MVC tableMachineMVC  = new MVC (TableModel.class, TableController.class, TableViewP.class, this.observableDS, Rule.Machine );
         MVC hboxpaneMachineMVC = new MVC (HboxpaneModel.class,HboxpaneController.class,HboxpaneView.class,dataSet, Rule.RowMachine);
         hboxpaneMachineMVC.addObserverP( (TableModel)tableMachineMVC .getModel());
 
@@ -119,6 +117,6 @@ public class  ResourceLinkView extends BorderPane implements Observer {
 
     @Override
     public void update(Observable o, Object arg) {
-        if (ResourceLinkModel.class == o.getClass()) resourceLinkModel = o;
+        if (ResourceLinkModel.class == o.getClass()) observableDS = (ObservableDS) o;
     }
 }

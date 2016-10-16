@@ -1,6 +1,8 @@
 package trestview.table;
 
 import com.sun.org.apache.xpath.internal.SourceTree;
+import designpatterns.InitializableDS;
+import designpatterns.ObservableDS;
 import entityProduction.Functiondist;
 import entityProduction.Machine;
 import entityProduction.Modelmachine;
@@ -55,9 +57,9 @@ public class TableViewP<cL> extends TableView<cL> implements Observer {
 
     public TableViewP() {}
 
-    public TableViewP(TableModel tableModel, TableController tableController) {
+    public TableViewP(ObservableDS observableDS, InitializableDS tableController) {
 
-        this.tableModel = tableModel;
+        this.tableModel = (TableModel) observableDS;
         this.tab= tableModel.getTab();
         this.tClass=tableModel.gettClass();
         this.dataSet = tableModel.getDataset();

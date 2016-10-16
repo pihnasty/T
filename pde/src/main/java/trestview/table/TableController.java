@@ -1,5 +1,7 @@
 package trestview.table;
 
+import designpatterns.InitializableDS;
+import designpatterns.ObservableDS;
 import javafx.fxml.Initializable;
 import trestview.table.tablemodel.TableModel;
 
@@ -9,12 +11,10 @@ import java.util.ResourceBundle;
 /**
  * Created by pom on 28.02.2016.
  */
-public class TableController implements Initializable {
+public class TableController extends InitializableDS {
 
-    private TableModel tableModel;
-
-    public TableController(TableModel tableModel) {
-        this.tableModel = tableModel;
+    public TableController(ObservableDS observableDS) {
+        super(observableDS);
     }
 
     @Override

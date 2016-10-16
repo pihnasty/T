@@ -1,6 +1,7 @@
 package trestview.machinetest;
 
 import designpatterns.MVC;
+import designpatterns.ObservableDS;
 import entityProduction.Functiondist;
 import persistence.loader.DataSet;
 import persistence.loader.tabDataSet.*;

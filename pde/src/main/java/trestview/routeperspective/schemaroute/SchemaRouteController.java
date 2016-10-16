@@ -1,38 +1,31 @@
-package trestview.resourcelink.schemawork;
+package trestview.routeperspective.schemaroute;
 
 import designpatterns.InitializableDS;
 import designpatterns.ObservableDS;
 import javafx.event.EventHandler;
-import javafx.fxml.Initializable;
 import javafx.scene.input.MouseEvent;
+import trestview.resourcelink.schemawork.SchemaModel;
 
 
-import java.awt.*;
-import java.net.URL;
-import java.util.ResourceBundle;
+public class SchemaRouteController extends InitializableDS implements  EventHandler<MouseEvent> {
 
-
-public class SchemaController extends InitializableDS implements  EventHandler<MouseEvent> {
-    private SchemaModel observableModel;
-
-    public SchemaController(ObservableDS observableDS) {
+    public SchemaRouteController(ObservableDS observableDS) {
         super(observableDS);
     }
-
 
     @Override
     public void handle(MouseEvent event) {
 
         if ( event.getEventType() == MouseEvent.MOUSE_MOVED) {
-            ((SchemaModel)observableDS).changeCursor(event);
+            ((SchemaRouteModel)observableDS).changeCursor(event);
         }
 
         if ( event.getEventType() == MouseEvent.MOUSE_DRAGGED) {
-            ((SchemaModel)observableDS).changeLocation(event);
+            ((SchemaRouteModel)observableDS).changeLocation(event);
         }
 
         if ( event.getEventType() == MouseEvent.MOUSE_RELEASED) {
-            ((SchemaModel)observableDS).qCurrentIsNull();
+            ((SchemaRouteModel)observableDS).qCurrentIsNull();
         }
 
 

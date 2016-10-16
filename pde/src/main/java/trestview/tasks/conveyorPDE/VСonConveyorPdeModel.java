@@ -1,76 +1,45 @@
-    package trestview.tasks.conveyorPDE;
+package trestview.tasks.conveyorPDE;
 
-
-
+import com.sun.javafx.binding.StringFormatter;
 import designpatterns.ObservableDS;
-import persistence.loader.DataSet;
 import trestview.linechart.LineChartInterface;
 import trestview.table.tablemodel.abstracttablemodel.Rule;
 
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Observable;
 
+import java.util.ResourceBundle;
+import java.util.function.DoubleFunction;
 
-
-interface InitialCondition {
-
-    double initialCondition(double _r);
-
-}
-
-interface BoundaryCondition {
-
-    double boundaryCondition(double _r);
-
-}
-
-/**
- * это сделанлоывиплоывиплоывиплоо мной
- */
-
-
-class SinInitialCondition implements InitialCondition {
-
-    public double initialCondition(double _r) {
-        return 2 + Math.sin(2 * Math.PI * _r);
-    }
-
-}
-
-class Pow2BoundaryCondition implements BoundaryCondition {
-
-    public double boundaryCondition(double _r) {
-        return 1 - Math.pow(_r, 2);
-    }
-
-}
-
-class RInitialCondition implements InitialCondition {
-
-    public double initialCondition(double _r) {
-        return _r;
-    }
-
-}
-
-class RPow2BoundaryCondition implements BoundaryCondition {
-
-    public double boundaryCondition(double _r) {
-        return Math.pow(_r, 2);
-    }
-
-}
 
 public class VСonConveyorPdeModel extends ObservableDS implements LineChartInterface {
+
+    private String titleOx;
+    private String titleOy;
+    private String titleGraph;
+
+    private double xMin;
+    private double xMax;
+
+    private double xTickUnit;
+    private double yMin;
+    private double yMax;
+    private double yTickUnit;
+
 
     private List<Point2D.Double> listConT;
     private List<Point2D.Double> listConS;
     private List<Point2D.Double> list;
-    private String titleOx;
-    private String titleOy="Распределение предметов труда по конвейерной линии";
-    private  ObservableDS o;
+
+    private List<List<Point2D.Double>> pullListConT;
+    private List<List<Point2D.Double>> pullListConS;
+    private List<List<Point2D.Double>> pullList;
+
+    private List<String> listConTLegend;
+    private List<String> listConSLegend;
+    private List<String> listLegend;
+
 
     public List<Point2D.Double> getListConT() {
         return listConT;
@@ -90,45 +59,90 @@ public class VСonConveyorPdeModel extends ObservableDS implements LineChartInte
 
 
     public VСonConveyorPdeModel(ObservableDS o, Rule rule) {
-        this.o=o;
-        double s = 0;
-        double t = 0.7;
-//    VСonConveyorPdeModel vСonConveyorPdeModel = new VСonConveyorPdeModel(null);
+        super(o,rule);
 
-        InitialCondition sinConveyorPdeModel = new SinInitialCondition();
-        BoundaryCondition pow2BoundaryCondition = new Pow2BoundaryCondition();
+        double _s0 = 0.0;
+        double _t0 = 0.0;
 
-        InitialCondition rConveyorPdeModel = new RInitialCondition();
-        BoundaryCondition rPow2BoundaryCondition = new RPow2BoundaryCondition();
+        DoubleFunction<Double> sinConveyorPdeModel    = _r -> (2 + Math.sin(2 * Math.PI * _r))/3.0;
+        DoubleFunction<Double> pow2BoundaryCondition  = _r -> { double ftMax = 1.0/3.0;   return  _r*0.5+0.25;
+                //  (_r*_r)*ftMax;// 0.3;
+        };  //    2) (_r*_r)*ftMax;        1)    (10*Math.pow(_r, 2)/100)*ftMax;}
+
+        pullListConS = new ArrayList<>();
+        pullListConT = new ArrayList<>();
+
+        listConSLegend = new ArrayList<>();
+        listConTLegend = new ArrayList<>();
 
 
-        listConS = xi0ForConstS(s, sinConveyorPdeModel, pow2BoundaryCondition);
+        for (double _s=0; _s<1.0;  _s+=0.1)   {
+            pullListConS.add(xi0ForConstS(_s, _s0, _t0, sinConveyorPdeModel, pow2BoundaryCondition));
+            listConSLegend.add("S/Sd="+ String.format("%3.1f",_s));
 
-        listConT = xi0ForConstT(t, sinConveyorPdeModel, pow2BoundaryCondition);
+        }
+        for ( double _t=0; _t<1.0; _t+=0.1)   {
+            pullListConT.add(xi0ForConstT(_t, _s0, _t0,  sinConveyorPdeModel, pow2BoundaryCondition));
+            listConTLegend.add("t/Td="+ String.format("%3.1f",_t));
+        }
 
-    /*
-    for (Point2D.Double p2 : vСonConveyorPdeModel.xi0ForConstS(s, rConveyorPdeModel, rPow2BoundaryCondition)) {
-        System.out.printf("p.s= %5.2f              p.hi0=  %5.2f  %n", p2.getX(), p2.getY());
 
     }
 
-    for (Point2D.Double p3 : vСonConveyorPdeModel.xi0ForConstT(t, rConveyorPdeModel, rPow2BoundaryCondition)) {
-        System.out.printf("p.s= %5.2f              p.hi0=  %5.2f  %n", p3.getX(), p3.getY());
 
+    public VСonConveyorPdeModel dataBuildVСonConveyorPdeModel(String s) {
+        VСonConveyorPdeModel vСonConveyorPdeModel =
+                new VСonConveyorPdeModel(this, null).setTitleGraph(ResourceBundle.getBundle("ui").getString("productionLine"))
+                                                    .setxMin(0.0).setyMin(0.0).setyMax(1.0).setyTickUnit(0.1);
+        if(s=="oX=S") {
+            vСonConveyorPdeModel        .setTitleX(ResourceBundle.getBundle("ui").getString("titleOxS"))
+                                        .setxMax(1.0).setxTickUnit(0.1)
+                                        .setTitleY(ResourceBundle.getBundle("ui").getString("titleOyS"))
+                                        .setList(getListConT())
+                                        .setPullList(pullListConT).setListLegend(listConTLegend);
+        }
+        if (s=="oX=T"){
+            vСonConveyorPdeModel        .setTitleX(ResourceBundle.getBundle("ui").getString("titleOxT"))
+                                        .setxMax(2.0).setxTickUnit(0.2)
+                                        .setTitleY(ResourceBundle.getBundle("ui").getString("titleOyT"))
+                                        .setList(getListConS())
+                                        .setPullList(pullListConS).setListLegend(listConSLegend);
+        }
+
+        if(s.length()>4) {
+            if (s.substring(0, 9).equals("oX=Salone")) {
+                List<List<Point2D.Double>> pullListAlone = new ArrayList<>();
+                List<String> listLegendAlone = new ArrayList<>();
+
+                int i = Integer.parseInt(s.substring(10, 11));
+                pullListAlone.add(pullListConT.get(i));
+                listLegendAlone.add(listConTLegend.get(i));
+
+                vСonConveyorPdeModel.setTitleGraph("")
+                        .setTitleX((i+1)+")   "+listConTLegend.get(i))
+                        .setxMax(1.0).setxTickUnit(0.1)
+
+                        .setPullList(pullListAlone).setListLegend(listLegendAlone);
+            }
+            if (s.substring(0, 9).equals("oX=Talone")) {
+                List<List<Point2D.Double>> pullListAlone = new ArrayList<>();
+                List<String> listLegendAlone = new ArrayList<>();
+
+                int i = Integer.parseInt(s.substring(10, 11));
+                pullListAlone.add(pullListConS.get(i));
+                listLegendAlone.add(listConSLegend.get(i));
+
+                vСonConveyorPdeModel.setTitleGraph("")
+                        .setTitleX((i+1)+")   "+listConSLegend.get(i))
+                        .setxMax(2.0).setxTickUnit(0.2)
+
+                        .setPullList(pullListAlone).setListLegend(listLegendAlone);
+            }
+        }
+
+
+        return vСonConveyorPdeModel;
     }
-*/
-
-    }
-
-
-    public void dataBuild(String s) {
-         if(s=="T") {
-             list= getListConT();
-             titleOx="S";
-         }
-        if (s=="S"){ list= getListConS(); titleOx="T";}//**************************************************************************************************************
-    }
-
 
     private void change() {
 
@@ -137,23 +151,15 @@ public class VСonConveyorPdeModel extends ObservableDS implements LineChartInte
 
     }
 
+    private double decision(double _s, double  _t, double  _s0,double  _t0, DoubleFunction<Double> a, DoubleFunction<Double> b) {
+        double _r = r(_s,_t,_s0,_t0);
 
-    private void changeInitialboundaryCondition(double _s1, double _t1, InitialCondition a1, BoundaryCondition b1) {
+   //     System.out.println("->"+(b.apply(_t0 )-a.apply(_s0) ) * ( h(_s-_s0)*h(_s0-_s) + h(_t-_t0)*h(_t0-_t) )+"          "+_s+"             "+_t);
 
-
-        listConT = xi0ForConstT(_t1, a1, b1);
-        listConS = xi0ForConstS(_s1, a1, b1);
-
-        change();
-
-    }
-
-
-    private double decision(double r, InitialCondition a, BoundaryCondition b) {
-
-
-        return a.initialCondition(r) * h(r) + b.boundaryCondition(r) * h(-r);
-
+        return a.apply(  _r +_s0) * (h(_r) + h(_s0-_s))
+             + b.apply(_t0 - _r ) * (h(-_r)- h(_s0-_s))
+             +(b.apply(_t0 )-a.apply(_s0) ) * ( h(_s-_s0)*h(_s0-_s) * h(_t-_t0)*h(_t0-_t) )
+                ;
 
     }
 
@@ -163,20 +169,17 @@ public class VСonConveyorPdeModel extends ObservableDS implements LineChartInte
         else return 1.0;
     }
 
-    private double r(double _s, double _t) {
-        return _s - _t;
+    private double r(double _s, double _t, double _s0, double _t0) {
+        return _s - _t - _s0 + _t0 ;
     }
 
-
-    private List<Point2D.Double> xi0ForConstT(double _t, InitialCondition a, BoundaryCondition b) {
+    private List<Point2D.Double> xi0ForConstT(double _t, double _s0, double _t0, DoubleFunction<Double> a, DoubleFunction<Double> b) {
         List<Point2D.Double> doubleList = new ArrayList<>();
-        double s0 = 0.0;
-        double sD = 1.0;
-        double dS = 0.01;
+        double dS = 0.001;
         if (_t >= 0) {
-            for (double _s = s0; _s <= sD; _s += dS) {
+            for (double _s = 0.0; _s <= 1.0; _s += dS) {
                 Point2D.Double p = new Point2D.Double(_s,
-                        decision(r(_s, _t), a, b)
+                        decision(_s, _t, _s0, _t0, a, b)
                 );
                 doubleList.add(p);
             }
@@ -185,16 +188,16 @@ public class VСonConveyorPdeModel extends ObservableDS implements LineChartInte
     }
 
 
-    private List<Point2D.Double> xi0ForConstS(double _s, InitialCondition a, BoundaryCondition b) {
+    private List<Point2D.Double> xi0ForConstS(double _s, double _s0, double _t0, DoubleFunction<Double> a,DoubleFunction<Double> b) {
         List<Point2D.Double> doubleList = new ArrayList<>();
         double t0 = 0.0;
         double tD = 10.0;
-        double dT = 0.1;
+        double dT = 0.01;
         if (_s >= 0 && _s <= 1) {
             for (double _t = t0; _t <= tD; _t += dT) {
                 Point2D.Double p = new Point2D.Double(_t,
-                        decision(r(_s, _t), a, b)
-                );
+                                                       decision(_s, _t, _s0, _t0 , a, b)
+                                                     );
                 doubleList.add(p);
             }
         }
@@ -204,22 +207,120 @@ public class VСonConveyorPdeModel extends ObservableDS implements LineChartInte
 
 
     @Override
-    public DataSet getDataSet() {
-        return o.getDataSet();
+    public List<String> getListLegend() {
+        return listLegend;
     }
+
+    public VСonConveyorPdeModel setListLegend(List<String> listLegend) {
+        this.listLegend = listLegend;
+        return this;
+    }
+
 
     @Override
-    public List<Point2D.Double> getlist() {
-        return list;
+    public String getTitleY() {
+        return titleOy;
     }
 
+    public VСonConveyorPdeModel setTitleY(String titleOy) {
+        this.titleOy = titleOy;
+        return this;
+    }
     @Override
     public String getTitleX() {
         return titleOx;
     }
 
+    public VСonConveyorPdeModel setTitleX(String titleOx) {
+        this.titleOx = titleOx;
+        return this;
+    }
     @Override
-    public String getTitleY() {
-        return titleOy;
+    public List<Point2D.Double> getList() {
+        return list;
+    }
+
+    public VСonConveyorPdeModel setList(List<Point2D.Double> list) {
+        this.list = list;
+        return this;
+    }
+
+    @Override
+    public List<List<Point2D.Double>> getPullList() {
+        return pullList;
+    }
+    public VСonConveyorPdeModel setPullList(List<List<Point2D.Double>> pullList) {
+        this.pullList = pullList;
+        return this;
+    }
+
+    @Override
+    public double getxMin() {
+        return xMin;
+    }
+
+    public VСonConveyorPdeModel setxMin(double xMin) {
+        this.xMin = xMin;
+        return this;
+    }
+
+    @Override
+    public double getxMax() {
+        return xMax;
+    }
+
+    public VСonConveyorPdeModel setxMax(double xMax) {
+        this.xMax = xMax;
+        return this;
+    }
+
+    @Override
+    public double getyMax() {
+        return yMax;
+    }
+
+    public VСonConveyorPdeModel setyMax(double yMax) {
+        this.yMax = yMax;
+        return this;
+    }
+
+    @Override
+    public double getyMin() {
+        return yMin;
+    }
+
+    public VСonConveyorPdeModel setyMin(double yMin) {
+        this.yMin = yMin;
+        return this;
+    }
+
+    @Override
+    public String getTitleGraph() {
+        return titleGraph;
+    }
+
+    public VСonConveyorPdeModel setTitleGraph(String titleGraph) {
+        this.titleGraph = titleGraph;
+        return this;
+    }
+
+    @Override
+    public double getxTickUnit() {
+        return xTickUnit;
+    }
+
+    public VСonConveyorPdeModel setxTickUnit(double xTickUnit) {
+        this.xTickUnit = xTickUnit;
+        return this;
+    }
+
+    @Override
+    public double getyTickUnit() {
+        return yTickUnit;
+    }
+
+    public VСonConveyorPdeModel setyTickUnit(double yTickUnit) {
+        this.yTickUnit = yTickUnit;
+        return this;
     }
 }

@@ -9,21 +9,49 @@ import java.util.List;
 
 public class LineChartModel extends ObservableDS implements LineChartInterface {
 
-    private ObservableDS o;
+
     private List<Point2D.Double> list;
+    private List<String> listLegend;
+    private List<List<Point2D.Double>> pullList;
+    private String titleGraph;
     private String titleX;
     private String titleY;
+    private double xMin;
+    private double xMax;
+    private double xTickUnit;
+    private double yMin;
+    private double yMax;
+    private double yTickUnit;
 
     public LineChartModel(ObservableDS o, Rule rule){
-        this.o=o;
-        list =( (LineChartInterface) o).getlist();
-        titleX=( (LineChartInterface) o).getTitleX();
-        titleY=( (LineChartInterface) o).getTitleY();
+       super(o,rule);
+        list =( (LineChartInterface) observableDS).getList();
+        listLegend = ( (LineChartInterface) observableDS).getListLegend();
+        pullList =( (LineChartInterface) observableDS).getPullList();
+        titleGraph=( (LineChartInterface) observableDS).getTitleGraph();
+        titleX=( (LineChartInterface) observableDS).getTitleX();
+        titleY=( (LineChartInterface) observableDS).getTitleY();
+        xMin = ( (LineChartInterface) observableDS).getxMin();
+        xMax = ( (LineChartInterface) observableDS).getxMax();
+        yMin = ( (LineChartInterface) observableDS).getyMin();
+        yMax = ( (LineChartInterface) observableDS).getyMax();
+        xTickUnit = ( (LineChartInterface) observableDS).getxTickUnit();
+        yTickUnit = ( (LineChartInterface) observableDS).getyTickUnit();
     }
 
     @Override
-    public List<Point2D.Double> getlist() {
+    public List<Point2D.Double> getList() {
         return list;
+    }
+
+    @Override
+    public List<String> getListLegend() {
+        return listLegend;
+    }
+
+    @Override
+    public String getTitleGraph() {
+        return titleGraph;
     }
 
     @Override
@@ -31,13 +59,42 @@ public class LineChartModel extends ObservableDS implements LineChartInterface {
         return titleX;
     }
 
-    @Override
+     @Override
     public String getTitleY() {
         return titleY;
     }
 
     @Override
-    public DataSet getDataSet() {
-        return o.getDataSet();
+    public List<List<Point2D.Double>> getPullList() {
+        return pullList;
     }
+    @Override
+    public double getxMax() {
+        return xMax;
+    }
+    @Override
+    public double getxMin() {
+        return xMin;
+    }
+
+    @Override
+    public double getxTickUnit() {
+        return xTickUnit;
+    }
+
+    @Override
+    public double getyMax() {
+        return yMax;
+    }
+
+    @Override
+    public double getyMin() {
+        return yMin;
+    }
+
+    @Override
+    public double getyTickUnit() {
+        return yTickUnit;
+    }
+
 }

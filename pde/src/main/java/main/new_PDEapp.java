@@ -1,15 +1,20 @@
 package main;
 
+import designpatterns.MVC;
+import designpatterns.ObservableDS;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 //import resources.images.icons.IconT;
+import persistence.loader.DataSet;
 import trestcontroller.TrestController;
 import trestmodel.TrestModel;
 import trestview.TrestView;
+import trestview.table.tablemodel.abstracttablemodel.Rule;
 
 import java.awt.*;
 import java.util.ResourceBundle;
@@ -34,11 +39,8 @@ public class new_PDEapp extends Application {
     @Override
     public void start(Stage stage) throws Exception {
 
-        //region Trest MVC
-        TrestModel trestModel = new TrestModel();
-        TrestView trestView = new TrestView(trestModel);
-        TrestController trestController = new TrestController();
-        trestModel.addObserver(trestView);
+        MVC trestMVC = new MVC(TrestModel.class, TrestController.class, TrestView.class, new ObservableDS(), null);
+
         //endregion
 
         //region Methods of specifying the icon.
@@ -52,12 +54,13 @@ public class new_PDEapp extends Application {
 
         //endregion
 
+
         FXMLLoader loader = new FXMLLoader();
         loader.setResources(ResourceBundle.getBundle("ui"));
         stage.setTitle(loader.getResources().getString("stageTitle"));
         stage.initStyle(StageStyle.DECORATED);
         stage.setMaximized(true);
-        stage.setScene(new Scene(trestView));
+        stage.setScene(new Scene((BorderPane)trestMVC.getView()));
         stage.setWidth(DEFAULT_WIDTH / 2);
         stage.setHeight(DEFAULT_HEIGHT / 2);
         stage.show();

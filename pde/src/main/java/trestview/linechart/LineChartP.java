@@ -1,5 +1,6 @@
 package trestview.linechart;
 
+import designpatterns.InitializableDS;
 import designpatterns.ObservableDS;
 import javafx.beans.Observable;
 import javafx.geometry.Side;
@@ -13,6 +14,7 @@ import javafx.scene.paint.Color;
 import java.awt.geom.Point2D;
 import java.util.List;
 import java.util.Observer;
+import java.util.ResourceBundle;
 
 /**
  * Created by Maxim on 15.08.2016.
@@ -23,7 +25,7 @@ public  class LineChartP extends HBox implements Observer{
 
     private LineChartInterface o;
 
-     public LineChartP(ObservableDS o, LineChartController lineChartController){
+     public LineChartP(ObservableDS o, InitializableDS initializableDS){
         this.o =(LineChartInterface)o;
 
         viewgrafic();
@@ -33,26 +35,23 @@ public  class LineChartP extends HBox implements Observer{
 
 
     public void viewgrafic(){
-
-
-
-        NumberAxis xAxis = new NumberAxis(o.getTitleX(), 0,1, 10);
+        NumberAxis xAxis = new NumberAxis(o.getTitleX(), o.getxMin(),o.getxMax(), o.getxTickUnit());
         xAxis.setTickLabelFill(Color.BROWN);
 
-        NumberAxis yAxis = new NumberAxis(o.getTitleY(), 0,3, 10);
+        NumberAxis yAxis = new NumberAxis(o.getTitleY(),  o.getyMin(),o.getyMax(),o.getyTickUnit() );
         yAxis.setTickLabelFill(Color.BROWN);
         // yAxis.setTickLabelGap(1);
         yAxis.setSide(Side.LEFT);
         //yAxis.setAutoRanging(false);
  //       yAxis.setMinorTickCount(10);
 
-        LineChart<Number,Number> chart = new LineChart<Number,Number>(xAxis,yAxis);
+        LineChart<Number,Number> chart = new LineChart<>(xAxis,yAxis);
         chart.setLayoutX(50);
         chart.setLayoutY(10);
         chart.setCursor(Cursor.CROSSHAIR);
-        chart.setStyle("-fx-font:bold 14 Arial; -fx-text-fill:brown;");
+        chart.setStyle("-fx-font:bold 12 Arial; -fx-text-fill:brown;");
         chart.setPrefSize(500, 400);
-        chart.setTitle("Поточнфя линия");
+        chart.setTitle(o.getTitleGraph());
         chart.setTitleSide(Side.TOP);
         chart.setLegendVisible(true);
         chart.setLegendSide(Side.BOTTOM);
@@ -73,17 +72,18 @@ public  class LineChartP extends HBox implements Observer{
 */
         //seriesAirTem.getData().addAll(data1, new XYChart.Data(category.get(1),0), new XYChart.Data(category.get(2),24), new XYChart.Data(category.get(3),27), new XYChart.Data(category.get(4),30), new XYChart.Data(category.get(5),32), data7, new XYChart.Data(category.get(7),33), new XYChart.Data(category.get(8),31), new XYChart.Data(category.get(9),29), new XYChart.Data(category.get(10),26),data12);
 
-        XYChart.Series seriesWaterTem= new XYChart.Series();
+
         //seriesWaterTem.setName("Температура воды");
+        int i = 0;
+        for (List<Point2D.Double> list : o.getPullList())  {
+            XYChart.Series line= new XYChart.Series();
 
-        for (Point2D.Double p : o.getlist()) {
-            seriesWaterTem.getData().add(new XYChart.Data(p.getX(), p.getY()));
-            System.out.println(String.format("   px=%5.2f   py=%5.2f   ", p.getX(), p.getY()));
+            for (Point2D.Double p : list) {
+                line.getData().add(new XYChart.Data(p.getX(), p.getY()));
+            }
+            line.setName(o.getListLegend().get(i)); i++;
+            chart.getData().addAll(line);
         }
-
-        chart.getData().addAll(seriesWaterTem);
-
-        //this.getChildren().addAll(chart);
 
         this.getChildren().add(chart);
      }

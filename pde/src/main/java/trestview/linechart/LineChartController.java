@@ -1,5 +1,7 @@
 package trestview.linechart;
 
+import designpatterns.InitializableDS;
+import designpatterns.ObservableDS;
 import javafx.fxml.Initializable;
 
 import java.net.URL;
@@ -8,13 +10,11 @@ import java.util.ResourceBundle;
 /**
  * Created by Maxim on 16.08.2016.
  */
-public class LineChartController implements Initializable {
+public class LineChartController extends InitializableDS {
 
-    public LineChartController(LineChartModel lineChartModel) {
+    public LineChartController(ObservableDS observableDS) {
+        super(observableDS);
     }
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
 
-    }
 }

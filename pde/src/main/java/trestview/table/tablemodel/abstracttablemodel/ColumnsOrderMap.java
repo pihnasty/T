@@ -20,6 +20,7 @@ public class ColumnsOrderMap {
         map.put(Rule.Machine, new ColumnsOrder("id", "name", "modelmachine", "image","locationX","locationY", "angle", "state",  "description" ));
         map.put(Rule.RowTypemachine, new ColumnsOrder("id", "name", "description" ));
         map.put(Rule.RowFunctiondist, new ColumnsOrder("id", "name", "description" ));
+        map.put(Rule.RowUnit, new ColumnsOrder("id", "name", "description" ));
         map.put(Rule.Functiondist, new ColumnsOrder("id", "name", "averageValue", "meanSquareDeviation", "pathData", "description" ));
         map.put(Rule.Functiondist2, new ColumnsOrder("id", "name" ));
     }
