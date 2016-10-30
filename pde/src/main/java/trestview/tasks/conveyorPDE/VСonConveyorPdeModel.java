@@ -40,6 +40,12 @@ public class VСonConveyorPdeModel extends ObservableDS implements LineChartInte
     private List<String> listConSLegend;
     private List<String> listLegend;
 
+    private double tMax = 2.0;
+    private double tMin = 0.0;
+    private double sMax =1.0;
+
+
+    public enum Conditions {v1, v2};
 
     public List<Point2D.Double> getListConT() {
         return listConT;
@@ -60,14 +66,33 @@ public class VСonConveyorPdeModel extends ObservableDS implements LineChartInte
 
     public VСonConveyorPdeModel(ObservableDS o, Rule rule) {
         super(o,rule);
-
         double _s0 = 0.0;
         double _t0 = 0.0;
 
-        DoubleFunction<Double> sinConveyorPdeModel    = _r -> (2 + Math.sin(2 * Math.PI * _r))/3.0;
-        DoubleFunction<Double> pow2BoundaryCondition  = _r -> { double ftMax = 1.0/3.0;   return  _r*0.5+0.25;
+
+
+        DoubleFunction<Double> sinConveyorPdeModelS     = _r -> (2 + Math.sin(2 * Math.PI * _r))/3.0;
+        DoubleFunction<Double> sinConveyorPdeModelT     = _r -> (2 + Math.sin(2 * Math.PI *(0.5- _r)))/3.0;
+        DoubleFunction<Double> pow2BoundaryCondition  = _r -> { double ftMax = 1.0/3.0;   return  0.0;   };
+
+        DoubleFunction<Double>  conditionForS = null;
+        DoubleFunction<Double>  conditionForT = null;
+
+
+        Conditions v = Conditions.v2;
+
+        switch (v) {
+            case v1:  _s0 = 0.5;  _t0 =  0.0;  tMax =1.0;  conditionForS = sinConveyorPdeModelS; conditionForT=sinConveyorPdeModelT;   break;
+            case v2:  _s0 = 0.5;  _t0 = 0.0;   tMin =-0.5;  tMax =0.5;  conditionForS = sinConveyorPdeModelS; conditionForT=sinConveyorPdeModelT;   break;
+            default:                                            break;
+        }
+
+
+
+
+
                 //  (_r*_r)*ftMax;// 0.3;
-        };  //    2) (_r*_r)*ftMax;        1)    (10*Math.pow(_r, 2)/100)*ftMax;}
+        //    2) (_r*_r)*ftMax;        1)    (10*Math.pow(_r, 2)/100)*ftMax;}
 
         pullListConS = new ArrayList<>();
         pullListConT = new ArrayList<>();
@@ -77,12 +102,12 @@ public class VСonConveyorPdeModel extends ObservableDS implements LineChartInte
 
 
         for (double _s=0; _s<1.0;  _s+=0.1)   {
-            pullListConS.add(xi0ForConstS(_s, _s0, _t0, sinConveyorPdeModel, pow2BoundaryCondition));
+            pullListConS.add(xi0ForConstS(_s, _s0, _t0, conditionForS, conditionForT));
             listConSLegend.add("S/Sd="+ String.format("%3.1f",_s));
 
         }
-        for ( double _t=0; _t<1.0; _t+=0.1)   {
-            pullListConT.add(xi0ForConstT(_t, _s0, _t0,  sinConveyorPdeModel, pow2BoundaryCondition));
+        for ( double _t=tMin; _t<tMax; _t+=0.1)   {
+            pullListConT.add(xi0ForConstT(_t, _s0, _t0, conditionForS, conditionForT));
             listConTLegend.add("t/Td="+ String.format("%3.1f",_t));
         }
 
@@ -96,14 +121,14 @@ public class VСonConveyorPdeModel extends ObservableDS implements LineChartInte
                                                     .setxMin(0.0).setyMin(0.0).setyMax(1.0).setyTickUnit(0.1);
         if(s=="oX=S") {
             vСonConveyorPdeModel        .setTitleX(ResourceBundle.getBundle("ui").getString("titleOxS"))
-                                        .setxMax(1.0).setxTickUnit(0.1)
+                                        .setxMax(sMax).setxTickUnit(sMax/10.0)
                                         .setTitleY(ResourceBundle.getBundle("ui").getString("titleOyS"))
                                         .setList(getListConT())
                                         .setPullList(pullListConT).setListLegend(listConTLegend);
         }
         if (s=="oX=T"){
             vСonConveyorPdeModel        .setTitleX(ResourceBundle.getBundle("ui").getString("titleOxT"))
-                                        .setxMax(2.0).setxTickUnit(0.2)
+                                        .setxMin(tMin).setxMax(tMax).setxTickUnit( (tMax-tMin)/10.0)
                                         .setTitleY(ResourceBundle.getBundle("ui").getString("titleOyT"))
                                         .setList(getListConS())
                                         .setPullList(pullListConS).setListLegend(listConSLegend);
@@ -120,7 +145,7 @@ public class VСonConveyorPdeModel extends ObservableDS implements LineChartInte
 
                 vСonConveyorPdeModel.setTitleGraph("")
                         .setTitleX((i+1)+")   "+listConTLegend.get(i))
-                        .setxMax(1.0).setxTickUnit(0.1)
+                        .setxMax(sMax).setxTickUnit(sMax/10.0)
 
                         .setPullList(pullListAlone).setListLegend(listLegendAlone);
             }
@@ -134,7 +159,7 @@ public class VСonConveyorPdeModel extends ObservableDS implements LineChartInte
 
                 vСonConveyorPdeModel.setTitleGraph("")
                         .setTitleX((i+1)+")   "+listConSLegend.get(i))
-                        .setxMax(2.0).setxTickUnit(0.2)
+                        .setxMin(tMin).setxMax(tMax).setxTickUnit( (tMax-tMin)/10.0)
 
                         .setPullList(pullListAlone).setListLegend(listLegendAlone);
             }
@@ -158,7 +183,8 @@ public class VСonConveyorPdeModel extends ObservableDS implements LineChartInte
 
         return a.apply(  _r +_s0) * (h(_r) + h(_s0-_s))
              + b.apply(_t0 - _r ) * (h(-_r)- h(_s0-_s))
-             +(b.apply(_t0 )-a.apply(_s0) ) * ( h(_s-_s0)*h(_s0-_s) * h(_t-_t0)*h(_t0-_t) )
+           //  +8*(b.apply(_t0 )-a.apply(_s0) ) * ( h(_s-_s0)*h(_s0-_s) * h(_t-_t0)*h(_t0-_t) )
+             +2.0*(b.apply(_t0 )-a.apply(_s0) ) * ( h(_r)*h(-_r)  )
                 ;
 
     }
@@ -176,31 +202,28 @@ public class VСonConveyorPdeModel extends ObservableDS implements LineChartInte
     private List<Point2D.Double> xi0ForConstT(double _t, double _s0, double _t0, DoubleFunction<Double> a, DoubleFunction<Double> b) {
         List<Point2D.Double> doubleList = new ArrayList<>();
         double dS = 0.001;
-        if (_t >= 0) {
+
             for (double _s = 0.0; _s <= 1.0; _s += dS) {
                 Point2D.Double p = new Point2D.Double(_s,
                         decision(_s, _t, _s0, _t0, a, b)
                 );
                 doubleList.add(p);
             }
-        }
+
         return doubleList;
     }
 
 
     private List<Point2D.Double> xi0ForConstS(double _s, double _s0, double _t0, DoubleFunction<Double> a,DoubleFunction<Double> b) {
         List<Point2D.Double> doubleList = new ArrayList<>();
-        double t0 = 0.0;
         double tD = 10.0;
         double dT = 0.01;
-        if (_s >= 0 && _s <= 1) {
-            for (double _t = t0; _t <= tD; _t += dT) {
+            for (double _t = tMin; _t <= tD; _t += dT) {
                 Point2D.Double p = new Point2D.Double(_t,
                                                        decision(_s, _t, _s0, _t0 , a, b)
                                                      );
                 doubleList.add(p);
             }
-        }
         return doubleList;
 
     }

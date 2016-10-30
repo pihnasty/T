@@ -200,7 +200,7 @@ public class PanelFragment {
                     //newO = new Work(fm.getDataSet());  					//	создаем новый объект Work (производство) (оставил для образца)  
                     fm.getTrest().getWorks().add((Work) newO);				//  помещаем его в коллекцию Trest.works
                     work = (Work) newO;
-//RowWork r = new RowWork();							//	создаем новый объект RowWork (строка производство) (оставил для образца) 				            	 	
+
                     fm.getDataSet().getTabWorks().add((RowWork) rowO);				//  помещаем его в коллекцию DataSet.tabWorks
 
                     RowTrestWork rIdId = new RowTrestWork(fm.getTrest().getId(), ((RowIdNameDescription) newO).getId(), "   ");	//	Для связи по id строки RowWork таблицы tabWorks со строкой RowTrest таблицы tabTrests создаем строку реестра  RowTrestWork и (читать ниже)

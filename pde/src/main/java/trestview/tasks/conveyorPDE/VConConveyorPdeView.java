@@ -30,7 +30,12 @@ public class VConConveyorPdeView extends BorderPaneObserverDS {
     public  VConConveyorPdeView(ObservableDS observebleDS, InitializableDS initializableDS){
         super(observebleDS,initializableDS);
         inizilize(observableDS);
-        FXMLLoader fxmlLoader = XmlRW.fxmlLoad(this,initializableDS, "trestview/menu/tasks/conveyorPDE/vConConveyorPdeView.fxml","ui", "trestview/menu/tasks/conveyorPDE/vConConveyorPdeStyle.css");
+        FXMLLoader fxmlLoader = XmlRW.fxmlLoad(this,initializableDS, "trestview/tasks/conveyorPDE/vConConveyorPdeView.fxml","ui", "trestview/tasks/conveyorPDE/vConConveyorPdeStyle.css");
+
+     //   setStyle("-fx-background-color: red;");
+
+ //        getStyleClass().add("vConConveyorPdeStyle");
+   //     getStylesheets().add("barchartsample/Chart.css");
 
         int widthSection = (int)1.5*Toolkit.getDefaultToolkit ().getScreenSize ().width/3;
 
