@@ -36,6 +36,7 @@ public class TrestView extends BorderPaneObserverDS {
     private TrestModel trestModel;
     private DataSet dataSet;
     private List<Node> nodes;
+//    private MachineTestView machineTestView;
     private MachineTestView machineTestView;
 
     private MVC resourceLink;

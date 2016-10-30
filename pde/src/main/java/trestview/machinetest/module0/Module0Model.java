@@ -23,7 +23,7 @@ public class Module0Model extends Observable {
     public Module0Model() {
 //        this.randomVariablesList = new ArrayDeque<>();
 //        this.groupedStatisticalSeries = new Hashtable<>();
-   //     populateList(100);
+//        populateList(100);
     }
 
     public double getRandomVariable() {
@@ -64,7 +64,7 @@ public class Module0Model extends Observable {
         Timeline timeline = new Timeline(new KeyFrame(Duration.millis(3000), new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                System.out.println("this is called every 3 seconds on UI thread");
+                //this is called every 3 seconds on UI thread
                 double value = Math.random() * 100;
                 randomVariable = value;
                 changed();
