@@ -1,5 +1,7 @@
 package trestview.machinetest;
 
+import designpatterns.InitializableDS;
+import designpatterns.ObservableDS;
 import entityProduction.Machine;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -11,11 +13,16 @@ import java.util.ResourceBundle;
 /**
  * Created by Roman Korsun on 22.03.2016.
  */
-public class MachineTestController implements Initializable {
+public class MachineTestController extends InitializableDS {
     private MachineTestModel machineTestModel;
 
-    public MachineTestController(MachineTestModel machineTestModel) {
-        this.machineTestModel = machineTestModel;
+    //stay tuned
+    public MachineTestController(MachineTestModel model) {
+        this((ObservableDS)model);
+    }
+    public MachineTestController(ObservableDS machineTestModel) {
+        super(machineTestModel);
+
     }
 
     @Override

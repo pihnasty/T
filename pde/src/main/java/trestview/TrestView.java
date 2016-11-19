@@ -22,6 +22,7 @@ import trestview.resourcelink.ResourceLinkView;
 import trestview.routeperspective.RoutePerspectiveController;
 import trestview.routeperspective.RoutePerspectiveModel;
 import trestview.routeperspective.RoutePerspectiveView;
+import trestview.table.tablemodel.abstracttablemodel.Rule;
 import trestview.tasks.conveyorPDE.VConConveyorPdeController;
 import trestview.tasks.conveyorPDE.VConConveyorPdeView;
 import trestview.tasks.conveyorPDE.VСonConveyorPdeModel;
@@ -37,11 +38,13 @@ public class TrestView extends BorderPaneObserverDS {
     private DataSet dataSet;
     private List<Node> nodes;
 //    private MachineTestView machineTestView;
-    private MachineTestView machineTestView;
+
 
     private MVC resourceLink;
     private MVC conConveyorPdeModel;
     private MVC routePerspective;
+    private MVC machineTest;
+
 
     public TrestView(ObservableDS trestModel, InitializableDS trestController) {
         super(trestModel,trestController);
@@ -62,11 +65,11 @@ public class TrestView extends BorderPaneObserverDS {
 
         this.setCenter((BorderPane)resourceLink.getView());
 
-        MachineTestModel machineTestModel = new MachineTestModel((TMenuModel)menu.getModel());
-        MachineTestController machineTestController = new MachineTestController(machineTestModel);
-        machineTestView = new MachineTestView(machineTestModel, machineTestController);
-        machineTestModel.addObserver(machineTestView);
-      //  machineTest = new MVC (MachineTestModel.class,  MachineTestController.class, MachineTestView.class,this.trestModel, null);
+//        MachineTestModel machineTestModel = new MachineTestModel((TMenuModel)menu.getModel());
+//        MachineTestController machineTestController = new MachineTestController(machineTestModel);
+//        machineTestView = new MachineTestView(machineTestModel, machineTestController);
+//        machineTestModel.addObserver(machineTestView);
+         machineTest = new MVC (MachineTestModel.class,  MachineTestController.class, MachineTestView.class, this.trestModel, Rule.Functiondist);
 
 
         /*
@@ -92,7 +95,7 @@ public class TrestView extends BorderPaneObserverDS {
 
     private void updateCenter (TMenuModel o) {
         switch (o.getMenuItemCall()) {
-            case testOfMachineItem:             this.setCenter(machineTestView);                            break;
+            case testOfMachineItem:             this.setCenter((BorderPane)machineTest.getView()); ;                            break;
             case resourcesLinksPerspectiveItem: this.setCenter((BorderPane)resourceLink.getView());         break;
             case conveyorSpeedConstantItem:     this.setCenter((BorderPane)conConveyorPdeModel.getView());  break;
             case routePerspectiveItem:          this.setCenter((BorderPane)routePerspective.getView());     break;

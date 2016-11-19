@@ -17,29 +17,33 @@ import java.util.Observable;
 /**
  * Created by Roman Korsun on 22.03.2016.
  */
-public class MachineTestModel extends Observable {
+public class MachineTestModel extends ObservableDS {
 
     private TMenuModel menuModel;
     private ArrayList<Double> randomValuesList;
     private DataSet dataSet;
 
 //    private Class tClass;
+    public MachineTestModel() {}
 
-
-
-    public MachineTestModel() {
+    public  MachineTestModel(ObservableDS observableDS, Rule rule) {
+        super(observableDS, rule);
         this.randomValuesList = new ArrayList<>();
+        this.dataSet = observableDS.getDataSet();
     }
-    public MachineTestModel(TMenuModel menuModel) {
-        this.menuModel = menuModel;
-        this.randomValuesList = new ArrayList<Double>();
-        populateList(100);
-//        this.tClass = tClass;
-        this.dataSet =  menuModel.getTrestModel().getDataSet();
-
-
-
-    }
+//    public MachineTestModel() {
+//        this.randomValuesList = new ArrayList<>();
+//    }
+//    public MachineTestModel(TMenuModel menuModel) {
+//        this.menuModel = menuModel;
+//        this.randomValuesList = new ArrayList<Double>();
+//        populateList(100);
+////        this.tClass = tClass;
+//        this.dataSet =  menuModel.getTrestModel().getDataSet();
+//
+//
+//
+//    }
 
     public TMenuModel getTMenuModel() {
         return menuModel;

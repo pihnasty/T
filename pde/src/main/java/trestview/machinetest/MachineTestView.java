@@ -1,6 +1,9 @@
 package trestview.machinetest;
 
+import designpatterns.InitializableDS;
 import designpatterns.MVC;
+import designpatterns.ObservableDS;
+import designpatterns.observerdsall.BorderPaneObserverDS;
 import entityProduction.Functiondist;
 import javafx.geometry.Insets;
 import javafx.scene.chart.NumberAxis;
@@ -32,7 +35,7 @@ import java.util.*;
 /**
  * Created by Roman Korsun on 22.03.2016.
  */
-public class MachineTestView extends BorderPane implements Observer {
+public class MachineTestView extends BorderPaneObserverDS implements Observer {
     private MachineTestModel machineTestModel;
     private TableViewP tableView;
 
@@ -43,9 +46,16 @@ public class MachineTestView extends BorderPane implements Observer {
 
     XYChart.Series series;
 
-    public MachineTestView(MachineTestModel machineTestModel, MachineTestController machineTestController) {
-        this.machineTestModel = machineTestModel;
-        XmlRW.fxmlLoad(this, machineTestController,"trestview\\machinetest\\machinetestView.fxml", "ui", "");
+//    public MachineTestView(MachineTestModel mTestModel, MachineTestController mTestController) {
+
+    public MachineTestView(MachineTestModel model, MachineTestController controller) {
+        this((ObservableDS)model, (InitializableDS)controller);
+    }
+
+    public MachineTestView(ObservableDS mTestModel, InitializableDS mTestController) {
+        super(mTestModel, mTestController);
+        this.machineTestModel = (MachineTestModel) mTestModel;
+        XmlRW.fxmlLoad(this, mTestController,"trestview\\machinetest\\machinetestView.fxml", "ui", "");
 //        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("machinetestView.fxml"));
 //        fxmlLoader.setResources(ResourceBundle.getBundle("resources.ui"));
 //        fxmlLoader.setRoot(this);
@@ -149,7 +159,7 @@ public class MachineTestView extends BorderPane implements Observer {
 //        chartView.setMaxSize(600, 400);
 //        chartView1.setMaxSize(600, 400);
 //        chartView2.setMaxSize(600, 400);
-
+//        vBox = new VBox();
 //        vBox.getChildren().addAll(animationView, tableView);
         vBox1.getChildren().addAll(module3View, module4View, module5View); //, chartView1, chartView2);
         splitPane.getItems().addAll(vBox, vBox1);
