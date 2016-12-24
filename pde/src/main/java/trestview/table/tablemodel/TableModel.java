@@ -65,12 +65,13 @@ public class TableModel <cL> extends TableBaseModel implements Observer {
 
         switch (rule) {
             case Subject_labour:
-
+                this.trest = observableModel.getTrest();
                 this.tab = trest.getWorks().get(0).getSubject_labours();
                 this.selectRow = tab.get(0);
                 this.parentselectRow = trest.getWorks().get(0);
                 break;
             case Route:
+                this.trest = observableModel.getTrest();
                 this.tab = trest.getWorks().get(0).getSubject_labours().get(0).getRoutes();
                 this.selectRow = tab.get(0);
                 this.parentselectRow = trest.getWorks().get(0).getSubject_labours().get(0);

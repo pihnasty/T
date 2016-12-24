@@ -87,7 +87,7 @@ public class RoutePerspectiveView extends BorderPaneObserverDS {
 
 //----------------------------------------------------------------------------------------------------------------------
         VBox vboxSplitPaneLeft = new VBox();
-        vboxSplitPaneLeft.getChildren().addAll(vboxWork,vboxSubject_labour,vboxRoute);
+        vboxSplitPaneLeft.getChildren().addAll(vboxWork,vboxSubject_labour ,vboxRoute);
         vboxSplitPaneLeft.setSpacing(5);   // The amount of vertical space between each child in the vbox.
         vboxSplitPaneLeft.setPadding(new Insets(10, 0, 0, 10));   // The top,right,bottom,left padding around the region's content. This space will be included in the calculation of the region's minimum and preferred sizes. By default padding is Insets.EMPTY and cannot be set to null.
 //----------------------------------------------------------------------------------------------------------------------

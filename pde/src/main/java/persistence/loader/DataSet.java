@@ -771,31 +771,7 @@ public class DataSet {
 
 
         //B--------Route ------------Cоздается Объект-----------------------------------------------------------------------------------------//
-        if (row.getClass() == RowRoute.class) {
-            ArrayList<Lineroute> lineroutes = new ArrayList<Lineroute>();
-            for (RowRouteLineroute wr : tabRoutesLineroutes) {
-                if (((RowRoute) row).getId() == wr.getId()) {
-                    for (RowLineroute w : tabLineroutes) {
-                        if (wr.getId2() == w.getId()) {
-                            lineroutes.add( createObject(w));
-                        }
-                    }
-                }
-            }
 
-            if (lineroutes.isEmpty() == true) {     // Этот  if создан в процессе отладки (в дальнейшем можно убрать или оставить на случай, если кто-то почистить данные в xml-файлах), так как в таблицах были не все данные. Смысл его в том, что он в случае отсутствия записи Предмета труда, которая должна быть в строке, создает в RowSubject_labour и связывает его с RowLine
-                // если для строки заказа по IdId не находится предмет труда, то
-                RowLineroute rSL = new RowLineroute(this, RowLineroute.class);    // а)создаем отсутствующий RowSubject_labour
-                tabLineroutes.add(rSL);                                                        // б)помещаем его в таблицу для RowSubject_labour
-                RowRouteLineroute rIdId = new RowRouteLineroute(((RowRoute) row).getId(),
-                        rSL.getId(),
-                        "   ");    //	в)для связи по id строки RowLine и RowSubject_labour  создаем строку реестра    и
-                tabRoutesLineroutes.add(rIdId);                                                                //	г) помещаем ее в таблицу DataSet.tabLinesSubject_labours
-                // теперь у нас есть все необходиое для создание отсутствующего предмета труда
-                //      operations.add((Operation) createObject(rSL));							// д) создаем недостающий предмет труда и помещаем его в коллекцию.
-            }
-            m =  new Route(((RowRoute) row).getId(), ((RowRoute) row).getName(), lineroutes, ((RowRoute) row).getDescription());
-        }
         //E--------Route ------------Cоздается Объект-----------------------------------------------------------------------------------------//
 
         //B--------Lineroute --------Cоздается Объект-----------------------------------------------------------------------------------------//
