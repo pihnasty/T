@@ -89,6 +89,7 @@ public class TableViewP<cL> extends TableView<cL> implements Observer {
             setStringColumn(parametersColumn, tableColumn,"description",tClass);
             setStringColumn(parametersColumn, tableColumn,"pathData",tClass);
             setStringColumn(parametersColumn, tableColumn,"modelmachine",tClass);
+            setStringColumn(parametersColumn, tableColumn,"unitName",tClass);
 
 
             tableCol=tableColumn;
@@ -331,6 +332,7 @@ public class TableViewP<cL> extends TableView<cL> implements Observer {
             switch (((TableModel)o).getRule()) {
                 case Machine:
                 case Subject_labour:
+                case Route:
                     this.getSelectionModel().getSelectedIndex();
                     updateTableModel((TableModel) o);
                     this.requestFocus();

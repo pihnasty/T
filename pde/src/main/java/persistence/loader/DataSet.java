@@ -68,6 +68,7 @@ public class DataSet {
     private ArrayList<RowResource> tabResources;
 
     private ArrayList<RowSubject_labourRoute> tabSubject_laboursRoutes;
+    private ArrayList<RowSubject_labourUnit> tabSubject_laboursUnits;
 
     private ArrayList<RowUnit> tabUnits;
 
@@ -102,11 +103,6 @@ public class DataSet {
 
 
 
-    /**
-     * Инициализация переменных
-     *
-     * @throws Throwable
-     */
     public DataSet() {
         tSettings = new ArrayList<RowSetting>();
         tabTrests = new ArrayList<RowTrest>();
@@ -117,7 +113,8 @@ public class DataSet {
         tabEmployees = new ArrayList<RowEmployee>();
         tabWorksEmployees = new ArrayList<RowWorkEmployee>();
         tabSubject_labours = new ArrayList<RowSubject_labour>();
-        tabSubject_laboursRoutes = new ArrayList<RowSubject_labourRoute>();
+        tabSubject_laboursRoutes = new ArrayList<>();
+        tabSubject_laboursUnits = new ArrayList<>();
         tabWorksSubject_labours = new ArrayList<RowWorkSubject_labour>();
         tabOrders = new ArrayList<RowOrder>();
         tabWorksOrders = new ArrayList<RowWorkOrder>();
@@ -146,6 +143,8 @@ public class DataSet {
         tabTypemachineModelmachines = new ArrayList<>();
         tabModelmachineMachines = new ArrayList<>();
         tabFunctiondists = new ArrayList<>();
+
+
 
 
 
@@ -193,6 +192,7 @@ public class DataSet {
         tabSubject_labours = (ArrayList<RowSubject_labour>) setTabXML(tabSubject_labours, RowSubject_labour.class);        // 	showTab(tabSubject_labours,RowSubject_labour.class);
 
         tabSubject_laboursRoutes = (ArrayList<RowSubject_labourRoute>) setTabXML(tabSubject_laboursRoutes, RowSubject_labourRoute.class);        // 	showTab(tabSubject_laboursRoutes,RowSubject_labourRoute.class);
+        tabSubject_laboursUnits = (ArrayList<RowSubject_labourUnit>) setTabXML(tabSubject_laboursUnits, RowSubject_labourUnit.class);
 
         tabWorksSubject_labours = (ArrayList<RowWorkSubject_labour>) setTabXML(tabWorksSubject_labours, RowWorkSubject_labour.class);    //showTab(tabWorksProducts,RowWorkProduct.class);
 
@@ -251,6 +251,7 @@ public class DataSet {
      * @throws Throwable
      */
     public void saveDataset() {
+
         writeTab(tabTrests);
         writeTab(tabTrestsWorks);
         writeTab(tabWorks);
@@ -265,6 +266,7 @@ public class DataSet {
         writeTab(tabEmployees);
         writeTab(tabSubject_labours);
         writeTab(tabSubject_laboursRoutes);
+        writeTab(tabSubject_laboursUnits);
         writeTab(tabOrders);
         writeTab(tabOrdersLines);
         writeTab(tabUnits);
@@ -291,6 +293,11 @@ public class DataSet {
         writeTab(tabFunctiondists);
         writeTab(tabParametrfunctiondists);
         writeTab(tabFunctiondistsParametrfunctiondistsTest);
+
+
+
+//        for (Object t: tabs) writeTab(t);
+
 
 
         for (int i = 50; i < 60; i++) {
@@ -728,11 +735,21 @@ public class DataSet {
             m = new Subject_labour( row.getId(),
                                     row.getName(),
                                     ((RowSubject_labour)row).getPrice(),
-                                    null,               //ArrayList<Route> routes,
+                                    ((Unit)select(row, tabUnits, tabSubject_laboursUnits ).get(0)).getName(),   //  Unit.getName()
+                                    select(row, tabRoutes, tabSubject_laboursRoutes ),   // ArrayList<Route> routes
                                     row.getDescription()
                                    );
         }
 //----------------------------------------------------------------------------------------------------------------------
+                if (row.getClass() == RowRoute.class) { //noinspection ConstantConditions
+                    m = new Route( row.getId(),
+                            row.getName(),
+                            select(row, tabLineroutes, tabRoutesLineroutes ),   // ArrayList<LineRoute> routes,
+                            row.getDescription()
+                    );
+                }
+//----------------------------------------------------------------------------------------------------------------------
+
 
 
         if (row.getClass() == RowEmployee.class) {

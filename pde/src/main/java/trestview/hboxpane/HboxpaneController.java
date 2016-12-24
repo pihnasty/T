@@ -1,6 +1,8 @@
 package trestview.hboxpane;
 
 
+import designpatterns.InitializableDS;
+import designpatterns.ObservableDS;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -17,7 +19,7 @@ import java.util.ResourceBundle;
 /**
  * Created by pom on 07.02.2016.
  */
-public class HboxpaneController implements Initializable {
+public class HboxpaneController extends InitializableDS {
 
     @FXML
     private Button addButton;
@@ -30,14 +32,10 @@ public class HboxpaneController implements Initializable {
 
     private HboxpaneModel hboxpaneModel;
 
-    public HboxpaneController() {
-
+     public HboxpaneController(ObservableDS observableDS) {
+        super(observableDS);
+        this.hboxpaneModel = (HboxpaneModel)observableDS;
     }
-
-    public HboxpaneController(HboxpaneModel hboxpaneModel) {
-        this.hboxpaneModel = hboxpaneModel;
-    }
-
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {

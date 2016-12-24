@@ -12,6 +12,7 @@ public enum Rule {
     Work(Work.class),
     Machine(Machine.class),
     Subject_labour(Subject_labour.class),
+    Route(Route.class),
     Functiondist(Functiondist.class),
     RoutePerspective(Route.class),
     Functiondist2(Functiondist.class);

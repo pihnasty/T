@@ -46,28 +46,35 @@ public class TableModel <cL> extends TableBaseModel implements Observer {
         this.sectionDataSet = observableModel.getSectionDataSet();
         this.rule = rule;
         this.tClass =  rule.getClassTab();
+
+        this.dataset = observableModel.getDataSet();
+        this.trest = observableModel.getTrest();
+
         if(rule.getClassTab()== Work.class)  {
-            this.dataset = observableModel.getDataSet();
-            this.trest = observableModel.getTrest();
+
+
             this.tab = trest.getWorks();
             this.selectRow = tab.get(0);
         }
         if(rule.getClassTab()== Machine.class)  {
-            this.dataset = observableModel.getDataSet();
-            this.trest = observableModel.getTrest();
+
             this.tab = trest.getWorks().get(0).getMachines();
             this.selectRow = tab.get(0);
             this.parentselectRow = trest.getWorks().get(0);
         }
 
         switch (rule) {
-            case Subject_labour: {
-                this.dataset = observableModel.getDataSet();
-                this.trest = observableModel.getTrest();
+            case Subject_labour:
+
                 this.tab = trest.getWorks().get(0).getSubject_labours();
                 this.selectRow = tab.get(0);
                 this.parentselectRow = trest.getWorks().get(0);
-            }
+                break;
+            case Route:
+                this.tab = trest.getWorks().get(0).getSubject_labours().get(0).getRoutes();
+                this.selectRow = tab.get(0);
+                this.parentselectRow = trest.getWorks().get(0).getSubject_labours().get(0);
+                break;
         }
 
 

@@ -56,7 +56,7 @@ public class  ResourceLinkView extends BorderPaneObserverDS {
         view.addEventHandler(MouseEvent.MOUSE_RELEASED, (SchemaController)schemaWorkMVC.getController());
 //----------------------------------------------------------------------------------------------------------------------
         MVC tableWorkMVC  = new MVC (TableModel.class, TableController.class, TableViewP.class, this.observableDS, Rule.Work );
-        MVC hboxpaneWorkMVC = new MVC (HboxpaneModel.class,HboxpaneController.class,HboxpaneView.class,dataSet, Rule.Work);
+        MVC hboxpaneWorkMVC = new MVC (HboxpaneModel.class,HboxpaneController.class,HboxpaneView.class,observableDS, Rule.Work);
         hboxpaneWorkMVC.addObserverP( (TableModel)tableWorkMVC.getModel());
 
         VBox vboxWork = new VBox();
@@ -69,7 +69,7 @@ public class  ResourceLinkView extends BorderPaneObserverDS {
         vboxWork.setPadding(new Insets(10, 0, 0, 10));   // The top,right,bottom,left padding around the region's content. This space will be included in the calculation of the region's minimum and preferred sizes. By default padding is Insets.EMPTY and cannot be set to null.
 //----------------------------------------------------------------------------------------------------------------------
         MVC tableMachineMVC  = new MVC (TableModel.class, TableController.class, TableViewP.class, this.observableDS, Rule.Machine );
-        MVC hboxpaneMachineMVC = new MVC (HboxpaneModel.class,HboxpaneController.class,HboxpaneView.class,dataSet, Rule.RowMachine);
+        MVC hboxpaneMachineMVC = new MVC (HboxpaneModel.class,HboxpaneController.class,HboxpaneView.class,observableDS, Rule.RowMachine);
         hboxpaneMachineMVC.addObserverP( (TableModel)tableMachineMVC .getModel());
 
         tableWorkMVC.addObserverP((TableModel)tableMachineMVC .getModel());

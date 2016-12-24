@@ -7,7 +7,7 @@ import trestview.table.tablemodel.abstracttablemodel.Rule;
 
 import java.util.Observable;
 
-public class HboxpaneModel extends Observable {
+public class HboxpaneModel extends ObservableDS {
 
     private Class tClass;
     private Rule rule;
@@ -22,6 +22,12 @@ public class HboxpaneModel extends Observable {
         this.tClass = rule.getClassTab();
         this.dataSet = dataSet;
 
+    }
+
+    public HboxpaneModel (ObservableDS observableModel, Rule rule) {
+        this.rule = rule;
+        this.tClass = rule.getClassTab();
+        this.dataSet = observableModel.getDataSet();
     }
 
 
