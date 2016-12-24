@@ -6,6 +6,7 @@ import designpatterns.ObservableDS;
 import entityProduction.Functiondist;
 import entityProduction.Machine;
 import entityProduction.Modelmachine;
+import entityProduction.Subject_labour;
 import javafx.beans.property.Property;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.value.ChangeListener;
@@ -37,10 +38,7 @@ import trestview.table.tablemodel.abstracttablemodel.Rule;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.util.ArrayList;
-import java.util.Observable;
-import java.util.Observer;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class TableViewP<cL> extends TableView<cL> implements Observer {
 
@@ -111,6 +109,7 @@ public class TableViewP<cL> extends TableView<cL> implements Observer {
             setDoubleColumn(parametersColumn, tableColumn,"state",tClass);
             setDoubleColumn(parametersColumn, tableColumn,"averageValue",tClass);
             setDoubleColumn(parametersColumn, tableColumn,"meanSquareDeviation",tClass);
+            setDoubleColumn(parametersColumn, tableColumn,"price",tClass);
             tableCol=tableColumn;
         }
         if (parametersColumn.getcLs()==Image.class) {
@@ -327,13 +326,27 @@ public class TableViewP<cL> extends TableView<cL> implements Observer {
             this.getFocusModel().focus(selectIndex);
         }
 
-        if (     (( ((TableModel)o).getMethodCall() == MethodCall.selectRowTable))&& tClass== Machine.class) {
-            this.getSelectionModel().getSelectedIndex();
-            updateTableModel((TableModel) o);
-            this.requestFocus();
-            this.getSelectionModel().select(selectIndex);
-            this.getFocusModel().focus(selectIndex);
+        if (     (( ((TableModel)o).getMethodCall() == MethodCall.selectRowTable))) {
+
+            switch (((TableModel)o).getRule()) {
+                case Machine:
+                case Subject_labour:
+                    this.getSelectionModel().getSelectedIndex();
+                    updateTableModel((TableModel) o);
+                    this.requestFocus();
+                    this.getSelectionModel().select(selectIndex);
+                    this.getFocusModel().focus(selectIndex);
+                    break;
+            }
         }
+
+//        if (     (( ((TableModel)o).getMethodCall() == MethodCall.selectRowTable))&& tClass== Machine.class) {
+//            this.getSelectionModel().getSelectedIndex();
+//            updateTableModel((TableModel) o);
+//            this.requestFocus();
+//            this.getSelectionModel().select(selectIndex);
+//            this.getFocusModel().focus(selectIndex);
+//        }
     }
     // Repaints table after the data changes
     public void repaintTable() {

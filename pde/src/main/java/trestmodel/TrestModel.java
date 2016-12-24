@@ -37,8 +37,6 @@ public class TrestModel extends ObservableDS {
 
         this.sectionDataSet = new SectionDataSet(dataSet);
 
-        DataSet.showTab(sectionDataSet.getTypemachines());
-
         for (RowTrest r: this.dataSet.getTabTrests()) trests.add( dataSet.createObject(r));
 
         for (Trest t: trests)  if (t.getId()==1)    this.trest= t;

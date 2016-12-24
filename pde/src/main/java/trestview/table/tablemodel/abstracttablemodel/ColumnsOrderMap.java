@@ -18,6 +18,9 @@ public class ColumnsOrderMap {
         map.put(Rule.Work, new ColumnsOrder("id", "name", "scheme", "image", "overallSize", "scaleEquipment", "description"));
         map.put(Rule.RowMachine, new ColumnsOrder("id", "name", "image","locationX","locationY",  "state",  "description" ));
         map.put(Rule.Machine, new ColumnsOrder("id", "name", "modelmachine", "image","locationX","locationY", "angle", "state",  "description" ));
+
+        map.put(Rule.Subject_labour, new ColumnsOrder("id", "name", "price", "description" ));
+
         map.put(Rule.RowTypemachine, new ColumnsOrder("id", "name", "description" ));
         map.put(Rule.RowFunctiondist, new ColumnsOrder("id", "name", "description" ));
         map.put(Rule.RowUnit, new ColumnsOrder("id", "name", "description" ));

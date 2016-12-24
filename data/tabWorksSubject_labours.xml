@@ -1,32 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <tabWorksSubject_labours>
 <RowWorkSubject_labour description="Описание продукта №4" id="1" id2="4"/>
-<RowWorkSubject_labour description="Описание продукта №5" id="2" id2="5"/>
-<RowWorkSubject_labour description="Описание продукта №6" id="2" id2="6"/>
+<RowWorkSubject_labour description="Описание продукта №5" id="3" id2="5"/>
+<RowWorkSubject_labour description="Описание продукта №6" id="4" id2="6"/>
 <RowWorkSubject_labour description="Описание продукта №7" id="2" id2="7"/>
 <RowWorkSubject_labour description="Описание продукта №8" id="1" id2="8"/>
 <RowWorkSubject_labour description="Описание продукта №9" id="1" id2="9"/>
 <RowWorkSubject_labour description="Описание продукта №10" id="2" id2="10"/>
 <RowWorkSubject_labour description="Описание продукта №11" id="1" id2="11"/>
-<RowWorkSubject_labour description="Описание продукта №12" id="1" id2="12"/>
-<RowWorkSubject_labour description="Описание продукта №13" id="1" id2="13"/>
 <RowWorkSubject_labour description="Описание продукта №14" id="2" id2="14"/>
 <RowWorkSubject_labour description="Описание продукта №15" id="1" id2="15"/>
 <RowWorkSubject_labour description="Описание продукта №16" id="2" id2="16"/>
-<RowWorkSubject_labour description="Описание продукта №17" id="1" id2="17"/>
-<RowWorkSubject_labour description="Описание продукта №18" id="1" id2="18"/>
-<RowWorkSubject_labour description="Описание продукта №19" id="2" id2="19"/>
-<RowWorkSubject_labour description="   " id="1" id2="99"/>
-<RowWorkSubject_labour description="   " id="1" id2="100"/>
-<RowWorkSubject_labour description="   " id="1" id2="101"/>
-<RowWorkSubject_labour description="   " id="1" id2="102"/>
-<RowWorkSubject_labour description="   " id="1" id2="103"/>
-<RowWorkSubject_labour description="   " id="1" id2="104"/>
-<RowWorkSubject_labour description="   " id="1" id2="105"/>
-<RowWorkSubject_labour description="   " id="1" id2="106"/>
-<RowWorkSubject_labour description="   " id="1" id2="107"/>
-<RowWorkSubject_labour description="   " id="1" id2="108"/>
-<RowWorkSubject_labour description="   " id="1" id2="109"/>
-<RowWorkSubject_labour description="   " id="1" id2="110"/>
-<RowWorkSubject_labour description="   " id="3" id2="111"/>
 </tabWorksSubject_labours>

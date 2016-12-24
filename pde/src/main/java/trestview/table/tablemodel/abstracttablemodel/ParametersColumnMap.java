@@ -29,6 +29,8 @@ public class ParametersColumnMap  {
         map.put("state", new ParametersColumn ("state",double.class, true, 100) );
         // Parameters  of column  for Machine
         map.put("modelmachine", new ParametersColumn ("modelmachine", Modelmachine.class, true, 100) );
+        // Parameters  of column  for Subject_labour
+        map.put("price", new ParametersColumn ("price", double.class, true, 100) );
         // Parameters  of column  for Functiondist
         map.put("averageValue", new ParametersColumn ("averageValue",double.class, true, 100) );
         map.put("meanSquareDeviation", new ParametersColumn ("meanSquareDeviation",double.class, true, 100) );

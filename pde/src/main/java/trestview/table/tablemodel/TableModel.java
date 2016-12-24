@@ -60,6 +60,15 @@ public class TableModel <cL> extends TableBaseModel implements Observer {
             this.parentselectRow = trest.getWorks().get(0);
         }
 
+        switch (rule) {
+            case Subject_labour: {
+                this.dataset = observableModel.getDataSet();
+                this.trest = observableModel.getTrest();
+                this.tab = trest.getWorks().get(0).getSubject_labours();
+                this.selectRow = tab.get(0);
+                this.parentselectRow = trest.getWorks().get(0);
+            }
+        }
 
 
         this.parametersOfColumns = buildParametersColumn() ;
@@ -103,6 +112,13 @@ public class TableModel <cL> extends TableBaseModel implements Observer {
 //                parentselectRow = (RowIdNameDescription) ((TableModel) o).selectRow;
 //                for (Work w : trest.getWorks()) if (w == ((TableModel) o).selectRow) this.tab = w.getMachines();
 //            }
+            switch (rule) {
+                case Subject_labour: {
+                    methodCall = MethodCall.selectRowTable;
+                    parentselectRow = (RowIdNameDescription) ((TableModel) o).selectRow;
+                    for (Work w : trest.getWorks()) if (w == ((TableModel) o).selectRow) this.tab = w.getSubject_labours();
+                }
+            }
         }
 
         changed();

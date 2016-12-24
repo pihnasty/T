@@ -22,7 +22,7 @@ public class ObservableDS extends Observable {
     public ObservableDS ()  {}
 
     public ObservableDS (ObservableDS observableDS)  {
-      //  this.observableDS = observableDS;
+        //  this.observableDS = observableDS;
     }
 
     public ObservableDS (ObservableDS observableDS, Rule rule)  {

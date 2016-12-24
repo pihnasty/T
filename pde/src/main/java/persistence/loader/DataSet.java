@@ -682,7 +682,9 @@ public class DataSet {
             ArrayList<Order> orders = new ArrayList<>();
             m = new Work(row.getId(), row.getName(),( (RowWork) row).getScheme(), ( (RowWork) row).getOverallSize(), ( (RowWork) row).getScaleEquipment(),
                     select(row, tabMachines, tabWorksMachines),     //  ArrayList<Machine> machines
-                    null, null, null, row.getDescription());
+                    null,
+                    select(row, tabSubject_labours, tabWorksSubject_labours),     //  ArrayList<Subject_labour> machines
+                    null, row.getDescription());
         }
 
 
@@ -721,13 +723,16 @@ public class DataSet {
                 ((RowParametrfunctiondist) row).getPathData(),
                 row.getDescription());
     }
-
-
-
-
-        //------------------------------------------------------------------------
-
-
+//----------------------------------------------------------------------------------------------------------------------
+        if (row.getClass() == RowSubject_labour.class) { //noinspection ConstantConditions
+            m = new Subject_labour( row.getId(),
+                                    row.getName(),
+                                    ((RowSubject_labour)row).getPrice(),
+                                    null,               //ArrayList<Route> routes,
+                                    row.getDescription()
+                                   );
+        }
+//----------------------------------------------------------------------------------------------------------------------
 
 
         if (row.getClass() == RowEmployee.class) {
@@ -746,32 +751,7 @@ public class DataSet {
             m = (cL) new Unit(((RowUnit) row).getId(), ((RowUnit) row).getName(), ((RowUnit) row).getDescription());
         }
 
-        //B--------Subject_labour----Cоздается Объект-----------------------------------------------------------------------------------------//
-        if (row.getClass() == RowSubject_labour.class) {
-            ArrayList<Route> routes = new ArrayList<Route>();
-            for (RowSubject_labourRoute wr : tabSubject_laboursRoutes) {
-                if (((RowSubject_labour) row).getId() == wr.getId()) {
-                    for (RowRoute w : tabRoutes) {
-                        if (wr.getId2() == w.getId()) {
-                            routes.add((Route) createObject(w));
-                        }
-                    }
-                }
-            }
 
-            if (routes.isEmpty() == true) {     // Этот  if создан в процессе отладки (в дальнейшем можно убрать или оставить на случай, если кто-то почистить данные в xml-файлах), так как в таблицах были не все данные. Смысл его в том, что он в случае отсутствия записи Предмета труда, которая должна быть в строке, создает в RowSubject_labour и связывает его с RowLine
-                // если для строки заказа по IdId не находится предмет труда, то
-                RowRoute rSL = new RowRoute(this, RowRoute.class);    // а)создаем отсутствующий RowSubject_labour
-                tabRoutes.add(rSL);                                                        // б)помещаем его в таблицу для RowSubject_labour
-                RowSubject_labourRoute rIdId = new RowSubject_labourRoute(((RowSubject_labour) row).getId(), rSL.getId(), "   ");    //	в)для связи по id строки RowLine и RowSubject_labour  создаем строку реестра    и
-
-                tabSubject_laboursRoutes.add(rIdId);                                                                //	г) помещаем ее в таблицу DataSet.tabLinesSubject_labours
-                // теперь у нас есть все необходиое для создание отсутствующего предмета труда
-                routes.add((Route) createObject(rSL));                            // д) создаем недостающий предмет труда и помещаем его в коллекцию.
-            }
-            m =  new Subject_labour(((RowSubject_labour) row).getId(), ((RowSubject_labour) row).getName(), ((RowSubject_labour) row).getPrice(), routes, ((RowSubject_labour) row).getDescription());
-        }
-        //E--------Subject_labour-------------------------------------------------------------------------------------------------------------//
 
         //B--------Route ------------Cоздается Объект-----------------------------------------------------------------------------------------//
         if (row.getClass() == RowRoute.class) {

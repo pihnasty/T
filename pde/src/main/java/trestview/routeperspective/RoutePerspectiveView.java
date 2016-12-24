@@ -57,6 +57,25 @@ public class RoutePerspectiveView extends BorderPaneObserverDS {
         vboxWork.setSpacing(5);   // The amount of vertical space between each child in the vbox.
         vboxWork.setPadding(new Insets(10, 0, 0, 10));   // The top,right,bottom,left padding around the region's content. This space will be included in the calculation of the region's minimum and preferred sizes. By default padding is Insets.EMPTY and cannot be set to null.
 //----------------------------------------------------------------------------------------------------------------------
+        MVC tableSubject_labourMVC  = new MVC (TableModel.class, TableController.class, TableViewP.class, this.observableDS, Rule.Subject_labour );
+        MVC hboxpaneSubject_labourMVC = new MVC (HboxpaneModel.class,HboxpaneController.class,HboxpaneView.class,this.observableDS.getDataSet(), Rule.Subject_labour);
+        hboxpaneSubject_labourMVC.addObserverP( (TableModel)tableSubject_labourMVC.getModel());
+        tableSubject_labourMVC.addObserverP((SchemaRouteModel)schemaRouteMVC.getModel());
+        VBox vboxSubject_labour = new VBox();
+
+        Label labelSubject_labour = new Label(fxmlLoader.getResources().getString("ListManufacturing"));
+        labelWork.setGraphic(new ImageView(new Image("file:pde\\src\\main\\resources\\images\\icons\\RowWork.png")));
+
+        tableWorkMVC.addObserverP((TableModel)tableSubject_labourMVC.getModel());
+
+
+        vboxSubject_labour.getChildren().addAll(labelWork,(HboxpaneView)hboxpaneSubject_labourMVC.getView(),(TableViewP)tableSubject_labourMVC.getView());
+        vboxSubject_labour.setSpacing(5);   // The amount of vertical space between each child in the vbox.
+        vboxSubject_labour.setPadding(new Insets(10, 0, 0, 10));   // The top,right,bottom,left padding around the region's content. This space will be included in the calculation of the region's minimum and preferred sizes. By default padding is Insets.EMPTY and cannot be set to null.
+//----------------------------------------------------------------------------------------------------------------------
+
+
+
 //        MVC tableMachineMVC  = new MVC (TableModel.class, TableController.class, TableViewP.class, this.observableDS, Rule.Machine );
 //        MVC hboxpaneMachineMVC = new MVC (HboxpaneModel.class,HboxpaneController.class,HboxpaneView.class,this.observableDS.getDataSet(), Rule.RowMachine);
 //        hboxpaneMachineMVC.addObserverP( (TableModel)tableMachineMVC .getModel());
@@ -78,7 +97,7 @@ public class RoutePerspectiveView extends BorderPaneObserverDS {
 //        vboxMachine.setPadding(new Insets(30, 0, 0, 10));   // The top,right,bottom,left padding around the region's content. This space will be included in the calculation of the region's minimum and preferred sizes. By default padding is Insets.EMPTY and cannot be set to null.
 //----------------------------------------------------------------------------------------------------------------------
         VBox vboxSplitPaneLeft = new VBox();
-        vboxSplitPaneLeft.getChildren().addAll(vboxWork);
+        vboxSplitPaneLeft.getChildren().addAll(vboxWork,vboxSubject_labour);
         vboxSplitPaneLeft.setSpacing(5);   // The amount of vertical space between each child in the vbox.
         vboxSplitPaneLeft.setPadding(new Insets(10, 0, 0, 10));   // The top,right,bottom,left padding around the region's content. This space will be included in the calculation of the region's minimum and preferred sizes. By default padding is Insets.EMPTY and cannot be set to null.
 //----------------------------------------------------------------------------------------------------------------------
