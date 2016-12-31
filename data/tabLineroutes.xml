@@ -2,9 +2,6 @@
 <tabLineroutes>
 <RowLineroute description="   " id="4" inputBuffer="0" inputBufferMax="100" inputBufferMin="0" name="Lineroute  4" numberWork="0" outputBuffer="0" outputBufferMax="100" outputBufferMin="0"/>
 <RowLineroute description="   " id="6" inputBuffer="0" inputBufferMax="100" inputBufferMin="0" name="Lineroute  6" numberWork="0" outputBuffer="0" outputBufferMax="100" outputBufferMin="0"/>
-<RowLineroute description="   " id="7" inputBuffer="0" inputBufferMax="100" inputBufferMin="0" name="Lineroute  7" numberWork="0" outputBuffer="0" outputBufferMax="100" outputBufferMin="0"/>
-<RowLineroute description="   " id="8" inputBuffer="0" inputBufferMax="100" inputBufferMin="0" name="Lineroute  8" numberWork="0" outputBuffer="0" outputBufferMax="100" outputBufferMin="0"/>
-<RowLineroute description="   " id="9" inputBuffer="0" inputBufferMax="100" inputBufferMin="0" name="Lineroute  9" numberWork="0" outputBuffer="0" outputBufferMax="100" outputBufferMin="0"/>
 <RowLineroute description="   " id="10" inputBuffer="0" inputBufferMax="100" inputBufferMin="0" name="Lineroute  10" numberWork="0" outputBuffer="0" outputBufferMax="100" outputBufferMin="0"/>
 <RowLineroute description="   " id="14" inputBuffer="0" inputBufferMax="100" inputBufferMin="0" name="Lineroute  14" numberWork="0" outputBuffer="0" outputBufferMax="100" outputBufferMin="0"/>
 <RowLineroute description="Описание для    RowOperation" id="2" inputBuffer="0" inputBufferMax="2147483647" inputBufferMin="0" name="RowOperation№2" numberWork="0" outputBuffer="0" outputBufferMax="2147483647" outputBufferMin="0"/>

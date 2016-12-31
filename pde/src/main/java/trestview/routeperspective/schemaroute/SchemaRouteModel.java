@@ -47,7 +47,7 @@ public class SchemaRouteModel extends SchemaBaseModel {
 
 
         if (o.getRule()== Rule.Machine   )   {
-            this.dataSet = o.getDataset();
+            this.dataSet = o.getDataSet();
             createDataSchemaModel(work);
             if (!observableDS.getTrest().getWorks().isEmpty()) {
                              createDataSchemaModel(observableDS.getTrest().getWorks().get(0));

@@ -1,12 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <tabSubject_laboursRoutes>
-<RowSubject_labourRoute description="Предмет труда-Технологический маршрут №1" id="4" id2="12"/>
 <RowSubject_labourRoute description="Предмет труда-Технологический маршрут №2" id="4" id2="11"/>
-<RowSubject_labourRoute description="Предмет труда-Технологический маршрут №3" id="4" id2="12"/>
-<RowSubject_labourRoute description="Предмет труда-Технологический маршрут №4" id="4" id2="3"/>
-<RowSubject_labourRoute description="Предмет труда-Технологический маршрут №5" id="8" id2="12"/>
 <RowSubject_labourRoute description="Предмет труда-Технологический маршрут №6" id="8" id2="6"/>
-<RowSubject_labourRoute description="Предмет труда-Технологический маршрут №7" id="8" id2="12"/>
 <RowSubject_labourRoute description="Предмет труда-Технологический маршрут №8" id="8" id2="14"/>
 <RowSubject_labourRoute description="Предмет труда-Технологический маршрут №9" id="8" id2="7"/>
 <RowSubject_labourRoute description="Предмет труда-Технологический маршрут №10" id="8" id2="7"/>

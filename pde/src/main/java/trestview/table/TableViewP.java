@@ -60,7 +60,7 @@ public class TableViewP<cL> extends TableView<cL> implements Observer {
         this.tableModel = (TableModel) observableDS;
         this.tab= tableModel.getTab();
         this.tClass=tableModel.gettClass();
-        this.dataSet = tableModel.getDataset();
+        this.dataSet = tableModel.getDataSet();
         this.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
         this.setTableMenuButtonVisible(true);
         this.setEditable(true);
@@ -379,7 +379,7 @@ public class TableViewP<cL> extends TableView<cL> implements Observer {
                data.add(selectIndex,((TableModel)o).getSelectRow() );
                 break;
             case saveRowTable:
-                tableModel.getDataset().saveDataset(); // Save new path add read new database  from new directory path
+                tableModel.getDataSet().saveDataset(); // Save new path add read new database  from new directory path
                 break;
             case editRowTable:
                 this.setEditable(true);

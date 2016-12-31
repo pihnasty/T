@@ -65,7 +65,7 @@ public class SchemaModel extends ObservableDS implements Observer {
 
 
         if (o.getRule()== Rule.Machine   )   {
-            this.dataSet = o.getDataset();
+            this.dataSet = o.getDataSet();
             createDataSchemaModel(work);
             if (!((ResourceLinkModel) observableDS).getTrest().getWorks().isEmpty()) {
                 //              createDataSchemaModel(((ResourceLinkModel) observableModel).getTrest().getWorks().get(0));

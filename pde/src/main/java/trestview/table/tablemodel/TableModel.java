@@ -33,7 +33,7 @@ public class TableModel <cL> extends TableBaseModel implements Observer {
     public TableModel(DataSet dataSet ) {
       //  super(null);  /* -------- */
         this.parametersOfColumns = buildParametersColumn() ;
-        this.dataset = dataSet;
+        this.dataSet = dataSet;
     }
 
 
@@ -47,7 +47,6 @@ public class TableModel <cL> extends TableBaseModel implements Observer {
         this.rule = rule;
         this.tClass =  rule.getClassTab();
 
-        this.dataset = observableModel.getDataSet();
         this.trest = observableModel.getTrest();
 
         if(rule.getClassTab()== Work.class)  {
@@ -88,7 +87,7 @@ public class TableModel <cL> extends TableBaseModel implements Observer {
         this.tClass =  rule.getClassTab();
         this.tab = dataSet.getTabIND(tClass);
         this.parametersOfColumns = buildParametersColumn() ;
-        this.dataset = dataSet;
+        this.dataSet = dataSet;
     }
 
 
@@ -102,7 +101,7 @@ public class TableModel <cL> extends TableBaseModel implements Observer {
         this.tClass = rule.getClassTab();
         //  this.tClass = RowFunctiondist.class;
         this.parametersOfColumns = buildParametersColumn() ;
-        this.dataset = null;
+        this.dataSet = null;
     }
 
 
@@ -146,8 +145,8 @@ public class TableModel <cL> extends TableBaseModel implements Observer {
                 break;
             case saveRowTable:
                 methodCall = MethodCall.saveRowTable;
-                for(Object r: tab) FieldToField_ifClass(dataset, r);
-                this.dataset.saveDataset();
+                for(Object r: tab) FieldToField_ifClass(dataSet, r);
+                this.dataSet.saveDataset();
                 if (  rule == Rule.Machine)  {
 
                     for(Work w: trest.getWorks())
@@ -160,12 +159,12 @@ public class TableModel <cL> extends TableBaseModel implements Observer {
                 break;
             case delRowTable:
                 methodCall = MethodCall.delRowTable;
-                if (tClass == RowTypemachine.class )    XmlRW.delRow (selectRow, tab, dataset.getTabTypemachines(), dataset.getTabModelmachineTypemachines());
-                if (tClass == RowMachine.class )        XmlRW.delRow (selectRow, tab, dataset.getTabMachines(), dataset.getTabWorksMachines());
-                if (tClass == RowWork.class )           XmlRW.delRow (selectRow, tab, dataset.getTabWorks(), dataset.getTabTrestsWorks());
+                if (tClass == RowTypemachine.class )    XmlRW.delRow (selectRow, tab, dataSet.getTabTypemachines(), dataSet.getTabModelmachineTypemachines());
+                if (tClass == RowMachine.class )        XmlRW.delRow (selectRow, tab, dataSet.getTabMachines(), dataSet.getTabWorksMachines());
+                if (tClass == RowWork.class )           XmlRW.delRow (selectRow, tab, dataSet.getTabWorks(), dataSet.getTabTrestsWorks());
 
-                if (tClass == Work.class )              XmlRW.delRow (selectRow, tab, dataset.getTabWorks(), dataset.getTabTrestsWorks());
-                if (tClass == Machine.class )           XmlRW.delRow (selectRow, tab, dataset.getTabMachines(), dataset.getTabWorksMachines());
+                if (tClass == Work.class )              XmlRW.delRow (selectRow, tab, dataSet.getTabWorks(), dataSet.getTabTrestsWorks());
+                if (tClass == Machine.class )           XmlRW.delRow (selectRow, tab, dataSet.getTabMachines(), dataSet.getTabWorksMachines());
 
                 break;
 
@@ -183,7 +182,7 @@ public class TableModel <cL> extends TableBaseModel implements Observer {
                     break;
                 case Work:
                     createEntityRowentity();
-                    dataset.getTabTrestsWorks().add(new RowTrestWork(trest.getId(),r.getId(),""));
+                    dataSet.getTabTrestsWorks().add(new RowTrestWork(trest.getId(),r.getId(),""));
                     break;
                 case Machine:
                     createEntityRowentity();
@@ -200,7 +199,7 @@ public class TableModel <cL> extends TableBaseModel implements Observer {
         try {
         Constructor constructor;
         constructor = tClass.getConstructor(DataSet.class, Class.class);
-        selectRow = constructor.newInstance(this.dataset,tClass);
+        selectRow = constructor.newInstance(this.dataSet,tClass);
         tab.add(selectRow);
         }   catch (NoSuchMethodException | InstantiationException | IllegalAccessException | InvocationTargetException e)     { e.printStackTrace(); }
     }
@@ -208,17 +207,17 @@ public class TableModel <cL> extends TableBaseModel implements Observer {
     private void createEntityRowentity()  {
         try {
             Constructor constructor = tClass.getSuperclass().getConstructor(DataSet.class, Class.class);
-            r = (RowIdNameDescription) constructor.newInstance(this.dataset, tClass.getSuperclass());
+            r = (RowIdNameDescription) constructor.newInstance(this.dataSet, tClass.getSuperclass());
 
-            selectRow = dataset.createObject(r);
+            selectRow = dataSet.createObject(r);
 
 
             if (tClass ==   Machine.class) {
 
-                dataset.addRowToDataSet(r, parentselectRow, dataset.getTabModelmachines().get(0));
+                dataSet.addRowToDataSet(r, parentselectRow, dataSet.getTabModelmachines().get(0));
                 for (Typemachine typemachine : sectionDataSet.getTypemachines())
                     for (Modelmachine modelmachine : typemachine.getModelmachines())
-                        if (dataset.getTabModelmachines().get(0).getId() == modelmachine.getId()) {
+                        if (dataSet.getTabModelmachines().get(0).getId() == modelmachine.getId()) {
                             System.out.println("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&");
                             ((Machine) selectRow).setModelmachine(modelmachine);
                         }
@@ -228,7 +227,7 @@ public class TableModel <cL> extends TableBaseModel implements Observer {
 
 
             tab.add(selectRow);
-            List<RowIdNameDescription> tabRow = dataset.getTabIND(tClass.getSuperclass());
+            List<RowIdNameDescription> tabRow = dataSet.getTabIND(tClass.getSuperclass());
             tabRow.add(r);
 
 //changed();

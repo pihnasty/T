@@ -19,11 +19,8 @@ public class TableBaseModel<cL> extends ObservableDS {
 
     protected ArrayList<cL> tab;
     protected cL selectRow;
-    protected DataSet dataset;
-    protected Trest trest;
     protected ArrayList<ParametersColumn>  parametersOfColumns;
     protected Class tClass;
-    protected Rule rule;
     protected RowIdNameDescription r;
 
     public TableBaseModel() {
@@ -32,12 +29,9 @@ public class TableBaseModel<cL> extends ObservableDS {
        super( observableDS,rule);
     }
 
-
-
     public ArrayList<ParametersColumn> getParametersOfColumns() {
         return parametersOfColumns;
     }
-
 
     public ArrayList<ParametersColumn> buildParametersColumn() {
         parametersOfColumns = new ArrayList<>();
@@ -60,15 +54,6 @@ public class TableBaseModel<cL> extends ObservableDS {
     }
 
     public Class gettClass() { return tClass;  }
-
-    public DataSet getDataset() {  return dataset;  }
-
-    public void setDataset(DataSet dataset) {  this.dataset = dataset;  }
-
-    public Rule getRule() {   return rule;  }
-
-    public void setRule(Rule rule) {    this.rule = rule;    }
-
 
 }
 
