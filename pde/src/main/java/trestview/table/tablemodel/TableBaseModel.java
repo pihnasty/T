@@ -19,6 +19,7 @@ public class TableBaseModel<cL> extends ObservableDS {
 
     protected ArrayList<cL> tab;
     protected cL selectRow;
+    protected RowIdNameDescription parentselectRow;
     protected ArrayList<ParametersColumn>  parametersOfColumns;
     protected Class tClass;
     protected RowIdNameDescription r;
@@ -55,6 +56,13 @@ public class TableBaseModel<cL> extends ObservableDS {
 
     public Class gettClass() { return tClass;  }
 
+    public RowIdNameDescription getParentselectRow() {
+        return parentselectRow;
+    }
+
+    public void setParentselectRow(RowIdNameDescription parentselectRow) {
+        this.parentselectRow = parentselectRow;
+    }
 }
 
 

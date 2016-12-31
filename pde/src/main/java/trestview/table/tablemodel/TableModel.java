@@ -1,10 +1,7 @@
 package trestview.table.tablemodel;
 
 import designpatterns.ObservableDS;
-import entityProduction.Machine;
-import entityProduction.Modelmachine;
-import entityProduction.Typemachine;
-import entityProduction.Work;
+import entityProduction.*;
 import persistence.loader.DataSet;
 import persistence.loader.SectionDataSet;
 import persistence.loader.XmlRW;
@@ -26,7 +23,7 @@ import static persistence.loader.XmlRW.FieldToField_ifClass;
 public class TableModel <cL> extends TableBaseModel implements Observer {
 
     private MethodCall methodCall;
-    private RowIdNameDescription parentselectRow;
+
     public TableModel(DataSet dataSet ) {
       //  super(null);  /* -------- */
         this.parametersOfColumns = buildParametersColumn() ;
@@ -40,32 +37,26 @@ public class TableModel <cL> extends TableBaseModel implements Observer {
     public TableModel(ObservableDS observableDS, Rule rule) {
         super(observableDS,rule);
         this.tClass =  rule.getClassTab();
-        if(rule.getClassTab()== Work.class)  {
-            this.tab = trest.getWorks();
-            this.selectRow = tab.get(0);
-        }
-        if(rule.getClassTab()== Machine.class)  {
-            this.tab = trest.getWorks().get(0).getMachines();
-            this.selectRow = tab.get(0);
-            this.parentselectRow = trest.getWorks().get(0);
-        }
+
+
+        if(observableDS instanceof TableModel)  parentselectRow = (RowIdNameDescription) ((TableModel)observableDS).getSelectRow();
 
         switch (rule) {
+            case Work:
+                this.tab = trest.getWorks();
+                break;
+            case Machine:
+                this.tab = trest.getWorks().get(0).getMachines();
+                break;
             case Subject_labour:
-                this.tab = trest.getWorks().get(0).getSubject_labours();
-                this.selectRow = tab.get(0);
-                this.parentselectRow = trest.getWorks().get(0);
+                if(parentselectRow instanceof Work) tab = ((Work)(((TableModel) observableDS).tab.get(0))).getSubject_labours();
                 break;
             case Route:
-                this.tab = trest.getWorks().get(0).getSubject_labours().get(0).getRoutes();
-                this.selectRow = tab.get(0);
-                this.parentselectRow = trest.getWorks().get(0).getSubject_labours().get(0);
+                if(parentselectRow instanceof Subject_labour) tab = ((Subject_labour)(((TableModel) observableDS).tab.get(0))).getRoutes();
                 break;
         }
-
-
+        this.selectRow = tab.get(0);
         this.parametersOfColumns = buildParametersColumn() ;
-
     }
 
     public TableModel(DataSet dataSet, Rule rule) {
@@ -95,6 +86,19 @@ public class TableModel <cL> extends TableBaseModel implements Observer {
     public void update(Observable o, Object arg) {
         if (o.getClass() == HboxpaneModel.class)    { updateHBoxpaneModel((HboxpaneModel) o);  }
         if (o.getClass() == TableModel.class ) {
+
+
+
+
+
+
+
+
+
+
+
+
+
             if (((TableModel) o).getRule() == Rule.Work) {
                 methodCall = MethodCall.selectRowTable;
                 parentselectRow = (RowIdNameDescription) ((TableModel) o).selectRow;

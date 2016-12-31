@@ -68,7 +68,7 @@ public class  ResourceLinkView extends BorderPaneObserverDS {
         vboxWork.setSpacing(5);   // The amount of vertical space between each child in the vbox.
         vboxWork.setPadding(new Insets(10, 0, 0, 10));   // The top,right,bottom,left padding around the region's content. This space will be included in the calculation of the region's minimum and preferred sizes. By default padding is Insets.EMPTY and cannot be set to null.
 //----------------------------------------------------------------------------------------------------------------------
-        MVC tableMachineMVC  = new MVC (TableModel.class, TableController.class, TableViewP.class, this.observableDS, Rule.Machine );
+        MVC tableMachineMVC  = new MVC (TableModel.class, TableController.class, TableViewP.class, (ObservableDS) tableWorkMVC.getModel(), Rule.Machine );
         MVC hboxpaneMachineMVC = new MVC (HboxpaneModel.class,HboxpaneController.class,HboxpaneView.class,observableDS, Rule.RowMachine);
         hboxpaneMachineMVC.addObserverP( (TableModel)tableMachineMVC .getModel());
 
