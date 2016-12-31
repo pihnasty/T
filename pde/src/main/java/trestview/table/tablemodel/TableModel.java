@@ -26,10 +26,7 @@ import static persistence.loader.XmlRW.FieldToField_ifClass;
 public class TableModel <cL> extends TableBaseModel implements Observer {
 
     private MethodCall methodCall;
-    private Observable observableModel;
     private RowIdNameDescription parentselectRow;
-    private SectionDataSet sectionDataSet;
-
     public TableModel(DataSet dataSet ) {
       //  super(null);  /* -------- */
         this.parametersOfColumns = buildParametersColumn() ;
@@ -40,23 +37,14 @@ public class TableModel <cL> extends TableBaseModel implements Observer {
     /**
      * @param  rule    The data type for a table row. This is [RowWork.class] for the table = [ArrayList<RowWork>].
      */
-    public TableModel(ObservableDS observableModel, Rule rule) {
-        super(observableModel,rule);
-        this.observableModel = observableModel;
-        this.sectionDataSet = observableModel.getSectionDataSet();
-        this.rule = rule;
+    public TableModel(ObservableDS observableDS, Rule rule) {
+        super(observableDS,rule);
         this.tClass =  rule.getClassTab();
-
-        this.trest = observableModel.getTrest();
-
         if(rule.getClassTab()== Work.class)  {
-
-
             this.tab = trest.getWorks();
             this.selectRow = tab.get(0);
         }
         if(rule.getClassTab()== Machine.class)  {
-
             this.tab = trest.getWorks().get(0).getMachines();
             this.selectRow = tab.get(0);
             this.parentselectRow = trest.getWorks().get(0);
@@ -64,13 +52,11 @@ public class TableModel <cL> extends TableBaseModel implements Observer {
 
         switch (rule) {
             case Subject_labour:
-                this.trest = observableModel.getTrest();
                 this.tab = trest.getWorks().get(0).getSubject_labours();
                 this.selectRow = tab.get(0);
                 this.parentselectRow = trest.getWorks().get(0);
                 break;
             case Route:
-                this.trest = observableModel.getTrest();
                 this.tab = trest.getWorks().get(0).getSubject_labours().get(0).getRoutes();
                 this.selectRow = tab.get(0);
                 this.parentselectRow = trest.getWorks().get(0).getSubject_labours().get(0);
