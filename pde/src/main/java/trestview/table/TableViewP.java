@@ -333,11 +333,11 @@ public class TableViewP<cL> extends TableView<cL> implements Observer {
                 case Machine:
                 case Subject_labour:
                 case Route:
-                    this.getSelectionModel().getSelectedIndex();
+              //      this.getSelectionModel().getSelectedIndex();
                     updateTableModel((TableModel) o);
-                    this.requestFocus();
-                    this.getSelectionModel().select(selectIndex);
-                    this.getFocusModel().focus(selectIndex);
+              //      this.requestFocus();
+              //      this.getSelectionModel().select(selectIndex);
+              //      this.getFocusModel().focus(selectIndex);
                     break;
             }
         }
@@ -371,6 +371,7 @@ public class TableViewP<cL> extends TableView<cL> implements Observer {
         switch (o.getMethodCall()) {
 
             case selectRowTable:
+             //   if(selectIndex<0 ) selectIndex =0;
                 this.tab= tableModel.getTab();
                 repaintTable();
                 break;
@@ -397,7 +398,10 @@ public class TableViewP<cL> extends TableView<cL> implements Observer {
         @Override
         public void changed(ObservableValue<? extends Number> ov, Number oldVal, Number newVal) {
             selectIndex = newVal.intValue();
-            if ((selectIndex < 0) || (selectIndex >= data.size())) { return;  }
+            if ((selectIndex < 0) || (selectIndex >= data.size())) {
+                return;
+            }
+
             setEditable(true);
             selectRow = (cL)data.get(selectIndex);
             tableModel.setSelectRow(selectRow );
@@ -468,11 +472,13 @@ public class TableViewP<cL> extends TableView<cL> implements Observer {
 
                 } else {
                   if (r!=null)   {
-                      System.out.println("isEditing: r.getName()= " + r.getName());
-                        System.out.println("isEditing:comboBox.getSelectionModel().getSelectedItem()= " + comboBox.getSelectionModel().getSelectedItem());
-                      System.out.println("selectIndex="+selectIndex);
 
                       if (selectIndex<0) selectIndex =0;
+                      System.out.println("isEditing: r.getName()= " + r.getName());
+            //            System.out.println("isEditing:comboBox.getSelectionModel().getSelectedItem()= " + comboBox.getSelectionModel().getSelectedItem());
+                      System.out.println("selectIndex="+selectIndex);
+
+
                       r  = DataSet.getById(((Machine) data.get(selectIndex)).getModelmachine().getId(), dataSet.getTabModelmachines());
 
                       for ( int i=0; i< dataSet.getTabModelmachineMachines().size(); i++ ) {

@@ -58,7 +58,7 @@ public class RoutePerspectiveView extends BorderPaneObserverDS {
         vboxWork.setPadding(new Insets(10, 0, 0, 10));   // The top,right,bottom,left padding around the region's content. This space will be included in the calculation of the region's minimum and preferred sizes. By default padding is Insets.EMPTY and cannot be set to null.
 //----------------------------------------------------------------------------------------------------------------------
         MVC tableSubject_labourMVC  = new MVC (TableModel.class, TableController.class, TableViewP.class, (ObservableDS) tableWorkMVC.getModel(), Rule.Subject_labour );
-        MVC hboxpaneSubject_labourMVC = new MVC (HboxpaneModel.class,HboxpaneController.class,HboxpaneView.class,observableDS, Rule.Subject_labour);
+        MVC hboxpaneSubject_labourMVC = new MVC (HboxpaneModel.class,HboxpaneController.class,HboxpaneView.class,(ObservableDS) tableWorkMVC.getModel(), Rule.Subject_labour);
         hboxpaneSubject_labourMVC.addObserverP( (TableModel)tableSubject_labourMVC.getModel());
         tableSubject_labourMVC.addObserverP((SchemaRouteModel)schemaRouteMVC.getModel());
         VBox vboxSubject_labour = new VBox();
@@ -74,7 +74,7 @@ public class RoutePerspectiveView extends BorderPaneObserverDS {
         vboxSubject_labour.setPadding(new Insets(10, 0, 0, 10));   // The top,right,bottom,left padding around the region's content. This space will be included in the calculation of the region's minimum and preferred sizes. By default padding is Insets.EMPTY and cannot be set to null.
 //----------------------------------------------------------------------------------------------------------------------
         MVC tableRouteMVC  = new MVC (TableModel.class, TableController.class, TableViewP.class,(ObservableDS) tableSubject_labourMVC.getModel(), Rule.Route );
-        MVC hboxpaneRouteMVC = new MVC (HboxpaneModel.class,HboxpaneController.class,HboxpaneView.class,observableDS, Rule.Route);
+        MVC hboxpaneRouteMVC = new MVC (HboxpaneModel.class,HboxpaneController.class,HboxpaneView.class,(ObservableDS) tableSubject_labourMVC.getModel(), Rule.Route);
         hboxpaneRouteMVC.addObserverP( (TableModel)tableRouteMVC.getModel());
         tableRouteMVC.addObserverP((SchemaRouteModel)schemaRouteMVC.getModel());
         VBox vboxRoute = new VBox();

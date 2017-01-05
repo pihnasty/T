@@ -67,10 +67,6 @@ public class TableModel <cL> extends TableBaseModel implements Observer {
         this.dataSet = dataSet;
     }
 
-
-
-
-
     public TableModel(ArrayList<cL> tab, Rule rule) {
         // TODO Найти метод определения базового типа данных [cL] в массиве ArrayList<cL>
         this.rule=rule;
@@ -88,33 +84,23 @@ public class TableModel <cL> extends TableBaseModel implements Observer {
         if (o.getClass() == TableModel.class ) {
 
 
-
-
-
-
-
-
-
-
-
-
-
-            if (((TableModel) o).getRule() == Rule.Work) {
-                methodCall = MethodCall.selectRowTable;
-                parentselectRow = (RowIdNameDescription) ((TableModel) o).selectRow;
-                for (Work w : trest.getWorks()) if (w == ((TableModel) o).selectRow) this.tab = w.getMachines();
-            }
-//            if (((TableModel) o).getRule() == Rule.RoutePerspective) {
-//                methodCall = MethodCall.selectRowTable;
-//                parentselectRow = (RowIdNameDescription) ((TableModel) o).selectRow;
-//                for (Work w : trest.getWorks()) if (w == ((TableModel) o).selectRow) this.tab = w.getMachines();
-//            }
-            switch (rule) {
-                case Subject_labour: {
+            parentselectRow = (RowIdNameDescription) ((TableModel) o).selectRow;
+            switch (((TableModel) o).getRule()) {
+                case Work:
+                    if( rule == Rule.Machine) tab = ((Work)(((TableModel) o).selectRow)).getMachines();
+                    if( rule == Rule.Subject_labour) tab = ((Work)(((TableModel) o).selectRow)).getSubject_labours();
                     methodCall = MethodCall.selectRowTable;
-                    parentselectRow = (RowIdNameDescription) ((TableModel) o).selectRow;
-                    for (Work w : trest.getWorks()) if (w == ((TableModel) o).selectRow) this.tab = w.getSubject_labours();
-                }
+                    break;
+                case Subject_labour:
+                    if (rule == Rule.Route) {
+                        tab = ((Subject_labour) (((TableModel) o).selectRow)).getRoutes();
+                    }
+                    methodCall = MethodCall.selectRowTable;
+                  //  selectRow=tab.get(0);
+                break;
+                case Route:
+                    methodCall = MethodCall.selectRowTable;
+                    break;
             }
         }
 
@@ -124,6 +110,7 @@ public class TableModel <cL> extends TableBaseModel implements Observer {
     public void selectRowForTwoTableModel() {
         methodCall = MethodCall.selectRowTable;
         if (rule == Rule.Work) changed();
+        if (rule == Rule.Subject_labour) changed();
     }
 
     private void updateHBoxpaneModel(HboxpaneModel o) {
