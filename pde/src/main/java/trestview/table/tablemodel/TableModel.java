@@ -82,29 +82,29 @@ public class TableModel <cL> extends TableBaseModel implements Observer {
     public void update(Observable o, Object arg) {
         if (o.getClass() == HboxpaneModel.class)    { updateHBoxpaneModel((HboxpaneModel) o);  }
         if (o.getClass() == TableModel.class ) {
-
-
+            tab = getNewTab((TableModel) o);
             parentselectRow = (RowIdNameDescription) ((TableModel) o).selectRow;
-            switch (((TableModel) o).getRule()) {
-                case Work:
-                    if( rule == Rule.Machine) tab = ((Work)(((TableModel) o).selectRow)).getMachines();
-                    if( rule == Rule.Subject_labour) tab = ((Work)(((TableModel) o).selectRow)).getSubject_labours();
-                    methodCall = MethodCall.selectRowTable;
-                    break;
-                case Subject_labour:
-                    if (rule == Rule.Route) {
-                        tab = ((Subject_labour) (((TableModel) o).selectRow)).getRoutes();
-                    }
-                    methodCall = MethodCall.selectRowTable;
-                  //  selectRow=tab.get(0);
-                break;
-                case Route:
-                    methodCall = MethodCall.selectRowTable;
-                    break;
-            }
+            selectRow = tab!=null&&!tab.isEmpty() ? tab.get(0) : null;
+            methodCall = MethodCall.selectRowTable;
         }
-
         changed();
+    }
+
+    private ArrayList<cL>  getNewTab(TableModel o) {
+        ArrayList tab = new ArrayList();
+        if (o.selectRow == null) return tab;
+        switch (o.getRule()) {
+            case Work:
+                if( rule == Rule.Machine)        tab = ((Work)(o.selectRow)).getMachines();
+                if (rule == Rule.Subject_labour) tab = ((Work) (o.selectRow)).getSubject_labours();
+                break;
+            case Subject_labour:
+                if (rule == Rule.Route)          tab = ((Subject_labour) (o.selectRow)).getRoutes();
+                break;
+            case Route:
+                break;
+        }
+        return tab;
     }
 
     public void selectRowForTwoTableModel() {

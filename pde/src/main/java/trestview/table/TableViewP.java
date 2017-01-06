@@ -52,6 +52,7 @@ public class TableViewP<cL> extends TableView<cL> implements Observer {
     private Class tClass;
     private DataSet dataSet;
     private cL selectRow;
+    private boolean wasSelectedRow = false;
 
     public TableViewP() {}
 
@@ -327,7 +328,7 @@ public class TableViewP<cL> extends TableView<cL> implements Observer {
             this.getFocusModel().focus(selectIndex);
         }
 
-        if (     (( ((TableModel)o).getMethodCall() == MethodCall.selectRowTable))) {
+        if (     (( ((TableModel)o).getMethodCall() == MethodCall.selectRowTable)) && wasSelectedRow==false) {
 
             switch (((TableModel)o).getRule()) {
                 case Machine:
@@ -341,6 +342,8 @@ public class TableViewP<cL> extends TableView<cL> implements Observer {
                     break;
             }
         }
+
+        if(wasSelectedRow==true) wasSelectedRow=false;
 
 //        if (     (( ((TableModel)o).getMethodCall() == MethodCall.selectRowTable))&& tClass== Machine.class) {
 //            this.getSelectionModel().getSelectedIndex();
@@ -397,6 +400,7 @@ public class TableViewP<cL> extends TableView<cL> implements Observer {
     private class RowSelectChangeListener implements ChangeListener<Number> {
         @Override
         public void changed(ObservableValue<? extends Number> ov, Number oldVal, Number newVal) {
+            wasSelectedRow = true;
             selectIndex = newVal.intValue();
             if ((selectIndex < 0) || (selectIndex >= data.size())) {
                 return;
@@ -406,6 +410,7 @@ public class TableViewP<cL> extends TableView<cL> implements Observer {
             selectRow = (cL)data.get(selectIndex);
             tableModel.setSelectRow(selectRow );
             tableModel.selectRowForTwoTableModel();
+            return;
         }
     }
 

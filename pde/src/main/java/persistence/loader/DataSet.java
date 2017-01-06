@@ -744,12 +744,30 @@ public class DataSet {
                 if (row.getClass() == RowRoute.class) { //noinspection ConstantConditions
                     m = new Route( row.getId(),
                             row.getName(),
-                            select(row, tabLineroutes, tabRoutesLineroutes ),   // ArrayList<LineRoute> routes,
+                            select(row, tabLineroutes, tabRoutesLineroutes ),   // ArrayList<LineRoute> Lineroutes,
                             row.getDescription()
                     );
                 }
-//----------------------------------------------------------------------------------------------------------------------
+//region
+        if (row.getClass() == RowLineroute.class) { //noinspection ConstantConditions
+//            m = new Lineroute(row.getId(),
+//                              row.getName(),
+//                   ArrayList<Operation> operations,
+//                    int numberWork,
+//                    ArrayList<Machine> machines,
+//                    ArrayList<Employee> employees,
+//                    ArrayList<Linespec> linespecs,
+//                    int inputBufferMin,
+//                    int inputBuffer,
+//                    int inputBufferMax,
+//                    int outputBufferMin,
+//                    int outputBuffer,
+//                    int outputBufferMax,
+//                    String description
+//            );
+        }
 
+//end region
 
 
         if (row.getClass() == RowEmployee.class) {

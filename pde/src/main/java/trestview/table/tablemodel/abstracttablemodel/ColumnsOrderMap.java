@@ -19,7 +19,7 @@ public class ColumnsOrderMap {
         map.put(Rule.RowMachine, new ColumnsOrder("id", "name", "image","locationX","locationY",  "state",  "description" ));
         map.put(Rule.Machine, new ColumnsOrder("id", "name", "modelmachine", "image","locationX","locationY", "angle", "state",  "description" ));
 
-        map.put(Rule.Subject_labour, new ColumnsOrder("id", "name", "price","unitName", "description" ));
+        map.put(Rule.Subject_labour, new ColumnsOrder("id", "name", "price","unitName", "description"));
         map.put(Rule.Route, new ColumnsOrder("id", "name","description" ));
 
         map.put(Rule.RowTypemachine, new ColumnsOrder("id", "name", "description" ));
