@@ -46,6 +46,12 @@ public class ParametersColumnMap  {
         map.put("outputBufferMin", new ParametersColumn ("outputBufferMin",      int.class, true, 50) );
         map.put("outputBuffer", new ParametersColumn ("outputBuffer",      int.class, true, 50) );
         map.put("outputBufferMax", new ParametersColumn ("outputBufferMax",      int.class, true, 50) );
+        // Parameters  of column  for Linespec
+        map.put("resourceName", new ParametersColumn ("resourceName", String.class, true, 130) );
+        map.put("m", new ParametersColumn ("m",double.class, true, 50) );
+        map.put("sigma", new ParametersColumn ("sigma",double.class, true, 50) );
+        map.put("functionOEMName", new ParametersColumn ("functionOEMName", String.class, true, 130) );
+
 
     }
 

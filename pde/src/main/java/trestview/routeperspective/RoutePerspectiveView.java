@@ -97,9 +97,22 @@ public class RoutePerspectiveView extends BorderPaneObserverDS {
         vboxLineroute.setSpacing(5);   // The amount of vertical space between each child in the vbox.
         vboxLineroute.setPadding(new Insets(10, 0, 0, 10));   // The top,right,bottom,left padding around the region's content. This space will be included in the calculation of the region's minimum and preferred sizes. By default padding is Insets.EMPTY and cannot be set to null.
 //----------------------------------------------------------------------------------------------------------------------
+        MVC tableLinespecMVC  = new MVC (TableModel.class, TableController.class, TableViewP.class,(ObservableDS) tableLinerouteMVC.getModel(), Rule.Linespec);
+        MVC hboxpaneLinespecMVC = new MVC (HboxpaneModel.class,HboxpaneController.class,HboxpaneView.class,(ObservableDS) tableLinerouteMVC.getModel(), Rule.Linespec);
+        hboxpaneLinespecMVC.addObserverP( (TableModel)tableLinespecMVC.getModel());
+        tableLinespecMVC.addObserverP((SchemaRouteModel)schemaRouteMVC.getModel());
+        VBox vboxLinespec = new VBox();
+
+        tableLinerouteMVC.addObserverP((TableModel)tableLinespecMVC.getModel());
+
+        vboxLinespec.getChildren().addAll(labelWork,(HboxpaneView)hboxpaneLinespecMVC.getView(),(TableViewP)tableLinespecMVC.getView());
+        vboxLinespec.setSpacing(5);   // The amount of vertical space between each child in the vbox.
+        vboxLinespec.setPadding(new Insets(10, 0, 0, 10));   // The top,right,bottom,left padding around the region's content. This space will be included in the calculation of the region's minimum and preferred sizes. By default padding is Insets.EMPTY and cannot be set to null.
+
+//----------------------------------------------------------------------------------------------------------------------
 
         VBox vboxSplitPaneLeft = new VBox();
-        vboxSplitPaneLeft.getChildren().addAll(vboxWork,vboxSubject_labour ,vboxRoute,vboxLineroute);
+        vboxSplitPaneLeft.getChildren().addAll(vboxWork,vboxSubject_labour ,vboxRoute,vboxLineroute,vboxLinespec);
         vboxSplitPaneLeft.setSpacing(5);   // The amount of vertical space between each child in the vbox.
         vboxSplitPaneLeft.setPadding(new Insets(10, 0, 0, 10));   // The top,right,bottom,left padding around the region's content. This space will be included in the calculation of the region's minimum and preferred sizes. By default padding is Insets.EMPTY and cannot be set to null.
 //----------------------------------------------------------------------------------------------------------------------

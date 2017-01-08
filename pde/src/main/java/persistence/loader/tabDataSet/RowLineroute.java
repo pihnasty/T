@@ -8,22 +8,7 @@ package persistence.loader.tabDataSet;
 import persistence.loader.DataSet;
 
 public class RowLineroute extends RowIdNameDescription {
-	/**
-	 * �������������� ������ ���������� �����
-	 * @param id			Id ������ ���������� �����
-	 * @param name			�������� ������ ���������� ����� 
-	 * @param idOperation	Id ��������������� ��������, ������������ � ��������������� �������� � ������������ ��� ������������ �������  
-	 * @param numberWork	���������� ����� ���������� ��������������� ��������, ������������ � ��������������� �������� 
-	 * @param idMachine		Id ������������, ������������� ��� ���������� ��������������� ��������
-	 * @param idEmplousee	Id ����������, ������������� ��� ���������� ��������������� �������� 
-	 * @param inputBufferMin	����������� ������� �������� ������, ������������� ��� ���������� ��������������� �������� 
-	 * @param inputBuffer		������� ������� �������� ������, ������������� ��� ���������� ��������������� ��������  
-	 * @param inputBufferMax	������������ ������� �������� ������, ������������� ��� ���������� ��������������� ��������  
-	 * @param outputBufferMin	����������� ������� �������� ������, ������������� ��� ���������� ��������������� �������� 
-	 * @param outputBuffer		������� ������� �������� ������, ������������� ��� ���������� ��������������� ��������  
-	 * @param outputBufferMax	������������ ������� �������� ������, ������������� ��� ���������� ��������������� ��������   
-	 * @param description	�������� ������ ���������� �����
-	 */
+
 	public RowLineroute(int id, String name, int numberWork, int inputBufferMin,int inputBuffer,int inputBufferMax,int outputBufferMin,int outputBuffer,int outputBufferMax,String description)	{	
 		super(id, name, description);
 			

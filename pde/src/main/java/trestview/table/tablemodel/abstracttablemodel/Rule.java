@@ -15,6 +15,7 @@ public enum Rule {
     Subject_labour(Subject_labour.class),
     Route(Route.class),
     Lineroute(Lineroute.class),
+    Linespec(Linespec.class),
     Functiondist(Functiondist.class),
     RoutePerspective(Route.class),
     Functiondist2(Functiondist.class);

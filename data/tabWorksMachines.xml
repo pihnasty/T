@@ -1,10 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <tabWorksMachines>
-<RowWorkMachine description="IdWork=1IdMachine=96" id="1" id2="96"/>
-<RowWorkMachine description="IdWork=1IdMachine=97" id="1" id2="97"/>
-<RowWorkMachine description="IdWork=1IdMachine=98" id="1" id2="98"/>
-<RowWorkMachine description="IdWork=1IdMachine=99" id="1" id2="99"/>
-<RowWorkMachine description="IdWork=1IdMachine=100" id="1" id2="100"/>
 <RowWorkMachine description="" id="1" id2="103"/>
 <RowWorkMachine description="" id="1" id2="104"/>
 <RowWorkMachine description="" id="1" id2="105"/>

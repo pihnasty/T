@@ -57,6 +57,9 @@ public class TableModel <cL> extends TableBaseModel implements Observer {
             case Lineroute:
                 if(parentselectRow instanceof Route) tab = ((Route)(((TableModel) observableDS).tab.get(0))).getLineroutes();
                 break;
+            case Linespec:
+                if(parentselectRow instanceof Lineroute) tab = ((Lineroute)(((TableModel) observableDS).tab.get(0))).getLinespecs();
+                break;
             case RowTypemachine:
             case RowWork:
             case RowFunctiondist:
@@ -113,6 +116,9 @@ public class TableModel <cL> extends TableBaseModel implements Observer {
                 break;
             case Route:
                 if (rule == Rule.Lineroute)          tab = ((Route) (o.selectRow)).getLineroutes();
+                break;
+            case Lineroute:
+                if (rule == Rule.Linespec)          tab = ((Lineroute) (o.selectRow)).getLinespecs();
                 break;
         }
         return tab;

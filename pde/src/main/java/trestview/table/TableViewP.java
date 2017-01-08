@@ -94,6 +94,10 @@ public class TableViewP<cL> extends TableView<cL> implements Observer {
             setStringColumn(parametersColumn, tableColumn,"modelmachine",tClass);
             setStringColumn(parametersColumn, tableColumn,"unitName",tClass);
 
+            // for the table of Linespec
+            setStringColumn(parametersColumn, tableColumn,"resourceName",tClass);
+            setStringColumn(parametersColumn, tableColumn,"functionOEMName",tClass);
+
 
             tableCol=tableColumn;
         }
@@ -124,6 +128,10 @@ public class TableViewP<cL> extends TableView<cL> implements Observer {
             setDoubleColumn(parametersColumn, tableColumn,"averageValue",tClass);
             setDoubleColumn(parametersColumn, tableColumn,"meanSquareDeviation",tClass);
             setDoubleColumn(parametersColumn, tableColumn,"price",tClass);
+            // for the table of Linespec
+            setDoubleColumn(parametersColumn, tableColumn,"m",tClass);
+            setDoubleColumn(parametersColumn, tableColumn,"sigma",tClass);
+
             tableCol=tableColumn;
         }
         if (parametersColumn.getcLs()==Image.class) {
@@ -176,6 +184,9 @@ public class TableViewP<cL> extends TableView<cL> implements Observer {
                 if(fielgName=="nameOperation") ((Lineroute) t.getTableView().getItems().get( t.getTablePosition().getRow()) ).setNameOperation(t.getNewValue());
                 if(fielgName=="nameMachine") ((Lineroute) t.getTableView().getItems().get( t.getTablePosition().getRow()) ).setNameMachine(t.getNewValue());
 
+                //if(tclass==Linespec.class)
+                if(fielgName=="resourceName") ((Linespec) t.getTableView().getItems().get( t.getTablePosition().getRow()) ).setResourceName(t.getNewValue());
+                if(fielgName=="functionOEMName") ((Linespec) t.getTableView().getItems().get( t.getTablePosition().getRow()) ).setResourceName(t.getNewValue());
 
                 if(fielgName=="scheme" || fielgName=="pathData" ) {
                     File f = new File(t.getNewValue());
@@ -251,6 +262,9 @@ public class TableViewP<cL> extends TableView<cL> implements Observer {
             if(fielgName=="state")      ((RowMachine) t.getTableView().getItems().get( t.getTablePosition().getRow()) ).setState (t.getNewValue());
             if(fielgName=="averageValue")      ((Functiondist) t.getTableView().getItems().get( t.getTablePosition().getRow()) ).setAverageValue (t.getNewValue());
             if(fielgName=="meanSquareDeviation")      ((Functiondist) t.getTableView().getItems().get( t.getTablePosition().getRow()) ).setMeanSquareDeviation(t.getNewValue());
+            //if(tclass==Linespec.class)
+            if(fielgName=="m")      ((Linespec) t.getTableView().getItems().get( t.getTablePosition().getRow()) ).setM(t.getNewValue());
+            if(fielgName=="sigma")      ((Linespec) t.getTableView().getItems().get( t.getTablePosition().getRow()) ).setSigma(t.getNewValue());
             });
         }
     }
@@ -359,6 +373,7 @@ public class TableViewP<cL> extends TableView<cL> implements Observer {
                 case Subject_labour:
                 case Route:
                 case Lineroute:
+                case Linespec:
               //      this.getSelectionModel().getSelectedIndex();
                     updateTableModel((TableModel) o);
               //      this.requestFocus();
