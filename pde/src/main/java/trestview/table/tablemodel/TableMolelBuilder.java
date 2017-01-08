@@ -2,6 +2,7 @@ package trestview.table.tablemodel;
 
 import persistence.loader.DataSet;
 import trestview.dictionary.DictionaryModel;
+import trestview.menu.TMenuModel;
 
 
 /**
@@ -11,7 +12,7 @@ public class  TableMolelBuilder <cL> {
 
     public static <cL> TableBaseModel build (DictionaryModel dictionaryModel, Class tClass) {
 
-        DataSet dataSet = dictionaryModel.getTMenuModel().getTrestModel().getDataSet();
+        DataSet dataSet = ((TMenuModel)dictionaryModel.getTMenuModel()).getTrestModel().getDataSet();
         AbstractFactoryTableModel factoryTableModel = new FactoryTableModel(dataSet,tClass);
 
         return ((FactoryTableModel) factoryTableModel).getTableModel();

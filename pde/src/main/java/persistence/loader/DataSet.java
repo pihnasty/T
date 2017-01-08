@@ -748,26 +748,23 @@ public class DataSet {
                             row.getDescription()
                     );
                 }
-//region
+//----------------------------------------------------------------------------------------------------------------------
         if (row.getClass() == RowLineroute.class) { //noinspection ConstantConditions
-//            m = new Lineroute(row.getId(),
-//                              row.getName(),
-//                   ArrayList<Operation> operations,
-//                    int numberWork,
-//                    ArrayList<Machine> machines,
-//                    ArrayList<Employee> employees,
-//                    ArrayList<Linespec> linespecs,
-//                    int inputBufferMin,
-//                    int inputBuffer,
-//                    int inputBufferMax,
-//                    int outputBufferMin,
-//                    int outputBuffer,
-//                    int outputBufferMax,
-//                    String description
-//            );
+            m = new Lineroute(row.getId(),
+                            row.getName(),
+                            (Operation)select(row, tabOperations, tabLineroutesOperations).get(0),
+                            (Machine)select(row, tabMachines, tabLineroutesMachines ).get(0),
+                            ((RowLineroute)row).getNumberWork(),
+                            ((RowLineroute)row).getInputBufferMin(),
+                            ((RowLineroute)row).getInputBuffer(),
+                            ((RowLineroute)row).getInputBufferMax(),
+                            ((RowLineroute)row).getOutputBufferMin(),
+                            ((RowLineroute)row).getOutputBuffer(),
+                            ((RowLineroute)row).getOutputBufferMax(),
+                             row.getDescription()
+            );
         }
-
-//end region
+//----------------------------------------------------------------------------------------------------------------------
 
 
         if (row.getClass() == RowEmployee.class) {
@@ -871,18 +868,6 @@ public class DataSet {
                 tabLineroutesEmployees.add(rIdId);                                                                //	г) помещаем ее в таблицу DataSet.tabLinesSubject_labours
                 employees.add((Employee) createObject(rSL));                            // д) создаем недостающий предмет труда и помещаем его в коллекцию.  Теперь у нас есть все необходиое для создание отсутствующего предмета труда
             }
-
-            m =  new Lineroute(
-                    ((RowLineroute) row).getId(),
-                    ((RowLineroute) row).getName(),
-                    operations,
-                    ((RowLineroute) row).getNumberWork(),
-                    machines,
-                    employees,
-                    linespecs,
-                    ((RowLineroute) row).getInputBufferMin(), ((RowLineroute) row).getInputBuffer(), ((RowLineroute) row).getInputBufferMax(),
-                    ((RowLineroute) row).getOutputBufferMin(), ((RowLineroute) row).getOutputBuffer(), ((RowLineroute) row).getOutputBufferMax(),
-                    ((RowLineroute) row).getDescription());
 
         }
         //E--------Lineroute --------Cоздается Объект-----------------------------------------------------------------------------------------//

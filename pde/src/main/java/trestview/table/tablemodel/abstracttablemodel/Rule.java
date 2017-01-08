@@ -9,10 +9,12 @@ public enum Rule {
     RowTypemachine(RowTypemachine.class),
     RowFunctiondist(RowFunctiondist.class),
     RowUnit(RowUnit.class),
+    RowOperation (RowOperation.class),
     Work(Work.class),
     Machine(Machine.class),
     Subject_labour(Subject_labour.class),
     Route(Route.class),
+    Lineroute(Lineroute.class),
     Functiondist(Functiondist.class),
     RoutePerspective(Route.class),
     Functiondist2(Functiondist.class);

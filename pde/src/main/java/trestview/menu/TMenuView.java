@@ -1,5 +1,7 @@
 package trestview.menu;
 
+import designpatterns.InitializableDS;
+import designpatterns.ObservableDS;
 import javafx.fxml.FXML;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
@@ -14,7 +16,7 @@ import persistence.loader.XmlRW;
  */
 public class TMenuView extends MenuBar  implements Observer {
 
-    private TMenuModel menuModel;
+    private ObservableDS menuModel;
 
     @FXML
     private Menu OpenPerspective2;
@@ -25,7 +27,7 @@ public class TMenuView extends MenuBar  implements Observer {
     public TMenuView() {
     }
 
-    public TMenuView(TMenuModel menuModel, TMenuController menuController ) {
+    public TMenuView(ObservableDS menuModel, InitializableDS menuController ) {
         this.menuModel =menuModel;
         XmlRW.fxmlLoad (this, menuController,"trestview/menu/tMenuView.fxml", "ui", "trestview/menu/stylesMenu.css");
     }

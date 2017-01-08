@@ -1,11 +1,13 @@
 package trestview.menu;
 
+import designpatterns.ObservableDS;
 import trestmodel.TrestModel;
+import trestview.table.tablemodel.abstracttablemodel.Rule;
 
 import java.util.Observable;
 import java.util.Observer;
 
-public class TMenuModel extends Observable {
+public class TMenuModel extends ObservableDS {
 
     public MenuItemCall getMenuItemCall() { return menuItemCall;  }
 
@@ -13,18 +15,23 @@ public class TMenuModel extends Observable {
 
     private MenuItemCall menuItemCall = MenuItemCall.defaultItem;
 
-    private Observable trestModel;
 
-    public TMenuModel(Observable trestModel) {
-        this.trestModel = trestModel;
+
+    public TMenuModel(ObservableDS trestModel) {
+        this.observableDS = trestModel;
+    }
+
+    public TMenuModel(ObservableDS observableDS, Rule rule) {
+        super(observableDS,rule);
+
     }
 
     public TrestModel getTrestModel() {
-        return (TrestModel) trestModel;
+        return (TrestModel) observableDS;
     }
 
     public void setTrestModel(Observable trestModel) {
-        this.trestModel = trestModel;
+        this.observableDS = (ObservableDS) trestModel;
         changed();
     }
 

@@ -3,10 +3,7 @@ package trestview.table;
 import com.sun.org.apache.xpath.internal.SourceTree;
 import designpatterns.InitializableDS;
 import designpatterns.ObservableDS;
-import entityProduction.Functiondist;
-import entityProduction.Machine;
-import entityProduction.Modelmachine;
-import entityProduction.Subject_labour;
+import entityProduction.*;
 import javafx.beans.property.Property;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.value.ChangeListener;
@@ -87,6 +84,11 @@ public class TableViewP<cL> extends TableView<cL> implements Observer {
             TableColumn<cL,String> tableColumn = new TableColumn  (parametersColumn.getName());
             setStringColumn(parametersColumn, tableColumn,"name",tClass);
             setStringColumn(parametersColumn, tableColumn,"scheme",tClass);
+
+            // for the table of Lineroute
+            setStringColumn(parametersColumn, tableColumn,"nameOperation",tClass);
+            setStringColumn(parametersColumn, tableColumn,"nameMachine",tClass);
+
             setStringColumn(parametersColumn, tableColumn,"description",tClass);
             setStringColumn(parametersColumn, tableColumn,"pathData",tClass);
             setStringColumn(parametersColumn, tableColumn,"modelmachine",tClass);
@@ -99,6 +101,16 @@ public class TableViewP<cL> extends TableView<cL> implements Observer {
         if (parametersColumn.getcLs()==int.class) {
             TableColumn<cL,Integer> tableColumn = new TableColumn  (parametersColumn.getName());
             setIntegerColumn(parametersColumn, tableColumn,"id",tClass);
+
+            // for the table of Lineroute
+            setIntegerColumn(parametersColumn, tableColumn,"numberWork",tClass);
+            setIntegerColumn(parametersColumn, tableColumn,"inputBufferMin",tClass);
+            setIntegerColumn(parametersColumn, tableColumn,"inputBuffer",tClass);
+            setIntegerColumn(parametersColumn, tableColumn,"inputBufferMax",tClass);
+            setIntegerColumn(parametersColumn, tableColumn,"outputBufferMin",tClass);
+            setIntegerColumn(parametersColumn, tableColumn,"outputBuffer",tClass);
+            setIntegerColumn(parametersColumn, tableColumn,"outputBufferMax",tClass);
+
             tableCol=tableColumn;
         }
         if (parametersColumn.getcLs()==double.class) {
@@ -160,6 +172,11 @@ public class TableViewP<cL> extends TableView<cL> implements Observer {
 
                 if(fielgName=="modelmachine") ((RowIdNameDescription) t.getTableView().getItems().get( t.getTablePosition().getRow()) ).setName(t.getNewValue());
 
+                //if(tclass==Lineroute.class)
+                if(fielgName=="nameOperation") ((Lineroute) t.getTableView().getItems().get( t.getTablePosition().getRow()) ).setNameOperation(t.getNewValue());
+                if(fielgName=="nameMachine") ((Lineroute) t.getTableView().getItems().get( t.getTablePosition().getRow()) ).setNameMachine(t.getNewValue());
+
+
                 if(fielgName=="scheme" || fielgName=="pathData" ) {
                     File f = new File(t.getNewValue());
                     String schemePath = "Image\\Manufacturing";
@@ -211,6 +228,13 @@ public class TableViewP<cL> extends TableView<cL> implements Observer {
             tableColumn.setCellFactory(TextFieldTableCell.<cL, Integer>forTableColumn(new IntegerStringConverter()));
             tableColumn.setOnEditCommit(  (TableColumn.CellEditEvent<cL, Integer> t) -> {
             if(fielgName=="id")   ((RowIdNameDescription) t.getTableView().getItems().get( t.getTablePosition().getRow()) ).setId(t.getNewValue());
+            if(fielgName=="numberWork")   ((Lineroute) t.getTableView().getItems().get( t.getTablePosition().getRow()) ).setNumberWork(t.getNewValue());
+            if(fielgName=="inputBufferMin")   ((Lineroute) t.getTableView().getItems().get( t.getTablePosition().getRow()) ).setInputBufferMin(t.getNewValue());
+            if(fielgName=="inputBuffer")      ((Lineroute) t.getTableView().getItems().get( t.getTablePosition().getRow()) ).setInputBuffer(t.getNewValue());
+            if(fielgName=="inputBufferMax")   ((Lineroute) t.getTableView().getItems().get( t.getTablePosition().getRow()) ).setInputBufferMax(t.getNewValue());
+            if(fielgName=="outputBufferMin")   ((Lineroute) t.getTableView().getItems().get( t.getTablePosition().getRow()) ).setOutputBufferMin(t.getNewValue());
+            if(fielgName=="outputBuffer")      ((Lineroute) t.getTableView().getItems().get( t.getTablePosition().getRow()) ).setOutputBuffer(t.getNewValue());
+            if(fielgName=="outputBufferMax")   ((Lineroute) t.getTableView().getItems().get( t.getTablePosition().getRow()) ).setOutputBufferMax(t.getNewValue());
             });
         }
     }
@@ -334,6 +358,7 @@ public class TableViewP<cL> extends TableView<cL> implements Observer {
                 case Machine:
                 case Subject_labour:
                 case Route:
+                case Lineroute:
               //      this.getSelectionModel().getSelectedIndex();
                     updateTableModel((TableModel) o);
               //      this.requestFocus();

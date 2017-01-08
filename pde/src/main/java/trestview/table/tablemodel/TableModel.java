@@ -54,6 +54,16 @@ public class TableModel <cL> extends TableBaseModel implements Observer {
             case Route:
                 if(parentselectRow instanceof Subject_labour) tab = ((Subject_labour)(((TableModel) observableDS).tab.get(0))).getRoutes();
                 break;
+            case Lineroute:
+                if(parentselectRow instanceof Route) tab = ((Route)(((TableModel) observableDS).tab.get(0))).getLineroutes();
+                break;
+            case RowTypemachine:
+            case RowWork:
+            case RowFunctiondist:
+            case RowUnit:
+            case RowOperation:
+                this.tab = dataSet.getTabIND(tClass);
+            break;
         }
         this.selectRow = tab.get(0);
         this.parametersOfColumns = buildParametersColumn() ;
@@ -102,6 +112,7 @@ public class TableModel <cL> extends TableBaseModel implements Observer {
                 if (rule == Rule.Route)          tab = ((Subject_labour) (o.selectRow)).getRoutes();
                 break;
             case Route:
+                if (rule == Rule.Lineroute)          tab = ((Route) (o.selectRow)).getLineroutes();
                 break;
         }
         return tab;
@@ -111,6 +122,7 @@ public class TableModel <cL> extends TableBaseModel implements Observer {
         methodCall = MethodCall.selectRowTable;
         if (rule == Rule.Work) changed();
         if (rule == Rule.Subject_labour) changed();
+        if (rule == Rule.Route) changed();
     }
 
     private void updateHBoxpaneModel(HboxpaneModel o) {

@@ -36,6 +36,17 @@ public class ParametersColumnMap  {
         map.put("averageValue", new ParametersColumn ("averageValue",double.class, true, 100) );
         map.put("meanSquareDeviation", new ParametersColumn ("meanSquareDeviation",double.class, true, 100) );
         map.put("pathData", new ParametersColumn ("pathData", String.class, true, 200) );
+        // Parameters  of column  for Lineroute
+        map.put("nameOperation", new ParametersColumn ("nameOperation", String.class, true, 130) );
+        map.put("nameMachine", new ParametersColumn ("nameMachine", String.class, true, 130) );
+        map.put("numberWork", new ParametersColumn ("numberWork",      int.class, true, 50) );
+        map.put("inputBufferMin", new ParametersColumn ("inputBufferMin",      int.class, true, 50) );
+        map.put("inputBuffer", new ParametersColumn ("inputBuffer",      int.class, true, 50) );
+        map.put("inputBufferMax", new ParametersColumn ("inputBufferMax",      int.class, true, 50) );
+        map.put("outputBufferMin", new ParametersColumn ("outputBufferMin",      int.class, true, 50) );
+        map.put("outputBuffer", new ParametersColumn ("outputBuffer",      int.class, true, 50) );
+        map.put("outputBufferMax", new ParametersColumn ("outputBufferMax",      int.class, true, 50) );
+
     }
 
     public static ParametersColumn getParametersColumn(String key) {

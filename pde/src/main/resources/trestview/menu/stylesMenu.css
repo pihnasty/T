@@ -15,7 +15,7 @@
 #rowFunctiondistItem  { -fx-background-image: url("../../../../src/main/resources/images/icons/RowFunctiondist.png");  }
 #rowTypemachineItem   { -fx-background-image: url("../../../../src/main/resources/images/icons/RowTypemachine.png");  }
 #rowUnitItem   { -fx-background-image: url("../../../../src/main/resources/images/icons/rowunit.png");  }
-
+#rowOperationItem   { -fx-background-image: url("../../../../src/main/resources/images/icons/rowunit.png");  }
 .menu-item {
 /*    -fx-skin: "com.sun.javafx.scene.control.skin.MenuItemSkin";*/
     -fx-background-color: chartreuse;

@@ -52,7 +52,7 @@ public class TrestView extends BorderPaneObserverDS {
         this.dataSet = trestModel.getDataSet();
         XmlRW.fxmlLoad(this,this, "trestview/trestview.fxml","","");
 
-        MVC menu = new MVC(TMenuModel.class, TMenuController.class, TMenuView.class, this.trestModel );
+        MVC menu = new MVC(TMenuModel.class, TMenuController.class, TMenuView.class, this.trestModel,null );
         this.setTop((TMenuView)menu.getView());
         ((TMenuModel) menu.getModel()).addObserver(this);    // this: Depending on the keys pressed Menu is changing appearance for TrestView.
 

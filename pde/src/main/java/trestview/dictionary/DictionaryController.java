@@ -1,5 +1,7 @@
 package trestview.dictionary;
 
+import designpatterns.InitializableDS;
+import designpatterns.ObservableDS;
 import javafx.fxml.Initializable;
 
 import java.net.URL;
@@ -8,12 +10,13 @@ import java.util.ResourceBundle;
 /**
  * Created by pom on 28.02.2016.
  */
-public class DictionaryController implements Initializable {
+public class DictionaryController extends InitializableDS {
 
     private DictionaryModel dictionaryModel;
 
-    public DictionaryController (DictionaryModel dictionaryModel) {
-        this.dictionaryModel = dictionaryModel;
+
+    public DictionaryController (ObservableDS dictionaryModel) {
+        super(dictionaryModel);
      }
 
     @Override

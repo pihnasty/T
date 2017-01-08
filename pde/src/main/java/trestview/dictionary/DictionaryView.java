@@ -1,6 +1,8 @@
 package trestview.dictionary;
 
+import designpatterns.InitializableDS;
 import designpatterns.MVC;
+import designpatterns.ObservableDS;
 import entityProduction.Work;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -32,7 +34,7 @@ import java.util.*;
  */
 public class  DictionaryView extends Dialog implements Observer {
 
-    private DictionaryModel dictionaryModel;
+    private ObservableDS dictionaryModel;
     private DataSet dataSet;
 
 
@@ -40,20 +42,20 @@ public class  DictionaryView extends Dialog implements Observer {
     public DictionaryView() {
     }
 
-    public DictionaryView (DictionaryModel dictionaryModel, DictionaryController dictionaryController ) {
+    public DictionaryView (ObservableDS dictionaryModel, InitializableDS dictionaryController ) {
         this.dictionaryModel =dictionaryModel;
-        this.dataSet =dictionaryModel.getTMenuModel().getTrestModel().getDataSet();
+        this.dataSet =dictionaryModel.getDataSet();
         FXMLLoader fxmlLoader = XmlRW.fxmlLoad(this,dictionaryController, "trestview\\dictionary\\dictionaryView.fxml","ui", "");
 
-        setTitle(fxmlLoader.getResources().getString("Dictionary")+":  "+fxmlLoader.getResources().getString(dictionaryModel.gettClass().getSimpleName()));
-        setGraphic( new ImageView(new Image("file:pde\\src\\main\\resources\\images\\icons\\"+dictionaryModel.gettClass().getSimpleName()+".png")));
+        setTitle(fxmlLoader.getResources().getString("Dictionary")+":  "+fxmlLoader.getResources().getString(((DictionaryModel)dictionaryModel).gettClass().getSimpleName()));
+        setGraphic( new ImageView(new Image("file:pde\\src\\main\\resources\\images\\icons\\"+((DictionaryModel)dictionaryModel).gettClass().getSimpleName()+".png")));
 
         setHeaderText(fxmlLoader.getResources().getString("HeaderText"));
         setResizable(true);             //  Defines whether the Stage is resizable or not by the user.
         setHeight(700);
 
-        MVC tableMVC  = new MVC (TableModel.class, TableController.class, TableViewP.class, dataSet, dictionaryModel.getRule() );
-        MVC hboxpaneMVC = new MVC (HboxpaneModel.class,HboxpaneController.class,HboxpaneView.class,dataSet, dictionaryModel.getRule());
+        MVC tableMVC  = new MVC (TableModel.class, TableController.class, TableViewP.class, dictionaryModel, dictionaryModel.getRule() );
+        MVC hboxpaneMVC = new MVC (HboxpaneModel.class,HboxpaneController.class,HboxpaneView.class,dictionaryModel, dictionaryModel.getRule());
         hboxpaneMVC.addObserverP( (TableModel)tableMVC.getModel());
 
         VBox vbox = new VBox();

@@ -1,6 +1,8 @@
 package trestview.menu;
 
+import designpatterns.InitializableDS;
 import designpatterns.MVC;
+import designpatterns.ObservableDS;
 import entityProduction.Machine;
 import entityProduction.Work;
 import javafx.application.Platform;
@@ -38,7 +40,7 @@ import java.util.ResourceBundle;
 /**
  * Created by pom on 07.02.2016.
  */
-public class TMenuController implements Initializable {
+public class TMenuController extends InitializableDS {
 
 
     private TMenuModel menuModel;
@@ -76,15 +78,21 @@ public class TMenuController implements Initializable {
     private MenuItem resourcesLinksPerspectiveItem;
     @FXML
     private MenuItem  testOfMachineItem;
+    @FXML
+    private MenuItem  rowOperationItem;
 
+//    public TMenuController() {
+//
+//    }
 
-    public TMenuController() {
-
+    public TMenuController(ObservableDS observableDS) {
+        super(observableDS);
+        this.menuModel = (TMenuModel) observableDS;
     }
 
-    public TMenuController(TMenuModel menuModel) {
-        this.menuModel = menuModel;
-    }
+//    public TMenuController(TMenuModel menuModel) {
+//        this.menuModel = menuModel;
+//    }
 
 
     @Override
@@ -107,6 +115,7 @@ public class TMenuController implements Initializable {
         resourcesLinksPerspectiveItem.setAccelerator(KeyCombination.keyCombination("Ctrl+R"));
 
         testOfMachineItem.setAccelerator(KeyCombination.keyCombination("Ctrl+T"));
+        rowOperationItem.setAccelerator(KeyCombination.keyCombination("Ctrl+P"));
 
     }
 
@@ -167,6 +176,10 @@ public class TMenuController implements Initializable {
     @FXML
     private void handleRowUnitAction (ActionEvent event) {
         new MVC(DictionaryModel.class, DictionaryController.class, DictionaryView.class, this.menuModel, Rule.RowUnit );
+    }
+    @FXML
+    private void handleRowOperationAction (ActionEvent event) {
+        new MVC(DictionaryModel.class, DictionaryController.class, DictionaryView.class, this.menuModel, Rule.RowOperation );
     }
 
     //------------------- menu MachineTest ------------------------------------

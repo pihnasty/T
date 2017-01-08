@@ -5,7 +5,6 @@
 <RowWork description="description №4" id="4" name="Производс №4" overallSize="36.14" scaleEquipment="1.0" scheme="Image/Manufacturing/Manufacture of bearings.png"/>
 <RowWork description="description №5" id="5" name="Производ №5" overallSize="100.0" scaleEquipment="1.0" scheme="Image/Manufacturing/Производство полимеров.png"/>
 <RowWork description="description №6" id="6" name="Произво №6" overallSize="100.0" scaleEquipment="1.0" scheme="Image/Manufacturing/Производство тканей.png"/>
-<RowWork description="Описание для    Work" id="7" name="Work№20" overallSize="100.0" scaleEquipment="1.0" scheme="Image/Manufacturing/Производство мебели.png"/>
 <RowWork description="Описание для    RowWork" id="8" name="RowWork№8" overallSize="100.0" scaleEquipment="1.0" scheme="Image\Manufacturing\Производство двигателей.png"/>
 <RowWork description="Описание для    RowWork" id="10" name="RowWork№10" overallSize="100.0" scaleEquipment="1.0" scheme="Image/Manufacturing/Manufacture of bearings.png"/>
 <RowWork description="Описание для    RowWork" id="11" name="RowWork№11" overallSize="100.0" scaleEquipment="1.0" scheme="Image/Manufacturing/Manufacture of bearings.png"/>
@@ -15,4 +14,5 @@
 <RowWork description="Описание для    RowWork" id="15" name="RowWork№15" overallSize="100.0" scaleEquipment="1.0" scheme="Image/Manufacturing/Manufacture of bearings.png"/>
 <RowWork description="Описание для    RowWork" id="16" name="RowWork№16" overallSize="100.0" scaleEquipment="1.0" scheme="Image/Manufacturing/Manufacture of bearings.png"/>
 <RowWork description="Описание для    RowWork" id="17" name="RowWork№17" overallSize="100.0" scaleEquipment="1.0" scheme="Image/Manufacturing/Manufacture of bearings.png"/>
+<RowWork description="Описание для    RowWork" id="18" name="RowWork№18" overallSize="100.0" scaleEquipment="1.0" scheme="Image/Manufacturing/Manufacture of bearings.png"/>
 </tabWorks>

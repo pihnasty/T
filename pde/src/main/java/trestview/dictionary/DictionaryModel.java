@@ -1,5 +1,6 @@
 package trestview.dictionary;
 
+import designpatterns.ObservableDS;
 import trestmodel.TrestModel;
 import trestview.menu.TMenuModel;
 import trestview.table.tablemodel.abstracttablemodel.Rule;
@@ -9,9 +10,9 @@ import java.util.Observable;
 /**
  * Created by pom on 07.02.2016.
  */
-public class DictionaryModel extends Observable  {
+public class DictionaryModel extends ObservableDS  {
 
-    private TMenuModel menuModel;
+
 
     public Rule getRule() {
         return rule;
@@ -33,17 +34,19 @@ public class DictionaryModel extends Observable  {
 
     private Class tClass;
 
-     public DictionaryModel(Observable menuModel,Rule rule) {     this.rule = rule;        this.tClass = rule.getClassTab();
-        this.menuModel = (TMenuModel)menuModel;
+     public DictionaryModel(ObservableDS observableDS, Rule rule) {
+         super(observableDS,rule);
+         this.rule = rule;        this.tClass = rule.getClassTab();
+
 
     }
 
-    public TMenuModel getTMenuModel() {
-        return menuModel;
+    public ObservableDS getTMenuModel() {
+        return observableDS;
     }
 
-    public void setTMenuModel(TMenuModel menuModel) {
-        this.menuModel = menuModel;
+    public void setTMenuModel(ObservableDS observableDS) {
+        this.observableDS = observableDS;
         changed();
     }
 

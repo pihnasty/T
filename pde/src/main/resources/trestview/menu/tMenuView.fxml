@@ -46,6 +46,7 @@
     <MenuItem text="%RowTypemachine"    fx:id="rowTypemachineItem"      onAction="#handleRowTypemachineAction" />
     <MenuItem text="%RowFunctiondist"   fx:id="rowFunctiondistItem"     onAction="#handleRowFunctiondistAction" />
     <MenuItem text="%RowUnit"           fx:id="rowUnitItem"             onAction="#handleRowUnitAction" />
+    <MenuItem text="%RowOperation"      fx:id="rowOperationItem"        onAction="#handleRowOperationAction" />
 </Menu>
 <Menu text="%Test">
     <MenuItem text="%TestOfMachine" fx:id="testOfMachineItem" onAction="#handleMachineTestAction"></MenuItem>
