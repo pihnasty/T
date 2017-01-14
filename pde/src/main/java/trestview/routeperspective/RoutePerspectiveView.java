@@ -1,8 +1,6 @@
 package trestview.routeperspective;
 
-import designpatterns.InitializableDS;
-import designpatterns.MVC;
-import designpatterns.ObservableDS;
+import designpatterns.*;
 import designpatterns.observerdsall.BorderPaneObserverDS;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
@@ -12,6 +10,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import persistence.loader.XmlRW;
 import trestview.hboxpane.HboxpaneController;
@@ -30,13 +29,9 @@ import java.util.Observable;
 public class RoutePerspectiveView extends BorderPaneObserverDS {
     public RoutePerspectiveView (ObservableDS observableDS, InitializableDS initializableDS ) {
         super(observableDS,initializableDS);
-
         FXMLLoader fxmlLoader = XmlRW.fxmlLoad(this,initializableDS, "trestview/routeperspective/routeperspectiveView.fxml","ui", "trestview/routeperspective/routeperspectiveStyle.css");
-
         SplitPane splitPane = new SplitPane();
         BorderPane borderPane = new BorderPane();
-
-
 //----------------------------------------------------------------------------------------------------------------------
         MVC schemaRouteMVC = new MVC(SchemaRouteModel.class, SchemaRouteController.class, SchemaRouteView.class, observableDS, Rule.RoutePerspective);
         SchemaRouteView view = (SchemaRouteView) schemaRouteMVC.getView();
@@ -44,89 +39,37 @@ public class RoutePerspectiveView extends BorderPaneObserverDS {
         view.addEventHandler(MouseEvent.MOUSE_DRAGGED, (SchemaRouteController)schemaRouteMVC.getController());
         view.addEventHandler(MouseEvent.MOUSE_RELEASED, (SchemaRouteController)schemaRouteMVC.getController());
 //----------------------------------------------------------------------------------------------------------------------
-        MVC tableWorkMVC  = new MVC (TableModel.class, TableController.class, TableViewP.class, observableDS, Rule.Work );
-        MVC hboxpaneWorkMVC = new MVC (HboxpaneModel.class,HboxpaneController.class,HboxpaneView.class,observableDS, Rule.Work);
-        hboxpaneWorkMVC.addObserverP( (TableModel)tableWorkMVC.getModel());
-        tableWorkMVC.addObserverP((SchemaRouteModel)schemaRouteMVC.getModel());
-        VBox vboxWork = new VBox();
-
-        Label labelWork = new Label(fxmlLoader.getResources().getString("ListManufacturing"));
-        labelWork.setGraphic(new ImageView(new Image("file:pde\\src\\main\\resources\\images\\icons\\RowWork.png")));
-
-        vboxWork.getChildren().addAll(labelWork,(HboxpaneView)hboxpaneWorkMVC.getView(),(TableViewP)tableWorkMVC.getView());
-        vboxWork.setSpacing(5);   // The amount of vertical space between each child in the vbox.
-        vboxWork.setPadding(new Insets(10, 0, 0, 10));   // The top,right,bottom,left padding around the region's content. This space will be included in the calculation of the region's minimum and preferred sizes. By default padding is Insets.EMPTY and cannot be set to null.
+        TableBoxMVC tableBoxWorkMVC = new TableBoxMVC( observableDS,fxmlLoader.getResources().getString("ListManufacturing"),"file:pde\\src\\main\\resources\\images\\icons\\RowWork.png",Rule.Work);
+        tableBoxWorkMVC.addObserverForTable(schemaRouteMVC);
 //----------------------------------------------------------------------------------------------------------------------
-        MVC tableSubject_labourMVC  = new MVC (TableModel.class, TableController.class, TableViewP.class, (ObservableDS) tableWorkMVC.getModel(), Rule.Subject_labour );
-        MVC hboxpaneSubject_labourMVC = new MVC (HboxpaneModel.class,HboxpaneController.class,HboxpaneView.class,(ObservableDS) tableWorkMVC.getModel(), Rule.Subject_labour);
-        hboxpaneSubject_labourMVC.addObserverP( (TableModel)tableSubject_labourMVC.getModel());
-        tableSubject_labourMVC.addObserverP((SchemaRouteModel)schemaRouteMVC.getModel());
-        VBox vboxSubject_labour = new VBox();
-
-        Label labelSubject_labour = new Label(fxmlLoader.getResources().getString("ListManufacturing"));
-        labelWork.setGraphic(new ImageView(new Image("file:pde\\src\\main\\resources\\images\\icons\\RowWork.png")));
-
-        tableWorkMVC.addObserverP((TableModel)tableSubject_labourMVC.getModel());
-
-
-        vboxSubject_labour.getChildren().addAll(labelWork,(HboxpaneView)hboxpaneSubject_labourMVC.getView(),(TableViewP)tableSubject_labourMVC.getView());
-        vboxSubject_labour.setSpacing(5);   // The amount of vertical space between each child in the vbox.
-        vboxSubject_labour.setPadding(new Insets(10, 0, 0, 10));   // The top,right,bottom,left padding around the region's content. This space will be included in the calculation of the region's minimum and preferred sizes. By default padding is Insets.EMPTY and cannot be set to null.
+        TableBoxMVC tableBoxSubject_labourMVC = new TableBoxMVC( tableBoxWorkMVC.getTableMVC(),fxmlLoader.getResources().getString("ListSubject_labour"),"file:pde\\src\\main\\resources\\images\\icons\\RowSubject_labour.png",Rule.Subject_labour);
+        tableBoxSubject_labourMVC.addObserverForTable(schemaRouteMVC);
 //----------------------------------------------------------------------------------------------------------------------
-        MVC tableRouteMVC  = new MVC (TableModel.class, TableController.class, TableViewP.class,(ObservableDS) tableSubject_labourMVC.getModel(), Rule.Route );
-        MVC hboxpaneRouteMVC = new MVC (HboxpaneModel.class,HboxpaneController.class,HboxpaneView.class,(ObservableDS) tableSubject_labourMVC.getModel(), Rule.Route);
-        hboxpaneRouteMVC.addObserverP( (TableModel)tableRouteMVC.getModel());
-        tableRouteMVC.addObserverP((SchemaRouteModel)schemaRouteMVC.getModel());
-        VBox vboxRoute = new VBox();
-
-        tableSubject_labourMVC.addObserverP((TableModel)tableRouteMVC.getModel());
-
-        vboxRoute.getChildren().addAll(labelWork,(HboxpaneView)hboxpaneRouteMVC.getView(),(TableViewP)tableRouteMVC.getView());
-        vboxRoute.setSpacing(5);   // The amount of vertical space between each child in the vbox.
-        vboxRoute.setPadding(new Insets(10, 0, 0, 10));   // The top,right,bottom,left padding around the region's content. This space will be included in the calculation of the region's minimum and preferred sizes. By default padding is Insets.EMPTY and cannot be set to null.
+        TableBoxMVC tableBoxRouteMVC = new TableBoxMVC( tableBoxSubject_labourMVC.getTableMVC(),fxmlLoader.getResources().getString("ListRoute"),"file:pde\\src\\main\\resources\\images\\icons\\RowRoute.png",Rule.Route);
+        tableBoxRouteMVC.addObserverForTable(schemaRouteMVC);
 //----------------------------------------------------------------------------------------------------------------------
-        MVC tableLinerouteMVC  = new MVC (TableModel.class, TableController.class, TableViewP.class,(ObservableDS) tableRouteMVC.getModel(), Rule.Lineroute );
-        MVC hboxpaneLinerouteMVC = new MVC (HboxpaneModel.class,HboxpaneController.class,HboxpaneView.class,(ObservableDS) tableRouteMVC.getModel(), Rule.Lineroute);
-        hboxpaneLinerouteMVC.addObserverP( (TableModel)tableLinerouteMVC.getModel());
-        tableLinerouteMVC.addObserverP((SchemaRouteModel)schemaRouteMVC.getModel());
-        VBox vboxLineroute = new VBox();
-
-        tableRouteMVC.addObserverP((TableModel)tableLinerouteMVC.getModel());
-
-        vboxLineroute.getChildren().addAll(labelWork,(HboxpaneView)hboxpaneLinerouteMVC.getView(),(TableViewP)tableLinerouteMVC.getView());
-        vboxLineroute.setSpacing(5);   // The amount of vertical space between each child in the vbox.
-        vboxLineroute.setPadding(new Insets(10, 0, 0, 10));   // The top,right,bottom,left padding around the region's content. This space will be included in the calculation of the region's minimum and preferred sizes. By default padding is Insets.EMPTY and cannot be set to null.
+        TableBoxMVC tableBoxLinerouteMVC = new TableBoxMVC( tableBoxRouteMVC.getTableMVC(),fxmlLoader.getResources().getString("ListLineroute"),"file:pde\\src\\main\\resources\\images\\icons\\RowLineroute.png",Rule.Lineroute);
+        tableBoxLinerouteMVC.addObserverForTable(schemaRouteMVC);
 //----------------------------------------------------------------------------------------------------------------------
-        MVC tableLinespecMVC  = new MVC (TableModel.class, TableController.class, TableViewP.class,(ObservableDS) tableLinerouteMVC.getModel(), Rule.Linespec);
-        MVC hboxpaneLinespecMVC = new MVC (HboxpaneModel.class,HboxpaneController.class,HboxpaneView.class,(ObservableDS) tableLinerouteMVC.getModel(), Rule.Linespec);
-        hboxpaneLinespecMVC.addObserverP( (TableModel)tableLinespecMVC.getModel());
-        tableLinespecMVC.addObserverP((SchemaRouteModel)schemaRouteMVC.getModel());
-        VBox vboxLinespec = new VBox();
-
-        tableLinerouteMVC.addObserverP((TableModel)tableLinespecMVC.getModel());
-
-        vboxLinespec.getChildren().addAll(labelWork,(HboxpaneView)hboxpaneLinespecMVC.getView(),(TableViewP)tableLinespecMVC.getView());
-        vboxLinespec.setSpacing(5);   // The amount of vertical space between each child in the vbox.
-        vboxLinespec.setPadding(new Insets(10, 0, 0, 10));   // The top,right,bottom,left padding around the region's content. This space will be included in the calculation of the region's minimum and preferred sizes. By default padding is Insets.EMPTY and cannot be set to null.
-
+        TableBoxMVC tableBoxLinespecMVC = new TableBoxMVC( tableBoxLinerouteMVC.getTableMVC(),fxmlLoader.getResources().getString("ListLinespec"),"file:pde\\src\\main\\resources\\images\\icons\\RowResource.png",Rule.Linespec);
+        tableBoxLinespecMVC.addObserverForTable(schemaRouteMVC);
 //----------------------------------------------------------------------------------------------------------------------
-
         VBox vboxSplitPaneLeft = new VBox();
-        vboxSplitPaneLeft.getChildren().addAll(vboxWork,vboxSubject_labour ,vboxRoute,vboxLineroute,vboxLinespec);
+        vboxSplitPaneLeft.getChildren().addAll(tableBoxWorkMVC.getVbox(),
+                                                tableBoxSubject_labourMVC.getVbox() ,
+                                                tableBoxRouteMVC.getVbox(),
+                                                tableBoxLinerouteMVC.getVbox(),
+                                                tableBoxLinespecMVC.getVbox());
         vboxSplitPaneLeft.setSpacing(5);   // The amount of vertical space between each child in the vbox.
         vboxSplitPaneLeft.setPadding(new Insets(10, 0, 0, 10));   // The top,right,bottom,left padding around the region's content. This space will be included in the calculation of the region's minimum and preferred sizes. By default padding is Insets.EMPTY and cannot be set to null.
 //----------------------------------------------------------------------------------------------------------------------
-
-       borderPane.setCenter((BorderPane)schemaRouteMVC.getView());
+        borderPane.setCenter((BorderPane) schemaRouteMVC.getView());
         splitPane.getItems().addAll(vboxSplitPaneLeft, borderPane);
         splitPane.setDividerPositions(0.2f, 0.6f);
-
         setCenter(splitPane);
-
     }
-
     @Override
     public void update(Observable o, Object arg) {
-
+        /*NOP*/
     }
 }

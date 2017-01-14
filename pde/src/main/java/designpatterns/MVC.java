@@ -19,23 +19,23 @@ public class MVC {
     private Method methodAddObserver;
     private Object view;
     private Object controller;
-    @Deprecated
-    public   MVC (Class mClass, Class cClass, Class vClass, ArrayList  arrayList, Rule rule)   {
-        try {
-            Constructor mConstructor = mClass.getConstructor(ArrayList.class, Rule.class);
-            model = mConstructor.newInstance(arrayList, rule);
-
-            Constructor cConstructor = cClass.getConstructor( mClass);
-            controller = cConstructor.newInstance(model);
-
-            Constructor vConstructor = vClass.getConstructor( mClass, cClass);
-            view = vConstructor.newInstance(model,controller);
-
-            methodAddObserver = Observable.class.getDeclaredMethod("addObserver",Observer.class );
-            methodAddObserver.invoke(model, view);
-
-        } catch (NoSuchMethodException | IllegalAccessException | InstantiationException | InvocationTargetException e)  {      e.printStackTrace();        }
-    }
+//    @Deprecated
+//    public   MVC (Class mClass, Class cClass, Class vClass, ArrayList  arrayList, Rule rule)   {
+//        try {
+//            Constructor mConstructor = mClass.getConstructor(ArrayList.class, Rule.class);
+//            model = mConstructor.newInstance(arrayList, rule);
+//
+//            Constructor cConstructor = cClass.getConstructor( mClass);
+//            controller = cConstructor.newInstance(model);
+//
+//            Constructor vConstructor = vClass.getConstructor( mClass, cClass);
+//            view = vConstructor.newInstance(model,controller);
+//
+//            methodAddObserver = Observable.class.getDeclaredMethod("addObserver",Observer.class );
+//            methodAddObserver.invoke(model, view);
+//
+//        } catch (NoSuchMethodException | IllegalAccessException | InstantiationException | InvocationTargetException e)  {      e.printStackTrace();        }
+//    }
 
     @Deprecated
     public   MVC (Class mClass, Class cClass, Class vClass, DataSet dataSet, Rule rule )   {
@@ -91,6 +91,7 @@ public class MVC {
     }
 
 
+    @Deprecated
     public   MVC (Class mClass, Class cClass, Class vClass, Observable o )   {
         try {
             Constructor mConstructor = mClass.getConstructor(Observable.class);
