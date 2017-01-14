@@ -37,41 +37,41 @@ public class MVC {
 //        } catch (NoSuchMethodException | IllegalAccessException | InstantiationException | InvocationTargetException e)  {      e.printStackTrace();        }
 //    }
 
-    @Deprecated
-    public   MVC (Class mClass, Class cClass, Class vClass, DataSet dataSet, Rule rule )   {
-        try {
-            Constructor mConstructor = mClass.getConstructor(DataSet.class, Rule.class);
-            model = mConstructor.newInstance(dataSet,rule);
+//    @Deprecated
+//    public   MVC (Class mClass, Class cClass, Class vClass, DataSet dataSet, Rule rule )   {
+//        try {
+//            Constructor mConstructor = mClass.getConstructor(DataSet.class, Rule.class);
+//            model = mConstructor.newInstance(dataSet,rule);
+//
+//            Constructor cConstructor = cClass.getConstructor( mClass);
+//            controller = cConstructor.newInstance(model);
+//
+//            Constructor vConstructor = vClass.getConstructor( mClass, cClass);
+//            view = vConstructor.newInstance(model,controller);
+//
+//            methodAddObserver = Observable.class.getDeclaredMethod("addObserver",Observer.class );
+//            methodAddObserver.invoke(model, view);
+//
+//        } catch (NoSuchMethodException | InstantiationException | InvocationTargetException | IllegalAccessException e)  {      e.printStackTrace();        }
+//    }
 
-            Constructor cConstructor = cClass.getConstructor( mClass);
-            controller = cConstructor.newInstance(model);
-
-            Constructor vConstructor = vClass.getConstructor( mClass, cClass);
-            view = vConstructor.newInstance(model,controller);
-
-            methodAddObserver = Observable.class.getDeclaredMethod("addObserver",Observer.class );
-            methodAddObserver.invoke(model, view);
-
-        } catch (NoSuchMethodException | InstantiationException | InvocationTargetException | IllegalAccessException e)  {      e.printStackTrace();        }
-    }
-
-    @Deprecated
-    public   MVC (Class mClass, Class cClass, Class vClass, Observable o, Rule rule )   {
-        try {
-            Constructor mConstructor = mClass.getConstructor(Observable.class, Rule.class);
-            model = mConstructor.newInstance(o,rule);
-
-            Constructor cConstructor = cClass.getConstructor( mClass);
-            controller = cConstructor.newInstance(model);
-
-            Constructor vConstructor = vClass.getConstructor( mClass, cClass);
-            view = vConstructor.newInstance(model,controller);
-
-            methodAddObserver = Observable.class.getDeclaredMethod("addObserver",Observer.class );
-            methodAddObserver.invoke(model, view);
-
-        } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException | InstantiationException e)  {      e.printStackTrace();        }
-    }
+//    @Deprecated
+//    public   MVC (Class mClass, Class cClass, Class vClass, Observable o, Rule rule )   {
+//        try {
+//            Constructor mConstructor = mClass.getConstructor(Observable.class, Rule.class);
+//            model = mConstructor.newInstance(o,rule);
+//
+//            Constructor cConstructor = cClass.getConstructor( mClass);
+//            controller = cConstructor.newInstance(model);
+//
+//            Constructor vConstructor = vClass.getConstructor( mClass, cClass);
+//            view = vConstructor.newInstance(model,controller);
+//
+//            methodAddObserver = Observable.class.getDeclaredMethod("addObserver",Observer.class );
+//            methodAddObserver.invoke(model, view);
+//
+//        } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException | InstantiationException e)  {      e.printStackTrace();        }
+//    }
 // Main Constructor
     public   MVC (Class mClass, Class cClass, Class vClass, ObservableDS o, Rule rule )   {
         try {
@@ -91,44 +91,44 @@ public class MVC {
     }
 
 
-    @Deprecated
-    public   MVC (Class mClass, Class cClass, Class vClass, Observable o )   {
-        try {
-            Constructor mConstructor = mClass.getConstructor(Observable.class);
-            model = mConstructor.newInstance(o);
+//    @Deprecated
+//    public   MVC (Class mClass, Class cClass, Class vClass, Observable o )   {
+//        try {
+//            Constructor mConstructor = mClass.getConstructor(Observable.class);
+//            model = mConstructor.newInstance(o);
+//
+//            Constructor cConstructor = cClass.getConstructor( mClass);
+//            controller = cConstructor.newInstance(model);
+//
+//            Constructor vConstructor = vClass.getConstructor( mClass, cClass);
+//            view = vConstructor.newInstance(model,controller);
+//
+//            methodAddObserver = Observable.class.getDeclaredMethod("addObserver",Observer.class );
+//            methodAddObserver.invoke(model, view);
+//
+//        } catch (NoSuchMethodException | IllegalAccessException | InstantiationException | InvocationTargetException e) {      e.printStackTrace();    }
+//    }
 
-            Constructor cConstructor = cClass.getConstructor( mClass);
-            controller = cConstructor.newInstance(model);
 
-            Constructor vConstructor = vClass.getConstructor( mClass, cClass);
-            view = vConstructor.newInstance(model,controller);
-
-            methodAddObserver = Observable.class.getDeclaredMethod("addObserver",Observer.class );
-            methodAddObserver.invoke(model, view);
-
-        } catch (NoSuchMethodException | IllegalAccessException | InstantiationException | InvocationTargetException e) {      e.printStackTrace();    }
-    }
-
-
-    @Deprecated
-    public   MVC (Class mClass, Class cClass, Class vClass, DataSet dataSet )   {
-        try {
-            Constructor mConstructor = mClass.getConstructor(DataSet.class);
-            model = mConstructor.newInstance(dataSet);
-
-            Constructor cConstructor = cClass.getConstructor( mClass);
-            controller = cConstructor.newInstance(model);
-
-            Constructor vConstructor = vClass.getConstructor( mClass, cClass);
-            view = vConstructor.newInstance(model,controller);
-
-            methodAddObserver = Observable.class.getDeclaredMethod("addObserver",Observer.class );
-            methodAddObserver.invoke(model, view);
-
-        } catch (NoSuchMethodException | IllegalAccessException | InstantiationException | InvocationTargetException e) {
-            e.printStackTrace();
-        }
-    }
+//    @Deprecated
+//    public   MVC (Class mClass, Class cClass, Class vClass, DataSet dataSet )   {
+//        try {
+//            Constructor mConstructor = mClass.getConstructor(DataSet.class);
+//            model = mConstructor.newInstance(dataSet);
+//
+//            Constructor cConstructor = cClass.getConstructor( mClass);
+//            controller = cConstructor.newInstance(model);
+//
+//            Constructor vConstructor = vClass.getConstructor( mClass, cClass);
+//            view = vConstructor.newInstance(model,controller);
+//
+//            methodAddObserver = Observable.class.getDeclaredMethod("addObserver",Observer.class );
+//            methodAddObserver.invoke(model, view);
+//
+//        } catch (NoSuchMethodException | IllegalAccessException | InstantiationException | InvocationTargetException e) {
+//            e.printStackTrace();
+//        }
+//    }
 
     /*
     TMenuModel menuModel = new TMenuModel(this.trestModel);
