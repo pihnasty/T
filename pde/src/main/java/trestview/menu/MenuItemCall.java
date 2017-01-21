@@ -1,3 +1,3 @@
 package trestview.menu;
 
-public enum MenuItemCall {defaultItem, testOfMachineItem, resourcesLinksPerspectiveItem, conveyorSpeedConstantItem, routePerspectiveItem}
+public enum MenuItemCall {defaultItem, testOfMachineItem, resourcesLinksPerspectiveItem, conveyorSpeedConstantItem, routePerspectiveItem, orderPlaninigPerspectiveItem}

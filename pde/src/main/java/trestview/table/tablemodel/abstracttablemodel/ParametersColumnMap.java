@@ -3,6 +3,7 @@ package trestview.table.tablemodel.abstracttablemodel;
 import entityProduction.Modelmachine;
 import javafx.scene.image.Image;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.ResourceBundle;
@@ -14,6 +15,9 @@ public class ParametersColumnMap  {
     private static Map<String,ParametersColumn> map;
     private ParametersColumnMap () {
         map = new HashMap<>();
+        int sizeName = 50;
+        int sizeQuantity = (int) (sizeName*0.5);
+
         // Parameters  of column  for RowWork
         map.put("id", new ParametersColumn ("id",      int.class, false, 40) );
         map.put("name", new ParametersColumn ("name", String.class, true, 150) );
@@ -51,7 +55,12 @@ public class ParametersColumnMap  {
         map.put("m", new ParametersColumn ("m",double.class, true, 50) );
         map.put("sigma", new ParametersColumn ("sigma",double.class, true, 50) );
         map.put("functionOEMName", new ParametersColumn ("functionOEMName", String.class, true, 130) );
-
+        // Parameters  of column  for Order
+        map.put("dateBegin", new ParametersColumn ("dateBegin",Date.class, true, 50) );
+        map.put("dateEnd", new ParametersColumn ("dateEnd",Date.class, true, 50) );
+        // Parameters  of column  for Line
+        map.put("subject_labourName", new ParametersColumn ("subject_labourName",String.class, true, sizeName) );
+        map.put("quantity", new ParametersColumn ("quantity",double.class, true, sizeQuantity) );
 
     }
 

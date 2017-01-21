@@ -1,9 +1,17 @@
 package trestview.table;
 
 import com.sun.org.apache.xpath.internal.SourceTree;
+import designpatterns.ColumnDate;
+import designpatterns.ColumnModelmachine;
 import designpatterns.InitializableDS;
 import designpatterns.ObservableDS;
 import entityProduction.*;
+import entityProduction.Line;
+import entityProduction.Lineroute;
+import entityProduction.Linespec;
+import entityProduction.Machine;
+import entityProduction.Modelmachine;
+import entityProduction.Order;
 import javafx.beans.property.Property;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.value.ChangeListener;
@@ -20,8 +28,10 @@ import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.Callback;
+import javafx.util.converter.DateStringConverter;
 import javafx.util.converter.DoubleStringConverter;
 import javafx.util.converter.IntegerStringConverter;
+import old.entityProduction.*;
 import persistence.loader.DataSet;
 import persistence.loader.XmlRW;
 import persistence.loader.tabDataSet.*;
@@ -80,6 +90,17 @@ public class TableViewP<cL> extends TableView<cL> implements Observer {
 
         TableColumn<cL,?> tableCol = new TableColumn<>();
 
+        if (parametersColumn.getcLs()==Date.class) {
+            TableColumn<cL,Date> tableColumn = new TableColumn  (parametersColumn.getName());
+
+            // for the table of Order
+            setDateColumn(parametersColumn, tableColumn,"dateBegin",tClass);
+            setDateColumn(parametersColumn, tableColumn,"dateEnd",tClass);
+
+            tableCol=tableColumn;
+        }
+
+
         if (parametersColumn.getcLs()==String.class) {
             TableColumn<cL,String> tableColumn = new TableColumn  (parametersColumn.getName());
             setStringColumn(parametersColumn, tableColumn,"name",tClass);
@@ -97,6 +118,9 @@ public class TableViewP<cL> extends TableView<cL> implements Observer {
             // for the table of Linespec
             setStringColumn(parametersColumn, tableColumn,"resourceName",tClass);
             setStringColumn(parametersColumn, tableColumn,"functionOEMName",tClass);
+            // for the table of Line
+            setStringColumn(parametersColumn, tableColumn,"subject_labourName",tClass);
+
 
 
             tableCol=tableColumn;
@@ -131,7 +155,8 @@ public class TableViewP<cL> extends TableView<cL> implements Observer {
             // for the table of Linespec
             setDoubleColumn(parametersColumn, tableColumn,"m",tClass);
             setDoubleColumn(parametersColumn, tableColumn,"sigma",tClass);
-
+            // for the table of Line
+            setDoubleColumn(parametersColumn, tableColumn,"quantity",tClass);
             tableCol=tableColumn;
         }
         if (parametersColumn.getcLs()==Image.class) {
@@ -186,7 +211,10 @@ public class TableViewP<cL> extends TableView<cL> implements Observer {
 
                 //if(tclass==Linespec.class)
                 if(fielgName=="resourceName") ((Linespec) t.getTableView().getItems().get( t.getTablePosition().getRow()) ).setResourceName(t.getNewValue());
-                if(fielgName=="functionOEMName") ((Linespec) t.getTableView().getItems().get( t.getTablePosition().getRow()) ).setResourceName(t.getNewValue());
+                if(fielgName=="functionOEMName") ((Linespec) t.getTableView().getItems().get( t.getTablePosition().getRow()) ).setFunctionOEMName(t.getNewValue());
+                if(fielgName==" unitName") ((Linespec) t.getTableView().getItems().get( t.getTablePosition().getRow()) ).setUnitName(t.getNewValue());
+                if(fielgName=="subject_labourName") ((Line) t.getTableView().getItems().get( t.getTablePosition().getRow()) ).setSubject_labourName(t.getNewValue());
+
 
                 if(fielgName=="scheme" || fielgName=="pathData" ) {
                     File f = new File(t.getNewValue());
@@ -238,14 +266,24 @@ public class TableViewP<cL> extends TableView<cL> implements Observer {
             tableColumn.setCellValueFactory(new PropertyValueFactory(fielgName));
             tableColumn.setCellFactory(TextFieldTableCell.<cL, Integer>forTableColumn(new IntegerStringConverter()));
             tableColumn.setOnEditCommit(  (TableColumn.CellEditEvent<cL, Integer> t) -> {
-            if(fielgName=="id")   ((RowIdNameDescription) t.getTableView().getItems().get( t.getTablePosition().getRow()) ).setId(t.getNewValue());
-            if(fielgName=="numberWork")   ((Lineroute) t.getTableView().getItems().get( t.getTablePosition().getRow()) ).setNumberWork(t.getNewValue());
-            if(fielgName=="inputBufferMin")   ((Lineroute) t.getTableView().getItems().get( t.getTablePosition().getRow()) ).setInputBufferMin(t.getNewValue());
-            if(fielgName=="inputBuffer")      ((Lineroute) t.getTableView().getItems().get( t.getTablePosition().getRow()) ).setInputBuffer(t.getNewValue());
-            if(fielgName=="inputBufferMax")   ((Lineroute) t.getTableView().getItems().get( t.getTablePosition().getRow()) ).setInputBufferMax(t.getNewValue());
-            if(fielgName=="outputBufferMin")   ((Lineroute) t.getTableView().getItems().get( t.getTablePosition().getRow()) ).setOutputBufferMin(t.getNewValue());
-            if(fielgName=="outputBuffer")      ((Lineroute) t.getTableView().getItems().get( t.getTablePosition().getRow()) ).setOutputBuffer(t.getNewValue());
-            if(fielgName=="outputBufferMax")   ((Lineroute) t.getTableView().getItems().get( t.getTablePosition().getRow()) ).setOutputBufferMax(t.getNewValue());
+                if(fielgName=="id")   ((RowIdNameDescription) t.getTableView().getItems().get( t.getTablePosition().getRow()) ).setId(t.getNewValue());
+                if(fielgName=="numberWork")   ((Lineroute) t.getTableView().getItems().get( t.getTablePosition().getRow()) ).setNumberWork(t.getNewValue());
+                if(fielgName=="inputBufferMin")   ((Lineroute) t.getTableView().getItems().get( t.getTablePosition().getRow()) ).setInputBufferMin(t.getNewValue());
+                if(fielgName=="inputBuffer")      ((Lineroute) t.getTableView().getItems().get( t.getTablePosition().getRow()) ).setInputBuffer(t.getNewValue());
+                if(fielgName=="inputBufferMax")   ((Lineroute) t.getTableView().getItems().get( t.getTablePosition().getRow()) ).setInputBufferMax(t.getNewValue());
+                if(fielgName=="outputBufferMin")   ((Lineroute) t.getTableView().getItems().get( t.getTablePosition().getRow()) ).setOutputBufferMin(t.getNewValue());
+                if(fielgName=="outputBuffer")      ((Lineroute) t.getTableView().getItems().get( t.getTablePosition().getRow()) ).setOutputBuffer(t.getNewValue());
+                if(fielgName=="outputBufferMax")   ((Lineroute) t.getTableView().getItems().get( t.getTablePosition().getRow()) ).setOutputBufferMax(t.getNewValue());
+            });
+        }
+    }
+    private void setDateColumn(ParametersColumn parametersColumn, TableColumn<cL, Date> tableColumn,String fielgName, Class tclass ) {
+        if(parametersColumn.getFielgName().equals(fielgName)) {
+            tableColumn.setCellValueFactory(new PropertyValueFactory(fielgName));
+            tableColumn.setCellFactory(TextFieldTableCell.<cL, Date>forTableColumn(new DateStringConverter()));
+            tableColumn.setOnEditCommit(  (TableColumn.CellEditEvent<cL, Date> t) -> {
+                if(fielgName=="dateBegin")  ((ColumnDate) t.getTableView().getItems().get(t.getTablePosition().getRow())).setDateBegin(t.getNewValue());
+                if(fielgName=="dateEnd") ((ColumnDate)  t.getTableView().getItems().get( t.getTablePosition().getRow()) ).setDateEnd(t.getNewValue());
             });
         }
     }
@@ -265,10 +303,11 @@ public class TableViewP<cL> extends TableView<cL> implements Observer {
             //if(tclass==Linespec.class)
             if(fielgName=="m")      ((Linespec) t.getTableView().getItems().get( t.getTablePosition().getRow()) ).setM(t.getNewValue());
             if(fielgName=="sigma")      ((Linespec) t.getTableView().getItems().get( t.getTablePosition().getRow()) ).setSigma(t.getNewValue());
+            if(fielgName=="quantity")      ((Line) t.getTableView().getItems().get( t.getTablePosition().getRow()) ).setQuantity(t.getNewValue());
+
             });
         }
     }
-
     private void setComboBoxColumn(ParametersColumn parametersColumn, TableColumn<cL, RowModelmachine> tableColumn, String fielgName, Class tclass ) {
         if(parametersColumn.getFielgName().equals(fielgName)) {
             Callback<TableColumn<cL, RowModelmachine>, TableCell<cL, RowModelmachine>> comboBoxCellFactory = param -> new ComboBoxEditingCell();
@@ -288,9 +327,6 @@ public class TableViewP<cL> extends TableView<cL> implements Observer {
                                 dataSet.select(rowModelmachine, dataSet.getTabMachines(), dataSet.getTabModelmachineMachines()),   //  ArrayList<Machine> machines
                                 rowModelmachine.getOverallDimensionX(), rowModelmachine.getOverallDimensionY(),
                                 rowModelmachine.getWorkSizeX(), rowModelmachine.getWorkSizeY(), rowModelmachine.getDescription());
-//                                for(cL machine :   tab)
-//                                    if   ( ((Machine)machine).getModelmachine().getId()==t.getOldValue().getId())
-//                                    ((Machine)machine).setModelmachine(modelmachine);
                         for (int i = 0; i < tab.size(); i++)
                             if (((Machine) tab.get(i)).getModelmachine().getId() == t.getOldValue().getId())
                                 if (((Machine) selectRow).getId() ==  ((Machine) tab.get(i)).getId())
@@ -300,25 +336,21 @@ public class TableViewP<cL> extends TableView<cL> implements Observer {
             }
         }
     }
-
-    private void setImageColumnForMachne(ParametersColumn parametersColumn, TableColumn<cL, RowModelmachine> tableColumn, String fielgName, Class tclass ) {
+    private void setImageColumnForMachne(ParametersColumn parametersColumn, TableColumn<cL, RowModelmachine> tableColumn, String fielgName, Class tclass) {
 
         if (tableModel.getRule() == Rule.Machine) {
             System.out.println("if (tableModel.getRule() == Rule.Machine)");
             Callback<TableColumn<cL, RowModelmachine>, TableCell<cL, RowModelmachine>> imageMachineCellFactory = param -> new ImageMachineEditingCell();
             tableColumn.setCellFactory(imageMachineCellFactory);
             tableColumn.setCellValueFactory(
-                    p -> new SimpleObjectProperty<RowModelmachine>(  DataSet.getById(
-                    ((Machine) p.getValue()).getModelmachine().getId(),
-                    dataSet.getTabModelmachines()))
+                    p -> new SimpleObjectProperty<RowModelmachine>(DataSet.getById(
+                            ((Machine) p.getValue()).getModelmachine().getId(),
+                            dataSet.getTabModelmachines()))
             );
         }
 
-        }
-
-
+    }
     private void setImageColumn(ParametersColumn parametersColumn, TableColumn<cL, String> tableColumn, String fielgName, Class tclass ) {
-
         if(parametersColumn.getFielgName().equals(fielgName)) {
             // if (tableModel.getRule() == Rule.Work)
             tableColumn.setCellValueFactory(new PropertyValueFactory("scheme"));
@@ -351,13 +383,8 @@ public class TableViewP<cL> extends TableView<cL> implements Observer {
         }
     }
 
-
-
     @Override
     public void update(Observable o, Object arg) {
-
-
-
         if (     (!( ((TableModel)o).getMethodCall() == MethodCall.selectRowTable))    ) {
             this.getSelectionModel().getSelectedIndex();
             updateTableModel((TableModel) o);
@@ -374,6 +401,8 @@ public class TableViewP<cL> extends TableView<cL> implements Observer {
                 case Route:
                 case Lineroute:
                 case Linespec:
+                case Order:
+                case Line:
               //      this.getSelectionModel().getSelectedIndex();
                     updateTableModel((TableModel) o);
               //      this.requestFocus();

@@ -60,4 +60,9 @@ public class TMenuModel extends ObservableDS {
         this.menuItemCall = MenuItemCall.routePerspectiveItem;
         changed();
     }
+
+    public void clickOrderPlaninigPerspectiveItem()  {
+        this.menuItemCall = MenuItemCall.orderPlaninigPerspectiveItem;
+        changed();
+    }
 }

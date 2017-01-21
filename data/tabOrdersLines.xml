@@ -1,86 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <tabOrdersLines>
-<RowOrderLine description="Описание Строки № 1" id="5" id2="1"/>
-<RowOrderLine description="Описание Строки № 2" id="5" id2="2"/>
-<RowOrderLine description="Описание Строки № 3" id="5" id2="3"/>
+<RowOrderLine description="Описание Строки № 1" id="1" id2="1"/>
+<RowOrderLine description="Описание Строки № 2" id="1" id2="2"/>
+<RowOrderLine description="Описание Строки № 3" id="1" id2="3"/>
 <RowOrderLine description="Описание Строки № 4" id="2" id2="4"/>
-<RowOrderLine description="Описание Строки № 5" id="4" id2="5"/>
-<RowOrderLine description="Описание Строки № 6" id="4" id2="6"/>
-<RowOrderLine description="Описание Строки № 7" id="5" id2="7"/>
+<RowOrderLine description="Описание Строки № 5" id="2" id2="5"/>
+<RowOrderLine description="Описание Строки № 6" id="2" id2="6"/>
+<RowOrderLine description="Описание Строки № 7" id="3" id2="7"/>
 <RowOrderLine description="Описание Строки № 8" id="3" id2="8"/>
 <RowOrderLine description="Описание Строки № 9" id="4" id2="9"/>
 <RowOrderLine description="Описание Строки № 10" id="4" id2="10"/>
-<RowOrderLine description="Описание Строки № 11" id="4" id2="11"/>
-<RowOrderLine description="Описание Строки № 12" id="3" id2="12"/>
-<RowOrderLine description="Описание Строки № 13" id="4" id2="13"/>
-<RowOrderLine description="Описание Строки № 14" id="1" id2="14"/>
-<RowOrderLine description="Описание Строки № 15" id="5" id2="15"/>
-<RowOrderLine description="Описание Строки № 16" id="5" id2="16"/>
-<RowOrderLine description="Описание Строки № 17" id="2" id2="17"/>
-<RowOrderLine description="Описание Строки № 18" id="4" id2="18"/>
-<RowOrderLine description="Описание Строки № 19" id="3" id2="19"/>
-<RowOrderLine description="   " id="2" id2="20"/>
-<RowOrderLine description="   " id="2" id2="21"/>
-<RowOrderLine description="   " id="2" id2="22"/>
-<RowOrderLine description="   " id="9" id2="23"/>
-<RowOrderLine description="   " id="9" id2="24"/>
-<RowOrderLine description="   " id="9" id2="25"/>
-<RowOrderLine description="   " id="9" id2="26"/>
-<RowOrderLine description="   " id="9" id2="27"/>
-<RowOrderLine description="   " id="9" id2="28"/>
-<RowOrderLine description="   " id="9" id2="29"/>
-<RowOrderLine description="   " id="9" id2="30"/>
-<RowOrderLine description="   " id="15" id2="31"/>
-<RowOrderLine description="   " id="15" id2="32"/>
-<RowOrderLine description="   " id="15" id2="33"/>
-<RowOrderLine description="   " id="15" id2="34"/>
-<RowOrderLine description="   " id="15" id2="35"/>
-<RowOrderLine description="   " id="15" id2="36"/>
-<RowOrderLine description="   " id="15" id2="37"/>
-<RowOrderLine description="   " id="15" id2="38"/>
-<RowOrderLine description="   " id="15" id2="39"/>
-<RowOrderLine description="   " id="16" id2="40"/>
-<RowOrderLine description="   " id="16" id2="41"/>
-<RowOrderLine description="   " id="16" id2="42"/>
-<RowOrderLine description="   " id="16" id2="43"/>
-<RowOrderLine description="   " id="16" id2="44"/>
-<RowOrderLine description="   " id="16" id2="45"/>
-<RowOrderLine description="   " id="16" id2="46"/>
-<RowOrderLine description="   " id="16" id2="47"/>
-<RowOrderLine description="   " id="16" id2="48"/>
-<RowOrderLine description="   " id="16" id2="49"/>
-<RowOrderLine description="   " id="16" id2="50"/>
-<RowOrderLine description="   " id="16" id2="51"/>
-<RowOrderLine description="   " id="16" id2="52"/>
-<RowOrderLine description="   " id="16" id2="53"/>
-<RowOrderLine description="   " id="16" id2="54"/>
-<RowOrderLine description="   " id="54" id2="55"/>
-<RowOrderLine description="   " id="54" id2="56"/>
-<RowOrderLine description="   " id="54" id2="57"/>
-<RowOrderLine description="   " id="54" id2="58"/>
-<RowOrderLine description="   " id="54" id2="59"/>
-<RowOrderLine description="   " id="54" id2="60"/>
-<RowOrderLine description="   " id="54" id2="61"/>
-<RowOrderLine description="   " id="54" id2="62"/>
-<RowOrderLine description="   " id="85" id2="63"/>
-<RowOrderLine description="   " id="85" id2="64"/>
-<RowOrderLine description="   " id="85" id2="65"/>
-<RowOrderLine description="   " id="85" id2="66"/>
-<RowOrderLine description="   " id="85" id2="67"/>
-<RowOrderLine description="   " id="85" id2="68"/>
-<RowOrderLine description="   " id="84" id2="69"/>
-<RowOrderLine description="   " id="84" id2="70"/>
-<RowOrderLine description="   " id="84" id2="71"/>
-<RowOrderLine description="   " id="84" id2="72"/>
-<RowOrderLine description="   " id="84" id2="73"/>
-<RowOrderLine description="   " id="84" id2="74"/>
-<RowOrderLine description="   " id="84" id2="75"/>
-<RowOrderLine description="   " id="1" id2="76"/>
-<RowOrderLine description="   " id="1" id2="77"/>
-<RowOrderLine description="   " id="1" id2="78"/>
-<RowOrderLine description="   " id="1" id2="79"/>
-<RowOrderLine description="   " id="1" id2="80"/>
-<RowOrderLine description="   " id="1" id2="81"/>
-<RowOrderLine description="   " id="1" id2="82"/>
-<RowOrderLine description="   " id="1" id2="83"/>
+<RowOrderLine description="Описание Строки № 11" id="5" id2="11"/>
 </tabOrdersLines>

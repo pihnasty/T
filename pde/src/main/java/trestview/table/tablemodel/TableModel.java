@@ -53,12 +53,19 @@ public class TableModel <cL> extends TableBaseModel implements Observer {
                 break;
             case Route:
                 if(parentselectRow instanceof Subject_labour) tab = ((Subject_labour)(((TableModel) observableDS).tab.get(0))).getRoutes();
+                if(parentselectRow instanceof Line) tab = ((Line)(((TableModel) observableDS).tab.get(0))).getRoutes();
                 break;
             case Lineroute:
                 if(parentselectRow instanceof Route) tab = ((Route)(((TableModel) observableDS).tab.get(0))).getLineroutes();
                 break;
             case Linespec:
                 if(parentselectRow instanceof Lineroute) tab = ((Lineroute)(((TableModel) observableDS).tab.get(0))).getLinespecs();
+                break;
+            case Order:
+                if(parentselectRow instanceof Work) tab = ((Work)(((TableModel) observableDS).tab.get(0))).getOrders();
+                break;
+            case Line:
+                if(parentselectRow instanceof Order) tab = ((Order)(((TableModel) observableDS).tab.get(0))).getLines();
                 break;
             case RowTypemachine:
             case RowWork:
@@ -110,15 +117,22 @@ public class TableModel <cL> extends TableBaseModel implements Observer {
             case Work:
                 if( rule == Rule.Machine)        tab = ((Work)(o.selectRow)).getMachines();
                 if (rule == Rule.Subject_labour) tab = ((Work) (o.selectRow)).getSubject_labours();
+                if (rule == Rule.Order)          tab = ((Work) (o.selectRow)).getOrders();
                 break;
             case Subject_labour:
-                if (rule == Rule.Route)          tab = ((Subject_labour) (o.selectRow)).getRoutes();
+                if (rule == Rule.Route)           tab = ((Subject_labour) (o.selectRow)).getRoutes();
                 break;
             case Route:
                 if (rule == Rule.Lineroute)          tab = ((Route) (o.selectRow)).getLineroutes();
                 break;
             case Lineroute:
                 if (rule == Rule.Linespec)          tab = ((Lineroute) (o.selectRow)).getLinespecs();
+                break;
+            case Order:
+                if (rule == Rule.Line)           tab = ((Order) (o.selectRow)).getLines();
+                break;
+            case Line:
+                if (rule == Rule.Route)           tab = ((Line) (o.selectRow)).getRoutes();
                 break;
         }
         return tab;
@@ -129,6 +143,9 @@ public class TableModel <cL> extends TableBaseModel implements Observer {
         if (rule == Rule.Work) changed();
         if (rule == Rule.Subject_labour) changed();
         if (rule == Rule.Route) changed();
+        if (rule == Rule.Lineroute) changed();
+        if (rule == Rule.Order) changed();
+        if (rule == Rule.Line) changed();
     }
 
     private void updateHBoxpaneModel(HboxpaneModel o) {

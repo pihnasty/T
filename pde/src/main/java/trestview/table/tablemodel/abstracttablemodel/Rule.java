@@ -12,10 +12,15 @@ public enum Rule {
     RowOperation (RowOperation.class),
     Work(Work.class),
     Machine(Machine.class),
+
     Subject_labour(Subject_labour.class),
     Route(Route.class),
     Lineroute(Lineroute.class),
     Linespec(Linespec.class),
+
+    Order(Order.class),
+    Line(Line.class),
+
     Functiondist(Functiondist.class),
     RoutePerspective(Route.class),
     Functiondist2(Functiondist.class);

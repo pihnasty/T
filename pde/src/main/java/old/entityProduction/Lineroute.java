@@ -1,29 +1,15 @@
 package old.entityProduction;
 
+import designpatterns.ColumnModelmachine;
+import entityProduction.*;
+import entityProduction.Modelmachine;
 import old.database.DataSet;
 import old.database.tabDataSet.RowLineroute;
 
 import java.util.ArrayList;
 
-public class Lineroute extends RowLineroute
-{
-	/**
-	 * �������������� ������ ���������� �����
-	 * @param id			Id ������ ���������� �����
-	 * @param name			�������� ������ ���������� ����� 
-	 * @param Operation		������ ��������������� ��������, ������������ � ��������������� �������� � ������������ ��� ������������ �������  
-	 * @param numberWork	���������� ����� ���������� ��������������� ��������, ������������ � ��������������� �������� 
-	 * @param Machine		������ ������������, ������������� ��� ���������� ��������������� ��������
-	 * @param Emplousee		������ ����������, ������������� ��� ���������� ��������������� �������� 
-	 * @param linespecs		��������� ������������ ���� �������, ������������ ��� ���������� ��������������� �������� 
-	 * @param inputBufferMin	����������� ������� �������� ������, ������������� ��� ���������� ��������������� �������� 
-	 * @param inputBuffer		������� ������� �������� ������, ������������� ��� ���������� ��������������� ��������  
-	 * @param inputBufferMax	������������ ������� �������� ������, ������������� ��� ���������� ��������������� ��������  
-	 * @param outputBufferMin	����������� ������� �������� ������, ������������� ��� ���������� ��������������� �������� 
-	 * @param outputBuffer		������� ������� �������� ������, ������������� ��� ���������� ��������������� ��������  
-	 * @param outputBufferMax	������������ ������� �������� ������, ������������� ��� ���������� ��������������� ��������   
-	 * @param description	�������� ������ ���������� �����
-	 */	
+public class Lineroute extends RowLineroute  {
+
 	public Lineroute(int id, String name,
 					 ArrayList<Operation> operations,
 					 int numberWork, ArrayList<Machine> machines, ArrayList<Employee> employees, ArrayList<Linespec> linespecs,
@@ -51,14 +37,11 @@ public class Lineroute extends RowLineroute
 	public void setNameEmployee(String nameEmployee)					    {    this.nameEmployee = nameEmployee;}
 
 
-	/** �������� ��������������� �������� � ��������������� ��������				  */
-	private String nameOperation  ="nameOperation";	
-	/** �������� ������ � ��������������� ��������									  */
+	private String nameOperation  ="nameOperation";
 	private String nameMachine  ="nameMachine";
-	/** ������� ����������, ������������� �� ���������� ��������������� �������� � ��������������� ��������		*/
-	private String nameEmployee  ="nameEmployee";	
-	
+	private String nameEmployee  ="nameEmployee";
+	private ArrayList<Linespec> linespecs = new ArrayList<>();
+	private Modelmachine modelmachine;
 
-	private ArrayList<Linespec> linespecs = new ArrayList<Linespec>();
-	
+
 }

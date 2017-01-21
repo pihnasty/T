@@ -71,7 +71,7 @@ public class TMenuController extends InitializableDS {
     @FXML
     private MenuItem defaultPerspectiveItem;
     @FXML
-    private MenuItem ordersPerspectiveItem;
+    private MenuItem orderPlaningPerspectiveItem;
     @FXML
     private MenuItem routesPerspectiveItem;
     @FXML
@@ -110,7 +110,7 @@ public class TMenuController extends InitializableDS {
         pasteItem.setAccelerator(KeyCombination.keyCombination("Ctrl+V"));
 
         defaultPerspectiveItem.setAccelerator(KeyCombination.keyCombination("Ctrl+D"));
-        ordersPerspectiveItem.setAccelerator(KeyCombination.keyCombination("Ctrl+W"));
+        orderPlaningPerspectiveItem.setAccelerator(KeyCombination.keyCombination("Alt+O"));
         routesPerspectiveItem.setAccelerator(KeyCombination.keyCombination("Ctrl+M"));
         resourcesLinksPerspectiveItem.setAccelerator(KeyCombination.keyCombination("Ctrl+R"));
 
@@ -193,6 +193,8 @@ public class TMenuController extends InitializableDS {
     @FXML
     private void handleRoutePerspectiveAction (ActionEvent event) { menuModel.clickRoutePerspectiveItem(); }
 
+    @FXML
+    private void handleOrderPlaningPerspectiveAction (ActionEvent event) { menuModel.clickOrderPlaninigPerspectiveItem(); }
 
 
     /**

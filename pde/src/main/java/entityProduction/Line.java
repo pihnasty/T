@@ -5,53 +5,46 @@ import persistence.loader.tabDataSet.RowLine;
 
 import java.util.ArrayList;
 import java.util.Date;
-
-/**
- * �������� �������� ������ �  ������ 
- * @author POM
- */
-public class Line extends RowLine	{	
-	
-	/**
-	 * �������������� ������:  "������ ������"
-	 * @param id			Id "������ ������"
-	 * @param name			��� "������ ������"
-	 * @param dateBegin		����������� ����� ������ ������� � ������������ ������� � �������  "������ ������" 
-	 * @param dateEnd		����������� ����� ���������	������������ ������� � �������  "������ ������" 
-	 * @param description	�������� "������ ������"
-	 */		
-	public Line(int id, String name, ArrayList<Subject_labour>subject_labours, ArrayList<Unit>units, double quantity, Date dateBegin, Date dateEnd, String description){
+public class Line extends RowLine	{
+	public Line(int id, String name, Subject_labour subject_labour, Unit unit, double quantity, Date dateBegin, Date dateEnd, String description){
 			super(id, name, quantity, dateBegin, dateEnd, description);
-
-    		nameSubject_labour 	= subject_labours.get(0).getName();
-    		price 				= subject_labours.get(0).getPrice();
-    		unit                = units.get(0).getName();
-
-
-	}	
+		    this.subject_labour = subject_labour;
+    		subject_labourName 	= subject_labour.getName();
+    		price 				= subject_labour.getPrice();
+		    unitName            = unit.getName();
+	}
 	public Line()							{ 	super(); 					}	
 	public Line ( DataSet dataSet)			{	super( dataSet,  Line.class);		}
-	
 
-	
-	public String getNameSubject_labour()	{	return nameSubject_labour;	}
-	public void setNameSubject_labour(String nameSubject_labour)	
-											{	this.nameSubject_labour = nameSubject_labour;	}
+
 	public double getPrice()				{	return price;				}
 	public void setPrice(double price)		{	this.price = price;			}
-	public String getUnit()					{	return unit;				}
-	public void setUnit(String unit)		{	this.unit = unit;			}
-	
-	
-	
-	
-	/*________________________________________________________________________________*/
-	/**������� ����� (���������� �������) � ������ ����������� ������				  */
-//	private Subject_labour  	subject_labour;	
-	/** �������� ������� ����� (���������� �������) � ������ ����������� ������		  */
-	private String nameSubject_labour  ="nameSubject_labour";	
-	/** ���� ������� ����� (���������� �������) � ������ ����������� ������			  */	
+
+
+	public String getSubject_labourName() {
+		return subject_labourName;
+	}
+
+	public void setSubject_labourName(String subject_labourName) {
+		this.subject_labourName = subject_labourName;
+	}
+
+	public String getUnitName() {
+		return unitName;
+	}
+
+	public void setUnitName(String unitName) {
+		this.unitName = unitName;
+	}
+
+	public ArrayList<Route> getRoutes() {
+		return subject_labour.getRoutes();
+	}
+
+	private Subject_labour subject_labour;
+	private String subject_labourName;
 	private double price = 0.0;
-	/** ������� ��������� ������� ����� (���������� �������) � ������ �������. ������ */	
-	private String unit = "��.���";	
+	private String unitName = "piece";
 }
+
+

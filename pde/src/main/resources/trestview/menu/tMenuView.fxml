@@ -25,9 +25,9 @@
 <Menu text="%Window">
     <Menu  fx:id="OpenPerspective"  text="%OpenPerspective">
         <MenuItem text="%DefaultPerspective"            fx:id="defaultPerspectiveItem"  />
-        <MenuItem text="%OrdersPerspective"             fx:id="ordersPerspectiveItem"/>
-        <MenuItem text="%RoutesPerspective"             fx:id="routesPerspectiveItem"           onAction="#handleRoutePerspectiveAction"/>
         <MenuItem text="%ResourcesLinksPerspective"     fx:id="resourcesLinksPerspectiveItem"   onAction="#handleResourcesLinksPerspectiveAction"/>
+        <MenuItem text="%RoutesPerspective"             fx:id="routesPerspectiveItem"           onAction="#handleRoutePerspectiveAction"/>
+        <MenuItem text="%OrderPlaningPerspective"       fx:id="orderPlaningPerspectiveItem"     onAction="#handleOrderPlaningPerspectiveAction"/>
     </Menu>
 </Menu>
 
@@ -37,7 +37,6 @@
         <MenuItem text="%Copy"      fx:id="copyItem2"    />
         <MenuItem text="%Paste"     fx:id="pasteItem2"   />
     </Menu>
-
 </Menu>
 
 

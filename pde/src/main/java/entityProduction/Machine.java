@@ -1,9 +1,10 @@
 package entityProduction;
 
+import designpatterns.ColumnModelmachine;
 import persistence.loader.DataSet;
 import persistence.loader.tabDataSet.RowMachine;
 
-public class Machine extends RowMachine {
+public class Machine extends RowMachine implements ColumnModelmachine {
 
     private Modelmachine modelmachine;
 

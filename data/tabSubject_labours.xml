@@ -7,8 +7,4 @@
 <RowSubject_labour description="Описание предмета труда  №8" id="8" name="Предмет труда типа №8" price="160.0"/>
 <RowSubject_labour description="Описание предмета труда  №9" id="9" name="Предмет труда типа №9" price="180.0"/>
 <RowSubject_labour description="Описание предмета труда  №10" id="10" name="Предмет труда типа №10" price="200.0"/>
-<RowSubject_labour description="Описание предмета труда  №11" id="11" name="Предмет труда типа №11" price="220.0"/>
-<RowSubject_labour description="Описание предмета труда  №14" id="14" name="Предмет труда типа №14" price="280.0"/>
-<RowSubject_labour description="Описание предмета труда  №15" id="15" name="Предмет труда типа №15" price="300.0"/>
-<RowSubject_labour description="Описание предмета труда  №16" id="16" name="Предмет труда типа №16" price="320.0"/>
 </tabSubject_labours>

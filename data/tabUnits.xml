@@ -5,5 +5,4 @@
 <RowUnit description="Описание: м" id="3" name="м"/>
 <RowUnit description="Описание: м2" id="4" name="м2"/>
 <RowUnit description="Описание: м3" id="5" name="м3"/>
-<RowUnit description="Описание для    RowUnit" id="6" name="RowUnit№6"/>
 </tabUnits>

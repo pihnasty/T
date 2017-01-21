@@ -71,11 +71,11 @@ public class Linespec extends RowLinespec
 		this.unitName = unitName;
 	}
 
-	public String getFunctionOEMNama() {
+	public String getFunctionOEMName() {
 		return functionOEMNama;
 	}
 
-	public void setFunctionOEMNama(String functionOEMNama) {
+	public void setFunctionOEMName(String functionOEMNama) {
 		this.functionOEMNama = functionOEMNama;
 	}
 

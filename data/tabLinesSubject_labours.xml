@@ -1,101 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <tabLinesSubject_labours>
-<RowLineSubject_labour description="Описание Связи (Строка заказа)-(Предмет труда) №1" id="4" id2="1"/>
-<RowLineSubject_labour description="Описание Связи (Строка заказа)-(Предмет труда) №2" id="2" id2="2"/>
-<RowLineSubject_labour description="Описание Связи (Строка заказа)-(Предмет труда) №3" id="3" id2="3"/>
-<RowLineSubject_labour description="Описание Связи (Строка заказа)-(Предмет труда) №4" id="1" id2="4"/>
-<RowLineSubject_labour description="Описание Связи (Строка заказа)-(Предмет труда) №5" id="2" id2="5"/>
-<RowLineSubject_labour description="Описание Связи (Строка заказа)-(Предмет труда) №6" id="3" id2="6"/>
-<RowLineSubject_labour description="Описание Связи (Строка заказа)-(Предмет труда) №7" id="1" id2="7"/>
-<RowLineSubject_labour description="Описание Связи (Строка заказа)-(Предмет труда) №8" id="3" id2="8"/>
-<RowLineSubject_labour description="Описание Связи (Строка заказа)-(Предмет труда) №9" id="3" id2="9"/>
-<RowLineSubject_labour description="Описание Связи (Строка заказа)-(Предмет труда) №10" id="2" id2="10"/>
-<RowLineSubject_labour description="Описание Связи (Строка заказа)-(Предмет труда) №11" id="3" id2="11"/>
-<RowLineSubject_labour description="Описание Связи (Строка заказа)-(Предмет труда) №12" id="1" id2="12"/>
-<RowLineSubject_labour description="Описание Связи (Строка заказа)-(Предмет труда) №13" id="4" id2="13"/>
-<RowLineSubject_labour description="Описание Связи (Строка заказа)-(Предмет труда) №14" id="4" id2="14"/>
-<RowLineSubject_labour description="Описание Связи (Строка заказа)-(Предмет труда) №15" id="4" id2="15"/>
-<RowLineSubject_labour description="Описание Связи (Строка заказа)-(Предмет труда) №16" id="4" id2="16"/>
-<RowLineSubject_labour description="Описание Связи (Строка заказа)-(Предмет труда) №17" id="4" id2="17"/>
-<RowLineSubject_labour description="Описание Связи (Строка заказа)-(Предмет труда) №18" id="1" id2="18"/>
-<RowLineSubject_labour description="Описание Связи (Строка заказа)-(Предмет труда) №19" id="4" id2="19"/>
-<RowLineSubject_labour description="   " id="14" id2="5"/>
-<RowLineSubject_labour description="   " id="17" id2="21"/>
-<RowLineSubject_labour description="   " id="5" id2="22"/>
-<RowLineSubject_labour description="   " id="6" id2="23"/>
-<RowLineSubject_labour description="   " id="9" id2="24"/>
-<RowLineSubject_labour description="   " id="10" id2="25"/>
-<RowLineSubject_labour description="   " id="11" id2="26"/>
-<RowLineSubject_labour description="   " id="13" id2="27"/>
-<RowLineSubject_labour description="   " id="18" id2="28"/>
-<RowLineSubject_labour description="   " id="8" id2="29"/>
-<RowLineSubject_labour description="   " id="12" id2="30"/>
-<RowLineSubject_labour description="   " id="19" id2="31"/>
-<RowLineSubject_labour description="   " id="7" id2="32"/>
-<RowLineSubject_labour description="   " id="15" id2="33"/>
-<RowLineSubject_labour description="   " id="16" id2="34"/>
-<RowLineSubject_labour description="   " id="20" id2="35"/>
-<RowLineSubject_labour description="   " id="21" id2="36"/>
-<RowLineSubject_labour description="   " id="22" id2="37"/>
-<RowLineSubject_labour description="   " id="23" id2="38"/>
-<RowLineSubject_labour description="   " id="24" id2="39"/>
-<RowLineSubject_labour description="   " id="25" id2="40"/>
-<RowLineSubject_labour description="   " id="26" id2="41"/>
-<RowLineSubject_labour description="   " id="27" id2="42"/>
-<RowLineSubject_labour description="   " id="28" id2="43"/>
-<RowLineSubject_labour description="   " id="29" id2="44"/>
-<RowLineSubject_labour description="   " id="30" id2="45"/>
-<RowLineSubject_labour description="   " id="31" id2="46"/>
-<RowLineSubject_labour description="   " id="32" id2="47"/>
-<RowLineSubject_labour description="   " id="33" id2="48"/>
-<RowLineSubject_labour description="   " id="34" id2="49"/>
-<RowLineSubject_labour description="   " id="35" id2="50"/>
-<RowLineSubject_labour description="   " id="36" id2="51"/>
-<RowLineSubject_labour description="   " id="37" id2="52"/>
-<RowLineSubject_labour description="   " id="38" id2="53"/>
-<RowLineSubject_labour description="   " id="39" id2="54"/>
-<RowLineSubject_labour description="   " id="40" id2="55"/>
-<RowLineSubject_labour description="   " id="41" id2="56"/>
-<RowLineSubject_labour description="   " id="42" id2="57"/>
-<RowLineSubject_labour description="   " id="43" id2="58"/>
-<RowLineSubject_labour description="   " id="44" id2="59"/>
-<RowLineSubject_labour description="   " id="45" id2="60"/>
-<RowLineSubject_labour description="   " id="46" id2="61"/>
-<RowLineSubject_labour description="   " id="47" id2="62"/>
-<RowLineSubject_labour description="   " id="48" id2="63"/>
-<RowLineSubject_labour description="   " id="49" id2="64"/>
-<RowLineSubject_labour description="   " id="50" id2="65"/>
-<RowLineSubject_labour description="   " id="51" id2="66"/>
-<RowLineSubject_labour description="   " id="52" id2="67"/>
-<RowLineSubject_labour description="   " id="53" id2="68"/>
-<RowLineSubject_labour description="   " id="54" id2="69"/>
-<RowLineSubject_labour description="   " id="55" id2="70"/>
-<RowLineSubject_labour description="   " id="56" id2="71"/>
-<RowLineSubject_labour description="   " id="57" id2="72"/>
-<RowLineSubject_labour description="   " id="58" id2="73"/>
-<RowLineSubject_labour description="   " id="59" id2="74"/>
-<RowLineSubject_labour description="   " id="60" id2="75"/>
-<RowLineSubject_labour description="   " id="61" id2="76"/>
-<RowLineSubject_labour description="   " id="62" id2="77"/>
-<RowLineSubject_labour description="   " id="69" id2="78"/>
-<RowLineSubject_labour description="   " id="70" id2="79"/>
-<RowLineSubject_labour description="   " id="71" id2="80"/>
-<RowLineSubject_labour description="   " id="72" id2="81"/>
-<RowLineSubject_labour description="   " id="73" id2="82"/>
-<RowLineSubject_labour description="   " id="74" id2="83"/>
-<RowLineSubject_labour description="   " id="75" id2="84"/>
-<RowLineSubject_labour description="   " id="63" id2="85"/>
-<RowLineSubject_labour description="   " id="64" id2="86"/>
-<RowLineSubject_labour description="   " id="65" id2="87"/>
-<RowLineSubject_labour description="   " id="66" id2="88"/>
-<RowLineSubject_labour description="   " id="67" id2="89"/>
-<RowLineSubject_labour description="   " id="68" id2="90"/>
-<RowLineSubject_labour description="   " id="76" id2="91"/>
-<RowLineSubject_labour description="   " id="77" id2="92"/>
-<RowLineSubject_labour description="   " id="78" id2="93"/>
-<RowLineSubject_labour description="   " id="79" id2="94"/>
-<RowLineSubject_labour description="   " id="80" id2="95"/>
-<RowLineSubject_labour description="   " id="81" id2="96"/>
-<RowLineSubject_labour description="   " id="82" id2="97"/>
-<RowLineSubject_labour description="   " id="83" id2="98"/>
+<RowLineSubject_labour description="Описание Связи (Строка заказа)-(Предмет труда) №1" id="1" id2="4"/>
+<RowLineSubject_labour description="Описание Связи (Строка заказа)-(Предмет труда) №2" id="2" id2="5"/>
+<RowLineSubject_labour description="Описание Связи (Строка заказа)-(Предмет труда) №3" id="3" id2="6"/>
+<RowLineSubject_labour description="Описание Связи (Строка заказа)-(Предмет труда) №4" id="4" id2="4"/>
+<RowLineSubject_labour description="Описание Связи (Строка заказа)-(Предмет труда) №5" id="5" id2="7"/>
+<RowLineSubject_labour description="Описание Связи (Строка заказа)-(Предмет труда) №6" id="6" id2="8"/>
+<RowLineSubject_labour description="Описание Связи (Строка заказа)-(Предмет труда) №7" id="7" id2="9"/>
+<RowLineSubject_labour description="Описание Связи (Строка заказа)-(Предмет труда) №8" id="8" id2="10"/>
+<RowLineSubject_labour description="Описание Связи (Строка заказа)-(Предмет труда) №9" id="9" id2="4"/>
+<RowLineSubject_labour description="Описание Связи (Строка заказа)-(Предмет труда) №10" id="10" id2="5"/>
+<RowLineSubject_labour description="Описание Связи (Строка заказа)-(Предмет труда) №11" id="11" id2="6"/>
+<RowLineSubject_labour description="Описание Связи (Строка заказа)-(Предмет труда) №12" id="12" id2="7"/>
 </tabLinesSubject_labours>

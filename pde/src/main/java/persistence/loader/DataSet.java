@@ -691,9 +691,9 @@ public class DataSet {
                     select(row, tabMachines, tabWorksMachines),     //  ArrayList<Machine> machines
                     null,
                     select(row, tabSubject_labours, tabWorksSubject_labours),     //  ArrayList<Subject_labour> machines
-                    null, row.getDescription());
+                    select(row, tabOrders, tabWorksOrders),                       //  ArrayList<Subject_labour> orders
+                    row.getDescription());
         }
-
 
 //= SectionDataSet: TypeMachine ========================================================================================/
 //----------------------------------------------------------------------------------------------------------------------
@@ -795,13 +795,13 @@ public class DataSet {
         }
 
         if (row.getClass() == RowResource.class) {
-            m = (cL) new Resource(((RowResource) row).getId(), ((RowResource) row).getName(), ((RowResource) row).getDescription());
+            m = new Resource(((RowResource) row).getId(), ((RowResource) row).getName(), ((RowResource) row).getDescription());
         }
         if (row.getClass() == RowFunctionOEM.class) {
-            m = (cL) new FunctionOEM(((RowFunctionOEM) row).getId(), ((RowFunctionOEM) row).getName(), ((RowFunctionOEM) row).getPathFileFR(), ((RowFunctionOEM) row).getDescription());
+            m = new FunctionOEM(((RowFunctionOEM) row).getId(), ((RowFunctionOEM) row).getName(), ((RowFunctionOEM) row).getPathFileFR(), ((RowFunctionOEM) row).getDescription());
         }
         if (row.getClass() == RowUnit.class) {
-            m = (cL) new Unit(((RowUnit) row).getId(), ((RowUnit) row).getName(), ((RowUnit) row).getDescription());
+            m = new Unit(((RowUnit) row).getId(), ((RowUnit) row).getName(), ((RowUnit) row).getDescription());
         }
 
 
@@ -889,59 +889,63 @@ public class DataSet {
 //
 //        }
 
-        //E--------Linespec --------Cоздается Объект-----------------------------------------------------------------------------------------//		
-        if (row.getClass() == RowOrder.class) {
-            ArrayList<Line> lines = new ArrayList<Line>();
-            for (RowOrderLine wr : tabOrdersLines) {
-                if (((RowOrder) row).getId() == wr.getId()) {
-                    for (RowLine w : tabLines) {
-                        if (wr.getId2() == w.getId()) {
-                            lines.add((Line) createObject(w));
-                        }
-                    }
-                }
-            }
+        if (row.getClass() ==  RowOrder.class)  m = new Order(row.getId(),
+                                                              row.getName(),
+                                                              ((RowOrder) row).getDateBegin(),
+                                                              ((RowOrder) row).getDateEnd(),
+                                                              row.getDescription(),
+                                                              select(row, tabLines, tabOrdersLines)     // ArrayList<Line> lines,
+                                                              );
 
-            m = (cL) new Order(((RowOrder) row).getId(), ((RowOrder) row).getName(), ((RowOrder) row).getDateBegin(), ((RowOrder) row).getDateEnd(), ((RowOrder) row).getDescription(), lines);
-        }
+        if (row.getClass() ==  RowLine.class)  m = new Line(row.getId(),
+                                                            row.getName(),
+                                                            (Subject_labour)select(row, tabSubject_labours, tabLinesSubject_labours).get(0),
+                                                            select(row, tabUnits, tabLinesUnits).isEmpty() ? new Unit() : (Unit) select(row, tabUnits, tabLinesUnits).get(0),
+                                                            ((RowLine)row).getQuantity(),
+                                                            ((RowLine) row).getDateBegin(),
+                                                            ((RowLine) row).getDateEnd(),
+                                                            row.getDescription()
+                                                            );
 
-        if (row.getClass() == RowLine.class) {
-            ArrayList<Subject_labour> subject_labours = new ArrayList<Subject_labour>();
-            ArrayList<Unit> units = new ArrayList<Unit>();
-            for (RowLineSubject_labour wr : tabLinesSubject_labours) {
-                if (((RowLine) row).getId() == wr.getId()) {
-                    for (RowSubject_labour w : tabSubject_labours) {
-                        if (wr.getId2() == w.getId()) {
-                            subject_labours.add((Subject_labour) createObject(w));
-                        }
-                    }
-                }
-            }
 
-            for (RowLineUnit wu : tabLinesUnits) {
-                if (((RowLine) row).getId() == wu.getId()) {
-                    for (RowUnit w : tabUnits) {
-                        if (wu.getId2() == w.getId()) {
-                            units.add((Unit) createObject(w));
-                        }
-                    }
-                }
-            }
 
-            if (subject_labours.isEmpty() == true) {     // Этот  if создан в процессе отладки (в дальнейшем можно убрать или оставить на случай, если кто-то почистить данные в xml-файлах), так как в таблицах были не все данные. Смысл его в том, что он в случае отсутствия записи Предмета труда, которая должна быть в строке, создает в RowSubject_labour и связывает его с RowLine
-                // если для строки заказа по IdId не находится предмет труда, то
-                RowSubject_labour rSL = new RowSubject_labour(this, RowSubject_labour.class);    // а)создаем отсутствующий RowSubject_labour
-                tabSubject_labours.add(rSL);                                                        // б)помещаем его в таблицу для RowSubject_labour
-                RowLineSubject_labour rIdId = new RowLineSubject_labour(row.getId(), rSL.getId(), "   ");    //	в)для связи по id строки RowLine и RowSubject_labour  создаем строку реестра    и
+//        if (row.getClass() == RowLine.class) {
+//            ArrayList<Subject_labour> subject_labours = new ArrayList<Subject_labour>();
+//            ArrayList<Unit> units = new ArrayList<Unit>();
+//            for (RowLineSubject_labour wr : tabLinesSubject_labours) {
+//                if (((RowLine) row).getId() == wr.getId()) {
+//                    for (RowSubject_labour w : tabSubject_labours) {
+//                        if (wr.getId2() == w.getId()) {
+//                            subject_labours.add((Subject_labour) createObject(w));
+//                        }
+//                    }
+//                }
+//            }
+//
+//            for (RowLineUnit wu : tabLinesUnits) {
+//                if (((RowLine) row).getId() == wu.getId()) {
+//                    for (RowUnit w : tabUnits) {
+//                        if (wu.getId2() == w.getId()) {
+//                            units.add((Unit) createObject(w));
+//                        }
+//                    }
+//                }
+//            }
 
-                tabLinesSubject_labours.add(rIdId);                                                                //	г) помещаем ее в таблицу DataSet.tabLinesSubject_labours
-                // теперь у нас есть все необходиое для создание отсутствующего предмета труда
-
-                subject_labours.add((Subject_labour) createObject(rSL));                            // д) создаем недостающий предмет труда и помещаем его в коллекцию.
-
-            }
-            m =  new Line(((RowLine) row).getId(), ((RowLine) row).getName(), subject_labours, units, ((RowLine) row).getQuantity(), ((RowLine) row).getDateBegin(), ((RowLine) row).getDateEnd(), ((RowLine) row).getDescription());
-        }
+//            if (subject_labours.isEmpty() == true) {     // Этот  if создан в процессе отладки (в дальнейшем можно убрать или оставить на случай, если кто-то почистить данные в xml-файлах), так как в таблицах были не все данные. Смысл его в том, что он в случае отсутствия записи Предмета труда, которая должна быть в строке, создает в RowSubject_labour и связывает его с RowLine
+//                // если для строки заказа по IdId не находится предмет труда, то
+//                RowSubject_labour rSL = new RowSubject_labour(this, RowSubject_labour.class);    // а)создаем отсутствующий RowSubject_labour
+//                tabSubject_labours.add(rSL);                                                        // б)помещаем его в таблицу для RowSubject_labour
+//                RowLineSubject_labour rIdId = new RowLineSubject_labour(row.getId(), rSL.getId(), "   ");    //	в)для связи по id строки RowLine и RowSubject_labour  создаем строку реестра    и
+//
+//                tabLinesSubject_labours.add(rIdId);                                                                //	г) помещаем ее в таблицу DataSet.tabLinesSubject_labours
+//                // теперь у нас есть все необходиое для создание отсутствующего предмета труда
+//
+//                subject_labours.add((Subject_labour) createObject(rSL));                            // д) создаем недостающий предмет труда и помещаем его в коллекцию.
+//
+//            }
+//            m =  new Line(((RowLine) row).getId(), ((RowLine) row).getName(), subject_labours, units, ((RowLine) row).getQuantity(), ((RowLine) row).getDateBegin(), ((RowLine) row).getDateEnd(), ((RowLine) row).getDescription());
+ //       }
 
         return (cL)m;
     }

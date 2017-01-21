@@ -1,17 +1,19 @@
 package entityProduction;
 
+import designpatterns.ColumnModelmachine;
 import persistence.loader.DataSet;
 import persistence.loader.tabDataSet.RowLineroute;
 
 import java.util.ArrayList;
 
-public class Lineroute extends RowLineroute {
+public class Lineroute extends RowLineroute implements ColumnModelmachine{
 
     private String nameOperation = "nameOperation";
     private String nameMachine = "nameMachine";
     private Operation operation;
     private Machine machine;
-    ArrayList<Linespec> linespecs;
+    private ArrayList<Linespec> linespecs;
+    private Modelmachine modelmachine;
 
     public Lineroute() {
     }
@@ -29,9 +31,13 @@ public class Lineroute extends RowLineroute {
         super(id, name, numberWork, inputBufferMin, inputBuffer, inputBufferMax, outputBufferMin, outputBuffer, outputBufferMax, description);
         this.operation = operation;
         this.machine = machine;
+
         this.linespecs = linespecs;
         if (operation!=null) nameOperation = operation.getName();
-        if (machine!=null)   nameMachine = machine.getName();
+        if (machine != null) {
+            nameMachine = machine.getName();
+            this.modelmachine = machine.getModelmachine();
+        }
     }
 
     public String getNameOperation() {
@@ -56,5 +62,15 @@ public class Lineroute extends RowLineroute {
 
     public void setLinespecs(ArrayList<Linespec> linespecs) {
         this.linespecs = linespecs;
+    }
+
+    @Override
+    public Modelmachine getModelmachine() {
+        return modelmachine;
+    }
+
+    @Override
+    public void setModelmachine(Modelmachine modelmachine) {
+        this.modelmachine = modelmachine;
     }
 }
