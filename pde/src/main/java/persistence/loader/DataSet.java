@@ -1,10 +1,10 @@
 package persistence.loader;
 
 import entityProduction.*;
-import old._util._Date;
-import org.w3c.dom.DOMException;
-import persistence.loader.tabDataSet.*;
 
+import org.w3c.dom.DOMException;
+import persistence.loader._util._Date;
+import persistence.loader.tabDataSet.*;
 import javax.xml.parsers.ParserConfigurationException;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
@@ -530,11 +530,6 @@ public class DataSet {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    /**
-     * Вспомогательный класс, используется для передачи данных из метода
-     * FieldClass getFieldName_Class (Object tab)
-     *
-     */
     private class FieldClass {
 
         private String fieldName;
@@ -546,10 +541,6 @@ public class DataSet {
         }
     }
 
-    /**
-     * Выбираем из rtTab все элементы RT, для которых row.Id==RMT.Id && RMT.Id
-     * == RT.Id
-     */
     @Deprecated
     public <T, RT extends RowIdNameDescription, RMT extends RowIdId2> ArrayList<T> select(RowIdNameDescription row, ArrayList<RT> rtTab, ArrayList<RMT> rmtTab, Class cRT, Class cRMT) {
         ArrayList<T> typemachines = new ArrayList<>();
@@ -563,18 +554,6 @@ public class DataSet {
                 }
             return row.getId() == wr.getId(); }).count();
 
-/*
-        for (RMT wr : rmtTab) {  // Выбираем из rtTab все элементы RT, для которых row.Id==RMT.Id && RMT.Id2 == RT.Id
-            if ( row.getId() == wr.getId()) {
-                for (RT w : rtTab) {
-                    if (wr.getId2() == w.getId()) {
-                        typemachines.add((T) createObject(w));
-                    }
-                }
-            }
-        }
-
-*/
         if (typemachines.isEmpty() == true) {     //  If the table is empty, create a new element. His type of equipment installed by default.
             try {
                 RT rSL = (RT) cRT.getDeclaredConstructor(DataSet.class, Class.class).newInstance(this, cRT);
@@ -804,91 +783,6 @@ public class DataSet {
             m = new Unit(((RowUnit) row).getId(), ((RowUnit) row).getName(), ((RowUnit) row).getDescription());
         }
 
-
-
-        //B--------Route ------------Cоздается Объект-----------------------------------------------------------------------------------------//
-
-        //E--------Route ------------Cоздается Объект-----------------------------------------------------------------------------------------//
-
-        //B--------Lineroute --------Cоздается Объект-----------------------------------------------------------------------------------------//
-//
-
-//        if (row.getClass() == RowLinespec.class) {
-//            ArrayList<Resource> resources = new ArrayList<Resource>();
-//
-//            for (RowLinespecResource wr : tabLinespecsResources) {
-//                if (((RowLinespec) row).getId() == wr.getId()) {
-//                    for (RowResource w : tabResources) {
-//                        if (wr.getId2() == w.getId()) {
-//                            resources.add((Resource) createObject(w));
-//                        }
-//                    }
-//                }
-//            }
-//
-//            ArrayList<Unit> units = new ArrayList<Unit>();
-//            for (RowLinespecUnit wr : tabLinespecsUnits) {
-//                if (((RowLinespec) row).getId() == wr.getId()) {
-//                    for (RowUnit w : tabUnits) {
-//                        if (wr.getId2() == w.getId()) {
-//                            units.add((Unit) createObject(w));
-//                        }
-//                    }
-//                }
-//            }
-//
-//            ArrayList<FunctionOEM> functionOEMs = new ArrayList<FunctionOEM>();
-//            for (RowLinespecFunctionOEM wr : tabLinespecsFunctionOEMs) {
-//                if (((RowLinespec) row).getId() == wr.getId()) {
-//                    for (RowFunctionOEM w : tabFunctionOEMs) {
-//                        if (wr.getId2() == w.getId()) {
-//                            functionOEMs.add((FunctionOEM) createObject(w));
-//                        }
-//                    }
-//                }
-//            }
-//
-//            if (units.isEmpty() == true) {     // Этот  if создан в процессе отладки (в дальнейшем можно убрать или оставить на случай, если кто-то почистить данные в xml-файлах), так как в таблицах были не все данные. Смысл его в том, что он в случае отсутствия записи Предмета труда, которая должна быть в строке, создает в RowSubject_labour и связывает его с RowLine
-//                // если для строки заказа по IdId не находится предмет труда, то
-//                RowUnit rSL = new RowUnit(this, RowUnit.class);    // а)создаем отсутствующий RowSubject_labour
-//                tabUnits.add(rSL);                                                        // б)помещаем его в таблицу для RowSubject_labour
-//                RowLinespecUnit rIdId = new RowLinespecUnit(((RowLinespec) row).getId(), rSL.getId(), "   ");    //	в)для связи по id строки RowLine и RowSubject_labour  создаем строку реестра    и
-//                tabLinespecsUnits.add(rIdId);                                                                //	г) помещаем ее в таблицу DataSet.tabLinesSubject_labours
-//                // теперь у нас есть все необходиое для создание отсутствующего предмета труда
-//                units.add((Unit) createObject(rSL));                            // д) создаем недостающий предмет труда и помещаем его в коллекцию.
-//            }
-//            if (resources.isEmpty() == true) {     // Этот  if создан в процессе отладки (в дальнейшем можно убрать или оставить на случай, если кто-то почистить данные в xml-файлах), так как в таблицах были не все данные. Смысл его в том, что он в случае отсутствия записи Предмета труда, которая должна быть в строке, создает в RowSubject_labour и связывает его с RowLine
-//                // если для строки заказа по IdId не находится предмет труда, то
-//                RowResource rSL = new RowResource(this, RowResource.class);    // а)создаем отсутствующий RowSubject_labour
-//                tabResources.add(rSL);                                                        // б)помещаем его в таблицу для RowSubject_labour
-//                RowLinespecResource rIdId = new RowLinespecResource(((RowLinespec) row).getId(), rSL.getId(), "   ");    //	в)для связи по id строки RowLine и RowSubject_labour  создаем строку реестра    и
-//                tabLinespecsResources.add(rIdId);                                                                //	г) помещаем ее в таблицу DataSet.tabLinesSubject_labours
-//                // теперь у нас есть все необходиое для создание отсутствующего предмета труда
-//                resources.add((Resource) createObject(rSL));                            // д) создаем недостающий предмет труда и помещаем его в коллекцию.
-//            }
-//            if (functionOEMs.isEmpty() == true) {     // Этот  if создан в процессе отладки (в дальнейшем можно убрать или оставить на случай, если кто-то почистить данные в xml-файлах), так как в таблицах были не все данные. Смысл его в том, что он в случае отсутствия записи Предмета труда, которая должна быть в строке, создает в RowSubject_labour и связывает его с RowLine
-//                // если для строки заказа по IdId не находится предмет труда, то
-//                RowFunctionOEM rSL = new RowFunctionOEM(this, RowFunctionOEM.class);    // а)создаем отсутствующий RowSubject_labour
-//                tabFunctionOEMs.add(rSL);                                                        // б)помещаем его в таблицу для RowSubject_labour
-//                RowLinespecFunctionOEM rIdId = new RowLinespecFunctionOEM(((RowLinespec) row).getId(), rSL.getId(), "   ");    //	в)для связи по id строки RowLine и RowSubject_labour  создаем строку реестра    и
-//                tabLinespecsFunctionOEMs.add(rIdId);                                                                //	г) помещаем ее в таблицу DataSet.tabLinesSubject_labours
-//                // теперь у нас есть все необходиое для создание отсутствующего предмета труда
-//                functionOEMs.add((FunctionOEM) createObject(rSL));                            // д) создаем недостающий предмет труда и помещаем его в коллекцию.
-//            }
-//
-//            m = new Linespec(
-//                    ((RowLinespec) row).getId(),
-//                    ((RowLinespec) row).getName(),
-//                    resources,
-//                    ((RowLinespec) row).getM(),
-//                    ((RowLinespec) row).getSigma(),
-//                    functionOEMs,
-//                    units,
-//                    ((RowLinespec) row).getDescription()
-//            );
-//
-//        }
-
         if (row.getClass() ==  RowOrder.class)  m = new Order(row.getId(),
                                                               row.getName(),
                                                               ((RowOrder) row).getDateBegin(),
@@ -906,47 +800,6 @@ public class DataSet {
                                                             ((RowLine) row).getDateEnd(),
                                                             row.getDescription()
                                                             );
-
-
-
-//        if (row.getClass() == RowLine.class) {
-//            ArrayList<Subject_labour> subject_labours = new ArrayList<Subject_labour>();
-//            ArrayList<Unit> units = new ArrayList<Unit>();
-//            for (RowLineSubject_labour wr : tabLinesSubject_labours) {
-//                if (((RowLine) row).getId() == wr.getId()) {
-//                    for (RowSubject_labour w : tabSubject_labours) {
-//                        if (wr.getId2() == w.getId()) {
-//                            subject_labours.add((Subject_labour) createObject(w));
-//                        }
-//                    }
-//                }
-//            }
-//
-//            for (RowLineUnit wu : tabLinesUnits) {
-//                if (((RowLine) row).getId() == wu.getId()) {
-//                    for (RowUnit w : tabUnits) {
-//                        if (wu.getId2() == w.getId()) {
-//                            units.add((Unit) createObject(w));
-//                        }
-//                    }
-//                }
-//            }
-
-//            if (subject_labours.isEmpty() == true) {     // Этот  if создан в процессе отладки (в дальнейшем можно убрать или оставить на случай, если кто-то почистить данные в xml-файлах), так как в таблицах были не все данные. Смысл его в том, что он в случае отсутствия записи Предмета труда, которая должна быть в строке, создает в RowSubject_labour и связывает его с RowLine
-//                // если для строки заказа по IdId не находится предмет труда, то
-//                RowSubject_labour rSL = new RowSubject_labour(this, RowSubject_labour.class);    // а)создаем отсутствующий RowSubject_labour
-//                tabSubject_labours.add(rSL);                                                        // б)помещаем его в таблицу для RowSubject_labour
-//                RowLineSubject_labour rIdId = new RowLineSubject_labour(row.getId(), rSL.getId(), "   ");    //	в)для связи по id строки RowLine и RowSubject_labour  создаем строку реестра    и
-//
-//                tabLinesSubject_labours.add(rIdId);                                                                //	г) помещаем ее в таблицу DataSet.tabLinesSubject_labours
-//                // теперь у нас есть все необходиое для создание отсутствующего предмета труда
-//
-//                subject_labours.add((Subject_labour) createObject(rSL));                            // д) создаем недостающий предмет труда и помещаем его в коллекцию.
-//
-//            }
-//            m =  new Line(((RowLine) row).getId(), ((RowLine) row).getName(), subject_labours, units, ((RowLine) row).getQuantity(), ((RowLine) row).getDateBegin(), ((RowLine) row).getDateEnd(), ((RowLine) row).getDescription());
- //       }
-
         return (cL)m;
     }
 

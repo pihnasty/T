@@ -5,8 +5,10 @@
  */
 package entityProduction;
 
-import old.database.DataSet;
-import old.database.tabDataSet.RowTypemachine;
+
+
+import persistence.loader.DataSet;
+import persistence.loader.tabDataSet.RowTypemachine;
 
 import java.util.ArrayList;
 import java.util.Collection;

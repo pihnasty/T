@@ -22,6 +22,7 @@ public class ColumnsOrderMap {
         map.put(Rule.Subject_labour, new ColumnsOrder("id", "name", "price","unitName", "description"));
         map.put(Rule.Route, new ColumnsOrder("id", "name","description" ));
         map.put(Rule.Lineroute, new ColumnsOrder("numberWork","name","nameOperation","nameMachine", "inputBufferMin","inputBuffer","inputBufferMax","outputBufferMin","outputBuffer","outputBufferMax","id","description" ));
+        //map.put(Rule.Lineroute, new ColumnsOrder("numberWork","name","nameOperation","nameMachine", "modelmachine", "image", "inputBufferMin","inputBuffer","inputBufferMax","outputBufferMin","outputBuffer","outputBufferMax","id","description" ));
         map.put(Rule.Linespec, new ColumnsOrder("id","name","resourceName","m","sigma","functionOEMName","unitName","description" ));
 
         map.put(Rule.Order, new ColumnsOrder("id", "name", "dateBegin","dateEnd", "description"));
