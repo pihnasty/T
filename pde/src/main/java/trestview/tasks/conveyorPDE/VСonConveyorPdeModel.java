@@ -1,6 +1,6 @@
 package trestview.tasks.conveyorPDE;
 
-import com.sun.javafx.binding.StringFormatter;
+
 import designpatterns.ObservableDS;
 import trestview.linechart.LineChartInterface;
 import trestview.table.tablemodel.abstracttablemodel.Rule;
@@ -45,7 +45,7 @@ public class VСonConveyorPdeModel extends ObservableDS implements LineChartInte
     private double sMax =1.0;
 
 
-    public enum Conditions {v1, v2};
+    public enum Conditions {v1, v2,v3};
 
     public List<Point2D.Double> getListConT() {
         return listConT;
@@ -66,14 +66,14 @@ public class VСonConveyorPdeModel extends ObservableDS implements LineChartInte
 
     public VСonConveyorPdeModel(ObservableDS o, Rule rule) {
         super(o,rule);
-        double _s0 = 0.0;
+        double _s0 = 0.2;
         double _t0 = 0.0;
 
 
 
         DoubleFunction<Double> sinConveyorPdeModelS     = _r -> (2 + Math.sin(2 * Math.PI * _r))/3.0;
         DoubleFunction<Double> sinConveyorPdeModelT     = _r -> (2 + Math.sin(2 * Math.PI *(0.5- _r)))/3.0;
-        DoubleFunction<Double> pow2BoundaryCondition  = _r -> { double ftMax = 1.0/3.0;   return  0.0;   };
+        DoubleFunction<Double> pow2BoundaryCondition  = _r -> { double ftMax = 1.0/3.0;   return  _r*0.5+0.25;   };
 
         DoubleFunction<Double>  conditionForS = null;
         DoubleFunction<Double>  conditionForT = null;
@@ -83,7 +83,13 @@ public class VСonConveyorPdeModel extends ObservableDS implements LineChartInte
 
         switch (v) {
             case v1:  _s0 = 0.5;  _t0 =  0.0;  tMax =1.0;  conditionForS = sinConveyorPdeModelS; conditionForT=sinConveyorPdeModelT;   break;
-            case v2:  _s0 = 0.5;  _t0 = 0.0;   tMin =-0.5;  tMax =0.5;  conditionForS = sinConveyorPdeModelS; conditionForT=sinConveyorPdeModelT;   break;
+
+
+            case v2:  _s0 = 0.2;  _t0 = 0.2;   tMin =0.0;  tMax =1.0;  conditionForS = sinConveyorPdeModelS; conditionForT=pow2BoundaryCondition;   break;
+
+
+            case v3:  _s0 = 0.5;  _t0 = 0.0;   tMin =-0.5;  tMax =0.5;  conditionForS = sinConveyorPdeModelS; conditionForT=sinConveyorPdeModelT;   break;
+
             default:                                            break;
         }
 
@@ -118,7 +124,7 @@ public class VСonConveyorPdeModel extends ObservableDS implements LineChartInte
     public VСonConveyorPdeModel dataBuildVСonConveyorPdeModel(String s) {
         VСonConveyorPdeModel vСonConveyorPdeModel =
                 new VСonConveyorPdeModel(this, null).setTitleGraph(ResourceBundle.getBundle("ui").getString("productionLine"))
-                                                    .setxMin(0.0).setyMin(0.0).setyMax(1.0).setyTickUnit(0.1);
+                                                    .setxMin(0.0).setyMin(0.0).setyMax(2.0).setyTickUnit(0.1);
         if(s=="oX=S") {
             vСonConveyorPdeModel        .setTitleX(ResourceBundle.getBundle("ui").getString("titleOxS"))
                                         .setxMax(sMax).setxTickUnit(sMax/10.0)
