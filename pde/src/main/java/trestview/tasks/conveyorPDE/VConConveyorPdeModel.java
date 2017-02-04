@@ -1,6 +1,5 @@
 package trestview.tasks.conveyorPDE;
 
-import com.sun.javafx.binding.StringFormatter;
 import designpatterns.ObservableDS;
 import trestview.linechart.LineChartInterface;
 import trestview.table.tablemodel.abstracttablemodel.Rule;
@@ -10,8 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import java.util.ResourceBundle;
-import java.util.function.DoubleFunction;
-
 
 public class VConConveyorPdeModel extends ObservableDS implements LineChartInterface {
 
@@ -45,10 +42,7 @@ public class VConConveyorPdeModel extends ObservableDS implements LineChartInter
     private double tMin = 0.0;
     private double sMax = 1.0;
 
-
-    public enum Conditions {v1, v2}
-
-    ;
+    private Strategy strategy;
 
     public List<Point2D.Double> getListConT() {
         return list_qS;
@@ -69,66 +63,38 @@ public class VConConveyorPdeModel extends ObservableDS implements LineChartInter
 
     public VConConveyorPdeModel(ObservableDS o, Rule rule) {
         super(o, rule);
-        double _s0 = 0.0;
-        double _t0 = 0.0;
-        double numberOfCurves = 10.0;
-        double g1 = 1;
+
+        strategy = new Strategy01();
 
 
-        DoubleFunction<Double> sinConveyorPdeModelS = _r -> (2 + Math.sin(2 * Math.PI * _r)) / 3.0;
-        DoubleFunction<Double> sinConveyorPdeModelT = _r -> (2 + Math.sin(2 * Math.PI * (0.5 - _r))) / 3.0;
-        DoubleFunction<Double> pow2BoundaryCondition = _r -> {
-            double ftMax = 1.0 / 3.0;
-            return 0.5;
-        };
+        initialize();
+    }
 
-        DoubleFunction<Double> conditionForS = null;
-        DoubleFunction<Double> conditionForT = null;
-
-
-        Conditions v = Conditions.v2;
-
-        switch (v) {
-            case v2:
-                _s0 = -0.01;
-                _t0 = 0.0;
-                tMin = 0;
-                tMax = 1.0;
-                conditionForS = sinConveyorPdeModelS;
-                conditionForT = pow2BoundaryCondition;
-                break;
-            default:
-                break;
-        }
-
-        //  (_r*_r)*ftMax;// 0.3;
-        //    2) (_r*_r)*ftMax;        1)    (10*Math.pow(_r, 2)/100)*ftMax;}
-
+    private void initialize() {
         pullList_qT = new ArrayList<>();
         pullList_qS = new ArrayList<>();
         pullList_qX = new ArrayList<>();
 
         list_qT_Legend = new ArrayList<>();
         list_qS_Legend = new ArrayList<>();
-
-
-        for (double _s = 0; _s < 1.0; _s += 1.0 / numberOfCurves) {
-            pullList_qT.add(qT(_s, _s0, _t0, conditionForS, conditionForT, g1));
+        for (double _s = 0; _s < 1.0; _s += 1.0 / strategy.getNumberOfCurves()) {
+            pullList_qT.add(qT(_s));
             list_qT_Legend.add("S/Sd=" + String.format("%3.1f", _s));
 
         }
-        for (double _t = tMin; _t < tMax; _t += (tMax - tMin) / numberOfCurves) {
-            pullList_qS.add(qS(_t, _s0, _t0, conditionForS, conditionForT, g1));
+        for (double _t = tMin; _t < tMax; _t += (tMax - tMin) / strategy.getNumberOfCurves()) {
+            pullList_qS.add(qS(_t));
             list_qS_Legend.add("t/Td=" + String.format("%3.1f", _t));
         }
-        for (double _t = tMin; _t < tMax; _t += (tMax - tMin) / numberOfCurves) {
-            pullList_qX.add(qX(_t, _s0, _t0, conditionForS, conditionForT, g1));
+        for (double _t = tMin; _t < tMax; _t += (tMax - tMin) / strategy.getNumberOfCurves()) {
+            pullList_qX.add(qX(_t));
             list_qS_Legend.add("t/Td=" + String.format("%3.1f", _t));
         }
     }
 
 
     public VConConveyorPdeModel dataBuildVConConveyorPdeModel(String s) {
+
         VConConveyorPdeModel VConConveyorPdeModel =
                 new VConConveyorPdeModel(this, null).setTitleGraph(ResourceBundle.getBundle("ui").getString("productionLine"))
                         .setxMin(0.0).setyMin(0.0).setyMax(1.0).setyTickUnit(0.1);
@@ -196,57 +162,43 @@ public class VConConveyorPdeModel extends ObservableDS implements LineChartInter
 
     }
 
-    private double decision(double _s, double _t, double _s0, double _t0, DoubleFunction<Double> a, DoubleFunction<Double> b, double g) {
-        double _r = r(_s, _t, _s0, _t0, g);
-        return a.apply(_r + _s0) * (h(_r) + h(_s0 - _s)) + b.apply(_t0 - _r / g) * (h(-_r) - h(_s0 - _s));
+    private double decision(double _s, double _t) {
+        return strategy.decision(_s, _t);
     }
 
-    private double h(double r) {
-        if (r < 0) return 0;
-        if (r == 0) return 0.5;
-        else return 1.0;
+    private double decisionCharacteristic(double _s, double _t) {
+        return strategy.decisionCharacteristic(_s, _t);
     }
 
-    private double r(double _s, double _t, double _s0, double _t0, double g) {
-        return _s - _s0 - g * (_t - _t0);
-    }
 
-    private List<Point2D.Double> qS(double _t, double _s0, double _t0, DoubleFunction<Double> a, DoubleFunction<Double> b, double g) {
+    private List<Point2D.Double> qS(double _t) {
         List<Point2D.Double> doubleList = new ArrayList<>();
         double dS = 0.001;
-
         for (double _s = 0.0; _s <= 1.0; _s += dS) {
-            Point2D.Double p = new Point2D.Double(_s,
-                    decision(_s, _t, _s0, _t0, a, b, g)
-            );
-            doubleList.add(p);
-        }
-
-        return doubleList;
-    }
-
-
-    private List<Point2D.Double> qT(double _s, double _s0, double _t0, DoubleFunction<Double> a, DoubleFunction<Double> b, double g) {
-        List<Point2D.Double> doubleList = new ArrayList<>();
-        double tD = 10.0;
-        double dT = 0.01;
-        for (double _t = tMin; _t <= tD; _t += dT) {
-            Point2D.Double p = new Point2D.Double(_t,
-                    decision(_s, _t, _s0, _t0, a, b, g)
-            );
+            Point2D.Double p = new Point2D.Double(_s, decision(_s, _t));
             doubleList.add(p);
         }
         return doubleList;
     }
 
-    private List<Point2D.Double> qX(double _s, double _s0, double _t0, DoubleFunction<Double> a, DoubleFunction<Double> b, double g) {
+
+    private List<Point2D.Double> qT(double _s) {
         List<Point2D.Double> doubleList = new ArrayList<>();
         double tD = 10.0;
         double dT = 0.01;
         for (double _t = tMin; _t <= tD; _t += dT) {
-            Point2D.Double p = new Point2D.Double(_t,
-                    r(_s0, _t0, _s, _t, g)
-            );
+            Point2D.Double p = new Point2D.Double(_t, decision(_s, _t));
+            doubleList.add(p);
+        }
+        return doubleList;
+    }
+
+    private List<Point2D.Double> qX(double _s) {
+        List<Point2D.Double> doubleList = new ArrayList<>();
+        double tD = 10.0;
+        double dT = 0.01;
+        for (double _t = tMin; _t <= tD; _t += dT) {
+            Point2D.Double p = new Point2D.Double(_t, decisionCharacteristic(_s, _t));
             doubleList.add(p);
         }
         return doubleList;
@@ -371,5 +323,12 @@ public class VConConveyorPdeModel extends ObservableDS implements LineChartInter
     public VConConveyorPdeModel setyTickUnit(double yTickUnit) {
         this.yTickUnit = yTickUnit;
         return this;
+    }
+
+    public void setStrategy(Strategy strategy) {
+        this.strategy = strategy;
+        initialize();
+        change();
+
     }
 }

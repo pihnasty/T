@@ -3,15 +3,25 @@ package trestview.tasks.conveyorPDE;
         import designpatterns.MVC;
         import designpatterns.ObservableDS;
         import designpatterns.observerdsall.BorderPaneObserverDS;
+        import javafx.event.ActionEvent;
+        import javafx.event.EventHandler;
         import javafx.fxml.FXML;
         import javafx.fxml.FXMLLoader;
+        import javafx.scene.control.Button;
         import javafx.scene.control.Label;
+        import javafx.scene.control.Tooltip;
         import javafx.scene.layout.HBox;
+        import javafx.scene.layout.StackPane;
         import javafx.scene.layout.VBox;
         import persistence.loader.XmlRW;
+        import trestview.dictionary.DictionaryController;
+        import trestview.dictionary.DictionaryModel;
+        import trestview.dictionary.DictionaryView;
         import trestview.linechart.LineChartController;
         import trestview.linechart.LineChartModel;
         import trestview.linechart.LineChartP;
+        import trestview.table.tablemodel.abstracttablemodel.Rule;
+
 
         import java.awt.*;
         import java.awt.geom.Point2D;
@@ -29,6 +39,7 @@ public class VConConveyorPdeView extends BorderPaneObserverDS {
 
     public  VConConveyorPdeView(ObservableDS observebleDS, InitializableDS initializableDS){
         super(observebleDS,initializableDS);
+
         inizilize(observableDS);
         FXMLLoader fxmlLoader = XmlRW.fxmlLoad(this,initializableDS, "trestview/tasks/conveyorPDE/vConConveyorPdeView.fxml","ui", "trestview/tasks/conveyorPDE/vConConveyorPdeStyle.css");
 
@@ -37,7 +48,46 @@ public class VConConveyorPdeView extends BorderPaneObserverDS {
  //        getStyleClass().add("vConConveyorPdeStyle");
    //     getStylesheets().add("barchartsample/Chart.css");
 
-        int widthSection = (int)1.5*Toolkit.getDefaultToolkit ().getScreenSize ().width/3;
+
+
+        Button buttonForStrategy01 = new Button();
+        buttonForStrategy01.setText("Начальное условие");
+        buttonForStrategy01.setTooltip(new Tooltip("sddsdsdsdsd"));
+
+        Button button2 = new Button();
+        button2.setText("Начальное условие2");
+
+        HBox hBoxBottom1 = new HBox(buttonForStrategy01, button2);
+        setBottom(hBoxBottom1);
+
+
+
+        buttonForStrategy01.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                ((VConConveyorPdeModel) observebleDS).setStrategy(new Strategy01());
+            }
+        });
+
+        button2.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                ((VConConveyorPdeModel) observebleDS).setStrategy(new Strategy02());
+            }
+        });
+
+    }
+
+
+
+
+    public void update(Observable observeble, Object arg) {
+        inizilize((ObservableDS)observeble);
+
+    }
+
+    private void inizilize(ObservableDS observableDS) {
+        int widthSection = (int)1.5* Toolkit.getDefaultToolkit ().getScreenSize ().width/3;
 
         MVC LineChart1MVC  = new MVC (LineChartModel.class, LineChartController.class, LineChartP.class,
                 ((VConConveyorPdeModel) observableDS).dataBuildVConConveyorPdeModel("oX=S"), null );
@@ -46,7 +96,7 @@ public class VConConveyorPdeView extends BorderPaneObserverDS {
                 ((VConConveyorPdeModel) observableDS).dataBuildVConConveyorPdeModel("oX=T"), null );
 
         MVC LineChart3MVC  = new MVC (LineChartModel.class, LineChartController.class, LineChartP.class,
-                ((VConConveyorPdeModel) observableDS).dataBuildVConConveyorPdeModel("oX=S"), null );
+                ((VConConveyorPdeModel) observableDS).dataBuildVConConveyorPdeModel("oX=X"), null );
 
 
         List<MVC> listMVCs = new ArrayList<>();
@@ -65,20 +115,18 @@ public class VConConveyorPdeView extends BorderPaneObserverDS {
         setLeft(vBoxLeft);
 
 
-
-
         VBox vBoxCenterLeft = new VBox();
         VBox vBoxCenterRight = new VBox();
         int j=0;
         for (MVC mvc : listMVCs)
             if(j++ < 5) vBoxCenterLeft.getChildren().add((LineChartP)mvc.getView());
-                   else vBoxCenterRight.getChildren().add((LineChartP)mvc.getView());
+            else vBoxCenterRight.getChildren().add((LineChartP)mvc.getView());
         Label labelT = new Label(ResourceBundle.getBundle("ui").getString("titleSectionCenter"));
         labelT.setMinHeight(40);
         HBox hBoxCenter = new HBox(vBoxCenterLeft,vBoxCenterRight);
-        hBoxCenter.setMaxWidth(widthSection);    hBoxCenter.setMinWidth(widthSection-1);
+        hBoxCenter.setMaxWidth(widthSection);
+        hBoxCenter.setMinWidth(widthSection-1);
         setCenter(new VBox (labelT,hBoxCenter));
-
 
 
         VBox vBoxRightLeft = new VBox();
@@ -92,28 +140,9 @@ public class VConConveyorPdeView extends BorderPaneObserverDS {
         Label labelS = new Label(ResourceBundle.getBundle("ui").getString("titleSectionRight"));
         labelS.setMinHeight(40);
         HBox hBoxRight = new HBox(vBoxRightLeft,vBoxRightRight);
-        hBoxRight.setMaxWidth(widthSection);    hBoxRight.setMinWidth(widthSection-1);
+        hBoxRight.setMaxWidth(widthSection);
+        hBoxRight.setMinWidth(widthSection-1);
         setRight(new VBox (labelS, hBoxRight) );
-
     }
-
-
-
-    public void update(Observable observeble, Object arg) {
-        inizilize(observeble);
-
-    }
-
-    private void inizilize(Observable observeble) {
-//        model=observeble;
-//        LineChartModel lineChartModel = new LineChartModel(observeble);
-//
-//        List<Point2D.Double> list = lineChartModel.getlist();
-//
-//       // ObservableList<String> y
-    }
-
-
-    static public void main(String[] args) {}
 
 }

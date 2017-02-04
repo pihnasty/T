@@ -28,7 +28,7 @@ import trestview.routeperspective.RoutePerspectiveView;
 import trestview.table.tablemodel.abstracttablemodel.Rule;
 import trestview.tasks.conveyorPDE.VConConveyorPdeController;
 import trestview.tasks.conveyorPDE.VConConveyorPdeView;
-import trestview.tasks.conveyorPDE.VСonConveyorPdeModel;
+import trestview.tasks.conveyorPDE.VConConveyorPdeModel;
 
 
 import java.lang.reflect.Constructor;
@@ -73,7 +73,7 @@ public class TrestView extends BorderPaneObserverDS {
          machineTest = new MVC (MachineTestModel.class,  MachineTestController.class, MachineTestView.class, this.trestModel, Rule.Functiondist);
 
 
-        conConveyorPdeModel = new MVC (VСonConveyorPdeModel.class, VConConveyorPdeController.class, VConConveyorPdeView.class,this.trestModel, null);
+        conConveyorPdeModel = new MVC (VConConveyorPdeModel.class, VConConveyorPdeController.class, VConConveyorPdeView.class,this.trestModel, null);
 
         routePerspective = new MVC (RoutePerspectiveModel.class, RoutePerspectiveController.class, RoutePerspectiveView.class,this.trestModel, null);
 
