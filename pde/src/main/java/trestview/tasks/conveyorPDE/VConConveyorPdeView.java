@@ -40,23 +40,23 @@ public class VConConveyorPdeView extends BorderPaneObserverDS {
         int widthSection = (int)1.5*Toolkit.getDefaultToolkit ().getScreenSize ().width/3;
 
         MVC LineChart1MVC  = new MVC (LineChartModel.class, LineChartController.class, LineChartP.class,
-                ((VСonConveyorPdeModel) observableDS).dataBuildVСonConveyorPdeModel("oX=S"), null );
+                ((VConConveyorPdeModel) observableDS).dataBuildVConConveyorPdeModel("oX=S"), null );
 
         MVC LineChart2MVC  = new MVC (LineChartModel.class, LineChartController.class, LineChartP.class,
-                ((VСonConveyorPdeModel) observableDS).dataBuildVСonConveyorPdeModel("oX=T"), null );
+                ((VConConveyorPdeModel) observableDS).dataBuildVConConveyorPdeModel("oX=T"), null );
 
         MVC LineChart3MVC  = new MVC (LineChartModel.class, LineChartController.class, LineChartP.class,
-                ((VСonConveyorPdeModel) observableDS).dataBuildVСonConveyorPdeModel("oX=S"), null );
+                ((VConConveyorPdeModel) observableDS).dataBuildVConConveyorPdeModel("oX=S"), null );
 
 
         List<MVC> listMVCs = new ArrayList<>();
         for (int i=0; i<10; i++)  listMVCs.add( new MVC (LineChartModel.class, LineChartController.class, LineChartP.class,
-                ((VСonConveyorPdeModel) observableDS).dataBuildVСonConveyorPdeModel("oX=Salone0"+i), null )
+                ((VConConveyorPdeModel) observableDS).dataBuildVConConveyorPdeModel("oX=Salone0"+i), null )
         );
 
         List<MVC> listMVCt = new ArrayList<>();
         for (int i=0; i<10; i++)  listMVCt.add( new MVC (LineChartModel.class, LineChartController.class, LineChartP.class,
-                ((VСonConveyorPdeModel) observableDS).dataBuildVСonConveyorPdeModel("oX=Talone0"+i), null )
+                ((VConConveyorPdeModel) observableDS).dataBuildVConConveyorPdeModel("oX=Talone0"+i), null )
         );
 
 
