@@ -1,34 +1,28 @@
 package trestview.tasks.conveyorPDE;
         import designpatterns.InitializableDS;
-        import designpatterns.MVC;
-        import designpatterns.ObservableDS;
-        import designpatterns.observerdsall.BorderPaneObserverDS;
-        import javafx.event.ActionEvent;
-        import javafx.event.EventHandler;
+import designpatterns.MVC;
+import designpatterns.ObservableDS;
+import designpatterns.observerdsall.BorderPaneObserverDS;
+        import javafx.event.*;
+        import javafx.event.Event;
         import javafx.fxml.FXML;
-        import javafx.fxml.FXMLLoader;
-        import javafx.scene.control.Button;
-        import javafx.scene.control.Label;
-        import javafx.scene.control.Tooltip;
-        import javafx.scene.layout.HBox;
-        import javafx.scene.layout.StackPane;
-        import javafx.scene.layout.VBox;
-        import persistence.loader.XmlRW;
-        import trestview.dictionary.DictionaryController;
-        import trestview.dictionary.DictionaryModel;
-        import trestview.dictionary.DictionaryView;
-        import trestview.linechart.LineChartController;
-        import trestview.linechart.LineChartModel;
-        import trestview.linechart.LineChartP;
-        import trestview.table.tablemodel.abstracttablemodel.Rule;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.Tooltip;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import persistence.loader.XmlRW;
+import trestview.linechart.LineChartController;
+import trestview.linechart.LineChartModel;
+import trestview.linechart.LineChartP;
 
-
-        import java.awt.*;
-        import java.awt.geom.Point2D;
-        import java.util.ArrayList;
-        import java.util.List;
-        import java.util.Observable;
-        import java.util.ResourceBundle;
+import java.awt.*;
+import java.awt.geom.Point2D;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Observable;
+import java.util.ResourceBundle;
 
 public class VConConveyorPdeView extends BorderPaneObserverDS {
 
@@ -39,51 +33,44 @@ public class VConConveyorPdeView extends BorderPaneObserverDS {
 
     public  VConConveyorPdeView(ObservableDS observebleDS, InitializableDS initializableDS){
         super(observebleDS,initializableDS);
-
         inizilize(observableDS);
         FXMLLoader fxmlLoader = XmlRW.fxmlLoad(this,initializableDS, "trestview/tasks/conveyorPDE/vConConveyorPdeView.fxml","ui", "trestview/tasks/conveyorPDE/vConConveyorPdeStyle.css");
-
      //   setStyle("-fx-background-color: red;");
+     //        getStyleClass().add("vConConveyorPdeStyle");
+     //     getStylesheets().add("barchartsample/Chart.css");
+        Button buttonForStrategy01 = getButton((VConConveyorPdeModel) observebleDS, "buttonStrategy01", "buttonStrategy01Tooltip", new Strategy01());
+        Button buttonForStrategy02 = getButton((VConConveyorPdeModel) observebleDS, "buttonStrategy02", "buttonStrategy02Tooltip", new Strategy02());
+        Button buttonForStrategy03 = getButton((VConConveyorPdeModel) observebleDS, "buttonStrategy03", "buttonStrategy03Tooltip", new Strategy03());
+        Button buttonForStrategy04 = getButton((VConConveyorPdeModel) observebleDS, "buttonStrategy04", "buttonStrategy04Tooltip", new Strategy04());
+        Button buttonForStrategy05 = getButton((VConConveyorPdeModel) observebleDS, "buttonStrategy05", "buttonStrategy05Tooltip", new Strategy05());
 
- //        getStyleClass().add("vConConveyorPdeStyle");
-   //     getStylesheets().add("barchartsample/Chart.css");
+        buttonForStrategy01.setOnAction(event ->  ((VConConveyorPdeModel)observebleDS).setStrategy(new Strategy01()));
+        buttonForStrategy02.setOnAction(event ->  ((VConConveyorPdeModel)observebleDS).setStrategy(new Strategy02()));
+        buttonForStrategy03.setOnAction(event ->  ((VConConveyorPdeModel)observebleDS).setStrategy(new Strategy03()));
+        buttonForStrategy04.setOnAction(event ->  ((VConConveyorPdeModel)observebleDS).setStrategy(new Strategy04()));
+        buttonForStrategy05.setOnAction(event ->  ((VConConveyorPdeModel)observebleDS).setStrategy(new Strategy05()));
 
+//        buttonForStrategy02.setOnAction(new EventHandler() {
+//            @Override
+//            public void handle(Event event) {
+//                ((VConConveyorPdeModel)observebleDS).setStrategy( new Strategy02());
+//            }
+//        });
 
-
-        Button buttonForStrategy01 = new Button();
-        buttonForStrategy01.setText("Начальное условие");
-        buttonForStrategy01.setTooltip(new Tooltip("sddsdsdsdsd"));
-
-        Button button2 = new Button();
-        button2.setText("Начальное условие2");
-
-        HBox hBoxBottom1 = new HBox(buttonForStrategy01, button2);
+        HBox hBoxBottom1 = new HBox(buttonForStrategy01, buttonForStrategy02, buttonForStrategy03,  buttonForStrategy04,  buttonForStrategy05);
         setBottom(hBoxBottom1);
-
-
-
-        buttonForStrategy01.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                ((VConConveyorPdeModel) observebleDS).setStrategy(new Strategy01());
-            }
-        });
-
-        button2.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                ((VConConveyorPdeModel) observebleDS).setStrategy(new Strategy02());
-            }
-        });
-
     }
 
-
-
+    private Button getButton(VConConveyorPdeModel observebleDS, String buttonName, String buttonTooltip, Strategy strategy) {
+        Button buttonForStrategy = new Button();
+        buttonForStrategy.setText(ResourceBundle.getBundle("ui").getString(buttonName));
+        buttonForStrategy.setTooltip(new Tooltip(ResourceBundle.getBundle("ui").getString(buttonTooltip)));
+ //       buttonForStrategy.setOnAction( event -> observebleDS.setStrategy(strategy));
+        return buttonForStrategy;
+    }
 
     public void update(Observable observeble, Object arg) {
         inizilize((ObservableDS)observeble);
-
     }
 
     private void inizilize(ObservableDS observableDS) {
@@ -144,5 +131,4 @@ public class VConConveyorPdeView extends BorderPaneObserverDS {
         hBoxRight.setMinWidth(widthSection-1);
         setRight(new VBox (labelS, hBoxRight) );
     }
-
 }

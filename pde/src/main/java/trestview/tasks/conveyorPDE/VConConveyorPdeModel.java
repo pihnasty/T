@@ -36,11 +36,13 @@ public class VConConveyorPdeModel extends ObservableDS implements LineChartInter
 
     private List<String> list_qS_Legend;
     private List<String> list_qT_Legend;
+    private List<String> list_qX_Legend;
     private List<String> listLegend;
 
-    private double tMax = 2.0;
-    private double tMin = 0.0;
-    private double sMax = 1.0;
+    private double tMax;
+    private double tMin ;
+    private double sMax ;
+    private double numberOfCurves;
 
     private Strategy strategy;
 
@@ -70,54 +72,75 @@ public class VConConveyorPdeModel extends ObservableDS implements LineChartInter
         initialize();
     }
 
+    public VConConveyorPdeModel(Strategy strategy) {
+
+        this.strategy = strategy;
+
+
+        initialize();
+    }
+
     private void initialize() {
         pullList_qT = new ArrayList<>();
         pullList_qS = new ArrayList<>();
         pullList_qX = new ArrayList<>();
 
         list_qT_Legend = new ArrayList<>();
+        list_qX_Legend = new ArrayList<>();
         list_qS_Legend = new ArrayList<>();
-        for (double _s = 0; _s < 1.0; _s += 1.0 / strategy.getNumberOfCurves()) {
+
+        tMax = strategy.getTmax();
+        tMin = strategy.getTMin();
+        sMax = strategy.getSmax();
+        numberOfCurves = strategy.getNumberOfCurves();
+
+         yMin = strategy.getYMin();
+         yMax = strategy.getYmax();
+         yTickUnit = strategy.getYtickUnit();
+
+
+        for (double _s = 0; _s < 1.0; _s += 1.0 / numberOfCurves) {
             pullList_qT.add(qT(_s));
             list_qT_Legend.add("S/Sd=" + String.format("%3.1f", _s));
 
         }
-        for (double _t = tMin; _t < tMax; _t += (tMax - tMin) / strategy.getNumberOfCurves()) {
+        for (double _t = tMin; _t < tMax; _t += (tMax - tMin) / numberOfCurves) {
             pullList_qS.add(qS(_t));
             list_qS_Legend.add("t/Td=" + String.format("%3.1f", _t));
         }
-        for (double _t = tMin; _t < tMax; _t += (tMax - tMin) / strategy.getNumberOfCurves()) {
-            pullList_qX.add(qX(_t));
-            list_qS_Legend.add("t/Td=" + String.format("%3.1f", _t));
+        for (double  _s = 0; _s < 1.0; _s += 1.0 / numberOfCurves) {
+            pullList_qX.add(qX(_s));
+            list_qX_Legend.add("C=" + String.format("%3.1f", strategy.get_s0()-_s+strategy.getG0()*strategy.get_t0()));
         }
     }
 
 
     public VConConveyorPdeModel dataBuildVConConveyorPdeModel(String s) {
 
-        VConConveyorPdeModel VConConveyorPdeModel =
-                new VConConveyorPdeModel(this, null).setTitleGraph(ResourceBundle.getBundle("ui").getString("productionLine"))
-                        .setxMin(0.0).setyMin(0.0).setyMax(1.0).setyTickUnit(0.1);
+        VConConveyorPdeModel vConConveyorPdeModel =
+                new VConConveyorPdeModel(this.strategy).setTitleGraph(ResourceBundle.getBundle("ui").getString("productionLine")).setxMin(0.0);
+
+
         if (s == "oX=S") {
-            VConConveyorPdeModel.setTitleX(ResourceBundle.getBundle("ui").getString("titleOxS"))
+            vConConveyorPdeModel.setTitleX(ResourceBundle.getBundle("ui").getString("titleOxS"))
                     .setxMax(sMax).setxTickUnit(sMax / 10.0)
                     .setTitleY(ResourceBundle.getBundle("ui").getString("titleOyS"))
                     .setList(getListConT())
                     .setPullList(pullList_qS).setListLegend(list_qS_Legend);
         }
         if (s == "oX=T") {
-            VConConveyorPdeModel.setTitleX(ResourceBundle.getBundle("ui").getString("titleOxT"))
+            vConConveyorPdeModel.setTitleX(ResourceBundle.getBundle("ui").getString("titleOxT"))
                     .setxMin(tMin).setxMax(tMax).setxTickUnit((tMax - tMin) / 10.0)
                     .setTitleY(ResourceBundle.getBundle("ui").getString("titleOyT"))
                     .setList(getListConS())
                     .setPullList(pullList_qT).setListLegend(list_qT_Legend);
         }
         if (s == "oX=X") {
-            VConConveyorPdeModel.setTitleX(ResourceBundle.getBundle("ui").getString("titleOxT"))
+            vConConveyorPdeModel.setTitleX(ResourceBundle.getBundle("ui").getString("titleOxT"))
                     .setxMin(tMin).setxMax(tMax).setxTickUnit((tMax - tMin) / 10.0)
                     .setTitleY(ResourceBundle.getBundle("ui").getString("titleOyT"))
                     .setList(getListConS())
-                    .setPullList(pullList_qX).setListLegend(list_qT_Legend);
+                    .setPullList(pullList_qX).setListLegend(list_qX_Legend);
         }
 
         if (s.length() > 4) {
@@ -129,7 +152,7 @@ public class VConConveyorPdeModel extends ObservableDS implements LineChartInter
                 pullListAlone.add(pullList_qS.get(i));
                 listLegendAlone.add(list_qS_Legend.get(i));
 
-                VConConveyorPdeModel.setTitleGraph("")
+                vConConveyorPdeModel.setTitleGraph("")
                         .setTitleX((i + 1) + ")   " + list_qS_Legend.get(i))
                         .setxMax(sMax).setxTickUnit(sMax / 10.0)
 
@@ -143,7 +166,7 @@ public class VConConveyorPdeModel extends ObservableDS implements LineChartInter
                 pullListAlone.add(pullList_qT.get(i));
                 listLegendAlone.add(list_qT_Legend.get(i));
 
-                VConConveyorPdeModel.setTitleGraph("")
+                vConConveyorPdeModel.setTitleGraph("")
                         .setTitleX((i + 1) + ")   " + list_qT_Legend.get(i))
                         .setxMin(tMin).setxMax(tMax).setxTickUnit((tMax - tMin) / 10.0)
 
@@ -152,7 +175,7 @@ public class VConConveyorPdeModel extends ObservableDS implements LineChartInter
         }
 
 
-        return VConConveyorPdeModel;
+        return vConConveyorPdeModel;
     }
 
     private void change() {
