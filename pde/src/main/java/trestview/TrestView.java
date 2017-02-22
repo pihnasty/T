@@ -83,7 +83,7 @@ public class TrestView extends BorderPaneObserverDS {
     public void update(Observable o, Object arg) {
         if (o.getClass()==TMenuModel.class) { updateCenter((TMenuModel) o);   }
     }
-
+//----------------------
     private void updateCenter(TMenuModel o) {
         switch (o.getMenuItemCall()) {
             case testOfMachineItem:
