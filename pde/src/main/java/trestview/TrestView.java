@@ -45,8 +45,7 @@ public class TrestView extends BorderPaneObserverDS {
     private MVC orderPlaninigPerspective;
     private MVC routePerspective;
     private MVC machineTest;
-
-
+//----------------
     public TrestView(ObservableDS trestModel, InitializableDS trestController) {
         super(trestModel,trestController);
         this.trestModel = (TrestModel) trestModel;
