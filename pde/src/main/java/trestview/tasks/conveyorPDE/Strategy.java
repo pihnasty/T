@@ -85,7 +85,6 @@ class Strategy01 implements Strategy {
         _s0[0] = 0.0;        _t0[0] = 0.0;        numberOfCurves[0] = 10.0;        g[0] = 1.0;
         tMax[0] = 1.0;       tMin[0] = 0.0;       sMax[0] = 1.0;
         yMax[0] = 1.0;       yMin[0] = 0.0;       yTickUnitNumber[0] = 10.0;
-
     }
 
     @Override

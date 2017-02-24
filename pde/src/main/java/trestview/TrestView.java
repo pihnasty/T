@@ -45,8 +45,7 @@ public class TrestView extends BorderPaneObserverDS {
     private MVC orderPlaninigPerspective;
     private MVC routePerspective;
     private MVC machineTest;
-
-
+//----------------
     public TrestView(ObservableDS trestModel, InitializableDS trestController) {
         super(trestModel,trestController);
         this.trestModel = (TrestModel) trestModel;
@@ -84,7 +83,6 @@ public class TrestView extends BorderPaneObserverDS {
     public void update(Observable o, Object arg) {
         if (o.getClass()==TMenuModel.class) { updateCenter((TMenuModel) o);   }
     }
-
     private void updateCenter(TMenuModel o) {
         switch (o.getMenuItemCall()) {
             case testOfMachineItem:
