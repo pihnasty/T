@@ -211,9 +211,12 @@ class Strategy04 implements Strategy {
 
     }
 
-    double functionQ1 (double _S, double _t) {
-        return  h(_t-r(_S, _t, _s0[1], _t0[1], g0[1])/g0[1])*
-                getBoundaryConditions().get(1).apply(_t0[1]-r(_S, _t, _s0[1], _t0[1], g0[1])/g0[1]);
+    double functionQ1 (double _s, double _t) {
+        return  h(-r(_s, _t, _s0[1], _t0[1], g0[1])/g0[1])*
+                // h(_t-r(_S, _t, _s0[1], _t0[1], g0[1])/g0[1])*
+                getBoundaryConditions().get(1).apply(-r(_s, _t, _s0[1], _t0[1], g0[1])/g0[1])
+                -h(_s-_s0[1])*h(-_s+_s0[1])
+                ;
     }
 
     @Override
