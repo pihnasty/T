@@ -8,7 +8,6 @@ import javafx.scene.Node;
 import javafx.scene.layout.BorderPane;
 import persistence.loader.DataSet;
 import persistence.loader.XmlRW;
-import trestcontroller.TrestController;
 import trestmodel.TrestModel;
 import trestview.machinetest.MachineTestController;
 import trestview.machinetest.MachineTestModel;
@@ -26,15 +25,16 @@ import trestview.routeperspective.RoutePerspectiveController;
 import trestview.routeperspective.RoutePerspectiveModel;
 import trestview.routeperspective.RoutePerspectiveView;
 import trestview.table.tablemodel.abstracttablemodel.Rule;
-import trestview.tasks.conveyorPDE.VConConveyorPdeController;
-import trestview.tasks.conveyorPDE.VConConveyorPdeView;
-import trestview.tasks.conveyorPDE.VConConveyorPdeModel;
+import trestview.tasks.conveyorPDE.v_const.VConConveyorPdeController;
+import trestview.tasks.conveyorPDE.v_const.VConConveyorPdeView;
+import trestview.tasks.conveyorPDE.v_const.VConConveyorPdeModel;
+import trestview.tasks.conveyorPDE.v_depends_time.VDependsTimeConveyorPdeController;
+import trestview.tasks.conveyorPDE.v_depends_time.VDependsTimeConveyorPdeModel;
+import trestview.tasks.conveyorPDE.v_depends_time.VDependsTimeConveyorPdeView;
 
 
-import java.lang.reflect.Constructor;
 import java.util.List;
 import java.util.Observable;
-import java.util.Observer;
 
 public class TrestView extends BorderPaneObserverDS {
     private TrestModel trestModel;
@@ -42,6 +42,7 @@ public class TrestView extends BorderPaneObserverDS {
     private List<Node> nodes;
     private MVC resourceLink;
     private MVC conConveyorPdeModel;
+    private MVC dependsTimeConveyorPdeModel;
     private MVC orderPlaninigPerspective;
     private MVC routePerspective;
     private MVC machineTest;
@@ -73,6 +74,7 @@ public class TrestView extends BorderPaneObserverDS {
 
 
         conConveyorPdeModel = new MVC (VConConveyorPdeModel.class, VConConveyorPdeController.class, VConConveyorPdeView.class,this.trestModel, null);
+        dependsTimeConveyorPdeModel = new MVC (VDependsTimeConveyorPdeModel.class, VDependsTimeConveyorPdeController.class, VDependsTimeConveyorPdeView.class,this.trestModel, null);
 
         routePerspective = new MVC (RoutePerspectiveModel.class, RoutePerspectiveController.class, RoutePerspectiveView.class,this.trestModel, null);
 
@@ -93,6 +95,9 @@ public class TrestView extends BorderPaneObserverDS {
                 break;
             case conveyorSpeedConstantItem:
                 this.setCenter((BorderPane) conConveyorPdeModel.getView());
+                break;
+            case conveyorSpeedDependsTimeItem:
+                this.setCenter((BorderPane) dependsTimeConveyorPdeModel.getView());
                 break;
             case routePerspectiveItem:
                 this.setCenter((BorderPane) routePerspective.getView());

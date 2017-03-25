@@ -156,6 +156,10 @@ public class TMenuController extends InitializableDS {
         menuModel.clickConveyorSpeedConstantItem();
     }
 
+    @FXML
+    private void handleConveyorSpeedDependsTimeAction (ActionEvent event) {
+        menuModel.clickConveyorSpeedDependsTimeItem();
+    }
 
 
 //------------------- menu Dictionary ------------------------------------

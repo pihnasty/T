@@ -56,6 +56,11 @@ public class TMenuModel extends ObservableDS {
         changed();
     }
 
+    public void clickConveyorSpeedDependsTimeItem()  {
+        this.menuItemCall = MenuItemCall.conveyorSpeedDependsTimeItem;
+        changed();
+    }
+
     public void clickRoutePerspectiveItem()  {
         this.menuItemCall = MenuItemCall.routePerspectiveItem;
         changed();

@@ -1,4 +1,4 @@
-package trestview.tasks.conveyorPDE;
+package trestview.tasks.conveyorPDE.v_depends_time;
 
 import designpatterns.ObservableDS;
 import trestview.linechart.LineChartInterface;
@@ -7,10 +7,9 @@ import trestview.table.tablemodel.abstracttablemodel.Rule;
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.List;
-
 import java.util.ResourceBundle;
 
-public class VConConveyorPdeModel extends ObservableDS implements LineChartInterface {
+public class VDependsTimeConveyorPdeModel extends ObservableDS implements LineChartInterface {
 
     private String titleOx;
     private String titleOy;
@@ -63,7 +62,7 @@ public class VConConveyorPdeModel extends ObservableDS implements LineChartInter
     }
 
 
-    public VConConveyorPdeModel(ObservableDS o, Rule rule) {
+    public VDependsTimeConveyorPdeModel(ObservableDS o, Rule rule) {
         super(o, rule);
 
         strategy = new Strategy01();
@@ -72,7 +71,7 @@ public class VConConveyorPdeModel extends ObservableDS implements LineChartInter
         initialize();
     }
 
-    public VConConveyorPdeModel(Strategy strategy) {
+    public VDependsTimeConveyorPdeModel(Strategy strategy) {
 
         this.strategy = strategy;
 
@@ -115,10 +114,10 @@ public class VConConveyorPdeModel extends ObservableDS implements LineChartInter
     }
 
 
-    public VConConveyorPdeModel dataBuildVConConveyorPdeModel(String s) {
+    public VDependsTimeConveyorPdeModel dataBuildVConConveyorPdeModel(String s) {
 
-        VConConveyorPdeModel vConConveyorPdeModel =
-                new VConConveyorPdeModel(this.strategy).setTitleGraph(ResourceBundle.getBundle("ui").getString("productionLine")).setxMin(0.0);
+        VDependsTimeConveyorPdeModel vConConveyorPdeModel =
+                new VDependsTimeConveyorPdeModel(this.strategy).setTitleGraph(ResourceBundle.getBundle("ui").getString("productionLine")).setxMin(0.0);
 
 
         if (s == "oX=S") {
@@ -232,7 +231,7 @@ public class VConConveyorPdeModel extends ObservableDS implements LineChartInter
         return listLegend;
     }
 
-    public VConConveyorPdeModel setListLegend(List<String> listLegend) {
+    public VDependsTimeConveyorPdeModel setListLegend(List<String> listLegend) {
         this.listLegend = listLegend;
         return this;
     }
@@ -243,7 +242,7 @@ public class VConConveyorPdeModel extends ObservableDS implements LineChartInter
         return titleOy;
     }
 
-    public VConConveyorPdeModel setTitleY(String titleOy) {
+    public VDependsTimeConveyorPdeModel setTitleY(String titleOy) {
         this.titleOy = titleOy;
         return this;
     }
@@ -253,7 +252,7 @@ public class VConConveyorPdeModel extends ObservableDS implements LineChartInter
         return titleOx;
     }
 
-    public VConConveyorPdeModel setTitleX(String titleOx) {
+    public VDependsTimeConveyorPdeModel setTitleX(String titleOx) {
         this.titleOx = titleOx;
         return this;
     }
@@ -263,7 +262,7 @@ public class VConConveyorPdeModel extends ObservableDS implements LineChartInter
         return list;
     }
 
-    public VConConveyorPdeModel setList(List<Point2D.Double> list) {
+    public VDependsTimeConveyorPdeModel setList(List<Point2D.Double> list) {
         this.list = list;
         return this;
     }
@@ -273,7 +272,7 @@ public class VConConveyorPdeModel extends ObservableDS implements LineChartInter
         return pullList;
     }
 
-    public VConConveyorPdeModel setPullList(List<List<Point2D.Double>> pullList) {
+    public VDependsTimeConveyorPdeModel setPullList(List<List<Point2D.Double>> pullList) {
         this.pullList = pullList;
         return this;
     }
@@ -283,7 +282,7 @@ public class VConConveyorPdeModel extends ObservableDS implements LineChartInter
         return xMin;
     }
 
-    public VConConveyorPdeModel setxMin(double xMin) {
+    public VDependsTimeConveyorPdeModel setxMin(double xMin) {
         this.xMin = xMin;
         return this;
     }
@@ -293,7 +292,7 @@ public class VConConveyorPdeModel extends ObservableDS implements LineChartInter
         return xMax;
     }
 
-    public VConConveyorPdeModel setxMax(double xMax) {
+    public VDependsTimeConveyorPdeModel setxMax(double xMax) {
         this.xMax = xMax;
         return this;
     }
@@ -303,7 +302,7 @@ public class VConConveyorPdeModel extends ObservableDS implements LineChartInter
         return yMax;
     }
 
-    public VConConveyorPdeModel setyMax(double yMax) {
+    public VDependsTimeConveyorPdeModel setyMax(double yMax) {
         this.yMax = yMax;
         return this;
     }
@@ -313,7 +312,7 @@ public class VConConveyorPdeModel extends ObservableDS implements LineChartInter
         return yMin;
     }
 
-    public VConConveyorPdeModel setyMin(double yMin) {
+    public VDependsTimeConveyorPdeModel setyMin(double yMin) {
         this.yMin = yMin;
         return this;
     }
@@ -323,7 +322,7 @@ public class VConConveyorPdeModel extends ObservableDS implements LineChartInter
         return titleGraph;
     }
 
-    public VConConveyorPdeModel setTitleGraph(String titleGraph) {
+    public VDependsTimeConveyorPdeModel setTitleGraph(String titleGraph) {
         this.titleGraph = titleGraph;
         return this;
     }
@@ -333,7 +332,7 @@ public class VConConveyorPdeModel extends ObservableDS implements LineChartInter
         return xTickUnit;
     }
 
-    public VConConveyorPdeModel setxTickUnit(double xTickUnit) {
+    public VDependsTimeConveyorPdeModel setxTickUnit(double xTickUnit) {
         this.xTickUnit = xTickUnit;
         return this;
     }
@@ -343,7 +342,7 @@ public class VConConveyorPdeModel extends ObservableDS implements LineChartInter
         return yTickUnit;
     }
 
-    public VConConveyorPdeModel setyTickUnit(double yTickUnit) {
+    public VDependsTimeConveyorPdeModel setyTickUnit(double yTickUnit) {
         this.yTickUnit = yTickUnit;
         return this;
     }
