@@ -9,6 +9,7 @@ public interface Strategy {
     double tMax[] = {1.0};         double tMin[] = {0.0};
     double yMax[] = {1.0};         double yMin[] = {0.0};         double yTickUnitNumber[] = {10.0};
 
+
     double sMax[] = {1.0};
     double _sD[] = {1.0, 0.2};                             // It is _sD[k]=sDk/sDo
     double g0[] = {g[0]* _sD[0],g[1]* _sD[1]};             // It is g0[k]=g[k]*sDo/sDk
