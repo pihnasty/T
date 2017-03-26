@@ -37,13 +37,13 @@ public class VDependsTimeConveyorPdeView extends BorderPaneObserverDS {
      //   setStyle("-fx-background-color: red;");
      //        getStyleClass().add("vConConveyorPdeStyle");
      //     getStylesheets().add("barchartsample/Chart.css");
-        Button buttonForStrategy01 = getButton((VDependsTimeConveyorPdeModel) observebleDS, "buttonStrategy01", "buttonStrategy01Tooltip", new Strategy01());
+        Button buttonForStrategy01 = getButton((VDependsTimeConveyorPdeModel) observebleDS, "buttonStrategy01", "buttonStrategy01Tooltip", new StrategyVDependsTime01());
 //        Button buttonForStrategy02 = getButton((VDependsTimeConveyorPdeModel) observebleDS, "buttonStrategy02", "buttonStrategy02Tooltip", new Strategy02());
 //        Button buttonForStrategy03 = getButton((VDependsTimeConveyorPdeModel) observebleDS, "buttonStrategy03", "buttonStrategy03Tooltip", new Strategy03());
 //        Button buttonForStrategy04 = getButton((VDependsTimeConveyorPdeModel) observebleDS, "buttonStrategy04", "buttonStrategy04Tooltip", new Strategy04());
 //        Button buttonForStrategy05 = getButton((VDependsTimeConveyorPdeModel) observebleDS, "buttonStrategy05", "buttonStrategy05Tooltip", new Strategy05());
 
-        buttonForStrategy01.setOnAction(event ->  ((VDependsTimeConveyorPdeModel)observebleDS).setStrategy(new Strategy01()));
+        buttonForStrategy01.setOnAction(event ->  ((VDependsTimeConveyorPdeModel)observebleDS).setStrategy(new StrategyVDependsTime01()));
 //        buttonForStrategy02.setOnAction(event ->  ((VDependsTimeConveyorPdeModel)observebleDS).setStrategy(new Strategy02()));
 //        buttonForStrategy03.setOnAction(event ->  ((VDependsTimeConveyorPdeModel)observebleDS).setStrategy(new Strategy03()));
 //        buttonForStrategy04.setOnAction(event ->  ((VDependsTimeConveyorPdeModel)observebleDS).setStrategy(new Strategy04()));
@@ -62,7 +62,7 @@ public class VDependsTimeConveyorPdeView extends BorderPaneObserverDS {
         setBottom(hBoxBottom1);
     }
 
-    private Button getButton(VDependsTimeConveyorPdeModel observebleDS, String buttonName, String buttonTooltip, Strategy strategy) {
+    private Button getButton(VDependsTimeConveyorPdeModel observebleDS, String buttonName, String buttonTooltip, StrategyVDependsTime strategy) {
         Button buttonForStrategy = new Button();
         buttonForStrategy.setText(ResourceBundle.getBundle("ui").getString(buttonName));
         buttonForStrategy.setTooltip(new Tooltip(ResourceBundle.getBundle("ui").getString(buttonTooltip)));

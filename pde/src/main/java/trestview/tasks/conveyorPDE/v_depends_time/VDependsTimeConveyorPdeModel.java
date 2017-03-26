@@ -43,7 +43,7 @@ public class VDependsTimeConveyorPdeModel extends ObservableDS implements LineCh
     private double sMax ;
     private double numberOfCurves;
 
-    private Strategy strategy;
+    private StrategyVDependsTime strategy;
 
     public List<Point2D.Double> getListConT() {
         return list_qS;
@@ -65,13 +65,13 @@ public class VDependsTimeConveyorPdeModel extends ObservableDS implements LineCh
     public VDependsTimeConveyorPdeModel(ObservableDS o, Rule rule) {
         super(o, rule);
 
-        strategy = new Strategy01();
+        strategy = new StrategyVDependsTime01();
 
 
         initialize();
     }
 
-    public VDependsTimeConveyorPdeModel(Strategy strategy) {
+    public VDependsTimeConveyorPdeModel(StrategyVDependsTime strategy) {
 
         this.strategy = strategy;
 
@@ -88,14 +88,15 @@ public class VDependsTimeConveyorPdeModel extends ObservableDS implements LineCh
         list_qX_Legend = new ArrayList<>();
         list_qS_Legend = new ArrayList<>();
 
-        tMax = strategy.getTmax();
-        tMin = strategy.getTMin();
-        sMax = strategy.getSmax();
-        numberOfCurves = strategy.getNumberOfCurves();
+        tMax = strategy.getAxisParametrs().gettMax();
 
-         yMin = strategy.getYMin();
-         yMax = strategy.getYmax();
-         yTickUnit = strategy.getYtickUnit();
+        tMin = strategy.getAxisParametrs().gettMin();
+        sMax = strategy.getAxisParametrs().getsMax();
+        numberOfCurves = strategy.getAxisParametrs().getNumberOfCurves();
+
+         yMin = strategy.getAxisParametrs().getyMin();
+         yMax = strategy.getAxisParametrs().getyMax();
+         yTickUnit = strategy.getAxisParametrs().getYtickUnit();
 
 
         for (double _s = 0; _s < 1.0; _s += 1.0 / numberOfCurves) {
@@ -109,7 +110,7 @@ public class VDependsTimeConveyorPdeModel extends ObservableDS implements LineCh
         }
         for (double  _s = 0; _s < 1.0; _s += 1.0 / numberOfCurves) {
             pullList_qX.add(qX(_s));
-            list_qX_Legend.add("C=" + String.format("%3.1f", strategy.get_s0()-_s+strategy.getG0()*strategy.get_t0()));
+            list_qX_Legend.add("C=" + String.format("%3.1f", 5.0));
         }
     }
 
@@ -347,7 +348,7 @@ public class VDependsTimeConveyorPdeModel extends ObservableDS implements LineCh
         return this;
     }
 
-    public void setStrategy(Strategy strategy) {
+    public void setStrategy(StrategyVDependsTime strategy) {
         this.strategy = strategy;
         initialize();
         change();

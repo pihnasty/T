@@ -74,6 +74,7 @@ public class TrestView extends BorderPaneObserverDS {
 
 
         conConveyorPdeModel = new MVC (VConConveyorPdeModel.class, VConConveyorPdeController.class, VConConveyorPdeView.class,this.trestModel, null);
+
         dependsTimeConveyorPdeModel = new MVC (VDependsTimeConveyorPdeModel.class, VDependsTimeConveyorPdeController.class, VDependsTimeConveyorPdeView.class,this.trestModel, null);
 
         routePerspective = new MVC (RoutePerspectiveModel.class, RoutePerspectiveController.class, RoutePerspectiveView.class,this.trestModel, null);

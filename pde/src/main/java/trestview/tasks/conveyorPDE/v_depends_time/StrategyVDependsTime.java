@@ -2,44 +2,29 @@ package trestview.tasks.conveyorPDE.v_depends_time;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.BiFunction;
 import java.util.function.DoubleFunction;
+
+import static trestview.tasks.conveyorPDE.v_depends_time.StrategyVDependsTime.MathP.integralF;
 
 public interface StrategyVDependsTime {
 
-
-
-
-
-    DoubleFunction<Double> sinConveyorPdeModelS = _r -> (2 + Math.sin(2 * Math.PI * _r)) / 3.0;
-    DoubleFunction<Double> sinConveyorPdeModelT = _r -> (2 + Math.sin(2 * Math.PI * (0.5 - _r))) / 3.0;
-    DoubleFunction<Double> const_1 = _r -> 1.0;
-    DoubleFunction<Double> const_x = _r -> _r;
-
-    double decision(double _s, double _t);
+     double decision(double _s, double _t);
 
     double decisionCharacteristic(double _s, double _t);
 
-    List<DoubleFunction<Double>> getInitialConditions();
-
-    default  List<DoubleFunction<Double>> getBoundaryConditions() {
-        return null;
-    }
-
-    default double r(double _s, double _t, double _s0, double _t0, double g) {
-        return _s - _s0 - g * (_t - _t0);
-    }
-
+    AxisParametrs  getAxisParametrs();
 
     /*Parameters for the graph scale t={tMin,tMax}, S={sMin,sMax}, y={yMin,yMax}
     * numberOfCurves - Number of curves on the graph (number of graphs)
     * yTickUnitNumber - Number of the tick at the axis */
     class AxisParametrs {
 
-        double tMax = 1.0;         double tMin = 0.0;
-        double sMax = 1.0;         double sMin = 0.0;
-        double yMax = 1.0;         double yMin = 0.0;
-        double numberOfCurves = 10.0;
-        double yTickUnitNumber = 10.0;
+        private double tMax = 1.0;         private double tMin = 0.0;
+        private double sMax = 1.0;         private double sMin = 0.0;
+        private double yMax = 1.0;         private double yMin = 0.0;
+        private double numberOfCurves = 10.0;
+        private double yTickUnitNumber = 10.0;
 
 
         public AxisParametrs() {
@@ -126,6 +111,10 @@ public interface StrategyVDependsTime {
             this.yTickUnitNumber = yTickUnitNumber;
         }
 
+        public double getYtickUnit() {
+            return (yMax - yMin) / yTickUnitNumber;
+        }
+
     }
 
     /*
@@ -133,85 +122,122 @@ public interface StrategyVDependsTime {
     * tS= Ts/Td, - Ratio of the duration of the works day to the duration of the production cycle
     * */
     class TaskParameters {
-        double s0 = 0.0;
-        double t0 = 0.0;
-        double tS = 0.0;
+
+        protected double s0 = 0.0;
+        protected double t0 = 0.0;          protected double tK = new AxisParametrs().tMax;
+        protected double tS = 0.1;
+
+
+
     }
 
     class Psi {
+        protected DoubleFunction<Double> hm1_S = s -> MathP.h(s)*(1-s);
 
     }
 
     class G {
         private TaskParameters taskParameters;
+        protected DoubleFunction<Double> g0_g1coswt;
+        private double wS;
+
         public G() {
             this( new TaskParameters () );
         }
         public G(TaskParameters taskParameters) {
-
-        }
-        double g0_g1coswt(double t) {
-            return 1.0;
+            this.taskParameters = taskParameters;
+            this.wS = 2.0*Math.PI / taskParameters.tS;
+            g0_g1coswt = t -> 2.0 - Math.cos(wS*t);
         }
     }
 
     class Gamma {
-
+        protected DoubleFunction<Double> h = t -> MathP.h(t);
     }
 
+    class MathP {
 
-    class MethodDefault {
+        static final double NUMBER_AXIS_PARTITION = 100;
+
+        static double h (double x) {
+            return ( x==0.0) ? 0.5 : ((x>0) ? 1.0 : 0.0 );
+        }
+        static ThreeDoubleFunction integralF = (t0, tK, function) -> {
+            double dt = (tK-t0)/NUMBER_AXIS_PARTITION;
+            double result = 0.0;
+            for (double t=t0; t<tK; t+=dt ) {
+                result = result + function.apply(t)*dt;
+            }
+            return result;
+        };
+
+        static FourDoubleFunction integrationParameter =
+                (t0, tK, C1, function) -> {
+                    if (C1 <= 0) return t0;
+
+                    double dt = (tK-t0)/NUMBER_AXIS_PARTITION;
+                    double result = 0.0;
+                    double tP = t0;
+
+                    while (result < C1) {
+                        result = integralF.apply(t0, tP, function);
+                        tP+=dt;
+                    }
+                    return tP;
+                };
 
 
+        interface ThreeDoubleFunction {
+            Double apply(double t0, double tK, DoubleFunction<Double> function);
+        }
 
+        interface FourDoubleFunction {
+            Double apply(double t0, double tK, double С1, DoubleFunction<Double> function);
+        }
     }
 
-
-    default double h(double r) {
-        if (r < 0) return 0;
-        if (r == 0) return 0.5;
-        else return 1.0;
-    }
-
-
-
-//    default double getNumberOfCurves() {
-//        return numberOfCurves[0];
-//    }
-
-
-
-
-
-// //  default double getYtickUnit() {
-//        return (yMax[0]-yMin[0])/yTickUnitNumber[0];
-//    }
+    class MethodDefault {      }
 }
 
 
 class StrategyVDependsTime01 implements StrategyVDependsTime {
-    public StrategyVDependsTime01() {
-        _s0[0] = 0.0;        _t0[0] = 0.0;               g[0] = 1.0;
+    private AxisParametrs  axisParametrs;
+    private TaskParameters  taskParameters;
+    private DoubleFunction<Double> g;
+    private DoubleFunction<Double> psi;
+    private DoubleFunction<Double> gamma;
 
-        StrategyVDependsTime.AxisParametrs  AxisParametrs = new StrategyVDependsTime.AxisParametrs();
+    public StrategyVDependsTime01() {
+        axisParametrs = new AxisParametrs();
+        taskParameters = new TaskParameters();
+
+        g = new G().g0_g1coswt;
+        psi = new Psi().hm1_S;
+        gamma = new Gamma().h;
+
+
+
 
     }
 
     @Override
-    public double decision(double _s, double _t) {
-        double _r = r(_s, _t, get_s0(), get_t0(), getG0());
-        return getInitialConditions().get(0).apply(_r + get_s0());
+    public double decision(double s, double t) {
+
+       double C1 = s - MathP.integralF.apply(taskParameters.t0, t, g) ;
+
+       double tP = MathP.integrationParameter.apply(taskParameters.t0, taskParameters.tK, C1, g);
+
+       return MathP.h(s)*gamma.apply(tP)/g.apply(tP) - MathP.h(C1)*gamma.apply(tP)/g.apply(tP)+MathP.h(C1)*psi.apply(C1);
     }
 
     @Override
     public double decisionCharacteristic(double _s, double _t) {
-        return  r(get_s0(), get_t0(), _s, _t, getG0());
+        return  1.0;
     }
 
     @Override
-    public List<DoubleFunction<Double>> getInitialConditions() {
-        List<DoubleFunction<Double>> initialConditions = new ArrayList<>();
-        initialConditions.add(sinConveyorPdeModelS);
-        return  initialConditions ;
+    public AxisParametrs getAxisParametrs() {
+        return axisParametrs;
     }
+
 }
