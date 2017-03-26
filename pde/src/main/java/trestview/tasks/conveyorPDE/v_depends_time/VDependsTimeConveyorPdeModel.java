@@ -110,7 +110,7 @@ public class VDependsTimeConveyorPdeModel extends ObservableDS implements LineCh
         }
         for (double  _s = 0; _s < 1.0; _s += 1.0 / numberOfCurves) {
             pullList_qX.add(qX(_s));
-            list_qX_Legend.add("C=" + String.format("%3.1f", 5.0));
+            list_qX_Legend.add("C=" + String.format("%3.1f", _s));
         }
     }
 

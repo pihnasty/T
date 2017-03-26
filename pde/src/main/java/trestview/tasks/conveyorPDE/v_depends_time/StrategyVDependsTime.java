@@ -9,9 +9,9 @@ import static trestview.tasks.conveyorPDE.v_depends_time.StrategyVDependsTime.Ma
 
 public interface StrategyVDependsTime {
 
-     double decision(double _s, double _t);
+     double decision(double s, double t);
 
-    double decisionCharacteristic(double _s, double _t);
+    double decisionCharacteristic(double s, double t);
 
     AxisParametrs  getAxisParametrs();
 
@@ -20,15 +20,15 @@ public interface StrategyVDependsTime {
     * yTickUnitNumber - Number of the tick at the axis */
     class AxisParametrs {
 
-        private double tMax = 1.0;         private double tMin = 0.0;
-        private double sMax = 1.0;         private double sMin = 0.0;
-        private double yMax = 1.0;         private double yMin = 0.0;
-        private double numberOfCurves = 10.0;
-        private double yTickUnitNumber = 10.0;
+        private double tMax ;         private double tMin ;
+        private double sMax ;         private double sMin ;
+        private double yMax ;         private double yMin ;
+        private double numberOfCurves;
+        private double yTickUnitNumber;
 
 
         public AxisParametrs() {
-           this(0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 10.0, 10.0);
+           this(0.0, 1.0, 0.0, 2.0, 0.0, 1.0, 10.0, 10.0);
         }
 
         public AxisParametrs(double numberOfCurves, double yTickUnitNumber) {
@@ -125,7 +125,7 @@ public interface StrategyVDependsTime {
 
         protected double s0 = 0.0;
         protected double t0 = 0.0;          protected double tK = new AxisParametrs().tMax;
-        protected double tS = 0.1;
+        protected double tS = 0.5;
 
 
 
@@ -161,6 +161,7 @@ public interface StrategyVDependsTime {
 
         static double h (double x) {
             return ( x==0.0) ? 0.5 : ((x>0) ? 1.0 : 0.0 );
+            //return ( x>=0.0) ? 1.0 : 0.0;
         }
         static ThreeDoubleFunction integralF = (t0, tK, function) -> {
             double dt = (tK-t0)/NUMBER_AXIS_PARTITION;
@@ -196,7 +197,6 @@ public interface StrategyVDependsTime {
         }
     }
 
-    class MethodDefault {      }
 }
 
 
@@ -208,8 +208,10 @@ class StrategyVDependsTime01 implements StrategyVDependsTime {
     private DoubleFunction<Double> gamma;
 
     public StrategyVDependsTime01() {
-        axisParametrs = new AxisParametrs();
+        axisParametrs = new AxisParametrs(0.0, 1.0, 0.0, 1.0, 0.0, 2.0, 10.0, 10.0);
+
         taskParameters = new TaskParameters();
+        taskParameters.tK = axisParametrs.gettMax();
 
         g = new G().g0_g1coswt;
         psi = new Psi().hm1_S;
@@ -225,14 +227,16 @@ class StrategyVDependsTime01 implements StrategyVDependsTime {
 
        double C1 = s - MathP.integralF.apply(taskParameters.t0, t, g) ;
 
-       double tP = MathP.integrationParameter.apply(taskParameters.t0, taskParameters.tK, C1, g);
+       double tP = MathP.integrationParameter.apply(taskParameters.t0, taskParameters.tK, -C1, g);
 
-       return MathP.h(s)*gamma.apply(tP)/g.apply(tP) - MathP.h(C1)*gamma.apply(tP)/g.apply(tP)+MathP.h(C1)*psi.apply(C1);
+       return MathP.h(s)*gamma.apply(tP)/g.apply(tP) - MathP.h(C1)*gamma.apply(tP)/g.apply(tP)
+               +MathP.h(C1)*psi.apply(C1);
     }
 
     @Override
-    public double decisionCharacteristic(double _s, double _t) {
-        return  1.0;
+    public double decisionCharacteristic(double s, double t) {
+
+        return  MathP.integralF.apply(taskParameters.t0, t, g)  - s;
     }
 
     @Override
