@@ -148,6 +148,7 @@ public interface StrategyVDependsTime {
             this.taskParameters = taskParameters;
             this.wS = 2.0*Math.PI / taskParameters.tS;
             g0_g1coswt = t -> 2.0 - Math.cos(wS*t);
+            // There are .....
         }
     }
 
