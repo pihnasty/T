@@ -130,12 +130,12 @@ public interface StrategyVDependsTime {
 
     /*
     * s0, t0 - The coordinate of the technological position and the time when the subjects of labour began to come in at this position
+    * tS= Ts/Td, - Ratio of the duration of the works day to the duration of the production cycle
     * */
     class TaskParameters {
         double s0 = 0.0;
         double t0 = 0.0;
         double tS = 0.0;
-
     }
 
     class Psi {
@@ -143,6 +143,13 @@ public interface StrategyVDependsTime {
     }
 
     class G {
+        private TaskParameters taskParameters;
+        public G() {
+            this( new TaskParameters () );
+        }
+        public G(TaskParameters taskParameters) {
+
+        }
         double g0_g1coswt(double t) {
             return 1.0;
         }
