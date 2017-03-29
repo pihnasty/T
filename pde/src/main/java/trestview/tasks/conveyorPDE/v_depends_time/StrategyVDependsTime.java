@@ -1,9 +1,12 @@
 package trestview.tasks.conveyorPDE.v_depends_time;
 
+import javafx.util.Pair;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.BiFunction;
 import java.util.function.DoubleFunction;
+import java.util.stream.Collectors;
 
 import static trestview.tasks.conveyorPDE.v_depends_time.StrategyVDependsTime.MathP.integralF;
 
@@ -156,6 +159,47 @@ public interface StrategyVDependsTime {
         protected DoubleFunction<Double> h = t -> MathP.h(t);
     }
 
+    class CashIntegralValue {
+        private List<Pair<Double, Double>> integralCashSorted;
+        private double C1max = Double.MIN_VALUE;
+        private double C1min = Double.MAX_VALUE;
+
+
+        public CashIntegralValue() {
+            integralCashSorted = new ArrayList<>();
+        }
+
+        public void addValue(double t, double C1) {
+            integralCashSorted.add(new Pair<>(t, C1));
+        }
+
+        public void sorted() {
+            integralCashSorted = integralCashSorted.stream().sorted((p1, p2) -> (p2.getValue() > p1.getValue()) ? -1 : 1)
+                    .collect(Collectors.toList());
+            if (!integralCashSorted.isEmpty()) {
+                C1max = integralCashSorted.get(integralCashSorted.size()-1).getValue();
+                C1min = integralCashSorted.get(0).getValue();
+            }
+        }
+
+        public double getFromCacheKey(double C1) {
+            try {
+                if (C1 > C1max) throw new Exception("-------------------- C1 > C1max ---------------------  C1="+C1+"  C1Max="+C1max);
+                if (C1 < C1min) throw new Exception("-------------------- C1 < C1min ---------------------  C1="+C1+"  C1Max="+C1min);
+            } catch (Exception e) {  e.printStackTrace();    }
+            return integralCashSorted.stream().filter(p -> p.getValue() > C1).findFirst().get().getKey();
+        }
+
+        public double getKey(int i) {
+            return integralCashSorted.get(i).getKey();
+        }
+
+        public double getValue(int i) {
+            return integralCashSorted.get(i).getValue();
+        }
+
+    }
+
     class MathP {
 
         static final double NUMBER_AXIS_PARTITION = 100;
@@ -164,8 +208,8 @@ public interface StrategyVDependsTime {
             return ( x==0.0) ? 0.5 : ((x>0) ? 1.0 : 0.0 );
             //return ( x>=0.0) ? 1.0 : 0.0;
         }
-        static ThreeDoubleFunction integralF = (t0, tK, function) -> {
-            double dt = (tK-t0)/NUMBER_AXIS_PARTITION;
+        static FourDoubleFunction integralF = (t0, tK, dt, function) -> {
+
             double result = 0.0;
             for (double t=t0; t<tK; t+=dt ) {
                 result = result + function.apply(t)*dt;
@@ -182,14 +226,14 @@ public interface StrategyVDependsTime {
                     double tP = t0;
 
                     while (result < C1) {
-                        result = integralF.apply(t0, tP, function);
+                        result = integralF.apply(t0, tP, dt, function);
                         tP+=dt;
                     }
                     return tP;
                 };
 
 
-        interface ThreeDoubleFunction {
+        interface FiveDoubleFunction {
             Double apply(double t0, double tK, DoubleFunction<Double> function);
         }
 
@@ -207,16 +251,23 @@ class StrategyVDependsTime01 implements StrategyVDependsTime {
     private DoubleFunction<Double> g;
     private DoubleFunction<Double> psi;
     private DoubleFunction<Double> gamma;
+    private CashIntegralValue cashIntegralValue;
+    double dt;
 
     public StrategyVDependsTime01() {
         axisParametrs = new AxisParametrs(0.0, 1.0, 0.0, 1.0, 0.0, 2.0, 10.0, 10.0);
 
         taskParameters = new TaskParameters();
         taskParameters.tK = axisParametrs.gettMax();
+        dt= (taskParameters.tK-taskParameters.t0)/MathP.NUMBER_AXIS_PARTITION;
 
         g = new G().g0_g1coswt;
         psi = new Psi().hm1_S;
         gamma = new Gamma().h;
+
+
+
+
 
 
 
@@ -226,7 +277,13 @@ class StrategyVDependsTime01 implements StrategyVDependsTime {
     @Override
     public double decision(double s, double t) {
 
-       double C1 = s - MathP.integralF.apply(taskParameters.t0, t, g) ;
+//        if (cashIntegralValue==null) {
+//
+//            MathP.integralF.apply(taskParameters.t0, t, g)
+//        }
+
+
+       double C1 = s - MathP.integralF.apply(taskParameters.t0, t, dt, g) ;
 
        double tP = MathP.integrationParameter.apply(taskParameters.t0, taskParameters.tK, -C1, g);
 
@@ -237,7 +294,7 @@ class StrategyVDependsTime01 implements StrategyVDependsTime {
     @Override
     public double decisionCharacteristic(double s, double t) {
 
-        return  MathP.integralF.apply(taskParameters.t0, t, g)  - s;
+        return  MathP.integralF.apply(taskParameters.t0, t, dt, g)  - s;
     }
 
     @Override
