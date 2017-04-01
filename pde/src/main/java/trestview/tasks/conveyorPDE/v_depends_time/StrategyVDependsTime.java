@@ -173,7 +173,7 @@ public interface StrategyVDependsTime {
             integralCashSorted.add(new Pair<>(t, C1));
         }
 
-        public void sorted() {
+        public void sortedValue() {
             integralCashSorted = integralCashSorted.stream().sorted((p1, p2) -> (p2.getValue() > p1.getValue()) ? -1 : 1)
                     .collect(Collectors.toList());
             if (!integralCashSorted.isEmpty()) {
@@ -182,13 +182,27 @@ public interface StrategyVDependsTime {
             }
         }
 
-        public double getFromCacheKey(double C1) {
+        public double getKey(double C1) {
+            int i = integralCashSorted.size()/2;
             try {
-                if (C1 > C1max) throw new Exception("-------------------- C1 > C1max ---------------------  C1="+C1+"  C1Max="+C1max);
-                if (C1 < C1min) throw new Exception("-------------------- C1 < C1min ---------------------  C1="+C1+"  C1Max="+C1min);
+                if (C1 > C1max)  C1 = C1max;  // throw new Exception("-------------------- C1 > C1max ---------------------  C1="+C1+"  C1Max="+C1max);
+                if (C1 < C1min)  C1 = C1min;  // throw new Exception("-------------------- C1 < C1min ---------------------  C1="+C1+"  C1Min="+C1min);
             } catch (Exception e) {  e.printStackTrace();    }
-            return integralCashSorted.stream().filter(p -> p.getValue() > C1).findFirst().get().getKey();
+            return methodNewton(0, integralCashSorted.size(), C1);   //  return integralCashSorted.stream().filter(p -> p.getValue() > C1).findFirst().get().getKey();
         }
+
+        public double methodNewton(int iMin, int iMax, double C1){
+            int i = (iMax+iMin)/2;
+            if(C1_isMore_Ci(C1,i)) iMin=i;
+                else iMax=i;
+            if ((iMax-iMin)>2)  return methodNewton(iMin, iMax, C1);
+            else return integralCashSorted.get(i).getKey();
+        }
+
+        public boolean C1_isMore_Ci (double C1, int i){
+            return C1>integralCashSorted.get(i).getValue();
+        }
+
 
         public double getKey(int i) {
             return integralCashSorted.get(i).getKey();
@@ -202,7 +216,7 @@ public interface StrategyVDependsTime {
 
     class MathP {
 
-        static final double NUMBER_AXIS_PARTITION = 100;
+        static final double NUMBER_AXIS_PARTITION = 1000;
 
         static double h (double x) {
             return ( x==0.0) ? 0.5 : ((x>0) ? 1.0 : 0.0 );
@@ -215,6 +229,15 @@ public interface StrategyVDependsTime {
                 result = result + function.apply(t)*dt;
             }
             return result;
+        };
+
+        static FiveDoubleFunction integralForCashSorted = (t0, tK, dt, function, integralCashSorted) -> {
+
+            double result = 0.0;
+            for (double t=t0; t<tK; t+=dt ) {
+                result = result + function.apply(t)*dt;
+                integralCashSorted.addValue(t, result);
+            }
         };
 
         static FourDoubleFunction integrationParameter =
@@ -233,12 +256,17 @@ public interface StrategyVDependsTime {
                 };
 
 
-        interface FiveDoubleFunction {
-            Double apply(double t0, double tK, DoubleFunction<Double> function);
-        }
+
+
+//        interface FiveDoubleFunction {
+//            Double apply(double t0, double tK, DoubleFunction<Double> function);
+//        }
 
         interface FourDoubleFunction {
             Double apply(double t0, double tK, double С1, DoubleFunction<Double> function);
+        }
+        interface FiveDoubleFunction {
+            void apply(double t0, double tK, double dt, DoubleFunction<Double> function, CashIntegralValue integralCashSorted);
         }
     }
 
@@ -265,9 +293,14 @@ class StrategyVDependsTime01 implements StrategyVDependsTime {
         psi = new Psi().hm1_S;
         gamma = new Gamma().h;
 
+        cashIntegralValue = new CashIntegralValue();
+//------------------------------------------------------------------------------------------------------------------
 
+        MathP.integralForCashSorted.apply(taskParameters.t0,taskParameters.tK,dt,g,cashIntegralValue);
+        cashIntegralValue.sortedValue();
 
-
+        cashIntegralValue.getKey(1.0);
+        System.out.println("");
 
 
 
@@ -285,7 +318,7 @@ class StrategyVDependsTime01 implements StrategyVDependsTime {
 
        double C1 = s - MathP.integralF.apply(taskParameters.t0, t, dt, g) ;
 
-       double tP = MathP.integrationParameter.apply(taskParameters.t0, taskParameters.tK, -C1, g);
+       double tP = cashIntegralValue.getKey(-C1);
 
        return MathP.h(s)*gamma.apply(tP)/g.apply(tP) - MathP.h(C1)*gamma.apply(tP)/g.apply(tP)
                +MathP.h(C1)*psi.apply(C1);
