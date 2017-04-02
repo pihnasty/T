@@ -1,41 +1,42 @@
 package trestview.tasks.conveyorPDE.v_depends_time;
 
 import javafx.util.Pair;
-
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.BiFunction;
 import java.util.function.DoubleFunction;
 import java.util.stream.Collectors;
 
-import static trestview.tasks.conveyorPDE.v_depends_time.StrategyVDependsTime.MathP.integralF;
-
 public interface StrategyVDependsTime {
 
-     double decision(double s, double t);
+    double decision(double s, double t);
 
     double decisionCharacteristic(double s, double t);
 
-    AxisParametrs  getAxisParametrs();
+    AxisParametrs getAxisParametrs();
+
+    void createCash();
 
     /*Parameters for the graph scale t={tMin,tMax}, S={sMin,sMax}, y={yMin,yMax}
     * numberOfCurves - Number of curves on the graph (number of graphs)
     * yTickUnitNumber - Number of the tick at the axis */
     class AxisParametrs {
 
-        private double tMax ;         private double tMin ;
-        private double sMax ;         private double sMin ;
-        private double yMax ;         private double yMin ;
+        private double tMax;
+        private double tMin;
+        private double sMax;
+        private double sMin;
+        private double yMax;
+        private double yMin;
         private double numberOfCurves;
         private double yTickUnitNumber;
 
 
         public AxisParametrs() {
-           this(0.0, 1.0, 0.0, 2.0, 0.0, 1.0, 10.0, 10.0);
+            this(0.0, 1.0, 0.0, 2.0, 0.0, 1.0, 10.0, 10.0);
         }
 
         public AxisParametrs(double numberOfCurves, double yTickUnitNumber) {
-            this(0.0, 1.0, 0.0, 1.0, 0.0, 1.0, numberOfCurves,  yTickUnitNumber);
+            this(0.0, 1.0, 0.0, 1.0, 0.0, 1.0, numberOfCurves, yTickUnitNumber);
         }
 
         public AxisParametrs(double tMin, double tMax, double sMin, double sMax, double yMin, double yMax, double numberOfCurves, double yTickUnitNumber) {
@@ -126,16 +127,61 @@ public interface StrategyVDependsTime {
     * */
     class TaskParameters {
 
-        protected double s0 = 0.0;
-        protected double t0 = 0.0;          protected double tK = new AxisParametrs().tMax;
-        protected double tS = 0.5;
+        protected double s0;
+        protected double t0 = 0.0;
+        protected double tK = new AxisParametrs().tMax;
+        protected double tS;
 
+        public TaskParameters() {
+        }
 
+        public TaskParameters(double t0, double tK, double tS) {
+            this(t0, tK, tS, 0.0);
+        }
 
+        public TaskParameters(double t0, double tK, double tS, double s0) {
+            this.tS = tS;
+            this.t0 = t0;
+            this.tK = tK;
+            this.s0 = s0;
+        }
+
+        public double getS0() {
+            return s0;
+        }
+
+        public void setS0(double s0) {
+            this.s0 = s0;
+        }
+
+        public double getT0() {
+            return t0;
+        }
+
+        public void setT0(double t0) {
+            this.t0 = t0;
+        }
+
+        public double gettK() {
+            return tK;
+        }
+
+        public void settK(double tK) {
+            this.tK = tK;
+        }
+
+        public double gettS() {
+            return tS;
+        }
+
+        public void settS(double tS) {
+            this.tS = tS;
+        }
     }
 
     class Psi {
-        protected DoubleFunction<Double> hm1_S = s -> MathP.h(s)*(1-s);
+        protected DoubleFunction<Double> hm1_S = s -> MathP.h(s) * (1 - s);
+        protected DoubleFunction<Double> hm_1_plus_sinS = s -> (1.0 + MathP.h(s) * Math.sin(10 * Math.PI * s)) / 2.0;
 
     }
 
@@ -145,12 +191,13 @@ public interface StrategyVDependsTime {
         private double wS;
 
         public G() {
-            this( new TaskParameters () );
+            this(new TaskParameters());
         }
+
         public G(TaskParameters taskParameters) {
             this.taskParameters = taskParameters;
-            this.wS = 2.0*Math.PI / taskParameters.tS;
-            g0_g1coswt = t -> 2.0 - Math.cos(wS*t);
+            this.wS = 2.0 * Math.PI / taskParameters.tS;
+            g0_g1coswt = t -> 2.0 - Math.cos(wS * t);
             // There are .....
         }
     }
@@ -160,73 +207,106 @@ public interface StrategyVDependsTime {
     }
 
     class CashIntegralValue {
-        private List<Pair<Double, Double>> integralCashSorted;
+        private List<Pair<Double, Double>> integralCashSortedValue;
+        private List<Pair<Double, Double>> integralCashSortedKey;
         private double C1max = Double.MIN_VALUE;
         private double C1min = Double.MAX_VALUE;
+        private double tMax = Double.MIN_VALUE;
+        private double tMin = Double.MAX_VALUE;
 
 
         public CashIntegralValue() {
-            integralCashSorted = new ArrayList<>();
+            integralCashSortedValue = new ArrayList<>();
+            integralCashSortedKey = new ArrayList<>();
         }
 
         public void addValue(double t, double C1) {
-            integralCashSorted.add(new Pair<>(t, C1));
+            integralCashSortedKey.add(new Pair<>(t, C1));
         }
 
         public void sortedValue() {
-            integralCashSorted = integralCashSorted.stream().sorted((p1, p2) -> (p2.getValue() > p1.getValue()) ? -1 : 1)
+            integralCashSortedValue = integralCashSortedKey.stream().sorted((p1, p2) -> (p2.getValue() > p1.getValue()) ? -1 : 1)
                     .collect(Collectors.toList());
-            if (!integralCashSorted.isEmpty()) {
-                C1max = integralCashSorted.get(integralCashSorted.size()-1).getValue();
-                C1min = integralCashSorted.get(0).getValue();
+            integralCashSortedKey = integralCashSortedKey.stream().sorted((p1, p2) -> (p2.getKey() > p1.getKey()) ? -1 : 1)
+                    .collect(Collectors.toList());
+            if (!integralCashSortedValue.isEmpty()) {
+                C1max = integralCashSortedValue.get(integralCashSortedValue.size() - 1).getValue();
+                C1min = integralCashSortedValue.get(0).getValue();
+                tMax = integralCashSortedKey.get(integralCashSortedKey.size() - 1).getKey();
+                tMin = integralCashSortedKey.get(0).getKey();
             }
         }
 
         public double getKey(double C1) {
-            int i = integralCashSorted.size()/2;
+            int i = integralCashSortedValue.size() / 2;
             try {
-                if (C1 > C1max)  C1 = C1max;  // throw new Exception("-------------------- C1 > C1max ---------------------  C1="+C1+"  C1Max="+C1max);
-                if (C1 < C1min)  C1 = C1min;  // throw new Exception("-------------------- C1 < C1min ---------------------  C1="+C1+"  C1Min="+C1min);
-            } catch (Exception e) {  e.printStackTrace();    }
-            return methodNewton(0, integralCashSorted.size(), C1);   //  return integralCashSorted.stream().filter(p -> p.getValue() > C1).findFirst().get().getKey();
+                if (C1 > C1max)
+                    C1 = C1max;  // throw new Exception("-------------------- C1 > C1max ---------------------  C1="+C1+"  C1Max="+C1max);
+                if (C1 < C1min)
+                    C1 = C1min;  // throw new Exception("-------------------- C1 < C1min ---------------------  C1="+C1+"  C1Min="+C1min);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return methodNewtonValue(0, integralCashSortedValue.size() - 1, C1);   //  return integralCashSorted.stream().filter(p -> p.getValue() > C1).findFirst().get().getKey();
         }
 
-        public double methodNewton(int iMin, int iMax, double C1){
-            int i = (iMax+iMin)/2;
-            if(C1_isMore_Ci(C1,i)) iMin=i;
-                else iMax=i;
-            if ((iMax-iMin)>2)  return methodNewton(iMin, iMax, C1);
-            else return integralCashSorted.get(i).getKey();
+        public double methodNewtonValue(int iMin, int iMax, double C1) {
+            int i = (iMax + iMin) / 2;
+            if (C1_isMore_Ci(C1, i)) iMin = i;
+            else iMax = i;
+            if ((iMax - iMin) > 2) return methodNewtonValue(iMin, iMax, C1);
+            else return integralCashSortedValue.get(i).getKey();
         }
 
-        public boolean C1_isMore_Ci (double C1, int i){
-            return C1>integralCashSorted.get(i).getValue();
+        public boolean C1_isMore_Ci(double C1, int i) {
+            return C1 > integralCashSortedValue.get(i).getValue();
         }
 
-
-        public double getKey(int i) {
-            return integralCashSorted.get(i).getKey();
+        public double getValue(double t) {
+            int i = integralCashSortedKey.size() / 2;
+            try {
+                if (t > tMax)
+                    t = tMax;  // throw new Exception("-------------------- C1 > C1max ---------------------  C1="+C1+"  C1Max="+C1max);
+                if (t < C1min)
+                    t = tMin;  // throw new Exception("-------------------- C1 < C1min ---------------------  C1="+C1+"  C1Min="+C1min);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return methodNewtonKey(0, integralCashSortedKey.size() - 1, t);   //  return integralCashSorted.stream().filter(p -> p.getValue() > C1).findFirst().get().getKey();
         }
 
-        public double getValue(int i) {
-            return integralCashSorted.get(i).getValue();
+        public double methodNewtonKey(int iMin, int iMax, double t) {
+            int i = (iMax + iMin) / 2;
+            if (t_isMore_ti(t, i)) iMin = i;
+            else iMax = i;
+            if ((iMax - iMin) > 2) return methodNewtonKey(iMin, iMax, t);
+            else return integralCashSortedKey.get(i).getValue();
         }
 
+        public boolean t_isMore_ti(double t, int i) {
+            return t > integralCashSortedKey.get(i).getKey();
+        }
     }
 
     class MathP {
 
-        static final double NUMBER_AXIS_PARTITION = 1000;
+        static final double NUMBER_AXIS_PARTITION = 100000;
 
-        static double h (double x) {
-            return ( x==0.0) ? 0.5 : ((x>0) ? 1.0 : 0.0 );
+        static double h(double x) {
+            return (x == 0.0) ? 0.5 : ((x > 0) ? 1.0 : 0.0);
             //return ( x>=0.0) ? 1.0 : 0.0;
         }
+
+        static double h(double x, String s) {
+            if ("1.0".equals(s)) return (x >= 0.0) ? 1.0 : 0.0;
+            else return (x == 0.0) ? 0.5 : ((x > 0) ? 1.0 : 0.0);
+        }
+
         static FourDoubleFunction integralF = (t0, tK, dt, function) -> {
 
             double result = 0.0;
-            for (double t=t0; t<tK; t+=dt ) {
-                result = result + function.apply(t)*dt;
+            for (double t = t0; t < tK; t += dt) {
+                result = result + function.apply(t) * dt;
             }
             return result;
         };
@@ -234,8 +314,8 @@ public interface StrategyVDependsTime {
         static FiveDoubleFunction integralForCashSorted = (t0, tK, dt, function, integralCashSorted) -> {
 
             double result = 0.0;
-            for (double t=t0; t<tK; t+=dt ) {
-                result = result + function.apply(t)*dt;
+            for (double t = t0; t < tK; t += dt) {
+                result = result + function.apply(t) * dt;
                 integralCashSorted.addValue(t, result);
             }
         };
@@ -244,95 +324,87 @@ public interface StrategyVDependsTime {
                 (t0, tK, C1, function) -> {
                     if (C1 <= 0) return t0;
 
-                    double dt = (tK-t0)/NUMBER_AXIS_PARTITION;
+                    double dt = (tK - t0) / NUMBER_AXIS_PARTITION;
                     double result = 0.0;
                     double tP = t0;
 
                     while (result < C1) {
                         result = integralF.apply(t0, tP, dt, function);
-                        tP+=dt;
+                        tP += dt;
                     }
                     return tP;
                 };
 
-
-
-
-//        interface FiveDoubleFunction {
-//            Double apply(double t0, double tK, DoubleFunction<Double> function);
-//        }
-
         interface FourDoubleFunction {
             Double apply(double t0, double tK, double С1, DoubleFunction<Double> function);
         }
+
         interface FiveDoubleFunction {
             void apply(double t0, double tK, double dt, DoubleFunction<Double> function, CashIntegralValue integralCashSorted);
         }
     }
-
 }
 
+class AbstractStrategyVDependsTime implements StrategyVDependsTime {
+    protected AxisParametrs  axisParametrs;
+    protected TaskParameters  taskParameters;
+    protected DoubleFunction<Double> g;
+    protected DoubleFunction<Double> psi;
+    protected DoubleFunction<Double> gamma;
+    protected CashIntegralValue cashIntegralValue;
+    protected String valueH_in_0;
 
-class StrategyVDependsTime01 implements StrategyVDependsTime {
-    private AxisParametrs  axisParametrs;
-    private TaskParameters  taskParameters;
-    private DoubleFunction<Double> g;
-    private DoubleFunction<Double> psi;
-    private DoubleFunction<Double> gamma;
-    private CashIntegralValue cashIntegralValue;
-    double dt;
-
-    public StrategyVDependsTime01() {
-        axisParametrs = new AxisParametrs(0.0, 1.0, 0.0, 1.0, 0.0, 2.0, 10.0, 10.0);
-
-        taskParameters = new TaskParameters();
-        taskParameters.tK = axisParametrs.gettMax();
-        dt= (taskParameters.tK-taskParameters.t0)/MathP.NUMBER_AXIS_PARTITION;
-
-        g = new G().g0_g1coswt;
-        psi = new Psi().hm1_S;
-        gamma = new Gamma().h;
-
+    @Override
+    public void createCash() {
+        double dt = (taskParameters.gettK()-taskParameters.getT0())/MathP.NUMBER_AXIS_PARTITION;
         cashIntegralValue = new CashIntegralValue();
 //------------------------------------------------------------------------------------------------------------------
-
-        MathP.integralForCashSorted.apply(taskParameters.t0,taskParameters.tK,dt,g,cashIntegralValue);
+        MathP.integralForCashSorted.apply(taskParameters.getT0(),taskParameters.gettK(),dt,g,cashIntegralValue);
         cashIntegralValue.sortedValue();
-
-        cashIntegralValue.getKey(1.0);
-        System.out.println("");
-
-
-
-
     }
 
     @Override
     public double decision(double s, double t) {
-
-//        if (cashIntegralValue==null) {
-//
-//            MathP.integralF.apply(taskParameters.t0, t, g)
-//        }
-
-
-       double C1 = s - MathP.integralF.apply(taskParameters.t0, t, dt, g) ;
-
-       double tP = cashIntegralValue.getKey(-C1);
-
-       return MathP.h(s)*gamma.apply(tP)/g.apply(tP) - MathP.h(C1)*gamma.apply(tP)/g.apply(tP)
-               +MathP.h(C1)*psi.apply(C1);
+        double C1 = s - cashIntegralValue.getValue(t);
+        double tP = cashIntegralValue.getKey(-C1);
+        return MathP.h(s,valueH_in_0)*gamma.apply(tP)/g.apply(tP) - MathP.h(C1,valueH_in_0)*gamma.apply(tP)/g.apply(tP)
+                +MathP.h(C1,valueH_in_0)*psi.apply(C1);
     }
 
     @Override
     public double decisionCharacteristic(double s, double t) {
-
-        return  MathP.integralF.apply(taskParameters.t0, t, dt, g)  - s;
+        return  cashIntegralValue.getValue(t)  - s;
     }
 
     @Override
     public AxisParametrs getAxisParametrs() {
         return axisParametrs;
     }
+}
 
+
+class StrategyVDependsTime01 extends AbstractStrategyVDependsTime {
+
+    public StrategyVDependsTime01() {
+        axisParametrs = new AxisParametrs(0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 10.0, 10.0);
+        taskParameters = new TaskParameters(axisParametrs.gettMin(), axisParametrs.gettMax(), 0.5, axisParametrs.getsMin());
+        g = new G(taskParameters).g0_g1coswt;
+        psi = new Psi().hm1_S;
+        gamma = new Gamma().h;
+        valueH_in_0 = "1.0";
+        createCash();
+    }
+}
+
+class StrategyVDependsTime02 extends AbstractStrategyVDependsTime {
+
+    public StrategyVDependsTime02() {
+        axisParametrs = new AxisParametrs(0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 10.0, 10.0);
+        taskParameters = new TaskParameters(axisParametrs.gettMin(), axisParametrs.gettMax(), 0.25, axisParametrs.getsMin());
+        g = new G(taskParameters).g0_g1coswt;
+        psi = new Psi().hm_1_plus_sinS;
+        gamma = new Gamma().h;
+        valueH_in_0 = "0.5";
+        createCash();
+    }
 }

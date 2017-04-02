@@ -37,14 +37,14 @@ public class VDependsTimeConveyorPdeView extends BorderPaneObserverDS {
      //   setStyle("-fx-background-color: red;");
      //        getStyleClass().add("vConConveyorPdeStyle");
      //     getStylesheets().add("barchartsample/Chart.css");
-        Button buttonForStrategy01 = getButton((VDependsTimeConveyorPdeModel) observebleDS, "buttonStrategy01", "buttonStrategy01Tooltip", new StrategyVDependsTime01());
-//        Button buttonForStrategy02 = getButton((VDependsTimeConveyorPdeModel) observebleDS, "buttonStrategy02", "buttonStrategy02Tooltip", new Strategy02());
+        Button buttonForStrategy01 = getButton((VDependsTimeConveyorPdeModel) observebleDS, "buttonStrategyVSpeedDependsTime01", "buttonStrategyVSpeedDependsTime01Tooltip", new StrategyVDependsTime01());
+        Button buttonForStrategy02 = getButton((VDependsTimeConveyorPdeModel) observebleDS, "buttonStrategyVSpeedDependsTime02", "buttonStrategyVSpeedDependsTime02Tooltip", new StrategyVDependsTime02());
 //        Button buttonForStrategy03 = getButton((VDependsTimeConveyorPdeModel) observebleDS, "buttonStrategy03", "buttonStrategy03Tooltip", new Strategy03());
 //        Button buttonForStrategy04 = getButton((VDependsTimeConveyorPdeModel) observebleDS, "buttonStrategy04", "buttonStrategy04Tooltip", new Strategy04());
 //        Button buttonForStrategy05 = getButton((VDependsTimeConveyorPdeModel) observebleDS, "buttonStrategy05", "buttonStrategy05Tooltip", new Strategy05());
 
         buttonForStrategy01.setOnAction(event ->  ((VDependsTimeConveyorPdeModel)observebleDS).setStrategy(new StrategyVDependsTime01()));
-//        buttonForStrategy02.setOnAction(event ->  ((VDependsTimeConveyorPdeModel)observebleDS).setStrategy(new Strategy02()));
+        buttonForStrategy02.setOnAction(event ->  ((VDependsTimeConveyorPdeModel)observebleDS).setStrategy(new StrategyVDependsTime02()));
 //        buttonForStrategy03.setOnAction(event ->  ((VDependsTimeConveyorPdeModel)observebleDS).setStrategy(new Strategy03()));
 //        buttonForStrategy04.setOnAction(event ->  ((VDependsTimeConveyorPdeModel)observebleDS).setStrategy(new Strategy04()));
 //        buttonForStrategy05.setOnAction(event ->  ((VDependsTimeConveyorPdeModel)observebleDS).setStrategy(new Strategy05()));
@@ -56,7 +56,7 @@ public class VDependsTimeConveyorPdeView extends BorderPaneObserverDS {
 //            }
 //        });
 
-        HBox hBoxBottom1 = new HBox(buttonForStrategy01
+        HBox hBoxBottom1 = new HBox(buttonForStrategy01,buttonForStrategy02
         //        , buttonForStrategy02, buttonForStrategy03,  buttonForStrategy04,  buttonForStrategy05
         );
         setBottom(hBoxBottom1);
