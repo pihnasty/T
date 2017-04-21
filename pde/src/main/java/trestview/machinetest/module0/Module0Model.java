@@ -23,7 +23,7 @@ public class Module0Model extends Observable {
     public Module0Model() {
 //        this.randomVariablesList = new ArrayDeque<>();
 //        this.groupedStatisticalSeries = new Hashtable<>();
-//        populateList(100);
+       // populateList(100);
     }
 
     public double getRandomVariable() {
@@ -36,9 +36,11 @@ public class Module0Model extends Observable {
 //        this.randomVariablesList = randomVariablesList;
 //
 //    }
-
-    //populate the List with a test data
-    private void populateList(int limit) {
+    /**
+     *
+     * populate the List with a test data
+     */
+    public void populateList(int limit) {
 
 //        timer = new Timer();
 //        timer.schedule(new TimerTask() {
@@ -59,8 +61,6 @@ public class Module0Model extends Observable {
 //            }
 //        }, 3000, 3000);//3000000, 300000000);
 
-
-
         Timeline timeline = new Timeline(new KeyFrame(Duration.millis(3000), new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -68,6 +68,7 @@ public class Module0Model extends Observable {
                 double value = Math.random() * 100;
                 randomVariable = value;
                 changed();
+                //System.out.println(value);
             }
         }));
         timeline.setCycleCount(Timeline.INDEFINITE);

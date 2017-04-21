@@ -131,6 +131,7 @@ public class MachineTestView extends BorderPaneObserverDS implements Observer {
         module0Model.addObserver(module5Model);
         module5Model.addObserver(module5View);
 
+        module0Model.populateList(0);
 
 //        ChartCommonModel chartCommonModel1 = new ChartCommonModel();
 //        ChartController chartController1 = new ChartController(chartCommonModel1);
@@ -160,7 +161,7 @@ public class MachineTestView extends BorderPaneObserverDS implements Observer {
 //        chartView1.setMaxSize(600, 400);
 //        chartView2.setMaxSize(600, 400);
 //        vBox = new VBox();
-//        vBox.getChildren().addAll(animationView, tableView);
+        vBox.getChildren().addAll(animationView);//add tableview
         vBox1.getChildren().addAll(module3View, module4View, module5View); //, chartView1, chartView2);
         splitPane.getItems().addAll(vBox, vBox1);
 

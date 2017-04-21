@@ -70,7 +70,7 @@ public class TrestView extends BorderPaneObserverDS {
 //        MachineTestController machineTestController = new MachineTestController(machineTestModel);
 //        machineTestView = new MachineTestView(machineTestModel, machineTestController);
 //        machineTestModel.addObserver(machineTestView);
-         machineTest = new MVC (MachineTestModel.class,  MachineTestController.class, MachineTestView.class, this.trestModel, Rule.Functiondist);
+         machineTest = new MVC (MachineTestModel.class,  MachineTestController.class, MachineTestView.class, this.trestModel, null);
 
 
         conConveyorPdeModel = new MVC (VConConveyorPdeModel.class, VConConveyorPdeController.class, VConConveyorPdeView.class,this.trestModel, null);

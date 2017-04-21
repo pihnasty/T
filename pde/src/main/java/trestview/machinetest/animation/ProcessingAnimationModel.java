@@ -19,6 +19,7 @@ public class ProcessingAnimationModel extends Observable implements Observer {
     }
 
     private void findDuration(double rndVal) {
+        System.out.println("In Animation Model");
         duration = rndVal*10;
     }
 

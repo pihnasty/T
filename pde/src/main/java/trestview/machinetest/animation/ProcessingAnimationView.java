@@ -1,6 +1,7 @@
 package trestview.machinetest.animation;
 
 import javafx.animation.*;
+import javafx.application.Platform;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
@@ -93,6 +94,8 @@ public class ProcessingAnimationView extends Pane implements Observer {
     }
 
     private void runProcessingAnimation(double duration) {
+
+        System.out.println("In Processing ANimation");
         timeline.setAutoReverse(true);
         timeline.setCycleCount(2);
 
@@ -113,9 +116,10 @@ public class ProcessingAnimationView extends Pane implements Observer {
         KeyValue keyValue = new KeyValue(imageViewTop.translateYProperty(), 90);
         KeyFrame keyFrame = new KeyFrame(Duration.millis(duration), (ActionEvent)->{
             toggleHide(rectangle);
-            transitionRect.play();
-            transitionCircle.play();
-            stackProducts(rectangle, imageViewRightStorage, this);
+                transitionRect.play();
+                transitionCircle.play();
+                stackProducts(rectangle, imageViewRightStorage, this);
+                //toggleHide(rectangle);
 
         },keyValue);
 
@@ -193,9 +197,9 @@ public class ProcessingAnimationView extends Pane implements Observer {
                 fillLeftStorage(this, imageViewLeftStorage);
             }
             removeItemFromStorage();
-            toggleHide(rectangle);
-            runProcessingAnimation(((ProcessingAnimationModel)o).getDuration());
-
+            //toggleHide(rectangle);
+            Platform.runLater(()->runProcessingAnimation(((ProcessingAnimationModel)o).getDuration()));
+            //runProcessingAnimation(((ProcessingAnimationModel)o).getDuration());
 
         }
     }
