@@ -20,7 +20,7 @@ import java.awt.*;
 import java.util.ResourceBundle;
 
 /**
- * IDEA 2017.1.2
+ * IDEA 2017.1.2  Oracle VM
  */
 public class new_PDEapp extends Application {
     /**
