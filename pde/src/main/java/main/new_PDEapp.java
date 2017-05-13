@@ -20,7 +20,7 @@ import java.awt.*;
 import java.util.ResourceBundle;
 
 /**
- * Created by pom on 1/23/2016.
+ * IDEA 2017.1.2
  */
 public class new_PDEapp extends Application {
     /**
