@@ -28,6 +28,9 @@ import trestview.table.tablemodel.abstracttablemodel.Rule;
 import trestview.tasks.conveyorPDE.v_const.VConConveyorPdeController;
 import trestview.tasks.conveyorPDE.v_const.VConConveyorPdeView;
 import trestview.tasks.conveyorPDE.v_const.VConConveyorPdeModel;
+import trestview.tasks.conveyorPDE.v_constcontrol.band.VConstTimeControlBandConveyorPdeController;
+import trestview.tasks.conveyorPDE.v_constcontrol.band.VConstTimeControlBandConveyorPdeModel;
+import trestview.tasks.conveyorPDE.v_constcontrol.band.VConstTimeControlBandConveyorPdeView;
 import trestview.tasks.conveyorPDE.v_depends_time.VDependsTimeConveyorPdeController;
 import trestview.tasks.conveyorPDE.v_depends_time.VDependsTimeConveyorPdeModel;
 import trestview.tasks.conveyorPDE.v_depends_time.VDependsTimeConveyorPdeView;
@@ -41,7 +44,8 @@ public class TrestView extends BorderPaneObserverDS {
     private DataSet dataSet;
     private List<Node> nodes;
     private MVC resourceLink;
-    private MVC conConveyorPdeModel;
+    private MVC constantTimeConveyorPdeModel;
+    private MVC constantTimeConveyorPdeControlBand;
     private MVC dependsTimeConveyorPdeModel;
     private MVC orderPlaninigPerspective;
     private MVC routePerspective;
@@ -66,14 +70,14 @@ public class TrestView extends BorderPaneObserverDS {
 
         this.setCenter((BorderPane)resourceLink.getView());
 
-//        MachineTestModel machineTestModel = new MachineTestModel((TMenuModel)menu.getModel());
-//        MachineTestController machineTestController = new MachineTestController(machineTestModel);
-//        machineTestView = new MachineTestView(machineTestModel, machineTestController);
-//        machineTestModel.addObserver(machineTestView);
-         machineTest = new MVC (MachineTestModel.class,  MachineTestController.class, MachineTestView.class, this.trestModel, null);
+  //   TODO Roman fixed    machineTest = new MVC (MachineTestModel.class,  MachineTestController.class, MachineTestView.class, this.trestModel, null);
 
 
-        conConveyorPdeModel = new MVC (VConConveyorPdeModel.class, VConConveyorPdeController.class, VConConveyorPdeView.class,this.trestModel, null);
+        constantTimeConveyorPdeModel = new MVC (VConConveyorPdeModel.class, VConConveyorPdeController.class, VConConveyorPdeView.class,this.trestModel, null);
+
+        constantTimeConveyorPdeControlBand = new MVC (VConstTimeControlBandConveyorPdeModel.class,
+                                                      VConstTimeControlBandConveyorPdeController.class,
+                                                      VConstTimeControlBandConveyorPdeView.class,this.trestModel, null);
 
         dependsTimeConveyorPdeModel = new MVC (VDependsTimeConveyorPdeModel.class, VDependsTimeConveyorPdeController.class, VDependsTimeConveyorPdeView.class,this.trestModel, null);
 
@@ -89,13 +93,16 @@ public class TrestView extends BorderPaneObserverDS {
     private void updateCenter(TMenuModel o) {
         switch (o.getMenuItemCall()) {
             case testOfMachineItem:
-                this.setCenter((BorderPane) machineTest.getView());
+            //    this.setCenter((BorderPane) machineTest.getView());
                 break;
             case resourcesLinksPerspectiveItem:
                 this.setCenter((BorderPane) resourceLink.getView());
                 break;
             case conveyorSpeedConstantItem:
-                this.setCenter((BorderPane) conConveyorPdeModel.getView());
+                this.setCenter((BorderPane) constantTimeConveyorPdeModel.getView());
+                break;
+            case conveyorSpeedConstantControlBandItem:
+                this.setCenter((BorderPane) constantTimeConveyorPdeControlBand.getView());
                 break;
             case conveyorSpeedDependsTimeItem:
                 this.setCenter((BorderPane) dependsTimeConveyorPdeModel.getView());
