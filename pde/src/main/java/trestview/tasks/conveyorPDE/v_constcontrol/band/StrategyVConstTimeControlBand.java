@@ -183,7 +183,11 @@ public interface StrategyVConstTimeControlBand {
     class Psi {
         protected DoubleFunction<Double> hm1_S = s -> MathP.h(s) * (1 - s);
         protected DoubleFunction<Double> hm_1_plus_sinS = s -> (1.0 + MathP.h(s) * Math.sin(10 * Math.PI * s)) / 2.0;
+    }
 
+    class Sigma {
+        protected DoubleFunction<Double> hm1_S = s -> MathP.h(s) * (1 - s);
+        protected DoubleFunction<Double> hm_1_plus_sinS = s -> (1.0 + MathP.h(s) * Math.sin(10 * Math.PI * s)) / 2.0;
     }
 
     class G {
