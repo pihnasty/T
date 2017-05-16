@@ -1,27 +1,20 @@
 package trestview.routeperspective;
 
-import designpatterns.*;
+import designpatterns.InitializableDS;
+import designpatterns.MVC;
+import designpatterns.ObservableDS;
+import designpatterns.TableBoxMVC;
 import designpatterns.observerdsall.BorderPaneObserverDS;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
-import javafx.scene.control.Label;
 import javafx.scene.control.SplitPane;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import persistence.loader.XmlRW;
-import trestview.hboxpane.HboxpaneController;
-import trestview.hboxpane.HboxpaneModel;
-import trestview.hboxpane.HboxpaneView;
 import trestview.routeperspective.schemaroute.SchemaRouteController;
 import trestview.routeperspective.schemaroute.SchemaRouteModel;
 import trestview.routeperspective.schemaroute.SchemaRouteView;
-import trestview.table.TableController;
-import trestview.table.TableViewP;
-import trestview.table.tablemodel.TableModel;
 import trestview.table.tablemodel.abstracttablemodel.Rule;
 
 import java.util.Observable;
@@ -35,9 +28,9 @@ public class RoutePerspectiveView extends BorderPaneObserverDS {
 //----------------------------------------------------------------------------------------------------------------------
         MVC schemaRouteMVC = new MVC(SchemaRouteModel.class, SchemaRouteController.class, SchemaRouteView.class, observableDS, Rule.RoutePerspective);
         SchemaRouteView view = (SchemaRouteView) schemaRouteMVC.getView();
-        view.addEventHandler(MouseEvent.MOUSE_MOVED, (SchemaRouteController)schemaRouteMVC.getController());
-        view.addEventHandler(MouseEvent.MOUSE_DRAGGED, (SchemaRouteController)schemaRouteMVC.getController());
-        view.addEventHandler(MouseEvent.MOUSE_RELEASED, (SchemaRouteController)schemaRouteMVC.getController());
+//        view.addEventHandler(MouseEvent.MOUSE_MOVED, (SchemaRouteController)schemaRouteMVC.getController());
+//        view.addEventHandler(MouseEvent.MOUSE_DRAGGED, (SchemaRouteController)schemaRouteMVC.getController());
+//        view.addEventHandler(MouseEvent.MOUSE_RELEASED, (SchemaRouteController)schemaRouteMVC.getController());
 //----------------------------------------------------------------------------------------------------------------------
         TableBoxMVC tableBoxWorkMVC = new TableBoxMVC( observableDS,fxmlLoader.getResources().getString("ListManufacturing"),"file:pde\\src\\main\\resources\\images\\icons\\RowWork.png",Rule.Work);
         tableBoxWorkMVC.addObserverForTable(schemaRouteMVC);
@@ -63,7 +56,7 @@ public class RoutePerspectiveView extends BorderPaneObserverDS {
         vboxSplitPaneLeft.setSpacing(5);   // The amount of vertical space between each child in the vbox.
         vboxSplitPaneLeft.setPadding(new Insets(10, 0, 0, 10));   // The top,right,bottom,left padding around the region's content. This space will be included in the calculation of the region's minimum and preferred sizes. By default padding is Insets.EMPTY and cannot be set to null.
 //----------------------------------------------------------------------------------------------------------------------
-        borderPane.setCenter((BorderPane) schemaRouteMVC.getView());
+        borderPane.setCenter((StackPane)schemaRouteMVC.getView());
         splitPane.getItems().addAll(vboxSplitPaneLeft, borderPane);
         splitPane.setDividerPositions(0.2f, 0.6f);
         setCenter(splitPane);

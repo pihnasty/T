@@ -32,25 +32,19 @@ public class SchemaBaseView extends BorderPaneObserverDS {
         super(observableDS,initializableDS);
         bp = new BorderPane();
         getChildren().addAll(bp);
-        qs = ((SchemaBaseModel)observableDS).getQs();
         setStyle("-fx-background-color: #336699;");
 
         setkScaleDefault();
         repaint((SchemaBaseModel) this.observableDS);
-//        bp.scaleXProperty().bind(kScale);
- //       bp.scaleYProperty().bind(kScale);
+        bp.scaleXProperty().bind(kScale);
+        bp.scaleYProperty().bind(kScale);
     }
 
     protected void repaint(SchemaBaseModel schemaModel) {
         this.bp.getChildren().clear();
         this.work = schemaModel.getWork();
         this.imageview.setImage(new Image("file:"+work.getScheme() ));
-        for(Q q: schemaModel.getQs()) {
-            q.setLayoutX(q.getX());
-            q.setLayoutY(q.getY());
-        }
         if (imageview != null)           bp.getChildren().addAll(imageview);
-        if (schemaModel.getQs() != null) bp.getChildren().addAll(schemaModel.getQs());
     }
     @Override
     public void update(Observable o, Object arg) {

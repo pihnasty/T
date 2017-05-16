@@ -4,7 +4,6 @@ import designpatterns.InitializableDS;
 import designpatterns.ObservableDS;
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
-import trestview.resourcelink.schemawork.SchemaModel;
 
 
 public class SchemaRouteController extends InitializableDS implements  EventHandler<MouseEvent> {
@@ -15,11 +14,11 @@ public class SchemaRouteController extends InitializableDS implements  EventHand
 
     @Override
     public void handle(MouseEvent event) {
-
+/*
         if ( event.getEventType() == MouseEvent.MOUSE_MOVED) {
             ((SchemaRouteModel)observableDS).changeCursor(event);
         }
-
+*/
         if ( event.getEventType() == MouseEvent.MOUSE_DRAGGED) {
             ((SchemaRouteModel)observableDS).changeLocation(event);
         }

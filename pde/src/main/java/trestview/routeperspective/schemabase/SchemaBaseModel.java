@@ -3,45 +3,60 @@ package trestview.routeperspective.schemabase;
 import designpatterns.ObservableDS;
 import entityProduction.Machine;
 import entityProduction.Work;
-import javafx.scene.Cursor;
-import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
-import persistence.loader.XmlRW;
-import persistence.loader.tabDataSet.RowMachine;
-import trestview.resourcelink.ResourceLinkModel;
 import trestview.resourcelink.schemawork.Q;
-import trestview.table.tablemodel.TableModel;
+import trestview.routeperspective.schemaroute.mesh.MeshController;
+import trestview.routeperspective.schemaroute.mesh.MeshModel;
+import trestview.routeperspective.schemaroute.mesh.MeshView;
 import trestview.table.tablemodel.abstracttablemodel.Rule;
 
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
-import java.util.stream.Collectors;
 
 public class SchemaBaseModel extends ObservableDS implements Observer {
 
     protected Work work;
-
-
-
     protected List<Q> qs;
+    protected List<MeshView> meshes;
 
     public SchemaBaseModel(ObservableDS observableDS, Rule rule) {
         super(observableDS, rule);
-        this.qs = new ArrayList();
-        if (!trest.getWorks().isEmpty())  createDataSchemaModel(trest.getWorks().get(0));
+        this.meshes = new ArrayList<>();
+        if (!trest.getWorks().isEmpty()) {
+            createDataSchemaModel(trest.getWorks().get(0));
+        }
+    }
+
+    protected void createDataSchemaModel(Work work) {
+        meshes.clear();
+        this.work = work;
+        work.getSubject_labours()
+                .forEach(subject_labour -> subject_labour.getRoutes()
+                        .forEach(route -> route.getLineroutes().forEach(lineroute -> {
+                            MeshModel meshModel = new MeshModel(getMachine(lineroute.getNameMachine()), lineroute);
+                            MeshController meshController = new MeshController(meshModel);
+                            MeshView meshView = new MeshView(meshModel, meshController);
+                            meshes.add(meshView);
+                        })));
+    }
+
+    private Machine getMachine(String machineName) {
+
+        for (Work itemWork : trest.getWorks()) {
+            for (Machine itemMachine : itemWork.getMachines()) {
+                if (itemMachine.getName().equals(machineName)) {
+                    return itemMachine;
+                }
+            }
+        }
+        System.out.println("machine name is not found. NULL");
+        return null;
     }
 
     @Override
     public void update(Observable o, Object arg) {
 
-    }
-    protected void createDataSchemaModel(Work work) {
-        qs.clear();
-        this.work = work;
-        qs.addAll(work.getMachines().stream().map(Q::new).collect(Collectors.toList())); //for (Machine machine : work.getMachines()) {  qs.add(new Q(machine)); }
     }
 
 //------------------------------------------------------------------------
@@ -54,12 +69,11 @@ public class SchemaBaseModel extends ObservableDS implements Observer {
         this.work = work;
     }
 
-    public List<Q> getQs() {
-        return qs;
+    public List<MeshView> getMeshes( ) {
+        return meshes;
     }
 
-    public void setQs(List<Q> qs) {
-        this.qs = qs;
+    public void setMeshes(List<MeshView> meshes) {
+        this.meshes = meshes;
     }
-
 }
