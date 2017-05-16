@@ -13,7 +13,7 @@ public class Line extends RowLine	{
     		price 				= subject_labour.getPrice();
 		    unitName            = unit.getName();
 	}
-	public Line()							{ 	super(); 					}	
+	public Line()						   { 	super(); 					}
 	public Line ( DataSet dataSet)			{	super( dataSet,  Line.class);		}
 
 

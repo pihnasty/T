@@ -8,59 +8,52 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import persistence.loader.XmlRW;
 import persistence.loader.tabDataSet.RowMachine;
-import trestview.resourcelink.ResourceLinkModel;
 import trestview.resourcelink.schemawork.Q;
 import trestview.routeperspective.schemabase.SchemaBaseModel;
 import trestview.table.tablemodel.TableModel;
 import trestview.table.tablemodel.abstracttablemodel.Rule;
 
 import java.awt.*;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
-import java.util.Observer;
-import java.util.stream.Collectors;
 
 public class SchemaRouteModel extends SchemaBaseModel {
+
     private Cursor cursor;
     private MouseEvent mouseEvent;
-
     private Double kScale;
-
     private Q qCurrent = null;
 
     public SchemaRouteModel(ObservableDS observableDS, Rule rule) {
         super(observableDS, rule);
-        }
+    }
 
     @Override
     public void update(Observable o, Object arg) {
 
-            if ((o.getClass()==TableModel.class)) {
-                updateForTableWorkMVC   ((TableModel) o);
-                updateForTableMachineMVC((TableModel) o);
-            }
+        if ((o.getClass() == TableModel.class)) {
+            updateForTableWorkMVC((TableModel) o);
+            updateForTableMachineMVC((TableModel) o);
+        }
         changed();
     }
 
     private void updateForTableMachineMVC(TableModel o) {
 
-
-        if (o.getRule()== Rule.Machine   )   {
+        if (o.getRule() == Rule.Machine) {
             this.dataSet = o.getDataSet();
             createDataSchemaModel(work);
             if (!observableDS.getTrest().getWorks().isEmpty()) {
-                             createDataSchemaModel(observableDS.getTrest().getWorks().get(0));
+                createDataSchemaModel(observableDS.getTrest().getWorks().get(0));
             }
         }
     }
 
     private void updateForTableWorkMVC(TableModel o) {
-        if (o.getRule()==Rule.Work   ) createDataSchemaModel((Work) ((TableModel<Work>) o).getSelectRow());
+        if (o.getRule() == Rule.Work) createDataSchemaModel((Work) ((TableModel<Work>) o).getSelectRow());
     }
 
-
-    public Work getWork() {
+    public Work getWork( ) {
         return work;
     }
 
@@ -68,7 +61,7 @@ public class SchemaRouteModel extends SchemaBaseModel {
         this.work = work;
     }
 
-    public List<Q> getQs() {
+    public List<Q> getQs( ) {
         return qs;
     }
 
@@ -76,7 +69,7 @@ public class SchemaRouteModel extends SchemaBaseModel {
         this.qs = qs;
     }
 
-    public Cursor getCursor() {
+    public Cursor getCursor( ) {
         return cursor;
     }
 
@@ -94,8 +87,7 @@ public class SchemaRouteModel extends SchemaBaseModel {
         changed();
     }
 
-
-    public void qCurrentIsNull() {
+    public void qCurrentIsNull( ) {
         qCurrent = null;
     }
 
@@ -132,8 +124,7 @@ public class SchemaRouteModel extends SchemaBaseModel {
                         saveMachineIntoRownachineDataSet(m);
                     }
 
-            }
-            else {
+            } else {
                 for (Machine m2 : work.getMachines())
                     if (m2.getId() == qCurrent.getIdQ()) {
                         double dxLocationX = x / imvWork.getImage().getWidth() - m2.getLocationX();
@@ -159,8 +150,6 @@ public class SchemaRouteModel extends SchemaBaseModel {
         changed();
     }
 
-
-
     private String isEmptyPoint(Q q) {
         Q q2 = null;
         String s = "N";
@@ -177,7 +166,7 @@ public class SchemaRouteModel extends SchemaBaseModel {
         return s;
     }
 
-    public MouseEvent getMouseEvent() {
+    public MouseEvent getMouseEvent( ) {
         return mouseEvent;
     }
 
@@ -185,7 +174,7 @@ public class SchemaRouteModel extends SchemaBaseModel {
         this.mouseEvent = mouseEvent;
     }
 
-    public Double getkScale() {
+    public Double getkScale( ) {
         return kScale;
     }
 
@@ -216,7 +205,9 @@ public class SchemaRouteModel extends SchemaBaseModel {
                 double t = 2.0 * Math.PI / 360;
                 double xAngle = x * Math.cos(q.getAngle() * t) + y * Math.sin(q.getAngle() * t);
                 double yAngle = -x * Math.sin(q.getAngle() * t) + y * Math.cos(q.getAngle() * t);
-                if (q.getrOuter().contains(xAngle, yAngle)) { return q;    }
+                if (q.getrOuter().contains(xAngle, yAngle)) {
+                    return q;
+                }
             }
         }
         return null;
@@ -242,8 +233,9 @@ public class SchemaRouteModel extends SchemaBaseModel {
     }
 
     private void saveMachineIntoRownachineDataSet(Machine m) {
-        for (RowMachine r: dataSet.getTabMachines()) if (r.getId()==m.getId()) {
-            XmlRW.FieldToField(r,m);
-        }
+        for (RowMachine r : dataSet.getTabMachines())
+            if (r.getId() == m.getId()) {
+                XmlRW.FieldToField(r, m);
+            }
     }
 }
