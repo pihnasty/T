@@ -2,7 +2,9 @@ package trestview.tasks.conveyorPDE.v_constcontrol.band;
 
 import javafx.util.Pair;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.function.DoubleFunction;
 import java.util.stream.Collectors;
@@ -125,6 +127,7 @@ public interface StrategyVConstTimeControlBand {
     /*
     * s0, t0 - The coordinate of the technological position and the time when the subjects of labour began to come in at this position
     * tS= Ts/Td, - Ratio of the duration of the works day to the duration of the production cycle
+    * tSigma - The period of the fluctuating demand for the products
     * */
     class TaskParameters {
 
@@ -132,19 +135,22 @@ public interface StrategyVConstTimeControlBand {
         protected double t0 = 0.0;
         protected double tK = new AxisParametrs().tMax;
         protected double tS;
+        protected double tSigma;
 
         public TaskParameters() {
         }
 
-        public TaskParameters(double t0, double tK, double tS) {
-            this(t0, tK, tS, 0.0);
+        public TaskParameters(double t0, double tK, double tS,  double tSigma) {
+            this(t0, tK, tS, tSigma, 0.0);
         }
 
-        public TaskParameters(double t0, double tK, double tS, double s0) {
+        public TaskParameters(double t0, double tK, double tS,  double tSigma, double s0) {
             this.tS = tS;
             this.t0 = t0;
             this.tK = tK;
             this.s0 = s0;
+            this.tSigma = tSigma;
+
         }
 
         public double getS0() {
@@ -185,15 +191,114 @@ public interface StrategyVConstTimeControlBand {
         protected DoubleFunction<Double> hm_1_plus_sinS = s -> (1.0 + MathP.h(s) * Math.sin(10 * Math.PI * s)) / 2.0;
     }
 
+    /*
+     * wSigma = 2Pi/tSigma,  The Circular frequency of the fluctuating demand for the products
+     * */
     class Sigma {
-        protected DoubleFunction<Double> hm1_S = s -> MathP.h(s) * (1 - s);
-        protected DoubleFunction<Double> hm_1_plus_sinS = s -> (1.0 + MathP.h(s) * Math.sin(10 * Math.PI * s)) / 2.0;
+        private TaskParameters taskParameters;
+        private double wSigma;
+        protected DoubleFunction<Double> p2_plus_cosWsigmaT ;
+
+        public Sigma(TaskParameters taskParameters) {
+            this.taskParameters = taskParameters;
+            this.wSigma = 2.0 * Math.PI / taskParameters.tSigma;
+            p2_plus_cosWsigmaT = tau -> (1.0 + Math.cos( this.wSigma  * tau));
+        }
+
     }
+
+    class ControlSpeedBand {
+
+        private TaskParameters taskParameters;
+        private List<Pair<Double, Double>> constantSpeedBand;
+        private double initialControlSpeedBand;
+        private double [] cascadeControlSpeedBand ={1.0};
+
+        public ControlSpeedBand(TaskParameters taskParameters) {
+            this.taskParameters = taskParameters;
+            initialControlSpeedBand = cascadeControlSpeedBand[0];
+        }
+        public ControlSpeedBand() {
+            this(new TaskParameters());
+        }
+
+        public List<Pair<Double, Double>> calculateConstantSpeedBand(DoubleFunction<Double> sigma, DoubleFunction<Double> gamma) {
+            constantSpeedBand = new ArrayList<>();
+            double dt = (taskParameters.gettK()-taskParameters.getT0())/MathP.NUMBER_AXIS_PARTITION;
+            double t1Start = -1.0/initialControlSpeedBand;
+            double t1=t1Start;
+            for (double t = t1Start; t < taskParameters.gettK(); t += dt) {
+                double u;
+                if (t < 0.0) {
+                    u=initialControlSpeedBand;
+                } else {
+                   double u_t1 = getConstantSpeedBand(t1, t1Start,  dt);
+                    u =  optimalControlSpeedBand ( u_t1*sigma.apply(t)/gamma.apply(t1));
+                   t1= t1+dt*u/u_t1;
+                }
+                constantSpeedBand.add(new Pair<>(t, u));
+                System.out.println("t="+t+" u="+u);
+            }
+            return constantSpeedBand;
+        }
+
+        private double getConstantSpeedBand(double t, double tStart, double dt) {
+            int i = (int) ((t-tStart)/dt);
+            i = (i>=0) ? i : 0;
+            i = (i<constantSpeedBand.size()) ? i : constantSpeedBand.size()-1;
+            return constantSpeedBand.get(i).getValue();
+        }
+
+        public double optimalControlSpeedBand(Double controlSpeedBand) {
+            class Result {
+                double optimalControlSpeedBandResult = 0.0;
+                double delta = Double.MAX_VALUE;
+                List<Double> mas = new ArrayList<>();
+
+                public Result(double[] doubleMas) {
+                    for (Double m : cascadeControlSpeedBand) {
+                        mas.add(m);
+                    }
+                }
+            }
+            Result r = new Result(cascadeControlSpeedBand);
+
+            r.mas.stream().forEach(speed -> {
+                        if (Math.abs(speed - controlSpeedBand) < r.delta) {
+                            r.delta = Math.abs(speed - controlSpeedBand);
+                            r.optimalControlSpeedBandResult = speed;
+                        }
+                    }
+            );
+            return r.optimalControlSpeedBandResult;
+        }
+
+
+
+        public double[] getCascadeControlSpeedBand() {
+            return cascadeControlSpeedBand;
+        }
+
+        public ControlSpeedBand setCascadeControlSpeedBand(double[] cascadeControlSpeedBand) {
+            this.cascadeControlSpeedBand = cascadeControlSpeedBand;
+            return this;
+        }
+
+        public double getInitialControlSpeedBand() {
+            return initialControlSpeedBand;
+        }
+
+        public ControlSpeedBand setInitialControlSpeedBand(double initialControlSpeedBand) {
+            this.initialControlSpeedBand = initialControlSpeedBand;
+            return this;
+        }
+    }
+
 
     class G {
         private TaskParameters taskParameters;
-        protected DoubleFunction<Double> g0_g1coswt;
-        private double wS;
+        protected DoubleFunction<Double> controlConstantSpeedBand;
+        private List<Pair<Double, Double>> controlConstantSpeedBandList;
 
         public G() {
             this(new TaskParameters());
@@ -201,14 +306,24 @@ public interface StrategyVConstTimeControlBand {
 
         public G(TaskParameters taskParameters) {
             this.taskParameters = taskParameters;
-            this.wS = 2.0 * Math.PI / taskParameters.tS;
-            g0_g1coswt = t -> 2.0 - Math.cos(wS * t);
-            // There are .....
+            controlConstantSpeedBand = t -> {
+                double t0 = controlConstantSpeedBandList.get(0).getKey();
+                double dt = controlConstantSpeedBandList.get(1).getKey() - t0;
+                int i = (int) (( t - t0)/dt);
+                i = (i>=0) ? i : 0;
+                return controlConstantSpeedBandList.get(i).getValue();
+            };
+        }
+
+        public G setControlConstantSpeedBandList(List<Pair<Double, Double>> controlConstantSpeedBandList) {
+            this.controlConstantSpeedBandList = controlConstantSpeedBandList;
+            return this;
         }
     }
 
     class Gamma {
         protected DoubleFunction<Double> h = t -> MathP.h(t);
+        protected DoubleFunction<Double> p1 = t -> 1.0;
     }
 
     class CashIntegralValue {
@@ -295,7 +410,7 @@ public interface StrategyVConstTimeControlBand {
 
     class MathP {
 
-        static final double NUMBER_AXIS_PARTITION = 100000;
+        static final double NUMBER_AXIS_PARTITION = 1000;
 
         static double h(double x) {
             return (x == 0.0) ? 0.5 : ((x > 0) ? 1.0 : 0.0);
@@ -356,8 +471,10 @@ class AbstractStrategyVConstTimeControlBand implements StrategyVConstTimeControl
     protected DoubleFunction<Double> g;
     protected DoubleFunction<Double> psi;
     protected DoubleFunction<Double> gamma;
+    protected DoubleFunction<Double> sigma;
     protected CashIntegralValue cashIntegralValue;
     protected String valueH_in_0;
+    protected ControlSpeedBand controlSpeedBand;
 
     @Override
     public void createCash() {
@@ -368,12 +485,14 @@ class AbstractStrategyVConstTimeControlBand implements StrategyVConstTimeControl
         cashIntegralValue.sortedValue();
     }
 
+
+
+
     @Override
     public double decision(double s, double t) {
         double C1 = s - cashIntegralValue.getValue(t);
         double tP = cashIntegralValue.getKey(-C1);
-        return MathP.h(s,valueH_in_0)*gamma.apply(tP)/g.apply(tP) - MathP.h(C1,valueH_in_0)*gamma.apply(tP)/g.apply(tP)
-                +MathP.h(C1,valueH_in_0)*psi.apply(C1);
+        return gamma.apply(tP)/g.apply(tP);
     }
 
     @Override
@@ -391,12 +510,19 @@ class AbstractStrategyVConstTimeControlBand implements StrategyVConstTimeControl
 class StrategyVConstTimeControlBand01 extends AbstractStrategyVConstTimeControlBand {
 
     public StrategyVConstTimeControlBand01() {
-        axisParametrs = new AxisParametrs(0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 10.0, 10.0);
-        taskParameters = new TaskParameters(axisParametrs.gettMin(), axisParametrs.gettMax(), 0.5, axisParametrs.getsMin());
-        g = new G(taskParameters).g0_g1coswt;
-        psi = new Psi().hm1_S;
-        gamma = new Gamma().h;
-        valueH_in_0 = "1.0";
+        axisParametrs = new AxisParametrs(0.0, 10.0, 0.0, 1.0, 0.0, 1.0, 10.0, 10.0);
+        taskParameters = new TaskParameters(axisParametrs.gettMin(), axisParametrs.gettMax(), 2.5, 1.0, axisParametrs.getsMin());
+        sigma = new Sigma(taskParameters).p2_plus_cosWsigmaT;
+        gamma = new Gamma().p1;
+        valueH_in_0 = "1.0";          // Determine the form of H(x)-function
+
+
+        controlSpeedBand = new ControlSpeedBand(taskParameters).setCascadeControlSpeedBand(new double[] {1.0,2.0}).setInitialControlSpeedBand(0.5);
+
+        controlSpeedBand.calculateConstantSpeedBand(sigma, gamma);
+
+        g = new G(taskParameters).setControlConstantSpeedBandList(controlSpeedBand.calculateConstantSpeedBand(sigma, gamma)).controlConstantSpeedBand;
+
         createCash();
     }
 }
@@ -404,12 +530,19 @@ class StrategyVConstTimeControlBand01 extends AbstractStrategyVConstTimeControlB
 class StrategyVConstTimeControlBand02 extends AbstractStrategyVConstTimeControlBand {
 
     public StrategyVConstTimeControlBand02() {
-        axisParametrs = new AxisParametrs(0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 10.0, 10.0);
-        taskParameters = new TaskParameters(axisParametrs.gettMin(), axisParametrs.gettMax(), 0.25, axisParametrs.getsMin());
-        g = new G(taskParameters).g0_g1coswt;
-        psi = new Psi().hm_1_plus_sinS;
-        gamma = new Gamma().h;
-        valueH_in_0 = "0.5";
+        axisParametrs = new AxisParametrs(0.0, 10.0, 0.0, 1.0, 0.0, 1.0, 10.0, 10.0);
+        taskParameters = new TaskParameters(axisParametrs.gettMin(), axisParametrs.gettMax(), 2.5, 1.0, axisParametrs.getsMin());
+        sigma = new Sigma(taskParameters).p2_plus_cosWsigmaT;
+        gamma = new Gamma().p1;
+        valueH_in_0 = "1.0";          // Determine the form of H(x)-function
+
+
+        controlSpeedBand = new ControlSpeedBand(taskParameters).setCascadeControlSpeedBand(new double[] {0.5,2.0}).setInitialControlSpeedBand(0.5);
+
+        controlSpeedBand.calculateConstantSpeedBand(sigma, gamma);
+
+        g = new G(taskParameters).setControlConstantSpeedBandList(controlSpeedBand.calculateConstantSpeedBand(sigma, gamma)).controlConstantSpeedBand;
+
         createCash();
     }
 }
