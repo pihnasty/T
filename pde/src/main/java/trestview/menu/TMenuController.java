@@ -157,6 +157,11 @@ public class TMenuController extends InitializableDS {
     }
 
     @FXML
+    private void handleConveyorSpeedConstantControlBandAction (ActionEvent event) {
+        menuModel.clickConveyorSpeedConstantControlBandItem();
+    }
+
+    @FXML
     private void handleConveyorSpeedDependsTimeAction (ActionEvent event) {
         menuModel.clickConveyorSpeedDependsTimeItem();
     }

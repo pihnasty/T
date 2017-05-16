@@ -33,9 +33,9 @@
 
 <Menu text="%Tasks">
     <Menu  text="%conveyorPDE"       fx:id="conveyorPDEItem"  >
-        <MenuItem text="%conveyorSpeedConstant"       fx:id="conveyorSpeedConstantItem"     onAction="#handleConveyorSpeedConstantAction"  />
-        <MenuItem text="%conveyorSpeedDependsTime"       fx:id="conveyorSpeedDependsTimeItem"     onAction="#handleConveyorSpeedDependsTimeAction"  />
-        <MenuItem text="%Paste"     fx:id="pasteItem2"   />
+        <MenuItem text="%conveyorSpeedConstant"             fx:id="conveyorSpeedConstantItem"               onAction="#handleConveyorSpeedConstantAction"  />
+        <MenuItem text="%conveyorSpeedConstantControlBand"  fx:id="conveyorSpeedConstantControlBandItem"    onAction="#handleConveyorSpeedConstantControlBandAction"  />
+        <MenuItem text="%conveyorSpeedDependsTime"          fx:id="conveyorSpeedDependsTimeItem"            onAction="#handleConveyorSpeedDependsTimeAction"  />
     </Menu>
 </Menu>
 

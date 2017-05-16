@@ -56,6 +56,11 @@ public class TMenuModel extends ObservableDS {
         changed();
     }
 
+    public void clickConveyorSpeedConstantControlBandItem()  {
+        this.menuItemCall = MenuItemCall.conveyorSpeedConstantControlBandItem;
+        changed();
+    }
+
     public void clickConveyorSpeedDependsTimeItem()  {
         this.menuItemCall = MenuItemCall.conveyorSpeedDependsTimeItem;
         changed();
@@ -70,4 +75,5 @@ public class TMenuModel extends ObservableDS {
         this.menuItemCall = MenuItemCall.orderPlaninigPerspectiveItem;
         changed();
     }
+
 }
