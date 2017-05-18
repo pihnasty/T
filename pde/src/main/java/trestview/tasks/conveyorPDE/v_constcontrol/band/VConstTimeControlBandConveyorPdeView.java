@@ -65,11 +65,11 @@ public class VConstTimeControlBandConveyorPdeView extends BorderPaneObserverDS {
     private void inizilize(ObservableDS observableDS) {
         int widthSection = (int)1.5* Toolkit.getDefaultToolkit ().getScreenSize ().width/3;
 
-        MVC LineChart1MVC  = new MVC (LineChartModel.class, LineChartController.class, LineChartP.class,
-                ((VConstTimeControlBandConveyorPdeModel) observableDS).dataBuildVConConveyorPdeModel("oX=S"), null );
+//        MVC LineChart1MVC  = new MVC (LineChartModel.class, LineChartController.class, LineChartP.class,
+//                ((VConstTimeControlBandConveyorPdeModel) observableDS).dataBuildVConConveyorPdeModel("oX=S"), null );
 
         MVC LineChart2MVC  = new MVC (LineChartModel.class, LineChartController.class, LineChartP.class,
-                ((VConstTimeControlBandConveyorPdeModel) observableDS).dataBuildVConConveyorPdeModel("oX=T"), null );
+                ((VConstTimeControlBandConveyorPdeModel) observableDS).dataBuildVConConveyorPdeModel("controlConstantSpeedBand"), null );
 
         MVC LineChart3MVC  = new MVC (LineChartModel.class, LineChartController.class, LineChartP.class,
                 ((VConstTimeControlBandConveyorPdeModel) observableDS).dataBuildVConConveyorPdeModel("oX=X"), null );
@@ -87,7 +87,9 @@ public class VConstTimeControlBandConveyorPdeView extends BorderPaneObserverDS {
 
 
         VBox vBoxLeft = new VBox();
-        vBoxLeft.getChildren().addAll((LineChartP)LineChart1MVC.getView(),(LineChartP)LineChart2MVC.getView(),(LineChartP)LineChart3MVC.getView());
+        vBoxLeft.getChildren().addAll(
+        //(LineChartP)LineChart1MVC.getView(),
+        (LineChartP)LineChart2MVC.getView(),(LineChartP)LineChart3MVC.getView());
         setLeft(vBoxLeft);
 
 

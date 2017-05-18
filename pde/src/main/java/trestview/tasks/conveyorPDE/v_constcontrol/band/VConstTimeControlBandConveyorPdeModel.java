@@ -33,11 +33,13 @@ public class VConstTimeControlBandConveyorPdeModel extends ObservableDS implemen
     private List<List<Point2D.Double>> pullList_qS;
     private List<List<Point2D.Double>> pullList_qT;
     private List<List<Point2D.Double>> pullList_qX;
+    private List<List<Point2D.Double>> pullList_uT;
     private List<List<Point2D.Double>> pullList;
 
     private List<String> list_qS_Legend;
     private List<String> list_qT_Legend;
     private List<String> list_qX_Legend;
+    private List<String> list_uT_Legend;
     private List<String> listLegend;
 
     private double tMax;
@@ -85,10 +87,12 @@ public class VConstTimeControlBandConveyorPdeModel extends ObservableDS implemen
         pullList_qT = new ArrayList<>();
         pullList_qS = new ArrayList<>();
         pullList_qX = new ArrayList<>();
+        pullList_uT = new ArrayList<>();
 
         list_qT_Legend = new ArrayList<>();
         list_qX_Legend = new ArrayList<>();
         list_qS_Legend = new ArrayList<>();
+        list_uT_Legend = new ArrayList<>();
 
         tMax = strategy.getAxisParametrs().gettMax();
 
@@ -104,7 +108,6 @@ public class VConstTimeControlBandConveyorPdeModel extends ObservableDS implemen
         for (double _s = 0; _s < 1.0; _s += 1.0 / numberOfCurves) {
             pullList_qT.add(qT(_s));
             list_qT_Legend.add("S/Sd=" + String.format("%3.1f", _s));
-
         }
         for (double _t = tMin; _t < tMax; _t += (tMax - tMin) / numberOfCurves) {
             pullList_qS.add(qS(_t));
@@ -114,6 +117,9 @@ public class VConstTimeControlBandConveyorPdeModel extends ObservableDS implemen
             pullList_qX.add(qX(_s));
             list_qX_Legend.add("C=" + String.format("%3.1f", _s));
         }
+
+            pullList_uT.add(uT());
+            list_uT_Legend.add("");
     }
 
 
@@ -139,11 +145,21 @@ public class VConstTimeControlBandConveyorPdeModel extends ObservableDS implemen
         }
         if (s == "oX=X") {
             vConConveyorPdeModel.setTitleX(ResourceBundle.getBundle("ui").getString("titleOxT"))
+                    .setTitleGraph(ResourceBundle.getBundle("ui").getString("productionLineCharacteristics"))
                     .setxMin(tMin).setxMax(tMax).setxTickUnit((tMax - tMin) / 10.0)
-                    .setTitleY(ResourceBundle.getBundle("ui").getString("titleOyT"))
+                    .setTitleY(ResourceBundle.getBundle("ui").getString("titleCharacteristics"))
                     .setList(getListConS())
                     .setPullList(pullList_qX).setListLegend(list_qX_Legend);
         }
+        if (s == "controlConstantSpeedBand") {
+            vConConveyorPdeModel.setTitleX(ResourceBundle.getBundle("ui").getString("titleOxT"))
+                    .setTitleGraph(ResourceBundle.getBundle("ui").getString("productionLineControl"))
+                    .setxMin(tMin).setxMax(tMax).setxTickUnit((tMax - tMin) / 10.0)
+                    .setTitleY(ResourceBundle.getBundle("ui").getString("titleControlConstantSpeedBand"))
+                    .setList(getListConS())
+                    .setPullList(pullList_uT).setListLegend(list_uT_Legend);
+        }
+
 
         if (s.length() > 4) {
             if (s.substring(0, 9).equals("oX=Salone")) {
@@ -195,6 +211,9 @@ public class VConstTimeControlBandConveyorPdeModel extends ObservableDS implemen
         return strategy.decisionCharacteristic(_s, _t);
     }
 
+    private double getControlConstantSpeedBand(double _t)  {
+        return strategy.getControlConstantSpeedBand(_t);
+    }
 
     private List<Point2D.Double> qS(double _t) {
         List<Point2D.Double> doubleList = new ArrayList<>();
@@ -218,12 +237,25 @@ public class VConstTimeControlBandConveyorPdeModel extends ObservableDS implemen
         return doubleList;
     }
 
+
+
     private List<Point2D.Double> qX(double _s) {
         List<Point2D.Double> doubleList = new ArrayList<>();
         double tD = 10.0;
         double dT = 0.01;
         for (double _t = tMin; _t <= tD; _t += dT) {
             Point2D.Double p = new Point2D.Double(_t, decisionCharacteristic(_s, _t));
+            doubleList.add(p);
+        }
+        return doubleList;
+    }
+
+    private List<Point2D.Double> uT() {
+        List<Point2D.Double> doubleList = new ArrayList<>();
+        double tD = 10.0;
+        double dT = 0.01;
+        for (double _t = tMin; _t <= tD; _t += dT) {
+            Point2D.Double p = new Point2D.Double(_t, getControlConstantSpeedBand(_t));
             doubleList.add(p);
         }
         return doubleList;

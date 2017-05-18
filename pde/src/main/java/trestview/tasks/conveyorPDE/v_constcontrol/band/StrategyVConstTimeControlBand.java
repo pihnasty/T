@@ -13,6 +13,8 @@ public interface StrategyVConstTimeControlBand {
 
     double decision(double s, double t);
 
+    double getControlConstantSpeedBand(double t);
+
     double decisionCharacteristic(double s, double t);
 
     AxisParametrs getAxisParametrs();
@@ -202,7 +204,7 @@ public interface StrategyVConstTimeControlBand {
         public Sigma(TaskParameters taskParameters) {
             this.taskParameters = taskParameters;
             this.wSigma = 2.0 * Math.PI / taskParameters.tSigma;
-            p2_plus_cosWsigmaT = tau -> (1.0 + Math.cos( this.wSigma  * tau));
+            p2_plus_cosWsigmaT = tau ->  (1.0 + Math.sin( this.wSigma  * tau));
         }
 
     }
@@ -237,7 +239,7 @@ public interface StrategyVConstTimeControlBand {
                    t1= t1+dt*u/u_t1;
                 }
                 constantSpeedBand.add(new Pair<>(t, u));
-                System.out.println("t="+t+" u="+u);
+              //  System.out.println("t="+t+" u="+u);
             }
             return constantSpeedBand;
         }
@@ -486,6 +488,10 @@ class AbstractStrategyVConstTimeControlBand implements StrategyVConstTimeControl
     }
 
 
+    @Override
+    public double getControlConstantSpeedBand( double t) {
+        return g.apply(t);
+    }
 
 
     @Override
@@ -510,7 +516,7 @@ class AbstractStrategyVConstTimeControlBand implements StrategyVConstTimeControl
 class StrategyVConstTimeControlBand01 extends AbstractStrategyVConstTimeControlBand {
 
     public StrategyVConstTimeControlBand01() {
-        axisParametrs = new AxisParametrs(0.0, 10.0, 0.0, 1.0, 0.0, 1.0, 10.0, 10.0);
+        axisParametrs = new AxisParametrs(0.0, 10.0, 0.0, 1.0, 0.0, 2.0, 10.0, 10.0);
         taskParameters = new TaskParameters(axisParametrs.gettMin(), axisParametrs.gettMax(), 2.5, 1.0, axisParametrs.getsMin());
         sigma = new Sigma(taskParameters).p2_plus_cosWsigmaT;
         gamma = new Gamma().p1;
@@ -530,7 +536,7 @@ class StrategyVConstTimeControlBand01 extends AbstractStrategyVConstTimeControlB
 class StrategyVConstTimeControlBand02 extends AbstractStrategyVConstTimeControlBand {
 
     public StrategyVConstTimeControlBand02() {
-        axisParametrs = new AxisParametrs(0.0, 10.0, 0.0, 1.0, 0.0, 1.0, 10.0, 10.0);
+        axisParametrs = new AxisParametrs(0.0, 10.0, 0.0, 1.0, 0.0, 2.0, 10.0, 10.0);
         taskParameters = new TaskParameters(axisParametrs.gettMin(), axisParametrs.gettMax(), 2.5, 1.0, axisParametrs.getsMin());
         sigma = new Sigma(taskParameters).p2_plus_cosWsigmaT;
         gamma = new Gamma().p1;
