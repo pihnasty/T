@@ -15,6 +15,8 @@ public interface StrategyVConstTimeControlBand {
 
     double getControlConstantSpeedBand(double t);
 
+    double getSigma(double t);
+
     double decisionCharacteristic(double s, double t);
 
     AxisParametrs getAxisParametrs();
@@ -229,6 +231,7 @@ public interface StrategyVConstTimeControlBand {
             double dt = (taskParameters.gettK()-taskParameters.getT0())/MathP.NUMBER_AXIS_PARTITION;
             double t1Start = -1.0/initialControlSpeedBand;
             double t1=t1Start;
+    //        System.out.printf("%-12s%-12s%-12s%-12s%-12s%-12s%s\n","t","t1","u","u1","sigma","t-t1","u_calculate");
             for (double t = t1Start; t < taskParameters.gettK(); t += dt) {
                 double u;
                 if (t < 0.0) {
@@ -237,9 +240,11 @@ public interface StrategyVConstTimeControlBand {
                    double u_t1 = getConstantSpeedBand(t1, t1Start,  dt);
                     u =  optimalControlSpeedBand ( u_t1*sigma.apply(t)/gamma.apply(t1));
                    t1= t1+dt*u/u_t1;
+           //         if (1.9<t && t<2.9)
+             //           System.out.printf("%-12.5f%-12.5f%-12.5f%-12.5f%-12.5f%-12.5f%-12.5f\n",t,t1,u,u_t1 ,sigma.apply(t),t-t1, u_t1*sigma.apply(t)/gamma.apply(t1));
+                    // System.out.println("t="+t+"\t u="+u+"\t sigma="+sigma.apply(t)+"\t u_t1="+u_t1+"\t t1="+t1);
                 }
                 constantSpeedBand.add(new Pair<>(t, u));
-              //  System.out.println("t="+t+" u="+u);
             }
             return constantSpeedBand;
         }
@@ -493,6 +498,10 @@ class AbstractStrategyVConstTimeControlBand implements StrategyVConstTimeControl
         return g.apply(t);
     }
 
+    @Override
+    public double getSigma( double t) {
+        return sigma.apply(t);
+    }
 
     @Override
     public double decision(double s, double t) {
