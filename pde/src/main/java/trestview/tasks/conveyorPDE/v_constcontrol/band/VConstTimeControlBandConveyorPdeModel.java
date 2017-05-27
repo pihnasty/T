@@ -179,17 +179,17 @@ public class VConstTimeControlBandConveyorPdeModel extends ObservableDS implemen
         }
         if (s == "sigm") {
             vConConveyorPdeModel.setTitleX(ResourceBundle.getBundle("ui").getString("titleOxT"))
-                    .setTitleGraph(ResourceBundle.getBundle("ui").getString("productionLineControl"))
+                    .setTitleGraph(ResourceBundle.getBundle("ui").getString("productionLineSigma"))
                     .setxMin(tMin).setxMax(tMax).setxTickUnit((tMax - tMin) / 10.0)
-                    .setTitleY(ResourceBundle.getBundle("ui").getString("titleControlConstantSpeedBand"))
+                    .setTitleY(ResourceBundle.getBundle("ui").getString("titleSigma"))
                     .setList(getListConS())
                     .setPullList(pullList_sigmaT).setListLegend(list_sigmaT_Legend);
         }
         if (s == "control_sigma") {
             vConConveyorPdeModel.setTitleX(ResourceBundle.getBundle("ui").getString("titleOxT"))
-                    .setTitleGraph(ResourceBundle.getBundle("ui").getString("productionLineControl"))
+                    .setTitleGraph(ResourceBundle.getBundle("ui").getString("productionLineControlSigma"))
                     .setxMin(tMin).setxMax(tMax).setxTickUnit((tMax - tMin) / 10.0)
-                    .setTitleY(ResourceBundle.getBundle("ui").getString("titleControlConstantSpeedBand"))
+                    .setTitleY(ResourceBundle.getBundle("ui").getString("titleControlConstantSpeedBandSigma"))
                     .setList(getListConS())
                     .setPullList(pullList_uT_sigmaT).setListLegend(list_uT_sigmaT_Legend);
         }

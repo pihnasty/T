@@ -231,7 +231,7 @@ public interface StrategyVConstTimeControlBand {
             double dt = (taskParameters.gettK()-taskParameters.getT0())/MathP.NUMBER_AXIS_PARTITION;
             double t1Start = -1.0/initialControlSpeedBand;
             double t1=t1Start;
-    //        System.out.printf("%-12s%-12s%-12s%-12s%-12s%-12s%s\n","t","t1","u","u1","sigma","t-t1","u_calculate");
+             System.out.printf("%-12s%-12s%-12s%-12s%-12s%-12s%s\n","t","t1","u","u1","sigma","t-t1","u_calculate");
             for (double t = t1Start; t < taskParameters.gettK(); t += dt) {
                 double u;
                 if (t < 0.0) {
@@ -239,10 +239,13 @@ public interface StrategyVConstTimeControlBand {
                 } else {
                    double u_t1 = getConstantSpeedBand(t1, t1Start,  dt);
                     u =  optimalControlSpeedBand ( u_t1*sigma.apply(t)/gamma.apply(t1));
+
+                //    if(t>5.0) u= 1.0;
+
                    t1= t1+dt*u/u_t1;
-           //         if (1.9<t && t<2.9)
-             //           System.out.printf("%-12.5f%-12.5f%-12.5f%-12.5f%-12.5f%-12.5f%-12.5f\n",t,t1,u,u_t1 ,sigma.apply(t),t-t1, u_t1*sigma.apply(t)/gamma.apply(t1));
-                    // System.out.println("t="+t+"\t u="+u+"\t sigma="+sigma.apply(t)+"\t u_t1="+u_t1+"\t t1="+t1);
+                   if (0.9<t && t<2.9)
+                       System.out.printf("%-12.5f%-12.5f%-12.5f%-12.5f%-12.5f%-12.5f%-12.5f\n",t,t1,u,u_t1 ,sigma.apply(t),t-t1, u_t1*sigma.apply(t)/gamma.apply(t1));
+                //     System.out.println("t="+t+"\t u="+u+"\t sigma="+sigma.apply(t)+"\t u_t1="+u_t1+"\t t1="+t1);
                 }
                 constantSpeedBand.add(new Pair<>(t, u));
             }
@@ -318,6 +321,7 @@ public interface StrategyVConstTimeControlBand {
                 double dt = controlConstantSpeedBandList.get(1).getKey() - t0;
                 int i = (int) (( t - t0)/dt);
                 i = (i>=0) ? i : 0;
+                i = (i<controlConstantSpeedBandList.size()) ? i : controlConstantSpeedBandList.size()-1;
                 return controlConstantSpeedBandList.get(i).getValue();
             };
         }
@@ -525,14 +529,14 @@ class AbstractStrategyVConstTimeControlBand implements StrategyVConstTimeControl
 class StrategyVConstTimeControlBand01 extends AbstractStrategyVConstTimeControlBand {
 
     public StrategyVConstTimeControlBand01() {
-        axisParametrs = new AxisParametrs(0.0, 10.0, 0.0, 1.0, 0.0, 2.0, 10.0, 10.0);
+        axisParametrs = new AxisParametrs(0.0, 10.0, 0.0, 1.0, 0.0, 2.1, 10.0, 10.0);
         taskParameters = new TaskParameters(axisParametrs.gettMin(), axisParametrs.gettMax(), 2.5, 1.0, axisParametrs.getsMin());
         sigma = new Sigma(taskParameters).p2_plus_cosWsigmaT;
         gamma = new Gamma().p1;
         valueH_in_0 = "1.0";          // Determine the form of H(x)-function
 
 
-        controlSpeedBand = new ControlSpeedBand(taskParameters).setCascadeControlSpeedBand(new double[] {1.0,2.0}).setInitialControlSpeedBand(0.5);
+        controlSpeedBand = new ControlSpeedBand(taskParameters).setCascadeControlSpeedBand(new double[] {1.0,2.0}).setInitialControlSpeedBand(1.0);
 
         controlSpeedBand.calculateConstantSpeedBand(sigma, gamma);
 
@@ -545,7 +549,7 @@ class StrategyVConstTimeControlBand01 extends AbstractStrategyVConstTimeControlB
 class StrategyVConstTimeControlBand02 extends AbstractStrategyVConstTimeControlBand {
 
     public StrategyVConstTimeControlBand02() {
-        axisParametrs = new AxisParametrs(0.0, 10.0, 0.0, 1.0, 0.0, 2.0, 10.0, 10.0);
+        axisParametrs = new AxisParametrs(0.0, 3.0, 0.0, 1.0, 0.0, 2.1, 10.0, 10.0);
         taskParameters = new TaskParameters(axisParametrs.gettMin(), axisParametrs.gettMax(), 2.5, 1.0, axisParametrs.getsMin());
         sigma = new Sigma(taskParameters).p2_plus_cosWsigmaT;
         gamma = new Gamma().p1;
@@ -561,3 +565,123 @@ class StrategyVConstTimeControlBand02 extends AbstractStrategyVConstTimeControlB
         createCash();
     }
 }
+
+class StrategyVConstTimeControlBand03 extends AbstractStrategyVConstTimeControlBand {
+
+    public StrategyVConstTimeControlBand03() {
+        axisParametrs = new AxisParametrs(0.0, 3.0, 0.0, 1.0, 0.0, 2.1, 10.0, 10.0);
+        taskParameters = new TaskParameters(axisParametrs.gettMin(), axisParametrs.gettMax(), 2.5, 1.0, axisParametrs.getsMin());
+        sigma = new Sigma(taskParameters).p2_plus_cosWsigmaT;
+        gamma = new Gamma().p1;
+        valueH_in_0 = "1.0";          // Determine the form of H(x)-function
+
+
+        controlSpeedBand = new ControlSpeedBand(taskParameters).setCascadeControlSpeedBand(new double[] {0.8,2.0}).setInitialControlSpeedBand(0.8);
+
+        controlSpeedBand.calculateConstantSpeedBand(sigma, gamma);
+
+        g = new G(taskParameters).setControlConstantSpeedBandList(controlSpeedBand.calculateConstantSpeedBand(sigma, gamma)).controlConstantSpeedBand;
+
+        createCash();
+    }
+}
+
+class StrategyVConstTimeControlBand04 extends AbstractStrategyVConstTimeControlBand {
+
+    public StrategyVConstTimeControlBand04() {
+        axisParametrs = new AxisParametrs(0.0, 3.0, 0.0, 1.0, 0.0, 2.1, 10.0, 10.0);
+        taskParameters = new TaskParameters(axisParametrs.gettMin(), axisParametrs.gettMax(), 2.5, 1.0, axisParametrs.getsMin());
+        sigma = new Sigma(taskParameters).p2_plus_cosWsigmaT;
+        gamma = new Gamma().p1;
+        valueH_in_0 = "1.0";          // Determine the form of H(x)-function
+
+
+        controlSpeedBand = new ControlSpeedBand(taskParameters).setCascadeControlSpeedBand(new double[] {1.0,2.0}).setInitialControlSpeedBand(1.0);
+
+        controlSpeedBand.calculateConstantSpeedBand(sigma, gamma);
+
+        g = new G(taskParameters).setControlConstantSpeedBandList(controlSpeedBand.calculateConstantSpeedBand(sigma, gamma)).controlConstantSpeedBand;
+
+        createCash();
+    }
+}
+
+class StrategyVConstTimeControlBand05 extends AbstractStrategyVConstTimeControlBand {
+
+    public StrategyVConstTimeControlBand05() {
+        axisParametrs = new AxisParametrs(0.0, 3.0, 0.0, 1.0, 0.0, 2.1, 10.0, 10.0);
+        taskParameters = new TaskParameters(axisParametrs.gettMin(), axisParametrs.gettMax(), 2.5, 1.0, axisParametrs.getsMin());
+        sigma = new Sigma(taskParameters).p2_plus_cosWsigmaT;
+        gamma = new Gamma().p1;
+        valueH_in_0 = "1.0";          // Determine the form of H(x)-function
+
+
+        controlSpeedBand = new ControlSpeedBand(taskParameters).setCascadeControlSpeedBand(new double[] {1.2,2.0}).setInitialControlSpeedBand(1.2);
+
+        controlSpeedBand.calculateConstantSpeedBand(sigma, gamma);
+
+        g = new G(taskParameters).setControlConstantSpeedBandList(controlSpeedBand.calculateConstantSpeedBand(sigma, gamma)).controlConstantSpeedBand;
+
+        createCash();
+    }
+}
+
+class StrategyVConstTimeControlBand06 extends AbstractStrategyVConstTimeControlBand {
+
+    public StrategyVConstTimeControlBand06() {
+        axisParametrs = new AxisParametrs(0.0, 3.0, 0.0, 1.0, 0.0, 2.1, 10.0, 10.0);
+        taskParameters = new TaskParameters(axisParametrs.gettMin(), axisParametrs.gettMax(), 2.5, 1.0, axisParametrs.getsMin());
+        sigma = new Sigma(taskParameters).p2_plus_cosWsigmaT;
+        gamma = new Gamma().p1;
+        valueH_in_0 = "1.0";          // Determine the form of H(x)-function
+
+
+        controlSpeedBand = new ControlSpeedBand(taskParameters).setCascadeControlSpeedBand(new double[] {1.5,2.0}).setInitialControlSpeedBand(1.5);
+
+        controlSpeedBand.calculateConstantSpeedBand(sigma, gamma);
+
+        g = new G(taskParameters).setControlConstantSpeedBandList(controlSpeedBand.calculateConstantSpeedBand(sigma, gamma)).controlConstantSpeedBand;
+
+        createCash();
+    }
+}
+
+class StrategyVConstTimeControlBand07 extends AbstractStrategyVConstTimeControlBand {
+
+    public StrategyVConstTimeControlBand07() {
+        axisParametrs = new AxisParametrs(0.0, 3.0, 0.0, 1.0, 0.0, 2.1, 10.0, 10.0);
+        taskParameters = new TaskParameters(axisParametrs.gettMin(), axisParametrs.gettMax(), 2.5, 1.0, axisParametrs.getsMin());
+        sigma = new Sigma(taskParameters).p2_plus_cosWsigmaT;
+        gamma = new Gamma().p1;
+        valueH_in_0 = "1.0";          // Determine the form of H(x)-function
+
+
+        controlSpeedBand = new ControlSpeedBand(taskParameters).setCascadeControlSpeedBand(new double[] {1.8,2.0}).setInitialControlSpeedBand(1.8);
+
+        controlSpeedBand.calculateConstantSpeedBand(sigma, gamma);
+
+        g = new G(taskParameters).setControlConstantSpeedBandList(controlSpeedBand.calculateConstantSpeedBand(sigma, gamma)).controlConstantSpeedBand;
+
+        createCash();
+    }
+}
+
+//class StrategyVConstTimeControlBand02 extends AbstractStrategyVConstTimeControlBand {
+//
+//    public StrategyVConstTimeControlBand02() {
+//        axisParametrs = new AxisParametrs(0.0, 10.0, 0.0, 1.0, 0.0, 2.0, 10.0, 10.0);
+//        taskParameters = new TaskParameters(axisParametrs.gettMin(), axisParametrs.gettMax(), 2.5, 1.0, axisParametrs.getsMin());
+//        sigma = new Sigma(taskParameters).p2_plus_cosWsigmaT;
+//        gamma = new Gamma().p1;
+//        valueH_in_0 = "1.0";          // Determine the form of H(x)-function
+//
+//
+//        controlSpeedBand = new ControlSpeedBand(taskParameters).setCascadeControlSpeedBand(new double[] {0.5,2.0}).setInitialControlSpeedBand(0.5);
+//
+//        controlSpeedBand.calculateConstantSpeedBand(sigma, gamma);
+//
+//        g = new G(taskParameters).setControlConstantSpeedBandList(controlSpeedBand.calculateConstantSpeedBand(sigma, gamma)).controlConstantSpeedBand;
+//
+//        createCash();
+//    }
+//}
