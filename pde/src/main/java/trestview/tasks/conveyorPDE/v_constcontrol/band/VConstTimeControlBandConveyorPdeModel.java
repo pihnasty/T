@@ -132,12 +132,12 @@ public class VConstTimeControlBandConveyorPdeModel extends ObservableDS implemen
 
             pullList_uT.add(uT());
             pullList_uT_sigmaT.add(uT());            pullList_uT_sigmaT.add(sigmaT());
-            pullList_sigmaT.add(sigmaT());
+            pullList_sigmaT.add( q1T(1.0));          pullList_sigmaT.add(sigmaT());
 
 
             list_uT_Legend.add("");
             list_uT_sigmaT_Legend.add("control");    list_uT_sigmaT_Legend.add("sigma");
-            list_sigmaT_Legend.add("");
+            list_sigmaT_Legend.add("");              list_sigmaT_Legend.add("");
     }
 
 
@@ -274,6 +274,19 @@ public class VConstTimeControlBandConveyorPdeModel extends ObservableDS implemen
         }
         return doubleList;
     }
+
+    private List<Point2D.Double> q1T(double _s) {
+        List<Point2D.Double> doubleList = new ArrayList<>();
+        double tD = 10.0;
+        double dT = 0.01;
+        for (double _t = tMin; _t <= tD; _t += dT) {
+            Point2D.Double p = new Point2D.Double(_t, decision(_s, _t)*getControlConstantSpeedBand(_t));
+            doubleList.add(p);
+        }
+        return doubleList;
+    }
+
+
 
 
 

@@ -529,14 +529,14 @@ class AbstractStrategyVConstTimeControlBand implements StrategyVConstTimeControl
 class StrategyVConstTimeControlBand01 extends AbstractStrategyVConstTimeControlBand {
 
     public StrategyVConstTimeControlBand01() {
-        axisParametrs = new AxisParametrs(0.0, 10.0, 0.0, 1.0, 0.0, 2.1, 10.0, 10.0);
+        axisParametrs = new AxisParametrs(0.0, 10.0, 0.0, 1.0, 0.0, 2.5, 10.0, 10.0);
         taskParameters = new TaskParameters(axisParametrs.gettMin(), axisParametrs.gettMax(), 2.5, 1.0, axisParametrs.getsMin());
         sigma = new Sigma(taskParameters).p2_plus_cosWsigmaT;
         gamma = new Gamma().p1;
         valueH_in_0 = "1.0";          // Determine the form of H(x)-function
 
 
-        controlSpeedBand = new ControlSpeedBand(taskParameters).setCascadeControlSpeedBand(new double[] {1.0,2.0}).setInitialControlSpeedBand(1.0);
+        controlSpeedBand = new ControlSpeedBand(taskParameters).setCascadeControlSpeedBand(new double[] {0.8,2.0}).setInitialControlSpeedBand(0.8);
 
         controlSpeedBand.calculateConstantSpeedBand(sigma, gamma);
 
@@ -549,7 +549,7 @@ class StrategyVConstTimeControlBand01 extends AbstractStrategyVConstTimeControlB
 class StrategyVConstTimeControlBand02 extends AbstractStrategyVConstTimeControlBand {
 
     public StrategyVConstTimeControlBand02() {
-        axisParametrs = new AxisParametrs(0.0, 3.0, 0.0, 1.0, 0.0, 2.1, 10.0, 10.0);
+        axisParametrs = new AxisParametrs(0.0, 10.0, 0.0, 1.0, 0.0, 2.5, 10.0, 10.0);
         taskParameters = new TaskParameters(axisParametrs.gettMin(), axisParametrs.gettMax(), 2.5, 1.0, axisParametrs.getsMin());
         sigma = new Sigma(taskParameters).p2_plus_cosWsigmaT;
         gamma = new Gamma().p1;
@@ -569,7 +569,7 @@ class StrategyVConstTimeControlBand02 extends AbstractStrategyVConstTimeControlB
 class StrategyVConstTimeControlBand03 extends AbstractStrategyVConstTimeControlBand {
 
     public StrategyVConstTimeControlBand03() {
-        axisParametrs = new AxisParametrs(0.0, 3.0, 0.0, 1.0, 0.0, 2.1, 10.0, 10.0);
+        axisParametrs = new AxisParametrs(0.0, 10.0, 0.0, 1.0, 0.0, 2.5, 10.0, 10.0);
         taskParameters = new TaskParameters(axisParametrs.gettMin(), axisParametrs.gettMax(), 2.5, 1.0, axisParametrs.getsMin());
         sigma = new Sigma(taskParameters).p2_plus_cosWsigmaT;
         gamma = new Gamma().p1;
@@ -589,7 +589,7 @@ class StrategyVConstTimeControlBand03 extends AbstractStrategyVConstTimeControlB
 class StrategyVConstTimeControlBand04 extends AbstractStrategyVConstTimeControlBand {
 
     public StrategyVConstTimeControlBand04() {
-        axisParametrs = new AxisParametrs(0.0, 3.0, 0.0, 1.0, 0.0, 2.1, 10.0, 10.0);
+        axisParametrs = new AxisParametrs(0.0, 10.0, 0.0, 1.0, 0.0, 2.5, 10.0, 10.0);
         taskParameters = new TaskParameters(axisParametrs.gettMin(), axisParametrs.gettMax(), 2.5, 1.0, axisParametrs.getsMin());
         sigma = new Sigma(taskParameters).p2_plus_cosWsigmaT;
         gamma = new Gamma().p1;
@@ -609,7 +609,7 @@ class StrategyVConstTimeControlBand04 extends AbstractStrategyVConstTimeControlB
 class StrategyVConstTimeControlBand05 extends AbstractStrategyVConstTimeControlBand {
 
     public StrategyVConstTimeControlBand05() {
-        axisParametrs = new AxisParametrs(0.0, 3.0, 0.0, 1.0, 0.0, 2.1, 10.0, 10.0);
+        axisParametrs = new AxisParametrs(0.0, 10.0, 0.0, 1.0, 0.0, 2.5, 10.0, 10.0);
         taskParameters = new TaskParameters(axisParametrs.gettMin(), axisParametrs.gettMax(), 2.5, 1.0, axisParametrs.getsMin());
         sigma = new Sigma(taskParameters).p2_plus_cosWsigmaT;
         gamma = new Gamma().p1;
@@ -629,7 +629,7 @@ class StrategyVConstTimeControlBand05 extends AbstractStrategyVConstTimeControlB
 class StrategyVConstTimeControlBand06 extends AbstractStrategyVConstTimeControlBand {
 
     public StrategyVConstTimeControlBand06() {
-        axisParametrs = new AxisParametrs(0.0, 3.0, 0.0, 1.0, 0.0, 2.1, 10.0, 10.0);
+        axisParametrs = new AxisParametrs(0.0, 10.0, 0.0, 1.0, 0.0, 2.5, 10.0, 10.0);
         taskParameters = new TaskParameters(axisParametrs.gettMin(), axisParametrs.gettMax(), 2.5, 1.0, axisParametrs.getsMin());
         sigma = new Sigma(taskParameters).p2_plus_cosWsigmaT;
         gamma = new Gamma().p1;
@@ -649,7 +649,7 @@ class StrategyVConstTimeControlBand06 extends AbstractStrategyVConstTimeControlB
 class StrategyVConstTimeControlBand07 extends AbstractStrategyVConstTimeControlBand {
 
     public StrategyVConstTimeControlBand07() {
-        axisParametrs = new AxisParametrs(0.0, 3.0, 0.0, 1.0, 0.0, 2.1, 10.0, 10.0);
+        axisParametrs = new AxisParametrs(0.0, 10.0, 0.0, 1.0, 0.0, 2.5, 10.0, 10.0);
         taskParameters = new TaskParameters(axisParametrs.gettMin(), axisParametrs.gettMax(), 2.5, 1.0, axisParametrs.getsMin());
         sigma = new Sigma(taskParameters).p2_plus_cosWsigmaT;
         gamma = new Gamma().p1;
