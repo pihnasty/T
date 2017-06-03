@@ -19,10 +19,8 @@ import trestview.linechart.LineChartP;
 
 import java.awt.*;
 import java.awt.geom.Point2D;
-import java.util.ArrayList;
+import java.util.*;
 import java.util.List;
-import java.util.Observable;
-import java.util.ResourceBundle;
 
 public class VConstTimeControlBandConveyorPdeView extends BorderPaneObserverDS {
 
@@ -38,23 +36,31 @@ public class VConstTimeControlBandConveyorPdeView extends BorderPaneObserverDS {
      //   setStyle("-fx-background-color: red;");
      //        getStyleClass().add("vConConveyorPdeStyle");
      //     getStylesheets().add("barchartsample/Chart.css");
-        Button buttonForStrategy01 = getButton((VConstTimeControlBandConveyorPdeModel) observebleDS, "buttonStrategyVConstTimeControlBand01", "buttonStrategyVConstTimeControlBand01Tooltip", new StrategyVConstTimeControlBand01());
-        Button buttonForStrategy02 = getButton((VConstTimeControlBandConveyorPdeModel) observebleDS, "buttonStrategyVConstTimeControlBand02", "buttonStrategyVConstTimeControlBand02Tooltip", new StrategyVConstTimeControlBand02());
 
-        buttonForStrategy01.setOnAction(event ->  ((VConstTimeControlBandConveyorPdeModel)observebleDS).setStrategy(new StrategyVConstTimeControlBand01()));
-        buttonForStrategy02.setOnAction(event ->  ((VConstTimeControlBandConveyorPdeModel)observebleDS).setStrategy(new StrategyVConstTimeControlBand02()));
+        List<StrategyVConstTimeControlBand> strategies = Arrays.asList(
+                new StrategyVConstTimeControlBand01(),
+                new StrategyVConstTimeControlBand02(),
+                new StrategyVConstTimeControlBand03(),
+                new StrategyVConstTimeControlBand04(),
+                new StrategyVConstTimeControlBand05(),new StrategyVConstTimeControlBand06(),new StrategyVConstTimeControlBand07()
+                );
 
-        HBox hBoxBottom1 = new HBox(buttonForStrategy01,buttonForStrategy02
-        //        , buttonForStrategy02, buttonForStrategy03,  buttonForStrategy04,  buttonForStrategy05
-        );
+//        List<StrategyVConstTimeControlBand> strategies = Arrays.asList(    new StrategyVConstTimeControlBand03()     );
+
+        HBox hBoxBottom1 = new HBox();
+        strategies.forEach(s-> {
+            hBoxBottom1.getChildren().add(getButton((VConstTimeControlBandConveyorPdeModel) observebleDS, s));
+        });
         setBottom(hBoxBottom1);
     }
 
-    private Button getButton(VConstTimeControlBandConveyorPdeModel observebleDS, String buttonName, String buttonTooltip, StrategyVConstTimeControlBand strategy) {
+    private Button getButton(VConstTimeControlBandConveyorPdeModel observebleDS, StrategyVConstTimeControlBand strategy) {
         Button buttonForStrategy = new Button();
+        String buttonName = "button"+strategy.getClass().getSimpleName();
+        String buttonTooltip = "button"+strategy.getClass().getSimpleName()+"Tooltip";
         buttonForStrategy.setText(ResourceBundle.getBundle("ui").getString(buttonName));
         buttonForStrategy.setTooltip(new Tooltip(ResourceBundle.getBundle("ui").getString(buttonTooltip)));
- //       buttonForStrategy.setOnAction( event -> observebleDS.setStrategy(strategy));
+        buttonForStrategy.setOnAction( event -> observebleDS.setStrategy(strategy));
         return buttonForStrategy;
     }
 
@@ -66,10 +72,13 @@ public class VConstTimeControlBandConveyorPdeView extends BorderPaneObserverDS {
         int widthSection = (int)1.5* Toolkit.getDefaultToolkit ().getScreenSize ().width/3;
 
         MVC LineChart1MVC  = new MVC (LineChartModel.class, LineChartController.class, LineChartP.class,
-                ((VConstTimeControlBandConveyorPdeModel) observableDS).dataBuildVConConveyorPdeModel("oX=S"), null );
+                ((VConstTimeControlBandConveyorPdeModel) observableDS).dataBuildVConConveyorPdeModel("sigm"), null );
+
+        MVC LineChart1AMVC  = new MVC (LineChartModel.class, LineChartController.class, LineChartP.class,
+                ((VConstTimeControlBandConveyorPdeModel) observableDS).dataBuildVConConveyorPdeModel("controlConstantSpeedBand"), null );
 
         MVC LineChart2MVC  = new MVC (LineChartModel.class, LineChartController.class, LineChartP.class,
-                ((VConstTimeControlBandConveyorPdeModel) observableDS).dataBuildVConConveyorPdeModel("oX=T"), null );
+                ((VConstTimeControlBandConveyorPdeModel) observableDS).dataBuildVConConveyorPdeModel("control_sigma"), null );
 
         MVC LineChart3MVC  = new MVC (LineChartModel.class, LineChartController.class, LineChartP.class,
                 ((VConstTimeControlBandConveyorPdeModel) observableDS).dataBuildVConConveyorPdeModel("oX=X"), null );
@@ -87,7 +96,10 @@ public class VConstTimeControlBandConveyorPdeView extends BorderPaneObserverDS {
 
 
         VBox vBoxLeft = new VBox();
-        vBoxLeft.getChildren().addAll((LineChartP)LineChart1MVC.getView(),(LineChartP)LineChart2MVC.getView(),(LineChartP)LineChart3MVC.getView());
+        vBoxLeft.getChildren().addAll(
+        (LineChartP)LineChart1MVC.getView(),
+        (LineChartP)LineChart1AMVC.getView(),
+        (LineChartP)LineChart2MVC.getView(),(LineChartP)LineChart3MVC.getView());
         setLeft(vBoxLeft);
 
 
