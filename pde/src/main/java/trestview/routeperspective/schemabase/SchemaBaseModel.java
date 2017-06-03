@@ -34,7 +34,7 @@ public class SchemaBaseModel extends ObservableDS implements Observer {
         work.getSubject_labours()
                 .forEach(subject_labour -> subject_labour.getRoutes()
                         .forEach(route -> route.getLineroutes().forEach(lineroute -> {
-                            MeshModel meshModel = new MeshModel(getMachine(lineroute.getNameMachine()), lineroute);
+                            MeshModel meshModel = new MeshModel(getMachine(lineroute.getNameMachine()), lineroute, work);
                             MeshController meshController = new MeshController(meshModel);
                             MeshView meshView = new MeshView(meshModel, meshController);
                             meshes.add(meshView);

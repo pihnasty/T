@@ -3,6 +3,7 @@ package trestview.routeperspective.schemaroute.mesh;
 import designpatterns.ObservableDS;
 import entityProduction.Lineroute;
 import entityProduction.Machine;
+import entityProduction.Work;
 import javafx.scene.image.Image;
 
 import java.util.HashMap;
@@ -24,6 +25,7 @@ public class MeshModel extends ObservableDS implements Observer {
     private Integer maxOutputBuffer;
     private String operationName;
     private Machine machine;
+    private Work work;
     /**
      * include another params such as equipment name, worker etc.
      * Key - param name;
@@ -31,7 +33,7 @@ public class MeshModel extends ObservableDS implements Observer {
      */
     private Map<String, Object> secondaryParams;
 
-    public MeshModel(Machine machine, Lineroute lineroute) {
+    public MeshModel(Machine machine, Lineroute lineroute, Work work) {
 
         this.machine = machine;
         this.minInputBuffer = lineroute.getInputBufferMin();
@@ -40,6 +42,11 @@ public class MeshModel extends ObservableDS implements Observer {
         this.maxOutputBuffer = lineroute.getOutputBufferMax();
         this.operationName = lineroute.getName();
         this.secondaryParams = new HashMap<>();
+        this.work = work;
+        System.out.println("Operation: " + operationName);
+        System.out.println("\t machine name: " + machine.getName());
+        System.out.println("\t\t machine x: " + machine.getLocationX());
+        System.out.println("\t\t machine y: " + machine.getLocationY());
     }
 
     public Machine getMachine( ) {
@@ -121,6 +128,14 @@ public class MeshModel extends ObservableDS implements Observer {
             System.out.println("null");
             return new Image("https://www.iconexperience.com/_img/o_collection_png/green_dark_grey/512x512/plain/industrial_machine.png");
         }
+    }
+
+    public Work getWork( ) {
+        return work;
+    }
+
+    public void setWork(Work work) {
+        this.work = work;
     }
 
     @Override

@@ -8,6 +8,7 @@ import designpatterns.observerdsall.BorderPaneObserverDS;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.scene.control.SplitPane;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
@@ -28,9 +29,9 @@ public class RoutePerspectiveView extends BorderPaneObserverDS {
 //----------------------------------------------------------------------------------------------------------------------
         MVC schemaRouteMVC = new MVC(SchemaRouteModel.class, SchemaRouteController.class, SchemaRouteView.class, observableDS, Rule.RoutePerspective);
         SchemaRouteView view = (SchemaRouteView) schemaRouteMVC.getView();
-//        view.addEventHandler(MouseEvent.MOUSE_MOVED, (SchemaRouteController)schemaRouteMVC.getController());
-//        view.addEventHandler(MouseEvent.MOUSE_DRAGGED, (SchemaRouteController)schemaRouteMVC.getController());
-//        view.addEventHandler(MouseEvent.MOUSE_RELEASED, (SchemaRouteController)schemaRouteMVC.getController());
+        view.addEventHandler(MouseEvent.MOUSE_MOVED, (SchemaRouteController)schemaRouteMVC.getController());
+        view.addEventHandler(MouseEvent.MOUSE_DRAGGED, (SchemaRouteController)schemaRouteMVC.getController());
+        view.addEventHandler(MouseEvent.MOUSE_RELEASED, (SchemaRouteController)schemaRouteMVC.getController());
 //----------------------------------------------------------------------------------------------------------------------
         TableBoxMVC tableBoxWorkMVC = new TableBoxMVC( observableDS,fxmlLoader.getResources().getString("ListManufacturing"),"file:pde\\src\\main\\resources\\images\\icons\\RowWork.png",Rule.Work);
         tableBoxWorkMVC.addObserverForTable(schemaRouteMVC);

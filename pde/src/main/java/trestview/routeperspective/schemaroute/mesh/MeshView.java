@@ -13,6 +13,8 @@ import trestview.routeperspective.schemaroute.mesh.states.State;
 import java.util.Observable;
 import java.util.Observer;
 
+
+//TODO: привести в человеческий вид. для плаката.
 /**
  * MeshView class represents view of such entity as mesh on the scheme route canvas
  */
@@ -48,10 +50,12 @@ public class MeshView extends StackPane implements Observer {
      * @param y     coordinate of the mesh on the scheme
      * @param scale of the mesh
      */
-    public void initDimensions(Double x, Double y, Double scale) {
-        this.x = x;
-        this.y = y;
+    public void initDimensions(Double scale, Double x, Double y) {
+
+        Image imgWork = new Image("file:"+this.meshModel.getWork().getScheme());
         this.scale = scale;
+        this.x = x * imgWork.getWidth() - (MAX_WIDTH * scale / 2);
+        this.y = y * imgWork.getHeight() - (MAX_HEIGHT * scale / 2);
         this.setState(scale);
     }
 
@@ -60,11 +64,10 @@ public class MeshView extends StackPane implements Observer {
         this.meshModel = meshModel;
         this.meshController = meshController;
 
-        Image imgWork = new javafx.scene.image.Image("file:"+this.meshModel.getMachine().getWork().getScheme());
         initDimensions(
-                meshModel.getMachine().getLocationX() * imgWork.getWidth(),
-                meshModel.getMachine().getLocationY() * imgWork.getHeight(),
-                .7
+                .7,
+                meshModel.getMachine().getLocationX(),
+                meshModel.getMachine().getLocationY()
         );
 //        appendTooltip();
         updateStackPane();
