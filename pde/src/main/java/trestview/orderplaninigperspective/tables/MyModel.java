@@ -1,6 +1,7 @@
 package trestview.orderplaninigperspective.tables;
 
 import designpatterns.ObservableDS;
+import entityProduction.Order;
 import entityProduction.Work;
 
 import java.util.Observable;

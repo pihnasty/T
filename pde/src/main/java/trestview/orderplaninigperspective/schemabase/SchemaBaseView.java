@@ -1,19 +1,30 @@
 package trestview.orderplaninigperspective.schemabase;
 
 import designpatterns.InitializableDS;
+import designpatterns.MVC;
 import designpatterns.ObservableDS;
 import designpatterns.observerdsall.BorderPaneObserverDS;
 import entityProduction.Work;
 import javafx.beans.binding.DoubleBinding;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Line;
+import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Font;
+import trestview.linechart.LineChartController;
+import trestview.linechart.LineChartModel;
+import trestview.linechart.LineChartP;
 import trestview.resourcelink.schemawork.Q;
 import trestview.resourcelink.schemawork.SchemaModel;
+import trestview.tasks.conveyorPDE.v_constcontrol.band.VConstTimeControlBandConveyorPdeModel;
 
 import java.util.List;
 import java.util.Observable;
+import java.util.concurrent.TimeUnit;
 
 public class SchemaBaseView extends BorderPaneObserverDS {
 
@@ -39,6 +50,8 @@ public class SchemaBaseView extends BorderPaneObserverDS {
         repaint((SchemaBaseModel) this.observableDS);
 //        bp.scaleXProperty().bind(kScale);
  //       bp.scaleYProperty().bind(kScale);
+
+
     }
 
     protected void repaint(SchemaBaseModel schemaModel) {
@@ -51,6 +64,7 @@ public class SchemaBaseView extends BorderPaneObserverDS {
         }
         if (imageview != null)           bp.getChildren().addAll(imageview);
         if (schemaModel.getQs() != null) bp.getChildren().addAll(schemaModel.getQs());
+
     }
     @Override
     public void update(Observable o, Object arg) {

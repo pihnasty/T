@@ -10,13 +10,20 @@ import javafx.geometry.Insets;
 import javafx.scene.control.SplitPane;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import persistence.loader.XmlRW;
+import trestview.linechart.LineChartController;
+import trestview.linechart.LineChartModel;
+import trestview.linechart.LineChartP;
 import trestview.orderplaninigperspective.schemaroute.SchemaOrderPlaninigController;
 import trestview.orderplaninigperspective.schemaroute.SchemaOrderPlaninigModel;
 import trestview.orderplaninigperspective.schemaroute.SchemaOrderPlaninigView;
 import trestview.table.tablemodel.abstracttablemodel.Rule;
+import trestview.tasks.conveyorPDE.v_constcontrol.band.VConstTimeControlBandConveyorPdeModel;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Observable;
 
 public class OrderPlaninigPerspectiveView extends BorderPaneObserverDS {
@@ -28,9 +35,10 @@ public class OrderPlaninigPerspectiveView extends BorderPaneObserverDS {
 //----------------------------------------------------------------------------------------------------------------------
         MVC schemaRouteMVC = new MVC(SchemaOrderPlaninigModel.class, SchemaOrderPlaninigController.class, SchemaOrderPlaninigView.class, observableDS, Rule.RoutePerspective);
         SchemaOrderPlaninigView view = (SchemaOrderPlaninigView) schemaRouteMVC.getView();
-        view.addEventHandler(MouseEvent.MOUSE_MOVED, (SchemaOrderPlaninigController)schemaRouteMVC.getController());
+        //TODO debug
+/*        view.addEventHandler(MouseEvent.MOUSE_MOVED, (SchemaOrderPlaninigController)schemaRouteMVC.getController());
         view.addEventHandler(MouseEvent.MOUSE_DRAGGED, (SchemaOrderPlaninigController)schemaRouteMVC.getController());
-        view.addEventHandler(MouseEvent.MOUSE_RELEASED, (SchemaOrderPlaninigController)schemaRouteMVC.getController());
+        view.addEventHandler(MouseEvent.MOUSE_RELEASED, (SchemaOrderPlaninigController)schemaRouteMVC.getController());*/
 //----------------------------------------------------------------------------------------------------------------------
         TableBoxMVC tableBoxWorkMVC = new TableBoxMVC( observableDS,fxmlLoader.getResources().getString("ListManufacturing"),"file:pde\\src\\main\\resources\\images\\icons\\RowWork.png",Rule.Work);
         tableBoxWorkMVC.addObserverForTable(schemaRouteMVC);
@@ -61,13 +69,16 @@ public class OrderPlaninigPerspectiveView extends BorderPaneObserverDS {
         vboxSplitPaneLeft.setSpacing(5);   // The amount of vertical space between each child in the vbox.
         vboxSplitPaneLeft.setPadding(new Insets(10, 0, 0, 10));   // The top,right,bottom,left padding around the region's content. This space will be included in the calculation of the region's minimum and preferred sizes. By default padding is Insets.EMPTY and cannot be set to null.
 //----------------------------------------------------------------------------------------------------------------------
-        borderPane.setCenter((BorderPane) schemaRouteMVC.getView());
+        borderPane.setCenter((StackPane) schemaRouteMVC.getView());
         splitPane.getItems().addAll(vboxSplitPaneLeft, borderPane);
         splitPane.setDividerPositions(0.2f, 0.6f);
         setCenter(splitPane);
+
+
     }
     @Override
     public void update(Observable o, Object arg) {
         /*NOP*/
     }
+
 }

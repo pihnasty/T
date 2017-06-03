@@ -1,17 +1,21 @@
 package trestview.orderplaninigperspective.tables;
 
 import entityProduction.Line;
-import javafx.beans.binding.Bindings;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.cell.PropertyValueFactory;
+import entityProduction.Order;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 
 import java.util.Observable;
 import java.util.Observer;
+import java.util.Random;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Username: dummy_user
@@ -19,53 +23,107 @@ import java.util.Observer;
  * Time: 9:05 PM
  */
 public class MyView extends StackPane implements Observer {
+
+    private Color[] colors = {Color.RED, Color.BLUE, Color.GREEN, Color.BURLYWOOD, Color.TOMATO, Color.CYAN, Color.BROWN};
+
     private MyModel myModel;
     private MyController myController;
+
 
     public MyView(MyModel myModel, MyController myController) {
         this.myModel = myModel;
         this.myController = myController;
 
-        printButton();
+        initView();
+    }
+
+    private void initView() {
+        this.getChildren().clear();
+
+        this.setWidth(1800);
+        this.setHeight(500);
+
+        VBox boxWithLines = new VBox();
+        VBox boxWithGraphics = new VBox();
+        HBox hBox = new HBox();
+
+
+        for (Order order : myModel.getWork().getOrders()) {
+            long orderDuration = order.getDateEnd().getTime() - order.getDateBegin().getTime();
+
+            VBox boxWithLinesInner = new VBox();
+            VBox boxWithGraphicsInner = new VBox();
+            boxWithLinesInner.getChildren().add(new Label(order.getName()));
+
+            for (Line line : order.getLines()) {
+                int colorIndex = new Random().nextInt(colors.length);
+
+
+                Label labelLine = new Label(line.getName());
+                labelLine.setTextFill(colors[colorIndex]);
+
+                boxWithLinesInner.getChildren().add(labelLine);
+
+
+                long lineDuration = line.getDateEnd().getTime() - line.getDateBegin().getTime();
+                Rectangle lineDurationGraphic = new Rectangle(TimeUnit.MILLISECONDS.toDays(lineDuration), 17);
+                lineDurationGraphic.setFill(colors[colorIndex]);
+
+
+                boxWithGraphicsInner.getChildren().add(lineDurationGraphic);
+            }
+            long orderDurationByDays = TimeUnit.MILLISECONDS.toDays(orderDuration);
+
+            StackPane paneWithGraphics = new StackPane();
+            paneWithGraphics.getChildren().add(boxWithGraphicsInner);
+            paneWithGraphics.setPadding(new Insets(0, 0, 0, orderDurationByDays));
+
+
+            boxWithLinesInner.setPadding(new Insets(20));
+
+            //TODO set it into stylesheets
+            boxWithGraphicsInner.setStyle(
+                    "-fx-border-style: solid inside;" +
+                    "-fx-border-width: 1;" +
+                    "-fx-border-color: blue;");
+            boxWithGraphicsInner.setPadding(new Insets(30, 0, 30, 0));
+
+
+            boxWithGraphics.getChildren().add(paneWithGraphics);
+            boxWithLines.getChildren().add(boxWithLinesInner);
+
+        }
+
+        boxWithGraphics.getChildren().add(writeAxesOx());
+
+        hBox.getChildren().addAll(boxWithLines, boxWithGraphics);
+
+        this.getChildren().add(hBox);
+    }
+
+    private StackPane writeAxesOx() {
+        StackPane stackPane = new StackPane();
+
+
+        javafx.scene.shape.Line line = new javafx.scene.shape.Line(0, 0, 400, 0);
+        line.setFill(Color.BLACK);
+
+        stackPane.getChildren().add(line);
+
+        for (int i = 0; i < 400; i += 40) {
+            Label axes = new Label(String.valueOf(i));
+            axes.setTranslateX(i);
+
+            StackPane.setAlignment(axes, Pos.CENTER_LEFT);
+            StackPane.setMargin(axes, new Insets(20, 0, 0, 0));
+            stackPane.getChildren().add(axes);
+
+        }
+        return stackPane;
     }
 
     @Override
     public void update(Observable o, Object arg) {
 
-    }
-
-    public void printButton() {
-        this.getChildren().clear();
-//        myModel.getWork().getOrders().forEach(order -> this.getChildren().add(new Label(order.getName())));
-
-        System.out.println("==============IEHOROV===========");
-        myModel.getWork().getOrders().forEach(order -> System.out.println(order.getName()));
-
-
-        this.setWidth(200);
-        this.setHeight(1000);
-        GridPane gridPane = new GridPane();
-
-
-        this.getChildren().add(gridPane);
-        myModel.getWork().getOrders().forEach(order -> {
-            if (order.getLines().isEmpty()) return;
-
-            TableView<Line> tableView = new TableView<>();
-            ObservableList<Line> data =
-                    FXCollections.observableArrayList(order.getLines());
-
-            TableColumn<Line, String> firstNameCol = new TableColumn<>(order.getName());
-            firstNameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
-            tableView.getColumns().add(firstNameCol);
-            tableView.setItems(data);
-
-            tableView.setFixedCellSize(25);
-            tableView.prefHeightProperty().bind(tableView.fixedCellSizeProperty().multiply(Bindings.size(tableView.getItems()).add(1.01)));
-            tableView.minHeightProperty().bind(tableView.prefHeightProperty());
-            tableView.maxHeightProperty().bind(tableView.prefHeightProperty());
-
-            gridPane.addRow(order.getId(), tableView);
-        });
     }
 }
