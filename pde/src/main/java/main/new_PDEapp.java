@@ -9,15 +9,14 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-//import resources.images.icons.IconT;
-import persistence.loader.DataSet;
+import logging.LoggerP;
 import trestcontroller.TrestController;
 import trestmodel.TrestModel;
 import trestview.TrestView;
-import trestview.table.tablemodel.abstracttablemodel.Rule;
 
 import java.awt.*;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
 
 /**
  * IDEA 2017.1.2  Oracle VM
@@ -38,6 +37,9 @@ public class new_PDEapp extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
+
+
+        LoggerP.logger.log(Level.SEVERE, "Starting application", "LoggerP");
 
         MVC trestMVC = new MVC(TrestModel.class, TrestController.class, TrestView.class, new ObservableDS(), null);
 

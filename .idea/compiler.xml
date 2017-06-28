@@ -27,10 +27,12 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="true" />
+        <module name="logger" />
         <module name="pde" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="logger" target="1.5" />
       <module name="pde" target="1.8" />
       <module name="t" target="1.5" />
     </bytecodeTargetLevel>

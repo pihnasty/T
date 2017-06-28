@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/logger/logger.iml" filepath="$PROJECT_DIR$/logger/logger.iml" />
       <module fileurl="file://$PROJECT_DIR$/pde/pde.iml" filepath="$PROJECT_DIR$/pde/pde.iml" />
       <module fileurl="file://$PROJECT_DIR$/t.iml" filepath="$PROJECT_DIR$/t.iml" />
     </modules>
