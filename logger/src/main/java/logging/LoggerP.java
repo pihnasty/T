@@ -34,3 +34,5 @@ public class LoggerP {
 
 //
 //     LoggerP.logger.log(Level.SEVERE, "Starting application", "LoggerP");
+//Error:error: pathspec 'pde/src/main/java/trestview/tasks/conveyorPDE/V?onConveyorPdeModel.java' did not match any file(s) known to git.
+//        during executing git "C:\Program Files\Git\cmd\git.exe" -c core.quotepath=false checkout HEAD -- pde/src/main/java/trestview/tasks/conveyorPDE/VСonConveyorPdeModel.java
