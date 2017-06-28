@@ -32,4 +32,5 @@ public class LoggerP {
 
 }
 
-//        LoggerP.logger.log(Level.SEVERE, "Starting application", "LoggerP");
+//
+//     LoggerP.logger.log(Level.SEVERE, "Starting application", "LoggerP");
